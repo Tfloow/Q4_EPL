@@ -2,7 +2,7 @@
 Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cours du Q4 2023 par:
 | Nom           | Nom           | Nom  |
 | ------------- |:-------------:| :-----:|
-| Julien Monfils| [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |
+| [Julien Monfils](https://github.com/JulienMonfils)| [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |
 |Nathan fockedey|||
 
 (Pour y être ajouté simplement contribue à une des synthèses (*oui oui, même si c'est une petite faute que tu as corrigé*))
@@ -39,6 +39,10 @@ Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo
 | Julien Monfils| TD    | TD    | Spe   | JM    |       |       |       |       |
 | Thomas Debelle| Spe   | JM    |       | NF    |       |       |       |       |
 |               |       | NF    |       |       |       |       |       |       |
+|               |       |       |       |       |       |       |       |       |
+|               |       |       |       |       |       |       |       |       |
+
+L'idéal est d'être 4 par filière pour se répartir au mieux le travail.
 
 
 ## Les liens utiles
