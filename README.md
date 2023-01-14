@@ -1,8 +1,10 @@
 # Q4: Sytnhèse
-1. [Getting Started](#getting-started-)
-2. [Contribuer](#contribuer-)
-3. [Répartition](#répartition-)
-4. [Liens utiles](#les-liens-utiles-)
+- [Q4: Sytnhèse](#q4-sytnhèse)
+    - [on cherche en priorité](#on-cherche-en-priorité)
+  - [Getting Started ](#getting-started-)
+  - [Contribuer ](#contribuer-)
+  - [Répartition ](#répartition-)
+  - [Les liens utiles ](#les-liens-utiles-)
 
 
 Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cours du Q4 2023 par:
@@ -12,7 +14,7 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 |Nathan fockedey|||
 
 (Pour y être ajouté simplement contribue à une des synthèses (*oui oui, même si c'est une petite faute que tu as corrigé*))
-### on cherche
+### on cherche en priorité
 - [ ] GC
 - [ ] FYKI
 - [ ] GBIO
@@ -27,14 +29,14 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 1. Fork ce Github depuis cette page
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
 3. Crée un dossier sur ton pc et lance Git depuis ce dossier
-4. Exécute `git clone <https://www.github.com/nom/Q4_EPL.git>`
+4. Exécute `git clone https://www.github.com/nom/Q4_EPL.git`
 5. Pour que ce dossier soit toujours à jour fait: `git remote add upstream https://github.com/Tfloow/Q4_EPL.git`
 
 Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécute simplement `git pull upstream master`.
 
 ## Contribuer <a name="C"></a>
 
-Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](https://github.com/Tfloow/Q4_EPL#getting-started).
+Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](#getting-started-).
 
 Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo sur ton github. Une fois que tu es satisfait avec tes modifications fait une pull request sur ce repo. Tu peux voir les comparaisons. Tu ouvres la request et on check et merge tout cela par la suite !
 
@@ -42,8 +44,8 @@ Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo
 
 | Tronc commun  | Info  | Elec  | MAP   | Méca  | GC    | GBio  | FYKI  | Projet|
 | ------------- |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-| Julien Monfils| TD    | TD    | Spe   | JM    |       |       |       |       |
-| Thomas Debelle| Spe   | JM    |       | NF    |       |       |       |       |
+| Julien Monfils| TD    | TD    | Spe   | JM    |       |       | Spé   |       |
+| Thomas Debelle|       | JM    |       | NF    |       |       |       |       |
 |               |       | NF    |       |       |       |       |       |       |
 |               |       |       |       |       |       |       |       |       |
 |               |       |       |       |       |       |       |       |       |
