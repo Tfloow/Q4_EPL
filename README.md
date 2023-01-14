@@ -3,6 +3,7 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 | Nom           | Nom           | Nom  |
 | ------------- |:-------------:| :-----:|
 | Julien Monfils| [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |
+|Nathan forckedey|||
 
 (Pour y être ajouté simplement contribue à une des synthèses (*oui oui, même si c'est une petite faute que tu as corrigé*))
 
@@ -23,9 +24,18 @@ Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécu
 
 ## Contribuer
 
-Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared]().
+Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](https://github.com/Tfloow/Q4_EPL#getting-started).
 
 Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo sur ton github. Une fois que tu es satisfait avec tes modifications fait une pull request sur ce repo. Tu peux voir les comparaisons. Tu ouvres la request et on check et merge tout cela par la suite !
+
+## Répartition
+
+| Tronc commun  | Info  | Elec  | MAP   | Méca  | GC    | GBio  | FYKI  |
+| ------------- |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| Julien Monfils| TD    | TD    |       |       |       |       |       |
+| Thomas Debelle|       |       |       |       |       |       |       |
+|               |       |       |       |       |       |       |       |
+
 
 ## Les liens utiles
 1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
