@@ -15,7 +15,7 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 | Nom                                                |                     Nom                     |                          Nom                           |
 | -------------------------------------------------- | :-----------------------------------------: | :----------------------------------------------------: |
 | [Julien Monfils](https://github.com/JulienMonfils) | [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |
-| Nathan fockedey                                    |                                             |                                                        |
+| Nathan fockedey                                    |Brieuc Dallemagne                            |                                                        |
 
 (Pour y être ajouté simplement contribue à une des synthèses (*oui oui, même si c'est une petite faute que tu as corrigé*))
 ### on cherche en priorité
@@ -54,7 +54,7 @@ Pour ajouter ta synthèse, tu dois:
 | Tronc commun   | Info  | Elec  |  MAP  | Méca  |  GC   | GBio  | FYKI  | Projet |
 | -------------- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :----: |
 | Julien Monfils |  TD   |  TD   |  Spé  |  JM   |       |       |  Spé  |        |
-| Thomas Debelle |       |  JM   |       |  NF   |       |       |       |        |
+| Thomas Debelle |       |  JM   |  BD   |  NF   |       |       |       |        |
 |                |       |  NF   |       |       |       |       |       |        |
 |                |       |       |       |       |       |       |       |        |
 |                |       |       |       |       |       |       |       |        |
