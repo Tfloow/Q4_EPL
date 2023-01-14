@@ -1,4 +1,10 @@
 # Q4: Sytnhèse
+1. [Getting Started](#getting-started-)
+2. [Contribuer](#contribuer-)
+3. [Répartition](#répartition-)
+4. [Liens utiles](#les-liens-utiles-)
+
+
 Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cours du Q4 2023 par:
 | Nom           | Nom           | Nom  |
 | ------------- |:-------------:| :-----:|
@@ -13,7 +19,7 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 
 Ce github **n'a pas vocation de remplacer le drive !** On l'utilise pour travailler au fil du quadri sur nos synthèses. Le but final est de pouvoir directement push nos synthèses sur le drive et ce de manière automatique. Nous avons créé un Github groupé pour *nous faciliter le travail* et pour *qu'on puisse toujours avoir un moyen de correction facile*.
 
-## Getting Started
+## Getting Started <a name="GS"></a>
 Pour pouvoir modifier facilement ce dossier et l'avoir en local, il te suffit de suivre ces étapes!
 * Pour commencer il faut que tu aies: un compte github, git installé sur ta machine.
 
@@ -26,13 +32,13 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 
 Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécute simplement `git pull upstream master`.
 
-## Contribuer
+## Contribuer <a name="C"></a>
 
 Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](https://github.com/Tfloow/Q4_EPL#getting-started).
 
 Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo sur ton github. Une fois que tu es satisfait avec tes modifications fait une pull request sur ce repo. Tu peux voir les comparaisons. Tu ouvres la request et on check et merge tout cela par la suite !
 
-## Répartition
+## Répartition <a name="R"></a>
 
 | Tronc commun  | Info  | Elec  | MAP   | Méca  | GC    | GBio  | FYKI  | Projet|
 | ------------- |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
@@ -45,6 +51,6 @@ Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo
 L'idéal est d'être 4 par filière pour se répartir au mieux le travail.
 
 
-## Les liens utiles
+## Les liens utiles <a name="L"></a>
 1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
 2. [le Github du Drive](https://github.com/Gp2mv3/Syntheses "la masterclass de nos prédecesseurs")
