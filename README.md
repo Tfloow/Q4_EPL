@@ -3,9 +3,13 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 | Nom           | Nom           | Nom  |
 | ------------- |:-------------:| :-----:|
 | Julien Monfils| [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |
-|Nathan forckedey|||
+|Nathan fockedey|||
 
 (Pour y être ajouté simplement contribue à une des synthèses (*oui oui, même si c'est une petite faute que tu as corrigé*))
+### on cherche
+- [ ] GC
+- [ ] FYKI
+- [ ] GBIO
 
 Ce github **n'a pas vocation de remplacer le drive !** On l'utilise pour travailler au fil du quadri sur nos synthèses. Le but final est de pouvoir directement push nos synthèses sur le drive et ce de manière automatique. Nous avons créé un Github groupé pour *nous faciliter le travail* et pour *qu'on puisse toujours avoir un moyen de correction facile*.
 
@@ -30,11 +34,11 @@ Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo
 
 ## Répartition
 
-| Tronc commun  | Info  | Elec  | MAP   | Méca  | GC    | GBio  | FYKI  |
-| ------------- |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-| Julien Monfils| TD    | TD    |       |       |       |       |       |
-| Thomas Debelle|       |       |       |       |       |       |       |
-|               |       |       |       |       |       |       |       |
+| Tronc commun  | Info  | Elec  | MAP   | Méca  | GC    | GBio  | FYKI  | Projet|
+| ------------- |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| Julien Monfils| TD    | TD    | Spe   | JM    |       |       |       |       |
+| Thomas Debelle| Spe   | JM    |       | NF    |       |       |       |       |
+|               |       | NF    |       |       |       |       |       |       |
 
 
 ## Les liens utiles
