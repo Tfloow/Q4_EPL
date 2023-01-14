@@ -44,7 +44,7 @@ Une fois fait, utilises ton repo local pour le modifier etc. `git push` ton repo
 
 | Tronc commun  | Info  | Elec  | MAP   | Méca  | GC    | GBio  | FYKI  | Projet|
 | ------------- |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-| Julien Monfils| TD    | TD    | Spe   | JM    |       |       | Spé   |       |
+| Julien Monfils| TD    | TD    | Spé   | JM    |       |       | Spé   |       |
 | Thomas Debelle|       | JM    |       | NF    |       |       |       |       |
 |               |       | NF    |       |       |       |       |       |       |
 |               |       |       |       |       |       |       |       |       |
