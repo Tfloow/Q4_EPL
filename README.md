@@ -1,7 +1,6 @@
 # Q4: Synthèse
 <details>
 <summary><h2><b>Table des matières</b></h2></summary>
-
  &nbsp; &nbsp; • <a href="#getting-started-">Getting Started</a>
  <br>
 &nbsp; &nbsp; • <a href="#contribuer-">Contribuer </a>
@@ -46,7 +45,7 @@ Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](#getting-sta
 Pour ajouter ta synthèse, tu dois:
 
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
-2. Upload ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard là, ça nous aide à toute les regrouper dans le dossier Synthèse Compilée)
+2. Upload ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toute les regrouper dans le dossier Synthèse Compilée)
 3. Git commit et push sur ton fork
 4. Fais un Pull request
 5. Attends et tadaaaa ta synthèse est dispo sur le Github
