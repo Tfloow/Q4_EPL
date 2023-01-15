@@ -29,6 +29,8 @@ Ce github **n'a pas vocation de remplacer le drive !** On l'utilise pour travail
 Pour pouvoir modifier facilement ce dossier et l'avoir en local, il te suffit de suivre ces étapes!
 * Pour commencer il faut que tu aies: un compte github, git installé sur ta machine.
 
+Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](https://github.com/Tfloow/Q4_EPL/wiki) où tu trouveras plein d'info sur git, github, ...
+
 Tu as tout ça ? parfait ! maintenant suit ces instructions:
 1. Fork ce Github depuis cette page
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
@@ -64,3 +66,4 @@ Pour ajouter ta synthèse, tu dois:
 1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
 2. [le Github du Drive](https://github.com/Gp2mv3/Syntheses "la masterclass de nos prédecesseurs")
 3. [les PDF](https://github.com/Tfloow/Q4_EPL/archive/refs/heads/main.zip)
+4. [le Template](https://github.com/Tfloow/Q4_EPL/raw/main/Template.zip)
