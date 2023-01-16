@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: print-arguments
+Version: 0.1.0
+Summary: print the arguments you pass
+Author: Thomas
+Author-email: @gmail.com
+License: MIT

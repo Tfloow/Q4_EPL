@@ -1,0 +1,2 @@
+[console_scripts]
+print-arguments = print_arguments.main:main
