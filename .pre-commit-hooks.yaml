@@ -2,5 +2,5 @@
 - id: some-id
   name: some-name
   description: some description
-  entry: print-arguments
+  entry: print_arguments
   language: python
