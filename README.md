@@ -27,7 +27,7 @@ Ce github **n'a pas vocation de remplacer le drive !** On l'utilise pour travail
 
 ## Getting Started <a name="GS"></a>
 Pour pouvoir modifier facilement ce dossier et l'avoir en local, il te suffit de suivre ces étapes!
-* Pour commencer il faut que tu aies: un compte github, git installé sur ta machine.
+* Pour commencer il faut que tu aies: un compte github, git et python installé sur ta machine.
 
 Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](https://github.com/Tfloow/Q4_EPL/wiki) où tu trouveras plein d'info sur git, github, ...
 
@@ -47,9 +47,10 @@ Pour ajouter ta synthèse, tu dois:
 
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
 2. Upload ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
-3. Git commit et push sur ton fork
-4. Fais un Pull request
-5. Attends et tadaaaa ta synthèse est dispo sur le Github
+3. `pip install pre-commit` c'est un package git qui check que tu as bien respecté la nomenclature et rend tout plus uniforme pour tous.
+4. Git commit et push sur ton fork
+5. Fais un Pull request
+6. Attends et tadaaaa ta synthèse est dispo sur le Github
 
 ## Répartition <a name="R"></a>
 
