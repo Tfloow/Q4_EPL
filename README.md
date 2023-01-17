@@ -48,9 +48,10 @@ Pour ajouter ta synthèse, tu dois:
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
 2. Upload ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
 3. `pip install pre-commit` c'est un package git qui check que tu as bien respecté la nomenclature et rend tout plus uniforme pour tous.
-4. Git commit et push sur ton fork
-5. Fais un Pull request
-6. Attends et tadaaaa ta synthèse est dispo sur le Github
+4. Une fois dans le dossier n'oublie pas de faire `pre-commit install` pour que tout fonctionne et voilà !
+5. Git commit et push sur ton fork
+6. Fais un Pull request
+7. Attends et tadaaaa ta synthèse est dispo sur le Github
 
 ## Répartition <a name="R"></a>
 
