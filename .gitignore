@@ -38,3 +38,5 @@
 *.synctex(busy)
 *.synctex.gz
 *.toc
+
+*.txt
