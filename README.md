@@ -45,9 +45,10 @@ Pour ajouter ta synthèse, tu dois:
 
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
 2. Upload ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
-3. Git commit et push sur ton fork
-4. Fais un Pull request
-5. Attends et tadaaaa ta synthèse est dispo sur le Github
+3. Lance `INSTALLER.sh` (si tu es sur Windows, tu peux l'exécuter via Git et sur Linux ou Mac Bash est natif)
+4. Git commit et push sur ton fork
+5. Fais un Pull request
+6. Attends et tadaaaa ta synthèse est dispo sur le Github
 
 ## Répartition <a name="R"></a>
 
