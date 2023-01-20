@@ -36,6 +36,8 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
 3. Crée un dossier sur ton pc et lance Git depuis ce dossier
 4. Exécute `git clone https://www.github.com/nom/Q4_EPL.git`
+5. Exécute `git remote add upstream https://www.github.com/Tfloow/Q4_EPL.git`
+6. Lance `INSTALLER.sh`
 
 Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécute simplement `git pull upstream main`.
 
@@ -47,10 +49,9 @@ Pour ajouter ta synthèse, tu dois:
 
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
 2. Crée ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
-3. Lance `INSTALLER.sh` (si tu es sur Windows, tu peux l'exécuter via Git et sur Linux ou Mac Bash est natif)
-4. Git commit et push sur ton fork
-5. Fais un Pull request pour que ton commit se fasse sur ce Github
-6. Attends et tadaaaa ta synthèse est dispo sur le Github
+3. Git commit et push sur ton fork
+4. Fais un Pull request pour que ton commit se fasse sur ce Github
+5. Attends et tadaaaa ta synthèse est dispo sur le Github
 
 ## Répartition <a name="R"></a>
 
