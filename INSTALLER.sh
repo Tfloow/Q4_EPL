@@ -19,7 +19,6 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR"
 var=$(pre-commit.exe install)
 
-# Check if there is an issue with pip
 if [ "$var" = "bash: pre-commit: command not found" ] || [ "$var" = "pre-commit: command not found"]
 then
   echo -e "${RED}Oops, something went wrong with the installation of your pip, open an issue on github at${NC}"
