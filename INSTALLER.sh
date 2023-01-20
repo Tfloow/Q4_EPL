@@ -3,6 +3,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 pip install pre-commit
+pre-commit install
 var=$(pre-commit install)
 echo $var
 
