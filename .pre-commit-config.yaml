@@ -11,5 +11,5 @@ repos:
 -   repo: https://github.com/Tfloow/Q4_EPL
     rev: v1.0.1
     hooks:
-    -   id: tex-compile-check
+    -   id: tex_compille
    
