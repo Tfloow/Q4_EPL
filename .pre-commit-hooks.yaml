@@ -2,5 +2,5 @@
 - id: tex-compile-check
   name: Is your tex compiled in pdf ?
   description: Refuse commit if a modified .tex is not compiled in .pdf
-  entry: tex-compile
+  entry: tex_compile
   language: python
