@@ -17,7 +17,7 @@ pip install pre-commit # Install the pre-commit depedency through pip
 # Making sure to execute the command is executed where the Repo is located on the device
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR"
-var=$(pre-commit install)
+var=$(pre-commit.exe install)
 
 # Check if there is an issue with pip
 if [ "$var" = "bash: pre-commit: command not found" ] || [ "$var" = "pre-commit: command not found"]
