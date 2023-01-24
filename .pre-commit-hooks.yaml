@@ -2,5 +2,5 @@
 - id: some-id
   name: tex-check
   description: Check if you have compiled your .tex file in .pdf
-  entry: print_arguments
+  entry: tex_compile
   language: python
