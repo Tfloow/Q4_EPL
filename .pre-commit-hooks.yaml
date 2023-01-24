@@ -1,6 +1,6 @@
 # .pre-commit-hooks.yaml
-- id: tex_compile
-  name: Is your tex compiled in pdf ?
-  description: Refuse commit if a modified .tex is not compiled in .pdf
-  entry: tex_compile
+- id: some-id
+  name: tex-check
+  description: Check if you have compiled your .tex file in .pdf
+  entry: print_arguments
   language: python
