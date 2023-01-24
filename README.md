@@ -32,13 +32,18 @@ Pour pouvoir modifier facilement ce dossier et l'avoir en local, il te suffit de
 Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](https://github.com/Tfloow/Q4_EPL/wiki) où tu trouveras plein d'info sur git, github, ...
 
 Tu as tout ça ? parfait ! maintenant suit ces instructions:
+
+<img src="https://cdn.discordapp.com/attachments/590178963477757972/1067492468083404860/Video_sans_titre_Realisee_avec_Clipchamp.gif" width="300">
+
 1. Fork ce Github depuis cette page
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
 3. Crée un dossier sur ton pc et lance Git depuis ce dossier
 4. Exécute `git clone https://www.github.com/nom/Q4_EPL.git`
 5. N'oublie d'être dans le dossier où se trouve le repo en faisant la commande `cd Q4_EPL`
 6. Exécute `git remote add upstream https://www.github.com/Tfloow/Q4_EPL.git`
-7. Lance `INSTALLER.sh`
+7. Lance `INSTALLER.sh` (on te conseille d'utiliser Git BASH qui est fourni avec Git pour l'exécuter)
+
+<img src="https://cdn.discordapp.com/attachments/590178963477757972/1067495514150539384/Video_sans_titre_Realisee_avec_Clipchamp_1.gif" width="300">
 
 Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécute simplement `git pull upstream main`.
 
