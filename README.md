@@ -7,6 +7,8 @@
  <br>
 &nbsp; &nbsp; • <a href="#répartition-">Répartition</a>
  <br>
+&nbsp; &nbsp; • <a href="#un-problème-">Un problème</a>
+ <br>
 &nbsp; &nbsp; • <a href="#les-liens-utiles-">Les liens utiles</a>
 </details>
 
@@ -69,6 +71,11 @@ Pour ajouter ta synthèse, tu dois:
 |                |       |       |       |       |       |       |       |        |
 |                |       |       |       |       |       |       |       |        |
 
+
+## Un Problème
+Si jamais tu as des difficultés à suivre les différentes étapes, regarde re-lis bien les différentes instructions à ton aise. (Git peut être intimidant pour les nouveaux utilisateurs) Si tu veux plus d'information sur les commandes utiles et/ou comprendre ce qu'elles font rends toi sur le [Wiki](https://github.com/Tfloow/Q4_EPL/wiki).
+Si tu es bloqué ou que tu as rencontré un problème que tu ne sais pas résoudre, ouvre une "Issue" [ici](https://github.com/Tfloow/Q4_EPL/issues) pour que tout le monde puisse t'aider.
+N'hésite pas à contacter directement les membres du projet pour toute autre question.
 
 ## Les liens utiles <a name="L"></a>
 1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
