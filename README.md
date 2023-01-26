@@ -57,7 +57,7 @@ Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](#getting-sta
 Pour ajouter ta synthèse, tu dois:
 
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
-2. Crée ton dossier de synthèse s'appelant par exemple `LEPLXXXX` ou encore `LINFOXXXX`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
+2. Crée ton dossier de synthèse s'appelant par exemple `LEPLXXXX - Nom Du Cours` ou encore `LINFOXXXX - Nom Du Cours`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
 3. Git commit et push sur ton fork
 4. Fais un Pull request pour que ton commit se fasse sur ce Github
 5. Attends et tadaaaa ta synthèse est dispo sur le Github
@@ -81,5 +81,5 @@ N'hésite pas à contacter directement les membres du projet pour toute autre qu
 ## Les liens utiles <a name="L"></a>
 1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
 2. [le Github du Drive](https://github.com/Gp2mv3/Syntheses "la masterclass de nos prédecesseurs")
-3. [les PDF](https://github.com/Tfloow/Q4_EPL/archive/refs/heads/main.zip)
-4. [le Template](https://github.com/Tfloow/Q4_EPL/raw/main/Template.zip)
+3. [les PDF](https://github.com/Tfloow/Q4_EPL/tree/main/SynthèseCompilé)
+4. [le Template](https://github.com/Tfloow/Q4_EPL/tree/main/Template)

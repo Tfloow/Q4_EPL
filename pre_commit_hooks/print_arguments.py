@@ -8,7 +8,9 @@ def print_arguments(arguments: list[str]):
         print(argument)
 
 def excpetionThrow(filepath):
-    raise Exception("Hey, it seems like you have not compiled the latest version of " + filepath + " yet, compile it into a pdf before commiting it to the branch")
+    raise Exception(
+        f"Hey, it seems like you have not compiled the latest version of {filepath} yet, compile it into a pdf before commiting it to the branch"
+    )
 
 
 def main():
