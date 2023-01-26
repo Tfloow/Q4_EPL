@@ -14,6 +14,7 @@
 
 
 Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cours du Q4 2023 par:
+
 | Nom                                                |                     Nom                     |                          Nom                           |
 | -------------------------------------------------- | :-----------------------------------------: | :----------------------------------------------------: |
 | [Julien Monfils](https://github.com/JulienMonfils) | [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |

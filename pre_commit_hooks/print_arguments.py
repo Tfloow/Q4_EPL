@@ -1,9 +1,6 @@
 # print_arguments/main.py
-#triger ?
 import argparse
 import os
-import datetime
-# need to add argument
 
 
 def print_arguments(arguments: list[str]):
