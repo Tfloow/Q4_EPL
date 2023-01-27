@@ -10,7 +10,7 @@ Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'
 
 echo -e "${Cyan}Welcome to the INSTALLER of${RED} Q4_EPL${NC}"
-sleep 5
+sleep 2
 
 pip install pre-commit # Install the pre-commit depedency through pip
 
@@ -21,7 +21,7 @@ var=$(pre-commit.exe install)
 
 if [ "$var" = "bash: pre-commit: command not found" ] || [ "$var" = "pre-commit: command not found"]
 then
-  echo -e "${RED}Oops, something went wrong with the installation of your pip, open an issue on github at${NC}"
+  echo -e "${RED}Oops, something went wrong with the installation of your pip, open an issue on github at${NC} https://www.github.com/Tfloow/Q4_EPL/issues"
 else
   echo -e "${Cyan}Everything is set! ${NC}Thank you for installing for further instructions or info visit: https://www.github.com/Tfloow/Q4_EPL Thank you :)"
 fi
@@ -30,7 +30,8 @@ fi
 location=$(where pre-commit)
 if [ "${location:${#location}-4:4}" != ".exe" ]
 then
-  echo "Mmh, something is off with your pre-commit app !"
+  echo -e "${RED}Mmh, something is off with your pre-commit app !${NC}"
+  echo "${SCRIPT_DIR} we executed here"
 fi
 
 sleep 10

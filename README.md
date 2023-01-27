@@ -36,7 +36,7 @@ Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](http
 
 Tu as tout ça ? parfait ! maintenant suit ces instructions:
 
-<img src="https://cdn.discordapp.com/attachments/590178963477757972/1067492468083404860/Video_sans_titre_Realisee_avec_Clipchamp.gif" width="300">
+<img src="https://cdn.discordapp.com/attachments/1032021239600009287/1068459707771129897/Video_sans_titre_Realisee_avec_Clipchamp_2.gif" width="300">
 
 1. Fork ce Github depuis cette page
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
