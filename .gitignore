@@ -41,3 +41,6 @@
 
 *.txt
 *.log
+
+__pycache__/
+.idea/
