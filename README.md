@@ -7,7 +7,7 @@
  <br>
 &nbsp; &nbsp; • <a href="#répartition-">Répartition</a>
  <br>
-&nbsp; &nbsp; • <a href="#un-problème-">Un problème</a>
+&nbsp; &nbsp; • <a href="#un-problème">Un problème</a>
  <br>
 &nbsp; &nbsp; • <a href="#les-liens-utiles-">Les liens utiles</a>
 </details>
@@ -36,7 +36,7 @@ Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](http
 
 Tu as tout ça ? parfait ! maintenant suit ces instructions:
 
-<img src="https://cdn.discordapp.com/attachments/1032021239600009287/1068459707771129897/Video_sans_titre_Realisee_avec_Clipchamp_2.gif" width="300">
+<img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp%20(2).gif" width="300">
 
 1. Fork ce Github depuis cette page
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
@@ -46,7 +46,7 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 6. Exécute `git remote add upstream https://www.github.com/Tfloow/Q4_EPL.git`
 7. Lance `INSTALLER.sh` (on te conseille d'utiliser Git BASH qui est fourni avec Git pour l'exécuter)
 
-<img src="https://cdn.discordapp.com/attachments/590178963477757972/1067495514150539384/Video_sans_titre_Realisee_avec_Clipchamp_1.gif" width="300">
+<img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif" width="300">
 
 Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécute simplement `git pull upstream main`.
 
