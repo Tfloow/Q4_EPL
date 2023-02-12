@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{listings}
+\usepackage{wrapfig}
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{float}
@@ -66,7 +67,14 @@ Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bon
 
 \chapter{Introduction}
 \section{Les Paradigmes}
-Une paradigme, est une façon d'approcher et apporter une solution à un problème. De ce fait, chaque langage de programmation utilise 1 voir 2 paradigmes. Ce cours couvrat 5 paradigmes cruciaux qui sont: 1. "Functionnal Programming" \quad 	2. "Object Oriented Programming" \quad 3. "Functional DataFlow Programming" \quad 4. "Actor DataFlow Programming or Multi-Agent" \quad 5. "Active Objects".\\
+Une paradigme, est une façon d'approcher et apporter une solution à un problème. De ce fait, chaque langage de programmation utilise 1 voir 2 paradigmes. Ce cours couvrat 5 paradigmes cruciaux qui sont:
+\begin{enumerate}
+\item "Functionnal Programming"
+\item "Object Oriented Programming"
+\item "Functional DataFlow Programming"
+\item "Actor DataFlow Programming or Multi-Agent"
+\item "Active Objects"
+\end{enumerate}
 
 Et pour découvrir ces paradigmes, nous utiliserons les langages de programmations \href{https://fr.wikipedia.org/wiki/Oz_(langage)}{"Oz"} qui est un langage de recherche multi paradigme ainsi que \href{https://fr.wikipedia.org/wiki/Erlang_(langage)}{"Erlang"}.
 
@@ -74,7 +82,20 @@ Et pour découvrir ces paradigmes, nous utiliserons les langages de programmatio
 Comme mentionner plus haut, on rencontrera 5 paradigmes dont voici le premier.
 \section{Functional Programming}
 Avec ce paradigme, on impose qu'une variable peut être nommé qu'une seule fois ! Donc: \quad X = 10 mais on ne peut pas plus loin dire X = 9. X est déjà attribué. On peut penser que cela risque d'être handicapant alors qu'en réalité, cela rend notre code plus simple à débugger. De plus, nombreux sont les langages et microservices utilisés qui implémentent la programmation fonctionnelle.
+Formellement, quand on déclare une variable et qu'on l'assigne à une valeur ceci se passe.
+\begin{wrapfigure}{r}{.4\textwidth}
+	\centering
+    \includegraphics[width=.5\textwidth]{img/declVar.png}
+    \caption{Déclaration d'une variable}
+\end{wrapfigure}
+Une chose importante à noter est que cette façon de programmer peut être réalisé dans n'importe quel langage de programmation. On peut également redéclarer un identificateur. C'est-à-dire écrire "X = 42" et plus loin en ayant redéclarer une variable "X = 11" car ces deux déclarations pointent à deux éléments totalement différents dans la mémoire.\\
 
-
+Un "Scope" ou portée est une propriété centrale en programmation. En effet, c'est le scope qui nous permet d'avoir différente valeur pour des variables qui ont le même nom. Naturellement, elle ne représente pas la même chose car elle diffère de leur scope. On peut déterminer le scope d'une variable sans même exécuter le code. Il nous suffit d'analyser le code qui comprend un "\textcolor{red}{lexical scoping}" ou un "\textcolor{red}{static scoping}".
+\begin{figure}[H]
+\centering
+\includegraphics[width=3cm]{img/scope.png}
+\caption{Exemple de code avec des scope différents}
+\end{figure}
+\section{Conseils pour la syntaxe d'Oz}
 
 \end{document}
