@@ -108,8 +108,45 @@ x[n] = A cos(\Omega n + \Phi)
 \end{equation}
 Il a une période de $\Omega N = 2 \pi m$
 
+\subsection{Signaux amortis}
+Pour les signaux continus et avec $\alpha > 0$:
+\begin{equation}
+x(t) = A e^{-\alpha t}cos(\omega t + \phi)
+\end{equation}
+Et pour les signaux discrets:
+\begin{equation}
+x[n] = Br^ncos(\Omega n + \Phi)
+\end{equation}
 
+\subsection{L'impulsion (temps discret)}
+Comme son nom l'indique, ce signal se représente sous la forme d'une impulsion. Par sa définition, cela nous force a avoir un signal discret !
+\begin{equation}
+\begin{cases}
+\delta [n] = 1 \rightarrow n = 0 \\
+\delta [n] = 0 \rightarrow \forall n \notin 0
+\end{cases}
+\end{equation}
+On peut réaliser des impulsions décaler en écrivant $\delta [n-x]$ avec $x$ représentant la valeur du décalage.
 
+\subsection{L'échelon (temps discret)}
+Ce type de signal élémentaire est encore plus trivial puisqu'il se résume à:
+\begin{equation}\label{eq:1}
+\begin{cases}
+1 \rightarrow n \geq 0 \\
+0 \rightarrow n < 0
+\end{cases}
+\end{equation}
+On peut aussi voir l'échelon comme une somme infinie d'impulsion comme $\sum_{k \geq 0}^{\infty} \delta[n-k]$.\\
+Il existe également un échelon en temps continu qui se résume à la même équation \ref{eq:1} mais pour des valeurs continues.
+
+\subsection{Impulsion (temps continu)}
+\begin{equation}
+\begin{cases}
+\delta (t) = 0 si t \neq 0\\
+\delta (0) = ?(+\infty)\\
+\int_{-a}^a \delta (s) ds = 1 \rightarrow \forall a > 0
+\end{cases}
+\end{equation}
 
 \part{Systèmes}
 
