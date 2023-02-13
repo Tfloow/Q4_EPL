@@ -1,0 +1,118 @@
+%Made By Thomas Debelle
+\documentclass{report}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xparse}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\begin{document}
+
+
+\begin{titlepage}
+    \begin{figure}
+        \includegraphics[height = 2cm]{UCL_Logo.png}
+        \label{fig:my_label}
+    \end{figure}
+
+    \hspace*{100cm}
+    \centering
+    \vspace*{7cm}
+
+    {\Huge \textbf{Résumé de LEPL1106}}\\
+    \vspace*{0.25cm}
+    compilation du \today\\
+    \vspace*{0.25cm}
+    \Large{Thomas Debelle}\\
+
+    \vspace*{9.5cm}
+    {\Large Juin 2023}
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+\section*{Préface}
+
+Bonjour à toi !\\
+
+Cette synthèse recueille toutes les informations importantes données au cours, pendant les séances de tp et est amélioré grâce au note du Syllabus. Elle ne remplace pas le cours donc écoutez bien les conseils et potentielles astuces que les professeurs peuvent vous donner. Notre synthèse est plus une aide qui on l'espère vous sera à toutes et tous utiles.\\
+
+Elle a été réalisée par toutes les personnes que tu vois mentionné. Si jamais cette synthèse a une faute, manque de précision, typo ou n'est pas à jour par rapport à la matière actuelle ou bien que tu veux simplement contribuer en y apportant ta connaissance ? Rien de plus simple ! Améliore la en te rendant \href{http://www.github.com/Tfloow/Q4_EPL}{ici} où tu trouveras toutes les infos pour mettre ce document à jour. (\textit{en plus tu auras ton nom en gros ici et sur la page du github})\\
+
+Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bonne lecture et bonne étude.
+
+
+\part{Signaux}
+
+\chapter{Les signaux}
+\section{Définition}
+\subsubsection{Définition}
+Un signal est une fonction de une ou plusieurs variables (continues ou discrètes) qui correspondent à de l'information ou a un phénomène physique.
+
+\subsubsection{Continues ou discrets ?}
+Un signal est dit continu si il est définit sur un espace de temps continu. On note ce signal $x(t)$. Et il est dit discret si il est définit sur un espace discret de temps. On note ce signal $x[t]$.
+
+\subsubsection{Manipulation des signaux}
+Pour le cas discrets ou continu, nous pouvons réaliser les opérations suivantes.
+\begin{itemize}
+\item Combinaison linéaire $\rightarrow \alpha_{1}x_{1}(t) + \alpha_{2}x_{2}(t)$
+\item Multiplication $ \rightarrow x_{1}[t]x_{2}[t]$
+\item Dilatation $ \rightarrow x[n/a], a > \mathbb{R}$
+\item Translation $ \rightarrow x(t - t_0), t_0 \in \mathbb{R}$
+\item Renversement $ \rightarrow x(-t)$
+\item Différentiation (que pour le cas continu) $ \rightarrow \frac{d^n x(t)}{dt^n}$
+\item Intégration (que pour le cas continu)
+\end{itemize}
+
+\section{Signaux élémentaires}
+\subsection{Signaux exponentiels}
+Pour les signaux continus nous avons:
+\begin{equation}
+x(t) = B e^{at}
+\end{equation}
+Et pour les signaux discrets nous avons:
+\begin{equation}
+x[n] = Br^n \rightarrow 0 < r < 1
+\end{equation}
+
+\subsection{Signaux sinusoïdales}
+Pour les signaux continus nous avons:
+\begin{equation}
+x(t) = A cos(\omega t + \phi)
+\end{equation}
+Et pour les signaux discrets nous avons:
+\begin{equation}
+x[n] = A cos(\Omega n + \Phi)
+\end{equation}
+Il a une période de $\Omega N = 2 \pi m$
+
+
+
+
+\part{Systèmes}
+
+
+
+\end{document}
