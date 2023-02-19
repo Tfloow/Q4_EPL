@@ -98,7 +98,7 @@ Pour connaitre la puissance dissipée dans une résistance, on utilise d'abord l
 v(t) = R i(t)
 \end{equation}
 Ainsi, en utilisant \ref{eqn:p} on trouve:
-\begin{equation}
+\begin{equation} \label{eqn:pr}
 p(t) = vi(t) = \frac{v^2(t)}{R} = Ri^2(t)
 \end{equation}
 
@@ -138,7 +138,47 @@ v_{oc} = R_{Th}i_{sc}
 \end{figure}
 
 \chapter{Cours 2}
-\subsubsection{Le quadripole}
+\section{Suite des bases}
+\subsubsection{Thévenin avec sources dépendantes}
+Pour trouver $R_{Th}$ on va rajouter au borne connectant l'autre circuit une source de tension. Puis on détermine les tensions à borne ouverte et le courant en \textit{court-circuit}.
+
+\subsubsection{Transfert maximal de puissance}
+Pour trouver la puissance maximale dans une résistance, on peut faire varier le courant et donc le voltage. Ici, on a réalisé un diviseur résistif très simple pour démontrer la formule de puissance de résistance donné par \ref{eqn:pr}, on obtient donc ceci dans notre circuit:
+\begin{equation}
+\frac{\partial}{\partial R_2} \biggl(\frac{V^2 R_2}{(R_1 + R_2)^2}\biggl) = 0
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=6.5cm]{img/maxPuissance.png}
+\caption{Graphique montrant l'évolution de la puissance dans une résistance}
+\end{figure}
+
+\subsubsection{Le quadripole à 2 accès}
+\begin{wrapfigure}{r}{.45\textwidth}
+\centering
+\includegraphics[width=6.5cm]{img/quadri2.png}
+\caption{Schéma classique d'un quadripole à 2 accès}
+\end{wrapfigure}
+Le quadripole à 2 accès se reposent sur 2 principes, il faut qu'il n'y ait aucune source indépendante interne $\rightarrow$ donc passif. Il faut également n'avoir que 2 accès, c'est à dire que la somme des entrées est nulle. Pour simplifier, il faut qu'on ait une entrée et sortie comprenant le même courant (voir schéma ci-contre).\\
+Le but de cette représentation est une simplification de circuit. De plus, même si ce circuit n'est pas linéaire, on fait des petites variations autour d'une valeur rendant approximativement le circuit linéaire.\\
+
+Ce type de quadripole peut être réalisé de 4 manières différentes détaillées ci-dessus.
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/YZGH.png}
+\caption{Les 4 types de quadripoles}
+\end{figure}
+On peut facilement représenter ces différents systèmes via des matrices détaillants le système
+%insérer la matrice
+
+\subsection{L'amplificateur opérationnelle}
+L'amplificateur opérationnelle ou \textit{ampli op} est un composant qu'on retrouve abondamment en électronique. 
+
+\subsubsection{Montage inverseur}
+\begin{equation}
+\frac{v_o}{v_s} ~= -\frac{R_2}{R_1}
+\end{equation}
 
 \end{document}
 
