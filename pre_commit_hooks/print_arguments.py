@@ -32,7 +32,7 @@ def main():
             elif(i.split(".")[-1].lower() == "pdf"):
                 timeCheckPdf[i.split(".")[0]] = os.path.getmtime(os.getcwd()+"\\"+i)
     for texName in timeCheckTex.keys():
-        if timeCheckTex[texName] - timeCheckPdf.get(texName, 0) > -60:
+        if timeCheckTex[texName] - timeCheckPdf.get(texName, 0) > 600:
             excpetionThrow(texName)
     print_arguments(args.filenames)
 
