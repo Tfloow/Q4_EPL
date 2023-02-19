@@ -1,4 +1,5 @@
 %Made By Thomas Debelle
+%Ajouté des Packages si nécessaires
 \documentclass{report}
 \usepackage[a4paper, total={6in, 9in}]{geometry}
 \usepackage[utf8]{inputenc}
@@ -17,6 +18,7 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{xparse}
+\usepackage{wrapfig}
 
 \hypersetup{
     colorlinks=true,
@@ -28,7 +30,7 @@
     }
 \begin{document}
 
-
+%Si la mention "Juin 2023" est sur une autre page, changé le dernier VSPACE
 \begin{titlepage}
     \begin{figure}
         \includegraphics[height = 2cm]{UCL_Logo.png}
@@ -45,11 +47,11 @@
     \vspace*{0.25cm}
     \Large{Noms des Auteurs}\\
 
-    \vspace*{9.5cm}
+    \vspace*{9.5cm} %Le dernier VSPACE
     {\Large Juin 2023}
 \end{titlepage}
 
-
+%_____NE PAS MODIFIER______
 \tableofcontents
 \newpage
 
@@ -63,7 +65,7 @@ Elle a été réalisée par toutes les personnes que tu vois mentionné. Si jama
 
 Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bonne lecture et bonne étude.
 
-
+%_______Vous pouvez modifier en-dessous_____
 \chapter{Introduction}
 
 \chapter{Partie 1}
