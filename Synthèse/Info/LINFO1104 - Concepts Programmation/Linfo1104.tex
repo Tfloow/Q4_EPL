@@ -98,4 +98,73 @@ Un "Scope" ou portée est une propriété centrale en programmation. En effet, c
 \end{figure}
 \section{Conseils pour la syntaxe d'Oz}
 
+\chapter{Programmation symbolique}
+\section{Listes}
+On dit d'une liste est \textbf{récursive} si elle se définit par elle-même. C'est-à-dire elle fait appel à elle-même. On utilise la récursion pour les calculs et pour stocker des données.
+Une liste est soit vide ou soit une pair \textit{d'une valeur suivi par une autre liste}.
+\subsection{Définition formelle}
+En utilisant la notation \textbf{Extended Backus-Naur Form} ou \textit{EBNF} pour les intimes, on écrit une liste comme: <List T> ::= nil | T '|' <List T>. Une chose importante à noter est le deuxième "ou" qui s'écrit comme '|' signifiant qu'il n'appartient pas à la définition de List T mais plutôt à l'ensemble T '|' <List T>. Si on lit ceci, on dirait "\textit{Une list d'élément représentant T correspond à un élément vide ou un élément représentant T suivi d'une autre Liste d'élément T}.\\
+
+\begin{wrapfigure}{r}{.4\textwidth}
+	\centering
+	\includegraphics[width=.3\textwidth]{img/listTree.png}
+\end{wrapfigure}
+Donc une List d'entier se définit comme: <List <Int>
+>. Une chose importante à remarquer est que j'ai utiliser le mot "représentation" en effet <Int> n'est pas un entier mais une représentation d'entier.\\
+
+Pour définir une liste en Oz, on utilise soit la notation \textcolor{blue}{[1 2 3]} ou \textcolor{blue}{1 | 2 | 3 | nil}. C'est 2 déclarations reviennent à la même chose en mémoire. Une utilité des listes est leur facilité à être représenté sous forme d'arbre comme montré ci-contre.\\
+En Oz, la \textit{head} est accessible via \textcolor{blue}{list.1} et la \textit{tail} est obtenu via \textcolor{blue}{list.2}.
+
+\section{Pattern matching}
+\begin{wrapfigure}{l}{.4\textwidth}
+	\centering
+	\includegraphics[width=.3\textwidth]{img/patternMatching.png}
+\end{wrapfigure}
+Grâce à cette représentation en arbre, il est plutôt aisé de voir si une liste est bien une liste ou si elle respecte une certaine structure définit par nos soins.\\
+Ci-contre, on voit une fonction classique en Oz qui analyse une liste et détermine si elle est d'une structure correcte. Le \textcolor{blue}{[]} correspond au case où l'élément \textcolor{blue}{L} est une liste avec une Head et une Tail. On appelle cela une \textit{Clause} et H|T est le pattern de la clause. Le premier cas est définit par \textcolor{blue}{of}.
+
+\section{Introduction au langage Kernel}
+Le langage Kernel est la première partie de la sémantique formelle d'un langage de programmation. Une règle importante est que tout programme écrit en programmation fonctionelle \textit{peut être traduit en langage kernel}.
+Les grands principes du langage Kernel sont:
+\begin{itemize}
+	\item Tous les résultats intermédiaires de calculs sont visibles.
+	\item Toutes les fonctions deviennent des \textit{procédures} avec un argument en plus. Cet argument donne le résultat de la fonction.
+	\item Les fonctions dans une fonction sont sortis de leur fonction et on leur donne un nouvel identificateur.
+\end{itemize}
+Les résultats de la traduction: Les programmes Kernel sont plus longs mais on voit facilement comment un programme s'exécute et on voit si il est \textit{tail-recursive}
+
+\section{Les arbres}
+Les arbres sont des structures de données extrêmement utiles et utilisées. On peut y stocker des données spécifiques, faire des calculs, ... Les arbres illustrent bien \textit{la programmation orienté but}. Par le standard \textit{EBNF}, on définit un arbre comme suit: <tree T> ::= leaf | t(T <tree T> ... <tree T>). Donc un arbre est une feuille ou \textit{leaf} qui est suivie par un ensemble de \textit{sous-arbres}. Les arbres sont forts similaires au liste si ce n'est que les listes n'ont qu'une sous-listes alors qu'un arbre peut avoir plusieurs sous-arbres.
+
+\subsection{Ordered Binary tree}
+Un arbre de ce type à 2 particularités:
+\begin{itemize}
+\item \textcolor{red}{Binary}: toutes les éléments hors les feuilles possèdes 2 sous-arbres.
+\item \textcolor{red}{Ordered}: pour chaque arbre, la clé à gauche est plus petite que la clé de l'arbre et la clé à droite est plus grande.
+\end{itemize}
+Ce type d'arbre est très utile pour par exemple effectuer des recherches binaires et permet de facilement et rapidement trouver des données.
+
+\subsubsection{Lookup K T}
+Nous permet de trouver une valeur. Ce programme est plutôt simple et il nous suffit de regarder la clé de l'arbre où on est. Puis on compare avec notre recherche, si on est plus grand, on va à droite sinon à gauche. On répète le processus jusqu'à trouver la clé.\\
+Lookup est très efficace car il s'exécute en \textcolor{red}{$log_2 n$}, le pire cas est si l'arbre n'est pas équilibré et il ressemble à une liste. Mais en général, en ayant un nombre suffisant de données, il est très rare d'avoir un arbre non équilibré.
+\subsubsection{Insert K W T}
+Il existe 4 possibilités.
+\begin{enumerate}
+\item remplace une feuille.
+\item on remplace un noeud.
+\item on remplace un sous-arbre à gauche.
+\item on remplace un sous-arbre à droite.
+\end{enumerate}
+Le premier cas est le plus simple car on créé simplement un nouvel sous-arbre avec 2 feuilles. Si on remplace un noeud, on change la clé et la valeur du noeud.
+Pour remplacer un sous-arbre, on garde les mêmes clés et valeur de Y pour le noeud mais on change le sous-arbre à gauche ou à droite en fonction.
+\subsubsection{Delete K T}
+Celle-ci est plus compliqué, on a 4 possibilités
+\begin{enumerate}
+\item La valeur qu'on veut supprimer n'existe pas
+\item On supprime une feuille.
+\item on supprime un sous-arbre à gauche.
+\item on supprime un sous-arbre à droite.
+\end{enumerate}
+Voici.
+
 \end{document}
