@@ -292,8 +292,23 @@ Dans ce type de représenation, on a \textcolor{red}{état $x$} qui est un \text
 \end{equation}
 
 \subsubsection{Solution}
-La solution \textit{homogène} de $e^{\lambda_it}$
+La solution \textit{homogène} de $e^{\lambda_it}$ avec $\lambda_i$ étant les valeurs propres de l'équation. Si la partie réelle des racines est négative pour tout $\lambda_i$.
 
+\subsubsection{État non-unique}
+Avec cette représentation, on peut facilement modifier les vecteurs et signaux pour rendre les équations plus simples. Cela n'a aucun impacte et rend les équations plus logiques pour un certain sens "\textit{réel}".
+\begin{equation}
+\begin{cases}
+z = Tx \Rightarrow \frac{d}{dt}z = T\frac{d}{dt}x = TAT^{-1}z(t) + TBu(t)\\
+y = Cx(t) + Bu(t) = CT^{-1}z(t) + Du(t) 
+\end{cases}
+\end{equation}
+
+Si la matrice $A$ est diagonalisable, on peut réaliser un \textbf{découplage} et obtenir ainsi un mode dit \textit{découplé}. On peut également faire des \textit{blocs de Jordan} pour diagonaliser le tout:
+\begin{equation}
+\frac{d}{dt} z_i = \lambda_i z_i + \tilde{B}_i u
+\end{equation}
+
+\subsection{Passage de représentation}
 
 
 \part{Systèmes}

@@ -1,6 +1,7 @@
 # print_arguments/main.py
 import argparse
 import os
+from Sorting import run
 
 
 def print_arguments(arguments: list[str]):
@@ -35,6 +36,8 @@ def main():
         if timeCheckTex[texName] - timeCheckPdf.get(texName, 0) > 600:
             excpetionThrow(texName)
     print_arguments(args.filenames)
+    run()
+    
 
 
 if __name__ == "__main__":
