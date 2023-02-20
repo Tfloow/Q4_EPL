@@ -8,6 +8,6 @@ repos:
     -   id: check-yaml
     -   id: check-added-large-files
 -   repo: https://github.com/Tfloow/Q4_EPL
-    rev: v1.1.2
+    rev: v1.1.1
     hooks:
     -   id: some-id
