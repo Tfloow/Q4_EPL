@@ -167,14 +167,14 @@ La méthode pour trouver le résultat d'une convolution est:
 
 \section{Modélisation et représentation des systèmes}
 Comme vu précédemment, la réponse impulsionelle est le résultat du système étant perturbé par une impulsion. 
-\subsubsection{Inconvénient}
+\subsection{Inconvénient}
 \begin{enumerate}
 \item Fonction de taille \textit{infinie} et représentation donc \textit{peu simple}.
 \item La modélisation d'un système ne mène généralement pas à une réponse impulsionelle .
 \item On doit connaitre l'entrée depuis $-\infty$
 \end{enumerate}
 
-\subsubsection{Représentation}
+\subsection{Représentation}
 \begin{wrapfigure}{r}{.3\textwidth}
 \includegraphics[width=5cm]{img/RLC.png}
 \caption{Circuit RLC}
@@ -214,6 +214,53 @@ L
 \caption{Repésentation \textit{bloc} du système à la figure \ref{fig:RLC}}
 \label{fig:bloc}
 \end{figure}
+
+\subsection{Équation différentielle entrée-sortie}
+La forme générale de ces équations est de ce type:
+\begin{equation}\label{eqn:difes}
+\sum_{k = 0}^{N} a_k (\frac{d^k}{dt^k}) y(t) = \sum_{k = 0}^M b_k (\frac{d^k}{dt^k}) u(t)
+\end{equation}
+Quelque chose à bien remarquer est que ces équations ne modélise \textit{qu'une partie} d'un système \textit{LIT}. Par exemple, on ne peut pas représenter un \textit{délai} ce qui également rare dans la réalité.\\
+
+Une chose à remarquer est que l'opérateur \textit{dérivé} peut se "\textit{démultiplier}" et possède une \textit{associativité} et \textit{commutativité}. Ainsi, on peut avoir une représentation dite "\textit{polynomiale}" comme ci-dessus qui est une autre écriture de l'équation \ref{eqn:difes}.
+\begin{equation}\label{eqn:poly}
+p(\frac{d}{dt})y(t) = q (\frac{d}{dt})u(t)
+\end{equation}
+Puis après, pour résoudre ce genre d'équation, on utilise des méthodes classiques vu au cours d'Analyse donc, solution homogène et particulière ...
+
+\subsubsection{Réponse libre et forcée}
+Une réponse \textit{libre} est la solution de l'équation homogène, donc quand $u(t) = 0$ à l'équation \ref{eqn:poly} et on garde les \textbf{mêmes conditions initiales}. En somme c'est la représentation de l'impact des \textit{CI}.\\
+
+Une réponse \textit{forcée} est l'équation \ref{eqn:poly} mais avec les \textit{conditions initiales} nulles. Donc on s'intéresse à l'impact de l'entrée sans les conditions initiales. La somme de la réponse \textit{libre} et \textit{forcée} nous donne la réponse générale.
+
+\subsubsection{Stabilité}
+On peut avoir une intuition sur la stabilité de notre système en posant $y_H(t)$ qui équivaut à:
+\begin{equation}
+y_H(t) = \sum_i \alpha_ie^{r_it} \rightarrow \quad r_i \text{ correspond aux racines de p(z) de \ref{eqn:poly}}
+\end{equation}
+Si la partie réelle de $r_i < 0 \forall i$ alors on a une exponentielle décroissante donc \textbf{stable}. On appelle ce genre de système \textit{BIBO} stable ou \textit{Bounded Input Bounded Output}.\\
+
+En revanche, si $r_i > 0 \exists i$ donc on a au moins une exponentielle croissante créant une \textit{instabilité}.\\
+
+Si $r_i = 0 \exists i$ on dit qu'on a une \textit{stabilité marginale} ou \textit{instabilité}. Cela dépendera de la \textbf{multiplicité} et de \textbf{$te^{r_it}$}.
+
+\subsubsection{Linéarité de l'entrée}
+Avec cette représentation polynomiale, on peut facilement voir qu'on a une linéarité de l'entrée nous permettant de simplifier différent calcul. %rajouter la formule etc
+
+\subsubsection{Avantage et Inconvénient}
+2 représentations qui sont \ref{eqn:difes} et \ref{eqn:poly}. Les avantages:
+\begin{itemize}
+\item Représentation compacte.
+\item Conditions initiales claires.
+\item Facile de la transformer dans d'autres représentations.
+\end{itemize}
+Les désavantages:
+\begin{itemize}
+\item On peut perdre la représentation physique.
+\end{itemize}
+
+\subsection{Schéma Bloc}
+
 
 
 
