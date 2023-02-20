@@ -211,7 +211,11 @@ Si $\mathcal{H}$ est \textit{invariant} au temps et qu'on pose $h := \mathcal{H}
 \mathcal{H}\{\delta[n-k]\} = \mathcal{H}\{\delta\}[n-k] &= h[n-k]\\
 \mathcal{H}\{x\} = \sum_{k=-\infty}^{\infty} x[k]h[n-k] &=: x \ast h
 \end{align}
-A noter que "$\ast$" fais référence à la convolution, sujet abordé à la section \ref{convo}.
+A noter que "$\ast$" fais référence à la convolution, sujet abordé à la section \ref{convo}.\\
+
+Il est important de noter que toutes ces propriétés et caractéristiques des systèmes \textit{LIT} en \textbf{temps discret} sont également valables et ont un équivalent en \textbf{temps continu}.
+
+
 
 \section{Opération sur les signaux}
 Voici un tableau résumant les différentes opérations possibles sur les signaux:
@@ -240,13 +244,105 @@ Voici un tableau résumant les différentes opérations possibles sur les signau
 \end{center}
 Une chose importante à voir dans ces formules est que $x$ est un \textit{signal}, $x[k]$ la \textit{valeur} de ce signal en k et on a $\mathcal{H}$ qui est un \textit{système} prenant et donnant des signaux.
 
+\section{Convolution (temps discret)} \label{convo}
+La convolution est une nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
+\begin{equation} \label{eqn:convolution}
+f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
+\end{equation}
+La méthode pour trouver le résultat d'une convolution de manière \textbf{graphique} est:
+\begin{enumerate}
+\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
+\item On décale une des fonctions le plus à droite. (on prend le $k_0$ où après, tous les résultats de $f[k]g[n-k]$ valent $0$) 
+\item Puis multiplier chaque point entre eux et les sommer.
+\item On met le résultat sur un \textit{graphe} au pont $k$.
+\end{enumerate}
+Pour trouver de manière \textbf{calculatoire}, on applique simplement la formule \ref{eqn:convolution}.
+
+\subsection{Propriétés}
+\begin{center}
+\begin{tabular}{c|c}
+	Commutativité & $(f\ast g)[n] = (g \ast f)[n]$ \\
+	\hline
+	Associativité & $(f \ast (g \ast h))[n] = ((f \ast g) \ast h)[n]$ \\
+	\hline
+	Distributivité & $(f \ast (g + h))[n] = (f \ast g + f \ast h)[n]$ \\
+\end{tabular}
+\end{center}
+On également ces propriétés:
+\begin{center}
+\begin{tabular}{c|c}
+	Élément neutre & $f[n] \ast \delta[n] = f[n]$ \\
+	\hline
+	Décalage & $f[n] \ast \delta[n-n_0] = f[n-n_0], n_0 \in \mathbb{Z}$ \\
+\end{tabular}
+\end{center}
+
+\section{Convolution (temps continu)}
+Cette formule ressemble très fort à celle vu en temps continu à la section \ref{convo}. Si on a \textit{2 signaux} $f(t)$ et $g(t)$ leur convolution est donnée par:
+\begin{equation}
+f(t) \ast g(t) = \int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau
+\end{equation}
+Pour calculer de manière \textbf{graphique} il faut suivre ces étapes:
+\begin{enumerate}
+\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f(t) \rightarrow f(-t)$.
+\item On décale une des fonctions le plus à droite. (on prend le $\tau_0$ où après, tous les résultats de $f(t)g(t-\tau_0)$ valent $0$) 
+\item Puis multiplier chaque point entre eux et on les intègre. (on prend la surface sous la courbe).
+\item On met le résultat sur un \textit{graphe} au pont $\tau$.
+\end{enumerate}
+En somme, nous avons une méthode très proche du temps discret si ce n'est l'utilisation d'intégrale allant de $-\infty$ à $\infty$.
+
+\subsection{Propriétés}
+On retrouve les mêmes propriétés que en temps discret.
+\begin{center}
+\begin{tabular}{c|c}
+	Commutativité & $(f\ast g)(t) = (g \ast f)(t)$ \\
+	\hline
+	Associativité & $(f \ast (g \ast h))(t) = ((f \ast g) \ast h)(t)$ \\
+	\hline
+	Distributivité & $(f \ast (g + h))(t) = (f \ast g + f \ast h)(t)$ \\
+\end{tabular}
+\end{center}
+On également ces propriétés:
+\begin{center}
+\begin{tabular}{c|c}
+	Élément neutre & $f(t) \ast \delta(t) = f(t)$ \\
+	\hline
+	Décalage & $f(t) \ast \delta(t-t_0) = f(t-t_0), n_0 \in \mathbb{R}$ \\
+\end{tabular}
+\end{center}
+
+\section{Réponse impulsionnelle}
+La réponse impulsionnelle d'un système \textit{LIT} $\mathcal{H}$ est la réaction du système à une \textit{impulsion d'entrée} ($\delta[0]$) on le note $h$.\\
+
+Pour \textbf{tout} système \textit{LIT}, le signal de sortie est le résultat de la convolution entre \textit{le signal d'entrée} et \textit{la réponse impulsionnelle}.
+\begin{align}
+y[n] &= x[n] \ast h[n]\\
+y(t) &= y(t) \ast h(t)
+\end{align}
+
+\section{Type de système}
+\begin{center}
+\begin{tabular}{|c|c|}
+	\hline
+	Système sans mémoire & Si la sortie du système \textit{à un temps donné}\\
+	&  ne dépend que de l'entrée à \textbf{cet instant}.\\
+	\hline
+	Système causal & Le système \textbf{ne dépend pas} de ce qui se passe dans le \textit{futur}\\
+	\hline
+	Système stable ou (\textit{BIBO}) & Entrée \textit{bornée} donne une sortie \textit{bornée}\\
+	\hline
+	Système inversible & On sait \textit{retrouver} l'entrée en ayant la \textit{sortie}.\\
+	\hline
+
+\end{tabular}
+\end{center}
 
 \section{Modélisation et représentation des systèmes}
-Comme vu précédemment, la réponse impulsionelle est le résultat du système étant perturbé par une impulsion. 
+Comme vu précédemment, la réponse impulsionnelle est le résultat du système étant perturbé par une impulsion. 
 \subsection{Inconvénient}
 \begin{enumerate}
 \item Fonction de taille \textit{infinie} et représentation donc \textit{peu simple}.
-\item La modélisation d'un système ne mène généralement pas à une réponse impulsionelle .
+\item La modélisation d'un système ne mène généralement pas à une réponse impulsionnelle .
 \item On doit connaitre l'entrée depuis $-\infty$
 \end{enumerate}
 
@@ -418,7 +514,7 @@ A_d \approx A_c \Delta t \text{ si } \Delta t \text{ petit}
 
 \subsection{Résumé}
 \begin{enumerate}
-\item Réponse impulsionelle, universelle mais peu maniable $\Rightarrow$ On voit que l'entrée et sortie et \textbf{Pas de CI}
+\item Réponse impulsionnelle, universelle mais peu maniable $\Rightarrow$ On voit que l'entrée et sortie et \textbf{Pas de CI}
 \item Équation différentielle entrée-sortie $\Rightarrow$ On voit que l'entrée et sortie et on a des \textbf{CI}
 \item Représentation d'état (matrice) $\Rightarrow$ On voit l'intérieur et on a des \textbf{CI}
 \item Schéma Bloc (très concret) $\Rightarrow$ On voit l'intérieur et on a des \textbf{CI}
