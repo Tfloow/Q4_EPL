@@ -247,7 +247,7 @@ Si $r_i = 0 \exists i$ on dit qu'on a une \textit{stabilité marginale} ou \text
 \subsubsection{Linéarité de l'entrée}
 Avec cette représentation polynomiale, on peut facilement voir qu'on a une linéarité de l'entrée nous permettant de simplifier différent calcul. %rajouter la formule etc
 
-\subsubsection{Avantage et Inconvénient}
+\subsubsection{Avantages et Inconvénients}
 2 représentations qui sont \ref{eqn:difes} et \ref{eqn:poly}. Les avantages:
 \begin{itemize}
 \item Représentation compacte.
@@ -260,8 +260,39 @@ Les désavantages:
 \end{itemize}
 
 \subsection{Schéma Bloc}
+Comme son nom l'indique, le schéma bloc utilise des "\textit{blocs}" pour représenter notre système. Ci-dessus on peut voir les composants de base composant ce type de schéma
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/blocExemple.png}
+\caption{Liste reprenant les blocs de base}
+\end{figure}
+Dans le cadre des systèmes \textit{LIT}, on se restreint souvent à l'addition, multiplication et intégration. On ne réalise que des opérations \textit{linéaires}.
 
+\subsubsection{Avantages et Inconvénients}
+Les avantages:
+\begin{itemize}
+	\item Représentation très intuitive.
+	\item Proche de l'implémentation réelle du système.
+	\item On peut plus facilement réfléchir sur le \textit{design} de notre système.
+	\item Très modulaire.
+\end{itemize}
+Les désavantages:
+\begin{itemize}
+	\item Lien moins clair avec la solution.
+\end{itemize}
+De plus, on peut voir comme un \textit{avantage} ou \textit{inconvénient} le fait de pouvoir voir l'évolution des signaux entre chaque bloc plutôt qu'une sorte de boite noire "\textit{entrée-sortie}". De plus, on peut réaliser de bien des manières des circuits.
 
+\subsection{Représentation d'état}
+Dans ce type de représenation, on a \textcolor{red}{état $x$} qui est un \textit{vecteur} comportant toutes les infos internes de notre système. On \textcolor{red}{entrée $u$} qui est un \textit{signal} extérieur affectant le système. Finalement on a une \textcolor{red}{sortie $y$} qui est un signal qu'on peut accéder depuis l'extérieur.\\
+\begin{equation}
+\begin{cases}
+\text{évolution: }\frac{d}{dt}x(t) =  Ax(t) + Bu(t)\\
+\text{sortie: } C x(t) + D u(t)
+\end{cases}
+\end{equation}
+
+\subsubsection{Solution}
+La solution \textit{homogène} de $e^{\lambda_it}$
 
 
 
