@@ -29,7 +29,7 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 Ce github **n'a pas vocation de remplacer le drive !** On l'utilise pour travailler au fil du quadri sur nos synthèses. Le but final est de pouvoir directement push nos synthèses sur le drive et ce de manière automatique. Nous avons créé un Github groupé pour *nous faciliter le travail* et pour *qu'on puisse toujours avoir un moyen de correction facile*.
 
 ## Getting Started <a name="GS"></a>
-Pour pouvoir modifier facilement ce dossier et l'avoir en local, il te suffit de suivre ces étapes!
+Pour pouvoir modifier facilement ce dossier et l'avoir en local, il te suffit de suivre ces étapes !
 * Pour commencer il faut que tu aies: un compte github, git et python installé sur ta machine.
 
 Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](https://github.com/Tfloow/Q4_EPL/wiki) où tu trouveras plein d'info sur git, github, ...
@@ -38,9 +38,9 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 
 <img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp%20(2).gif" width="300">
 
-1. Fork ce Github depuis cette page
-2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github.
-3. Crée un dossier sur ton pc et lance Git depuis ce dossier
+1. Fork ce Github depuis cette page (regarde tout au-dessus à droite)
+2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github. **Attention n'oublie de r'ajouter `.git` à la fin**
+3. Crée un dossier sur ton pc et lance Git depuis ce dossier (donc ouvre le dossier dans le terminal)
 4. Exécute `git clone https://www.github.com/nom/Q4_EPL.git`
 5. N'oublie d'être dans le dossier où se trouve le repo en faisant la commande `cd Q4_EPL`
 6. Exécute `git remote add upstream https://www.github.com/Tfloow/Q4_EPL.git`
