@@ -100,6 +100,70 @@ Il n'existe pas plus d'un b pour un a. Si pour un a il n'existe pas de b, on dit
 \item f est \textcolor{brown}{injectif} ssi $\forall a, a' \in A: a \neq a' \Rightarrow f(a)\neq f(a')$ autrement dit on ne fait correspondre qu'au plus un élément de A dans B.
 \item f est \textcolor{brown}{bijectif} s'il combine \textit{surjectif} et \textit{injectif}
 \end{itemize}
-Intéressons nous aux extensions qui est le fait de rajouter une fonction qui ne définit un élément de B pas encore défini.
+
+Intéressons nous aux \textcolor{red}{extensions} qui est le fait de rajouter une fonction qui ne définit un élément de B pas encore défini.
+\begin{equation}
+\forall x \in A : g(x) \neq \perp \Rightarrow f(x) = g(x)
+\end{equation}	
+f à la même valeur que g partout où g est défini.
+
+\subsubsection{Définition d'une fonction}
+Comme dit précédemment, une fonction est défini par sa table. On va souvent utiliser une description de la table qui permet que celle-ci soit clair et bien défini. De plus, on a pas besoin de savoir comment calculer ceci.\\
+On peut également définir une table via une fonction ou un algorithme.
+
+\section{Ensemble énumérable}
+On dit que 2 ensembles ont le même cardinal (\textit{A} et \textit{B}) ssi il existe une bijection entre ces 2 ensembles. Donc chaque élément de \textit{A} correspond à un élément de \textit{B}.\\
+
+On dit d'un ensemble qu'il est dénombrable ssi il est \textcolor{red}{fini} ou il existe une \textcolor{red}{bijection} entre l'ensemble $\mathbb{N}$ et cet ensemble.
+
+\subsubsection{Exemples}
+\begin{itemize}
+\item L'ensemble $\mathbb{Z}$
+\item L'ensemble des nombres pairs
+\item Des paires d'entiers
+\item L'ensemble des programmes Java
+\end{itemize}
+
+\subsubsection{Propriétés}
+Tout sous-ensemble d'ensemble énumérable est \textit{énumérable}. L'union et l'intersection d'ensembles énumérables est \textit{énumérable}.\\
+
+En s'intéressant à l'ensemble des programmes informatiques, on se rend compte que c'est une \textit{ensemble énumérable infini}. De plus, les programmes informatiques ne considèrent que des choses \textit{énumérables}.
+
+\section{Cantor}
+Le théorème de \textit{Cantor} nous dit que l'ensemble des nombres entre 0 et 1 compris est \textit{non énumérable}.
+\begin{equation}
+E = {x \in \mathbb{R} | 0 < x \le 1}
+\end{equation}
+
+\subsubsection{Preuve}
+Pour prouver cela, on va réaliser une table et on va réaliser une \textit{diagonalisation de Cantor}.
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|c|}
+	\hline
+	 & chiffre 1 & chiffre 2 & ... & chiffre $k+1$ & ...\\
+	 \hline
+	 $x_0$ & \textcolor{red}{$x_{00}$} & $x_{01}$ & ... & $x_{0k}$ & ...\\
+	 \hline
+	 $x_1$ & $x_{10}$ & \textcolor{red}{$x_{11}$} & ... & $x_{1k}$ & ...\\
+	 \hline
+	 ...& ... & ... & ... & ... & ...\\
+	 \hline
+	 $x_k$ & $x_{k0}$ & $x_{k1}$ & ... & \textcolor{red}{$x_{kk}$} & ...\\
+	\hline
+	 ...& ... & ... & ... & ... & ...\\
+	\hline
+\end{tabular}
+\end{center}
+Ensuite, on va définir notre nombre de la diagonale qui vaut $d = 0.x_{00}x_{11}...x_{kk}$. De cet valeur, on va créer une valeur $d'$ qui a comme propriété $x_{kk} \neq x'_{kk} \forall k$.\\
+Mais, on doit stocker notre valeur $d'$ dans la table. On la stock à $p$ ce qui donne $d' = 0.x'_{p0}x'_{p1}... \textcolor{red}{x'_{pp}}$ mais à cause de la construction de $d = 0.x_{00}x_{11}...\textcolor{red}{x_{pp}}$. Par construction, $x'_{pp} \neq x_{pp}$ mais cela ne peut être respecté. Donc, \textbf{il n'y a pas} de \textit{bijection} des $\mathbb{N}$ vers cet ensemble. Donc cet ensemble est \textit{non énumérable}.
+
+\subsubsection{Autre ensemble non énumérable}
+\begin{itemize}
+\item L'ensemble des $\mathbb{R}$.
+\item L'ensemble des sous-ensemble de $\mathbb{N}$.
+\item L'ensemble des chaines infinies de caractères d'un alphabet fini.
+\item L'ensemble des \textit{fonctions} de $\mathbb{N}$ dans $\mathbb{N}$.
+\end{itemize}
+Chose intéressante à noter, comme on a une infinité non énumérable de fonctions $\mathbb{N}$ dans $\mathbb{N}$ et un nombre de programme informatique \textit{infini énumérable}. On ne peut résoudre tous les problèmes informatiques donc.
 
 \end{document}
