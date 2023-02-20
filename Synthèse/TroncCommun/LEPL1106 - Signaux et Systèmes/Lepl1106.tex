@@ -17,6 +17,7 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{xparse}
+\usepackage{wrapfig}
 
 \hypersetup{
     colorlinks=true,
@@ -151,7 +152,70 @@ A noter que la dernière ligne nous crée une propriété bien spécifique. En e
 
 \subsubsection{Lien entre impulsion et échelon}
 $\delta (t) = u'(t)$ donc l'impulsion est une sorte de dérivé de l'échelon.
-\subsubsection{suite}
+
+\section{Convolution}
+La convolution est une nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
+\begin{equation}
+f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
+\end{equation}
+La méthode pour trouver le résultat d'une convolution est:
+\begin{enumerate}
+\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
+\item Puis multiplier ces deux nouvelles fonctions.
+\item L'\textit{aire} sous la courbe créer par cela est le résultat de la convolution.
+\end{enumerate}
+
+\section{Modélisation et représentation des systèmes}
+Comme vu précédemment, la réponse impulsionelle est le résultat du système étant perturbé par une impulsion. 
+\subsubsection{Inconvénient}
+\begin{enumerate}
+\item Fonction de taille \textit{infinie} et représentation donc \textit{peu simple}.
+\item La modélisation d'un système ne mène généralement pas à une réponse impulsionelle .
+\item On doit connaitre l'entrée depuis $-\infty$
+\end{enumerate}
+
+\subsubsection{Représentation}
+\begin{wrapfigure}{r}{.3\textwidth}
+\includegraphics[width=5cm]{img/RLC.png}
+\caption{Circuit RLC}
+\label{fig:RLC}
+\end{wrapfigure}
+Il existe 3 grandes façons de représenter un système. Tout d'abord la méthode \textit{équation différentielle d'entrée-sortie}. Pour la suite des exemples, j'utiliserai un circuit \textit{RLC} comme montré ci-contre.\\
+
+\textit{équation différentielle d'entrée-sortie} est une somme des dérivées comme montré dans l'équation \ref{eqn:es}. C'est plutôt facile de trouver les équations mais on fait face à un problème, l'opération \textit{dérivée} n'existe pas dans le monde réelle, il faut un opérateur intégrateur.\\
+
+Ensuite, nous avons la \textit{représentation d'état} qui utilise des matrices pour former les équations différentielles comme nous voyons à l'équation \ref{eqn:mat}\\
+
+La dernière représentation type est le \textit{schéma bloc} qui est visuel et qui utilise lui des blocs intégrateurs au lieu de dérivé comme montré à la figure \ref{fig:bloc}.
+
+\begin{equation} \label{eqn:es}
+\ddot{y} + \frac{1}{CR}\dot{y} + \frac{1}{LC}y = \frac{1}{CR}\dot{u}
+\end{equation}
+
+\begin{equation} \label{eqn:mat}
+\frac{d}{dt}\begin{pmatrix}
+V_0\\
+I_L
+\end{pmatrix} = \begin{pmatrix}
+-1/RC & -1/C\\
+1/L & 0
+\end{pmatrix} \begin{pmatrix}
+V_0\\
+L
+\end{pmatrix} + \begin{pmatrix}
+1/RC\\
+0
+\end{pmatrix} u
+\end{equation}
+
+\begin{figure}[H] 
+\centering
+\includegraphics[width=7cm]{img/bloc.png}
+\caption{Repésentation \textit{bloc} du système à la figure \ref{fig:RLC}}
+\label{fig:bloc}
+\end{figure}
+
+
 
 
 \part{Systèmes}
