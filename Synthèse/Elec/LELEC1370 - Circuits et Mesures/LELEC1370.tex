@@ -136,6 +136,23 @@ v_{oc} = R_{Th}i_{sc}
 \includegraphics[width = 10cm]{img/ThNo.png}
 \caption{Illustration du passage de Thévenin à Norton}
 \end{figure}
+Pour trouver la résistance $R_{Th}$ on met en \textit{court-circuit} les générateurs de tensions et en \textit{circuit ouvert} les générateurs de courant. Ensuite, on enlève la résistance et on regarde à ses bornes les \textit{résistances} et on trouve donc \textit{l'équivalent des résistances}. On peut faire cela uniquement avec des générateurs \textbf{non commandés}.\\
+
+Pour trouver le \textit{courant de Norton} et la \textit{tension de Thévenin} (on est \textbf{obligé} de passer par cette étape en premier avec des \textit{sources commandées}). Pour \textit{Thévenin} on met notre résistance en \textit{circuit ouvert} et on trouve le voltage à ses bornes.\\
+Pour \textit{Norton} on met notre résistance en \textit{court-circuit} et on trouve le courant circulant dans ce fil.
+
+\subsubsection{Conseil Norton Thévenin}
+Lorsqu'on travaille avec des courants, on utilise la loi des \textit{noeuds} et une fois qu'on a toutes les équations, on utilise la loi des \textit{mailles} qui permet d'utiliser nos courants et tout simplifier.\\
+
+\subsubsection{Dualité étoiles-triangle}
+Dans un circuit électrique, on peut faire face à des arrangements de résistances en \textit{triangle} qui sont compliqués à transformer en \textit{résistance équivalente}. 
+\begin{figure}
+\centering
+\includegraphics[width=6cm]{img/triangleEtoile.png}
+\caption{Passage d'une forme de triangle à une forme d'étoiles}
+\end{figure}
+
+
 
 \chapter{Cours 2}
 \section{Suite des bases}

@@ -245,7 +245,7 @@ Voici un tableau résumant les différentes opérations possibles sur les signau
 Une chose importante à voir dans ces formules est que $x$ est un \textit{signal}, $x[k]$ la \textit{valeur} de ce signal en k et on a $\mathcal{H}$ qui est un \textit{système} prenant et donnant des signaux.
 
 \section{Convolution (temps discret)} \label{convo}
-La convolution est une nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
+La convolution est un nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
 \begin{equation} \label{eqn:convolution}
 f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
 \end{equation}
@@ -254,7 +254,8 @@ La méthode pour trouver le résultat d'une convolution de manière \textbf{grap
 \item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
 \item On décale une des fonctions le plus à droite. (on prend le $k_0$ où après, tous les résultats de $f[k]g[n-k]$ valent $0$) 
 \item Puis multiplier chaque point entre eux et les sommer.
-\item On met le résultat sur un \textit{graphe} au pont $k$.
+\item On met le résultat sur un \textit{graphe} au point $k$.
+\item On décale notre fonction d'un point vers la gauche et on répète le processus.
 \end{enumerate}
 Pour trouver de manière \textbf{calculatoire}, on applique simplement la formule \ref{eqn:convolution}.
 
@@ -288,6 +289,7 @@ Pour calculer de manière \textbf{graphique} il faut suivre ces étapes:
 \item On décale une des fonctions le plus à droite. (on prend le $\tau_0$ où après, tous les résultats de $f(t)g(t-\tau_0)$ valent $0$) 
 \item Puis multiplier chaque point entre eux et on les intègre. (on prend la surface sous la courbe).
 \item On met le résultat sur un \textit{graphe} au pont $\tau$.
+\item On décale notre fonction d'une distance (pas trop loin mais pas trop proche pour ainsi avoir une nuée de points) vers la gauche et on répète le processus.
 \end{enumerate}
 En somme, nous avons une méthode très proche du temps discret si ce n'est l'utilisation d'intégrale allant de $-\infty$ à $\infty$.
 
