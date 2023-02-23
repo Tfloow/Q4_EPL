@@ -166,4 +166,40 @@ Mais, on doit stocker notre valeur $d'$ dans la table. On la stock à $p$ ce qui
 \end{itemize}
 Chose intéressante à noter, comme on a une infinité non énumérable de fonctions $\mathbb{N}$ dans $\mathbb{N}$ et un nombre de programme informatique \textit{infini énumérable}. On ne peut résoudre tous les problèmes informatiques donc.
 
+\chapter{Programmes calculables}
+\section{Les algorithmes}
+Un algorithme est un ensemble \textit{d'instructions} qui a pour but de produire un résultat. Donc un algorithme n'est \textcolor{red}{pas une fonction}. Il \textit{calcule} une fonction. Un algorithme n'est pas forcément un \textit{programme}, il peut être un \textit{organigramme}. C'est un \textit{ensemble fini d'instructions}. C'est une sorte de \textit{calculateur}. Ici, on va considérer nos algorithmes comme \textit{n'ayant pas de limite} de:
+\begin{itemize}
+\item Taille de données
+\item Taille d'instructions
+\item Taille de la mémoire, mais on a une utilisation finie.
+\end{itemize}
+
+\subsection{Calculabilité}
+Avant de continuer, il faut définir la \textit{calculabilité} des algorithmes car sans \textit{formalisme}, les algorithmes sont non rigoureux, non exploitables.\\
+
+Ici, on base cette notion sur celle des \textit{programmes informatiques}. (plus intuitif).
+Ainsi, on possède \textbf{2 univers} celui des \textit{programmes informatiques} et celui des \textit{problèmes}. Pour être plus précis, on se base sur le \textcolor{brown}{langage Java} et on se limite au fonction $\mathbb{N} \rightarrow \mathbb{N}$. Ainsi pour les fonctions, on aura \textbf{1 entrée} et \textbf{1 sortie}. (on peut également généraliser ceci en disant que $\mathbb{N}^n \rightarrow \mathbb{N}$)
+
+\section{Fonction calculable}
+Une fonction est dite \textit{calculable} s'il existe un \textit{programme Java} recevant \textbf{1 donnée} étant un nombre $\in \mathbb{N}$ et la fonction va nous retourner la \textit{valeur} de $f(x)$ \textit{si} elle est défini.\\
+Si le programme \textit{ne se termine pas} donc pas défini ou erreur d'exécution on dit que $f(x) = \perp$. On définit bien la notion de calculabilité sur \textit{l'existence d'un programme}. on a 2 types de fonctions
+\begin{enumerate}
+\item Fonction \textit{partielle} calculable: on a \textit{parfois} un résultat
+\item Fonction \textit{totale} calculable: on peut \textit{toujours} calculé quelque chose.
+\end{enumerate}
+
+\subsection{Ensemble récursif}
+Maintenant, on va essayer de déterminer la calculabilité sur \textit{un ensemble de fonctions}.
+Le principe de décision de \textit{calculabilité} est le principe dit \textit{récursif}.\\
+\textbf{A} est \textcolor{red}{récursif} si il existe un programme \textit{Java} qui recevant n'importe quelle donnée sous forme d'un $\mathbb{N}$ fourni comme résultat:
+\begin{itemize}
+\item 1 si $x \in A$
+\item 0 si $x \notin A$
+\end{itemize}
+Donc on est face à un \textit{algorithme} qui calcule si $x$ est dans A ou non. C'est un algorithme complet et se termine toujours. (attention de ne pas confondre \textit{récursif} et \textit{récursivité})\\
+
+On dit qu'un ensemble d'algorithme est \textcolor{red}{récursivement énumérable} s'il est \textit{récursif} sauf qu'il retourne $\neq 1 \quad x \notin A$ ou ne se termine pas.
+
+
 \end{document}
