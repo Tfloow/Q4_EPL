@@ -226,7 +226,7 @@ GL \frac{dI_L(t)}{dt} &= -(I_L(t)-I_S(t))\label{eq:LCsinus}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5cm]{img/LCsinus.png} \label{img:LCsinus}
+\includegraphics[width=4.6cm]{img/LCsinus.png} \label{img:LCsinus}
 \caption{Circuit LC en régime sinusoïdal}
 \end{figure}
 
@@ -265,7 +265,61 @@ L'équation \ref{eq:RCsol} nous indique plusieurs choses:
 %finir de clarifier les 2 dernières slides de cette sous-section
 
 \subsection{Les Phaseurs}
-On utilise des phaseurs pour des circuits \textit{linéaires}, ne possédant \textit{qu'une source indépendante}, on a une source de fréquence $\omega/ 2\pi$ et le circuit est \textit{en régime}.
+On utilise des \textbf{phaseurs} pour des circuits:
+\begin{itemize}
+\item \textit{linéaires}
+\item  ne possédant \textit{qu'une source indépendante}
+\item on a une source de fréquence $\omega/ 2\pi$
+\item le circuit est \textit{en régime}
+\end{itemize}
+
+Donc tous les autres \textit{courants dépendants} ont
+\begin{itemize}
+\item une \textit{forme} ressemblant à la source
+\item la \textit{même fréquence}
+\item une \textit{amplitude différente} 
+\item une \textit{phase différente}
+\end{itemize}
+Seulement si cela est respecté, alors on peut utiliser les \textbf{phaseurs}:
+\begin{align}
+\textbf{V} &= V_M e^{j\psi_V}\\
+\textbf{I} &= I_M e^{j\psi_I}
+\end{align}
+En électricité, on représente le nombre complexe par $j$. $\psi$ représente les phases.\\
+L'utilisation des \textit{phaseurs} vient de l'idée de la \textit{formule d'Euler} où quand on ajouter une partie imaginaire, cela n'affecte pas la partie \textit{réelle}. Donc on peut faire ceci:
+\begin{equation}
+\begin{cases}
+A cos(\omega t + \phi) \rightarrow A cos(\omega t + \phi) + j A sin(\omega t + \phi) \qquad -\frac{\pi}{2}  \geq \phi \geq \frac{\pi}{2} \\
+A cos(\omega t + \phi) \rightarrow \bigr[ Ae^{j\phi} \bigr]e^{j\omega t}
+\end{cases} %mettre le bon signe
+\end{equation}
+Ici, la deuxième équation utilise des \textit{phaseurs} (mis entre parenthèses, l'utilisation de phaseurs va simplifier notre notation surtout en dérivée et intégrale:
+\begin{align}
+\frac{d}{dt}\bigr[ Ae^{j\phi} \bigr]e^{j\omega t} &= \bigr[ j \omega Ae^{j\phi} \bigr]e^{j\omega t} \\
+\int \bigr[ Ae^{j\phi} \bigr]e^{j\omega t} &= \bigr[ \frac{1}{j \omega} Ae^{j\phi} \bigr]e^{j\omega t}
+\end{align}
+
+Il est important de se rappeler que lorsqu'on travaille en \textit{complexe}, multiplier par $j$ reviens à faire une rotation \textit{anti-horlogé} de $\frac{\pi}{2}$.
+
+%clarifier la fin
+
+\subsection{Analyse de circuits}
+Passer en phaseur est un opération \textbf{linéaire} donc toutes les lois de \textit{Kirchoff} et théorèmes de la \textit{théorie des circuits} restent \textbf{valables}.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Élément & Résistance & Inductance & Capacité\\
+\hline 
+Paramètre & $\textbf{Z} = R$ & $\textbf{Z} = j\omega L$ & $\textbf{Z} = \frac{1}{j \omega C}$\\
+$\textbf{Z} = \frac{1}{\textbf{Y}}$ & $\textbf{Y} = \frac{1}{R}$ & $\textbf{Y} = \frac{1}{j \omega L}$ & $j \omega C$ \\
+\hline 
+Équation constitutive & $V = \textbf{Z}I$ & $V = \textbf{Z}I$ & $V = \textbf{Z}I$\\
+ & $I = \textbf{Y}V$ & $I = \textbf{Y}V$ & $I = \textbf{Y}V$\\
+\hline
+
+\end{tabular}
+\end{center}
 
 
 
