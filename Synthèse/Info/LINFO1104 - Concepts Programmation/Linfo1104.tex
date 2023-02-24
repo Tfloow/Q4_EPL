@@ -101,7 +101,7 @@ Un "Scope" ou portée est une propriété centrale en programmation. En effet, c
 \chapter{Programmation symbolique}
 \section{Listes}
 On dit d'une liste est \textbf{récursive} si elle se définit par elle-même. C'est-à-dire elle fait appel à elle-même. On utilise la récursion pour les calculs et pour stocker des données.
-Une liste est soit vide ou soit une pair \textit{d'une valeur suivi par une autre liste}.
+Une liste est soit vide ou soit une pair \textit{d'une valeur suivi par une autre liste}. En \textbf{OZ} les variables, procédures et fonctions \textbf{doivent} commencer par une majuscule !
 \subsection{Définition formelle}
 En utilisant la notation \textbf{Extended Backus-Naur Form} ou \textit{EBNF} pour les intimes, on écrit une liste comme: <List T> ::= nil | T '|' <List T>. Une chose importante à noter est le deuxième "ou" qui s'écrit comme '|' signifiant qu'il n'appartient pas à la définition de List T mais plutôt à l'ensemble T '|' <List T>. Si on lit ceci, on dirait "\textit{Une list d'élément représentant T correspond à un élément vide ou un élément représentant T suivi d'une autre Liste d'élément T}.\\
 
@@ -166,5 +166,71 @@ Celle-ci est plus compliqué, on a 4 possibilités
 \item on supprime un sous-arbre à droite.
 \end{enumerate}
 Voici.
+
+\section{Tuples et Records}
+
+\subsection{Tuples}
+Un tuple est une manière de stocker des données de différents tuples, l'\textit{ordre} est \textit{important} dans un tuple. On doit également donné un nom, un \textbf{label}.
+\begin{lstlisting}
+X = state(1 b 2)
+{Browse {Label X}}
+{Browse {Width X}}
+\end{lstlisting}
+La première ligne défini un tuple ayant pour \textit{label} "state". La seconde ligne imprime le label du tuple. La dernière affiche sa taille. (c'est donc un entier toujours positif ou $0$)\\
+Les champs dans les tuples sont numérotés de\textbf{ $1$ à width $X$}. On appelle aussi le champ (field) une "\textit{feature}". Un tuple possède toutes ces features de manière consécutives.\\
+
+On peut donc ainsi construire des structures de données plus compliqués comme des arbres:
+\begin{lstlisting}
+declare
+Y = left(1 2) Z = right(3 4)
+X = mid(Y Z)
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/treeTuple.png}
+\end{figure}
+\subsubsection{Comparaison}
+Il est très simple de comparer des tuples via "$==$", il ne faut simplement comparer leur value à chaque champ. Attention au \textit{loop} causé par les approches naïves.\\
+
+\subsection{Similitude Tuples et liste}
+En effet, une liste qui n'est autre que "H|T" peut facilement être traduit en tuple '|' (H T). Quand on peut déterminer un même élément via différentes manières, on appelle ça du \textit{sucre syntaxique}. Dans le \textit{kernel}, on fait au plus simple donc que des tuples.
+
+\subsection{Les Records}
+Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différence avec les tuples est que le \textit{field} peut être n'importe quel valeur et ne doit pas être consécutif. Donc ceci est un \textit{record} correct:
+\begin{lstlisting}
+X = state(a:1 2:a b:2)
+Y = inv(3:a 2:b 1:c)
+\end{lstlisting}
+Donc la position d'une valeur et son \textit{field} n'importe plus et on peut déclarer dans le sens qu'on veut.\\
+Si on ne nomme pas un \textit{field} dans un \textit{record}, Oz va attribuer un nombre commençant à $1$ et qui n'est pas utilisé par un autre champ.\\
+\subsection{Résumé}
+\begin{itemize}
+\item Un \textit{atom} est un record de width $0$.
+\item Un tuple est un record avec des champs étant numéroté de manière consécutive de $1$ à width $X$. (consécutive, donc on skip pas. pas forcément dans l'ordre dans la déclaration)
+\item Une liste est réalisé avec des \textit{tuples} et des $(X \quad Y)$
+\item $\textbf{1}$ seule \textit{structure de donné} dans le kernel pour rester simple.
+\end{itemize}
+
+\section{Sémantique Formelle}
+\subsection{Les environnements}
+Un environnement est une fonction qui passe des \textit{identifieurs} aux \textit{variables en mémoire} autrement dit: $E_1 = {X \rightarrow x, Y \rightarrow y)}$
+
+\subsubsection{Environnement contextuel}
+Un \textit{environnement contextuel} d'une fonction contiens tous les \textit{identificateurs} qui sont usés dans la fonction mais déclaré \textit{en dehors}. Donc ce sont des fonctions qui lorsqu'on appelle une variable va pointer en dehors du scope de la fonction.
+
+\subsubsection{Stocker une Procédure}
+Les procédures sont stocker dans la mémoire sous le forme de procédure anonyme symboliser par le "\$".
+\begin{lstlisting}
+local P Q in
+	{Browse 'do something'}
+	proc {Q}
+		{P}
+	end
+	{Browse 'another something'}
+end
+\end{lstlisting}
+Notre "proc {Q}" sera stocker comme: "q = (proc{\$}{P} end, {$P\rightarrow p$})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P ({P}) et fini (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire ({$P\rightarrow p$}). Donc on voit que l'\textit{environnement contextuel} est stocker avec le code de procédure.\\
+On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand défini.
 
 \end{document}
