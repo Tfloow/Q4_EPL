@@ -198,7 +198,75 @@ L'amplificateur opérationnelle ou \textit{ampli op} est un composant qu'on retr
 \end{equation}
 
 \chapter{Signaux sinusoïdales et phaseurs}
-\section{Premier cours}
+\section{Circuits en régime sinusoïdal}
+
+\subsection{Circuit RC: rappel}
+Dans cette partie, on s'intéressera surtout au circuit \textbf{RC}, il est donc bon de rappeler différentes formules:
+\begin{align}
+I_C(t) &= C \frac{dV_C(t)}{dt}\\
+V_R(t) &= RI(t)\\
+RC \frac{dV_C(t)}{dt} &= -(V_C(t)-V_S(t))\label{eq:RCsinus}
+\end{align}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/RCsinus.png} \label{img:RCsinus}
+\caption{Circuit RC en régime sinusoïdal}
+\end{figure}
+
+Il est à noter que l'équation \ref{eq:RCsinus} est une équation propre au circuit de la figure \ref{img:RCsinus}. Il est bon de remarquer que \textit{maintenant}, les courants et tension sont \textit{dépendantes du temps}. La \textit{constante de temps} est $\tau = RC$ et apparait dans la résolution de \textit{l'équation différentielle}.
+
+\subsection{Circuit LC}
+Voici les formules pou les circuits LC. (\textit{note}: on dirait que notre source de courant est une source de courant \textit{commandé} mais c'est bien une source de courant \textbf{non-commandé})
+\begin{align}
+V_L(t) &= L \frac{dI_L(t)}{dt}\\
+V_L(t) &= GI_G(t)\\
+GL \frac{dI_L(t)}{dt} &= -(I_L(t)-I_S(t))\label{eq:LCsinus}
+\end{align}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/LCsinus.png} \label{img:LCsinus}
+\caption{Circuit LC en régime sinusoïdal}
+\end{figure}
+
+Il est à noter que l'équation \ref{eq:LCsinus} est une équation propre au circuit de la figure \ref{img:LCsinus}. La \textit{constante de temps} est $\tau = GL$
+
+\subsection{Régime sinusoïdal}
+Quelques notions à bien comprendre:
+\begin{itemize}
+\item La phase est établi par l'observateur car c'est lui qui définit "\textit{le début de la sinusoïdale}
+\item Un cosinus est un sinus \textit{déphasé} de $\frac{\pi}{2}$
+\end{itemize}
+
+\subsubsection{Analyse circuit RC}
+Si on a une source de courant sinusoïdale:
+\begin{align}
+V_s(t) &= V_p cos(\omega t)\\
+\omega_0 &= \frac{1}{\tau} = \frac{1}{RC}\\
+\frac{1}{\omega_0}\frac{dV_c(t)}{dt} + V_c(t) &= V_p cos(\omega t) \label{eq:RCdiff}
+\end{align}
+
+L'équation \ref{eq:RCdiff} correspond à l'équation différentielle et à pour solution:
+
+\begin{equation} 
+\begin{cases}
+V_C(0) = 0\\
+V_C(t) = \frac{V_p}{\textcolor{blue}{\sqrt{1 + \frac{\omega^2}{\omega_0^2}}}} \Bigl[\textcolor{brown}{-cos(\phi)e^{-\frac{t}{\tau}}} + \textcolor{green}{cos(\omega t + \phi)} \Bigl] \label{eq:RCsol}
+\end{cases} 
+\end{equation}
+L'équation \ref{eq:RCsol} nous indique plusieurs choses:
+\begin{enumerate}
+\item La partie en \textcolor{blue}{bleu} nous montre une atténuation du signal.
+\item La partie en \textcolor{brown}{brun} nous montre une partie \textit{transitoire} dû à la capacité qui se charge doucement avant d'arriver à un état stable.
+\item La partie en \textcolor{green}{vert} est le \textit{déphasage} du signal qui est créé par le caractère "\textit{dérivateur}" d'une capacité
+\end{enumerate}
+
+%finir de clarifier les 2 dernières slides de cette sous-section
+
+\subsection{Les Phaseurs}
+On utilise des phaseurs pour des circuits \textit{linéaires}, ne possédant \textit{qu'une source indépendante}, on a une source de fréquence $\omega/ 2\pi$ et le circuit est \textit{en régime}.
+
 
 
 \end{document}
