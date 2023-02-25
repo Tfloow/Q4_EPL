@@ -230,7 +230,86 @@ local P Q in
 	{Browse 'another something'}
 end
 \end{lstlisting}
-Notre "proc {Q}" sera stocker comme: "q = (proc{\$}{P} end, {$P\rightarrow p$})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P ({P}) et fini (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire ({$P\rightarrow p$}). Donc on voit que l'\textit{environnement contextuel} est stocker avec le code de procédure.\\
-On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand défini.
+Notre "proc {Q}" sera stocker comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et fini (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocker avec le code de procédure.\\
+On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand défini.\\
+Donc l'avantage d'un environnement contextuel nous permet d'être sûr qu'on appellera la bonne valeur même si elle est déclaré en dehors de la fonction.\\
+
+Un \textit{identificateur libre} est un identificateur utilisé dans une \textit{fonction} qui est déclaré \textit{en dehors} de la fonction.\\
+Les arguments d'une procédure \textbf{ne sont pas} des identificateurs libres car l'argument défini l'identificateur.
+
+\subsection{Sémantique}
+Il est important de comprendre le fonctionnement même d'un programme car si on ne comprend pas comme celui-ci fonctionne, il nous domine. \textit{If you do not understand something, then you do not master it – it masters you!}
+\subsubsection{Définition}
+La \textit{sémantique} d'un langage de programmation est une explication \textit{précise} de comment un programme s'exécute. Nous verrons la sémantique pour tous les paradigmes. Il en existe 4 types:
+\begin{enumerate}
+\item \textcolor{red}{Sémantique opérationnelle}: explique un programme sur base d'\textit{exécution} sur un PC simplifié appelé \textit{la machine abstraite}. $\rightarrow$ Fonctionne pour tous les paradigmes.
+\item \textcolor{red}{Sémantique axiomatique}: explique un programme sur base d'\textit{implication}. C'est-à-dire que certaines \textit{propriétés} présent avant l'exécution, et d'autres seront présentes après. $\rightarrow$ très utilisé pour la programmation orienté objet comme \textit{Java}.
+\item \textcolor{red}{Sémantique de notation}: explique un programme comme une \textit{fonction} sur un domaine abstrait. Donc simplifie l'analyse mathématique d'un programme. (utilisé dans \textit{Haskell} et \textit{Scheme})
+\item \textcolor{red}{Sémantique logique}: explique un programme comme étant un \textit{modèle logique} basé sur des \textit{axiomes logiques}. Le résultat est une propriété correcte dérivé des axiomes. (cela est implémenté par exemple dans \textit{Prologue} ou dans la \textit{programmation sous contrainte})
+\end{enumerate}
+
+\subsection{Sémantique opérationnelle}
+Ce type de sémantique à 2 parties majeures:
+\begin{itemize}
+\item \textcolor{red}{Langage Kernel}: traduit le programme en langage Kernel.
+\item \textcolor{red}{Machine abstraite}: puis exécute le programme sur la machine abstraite.
+\end{itemize}
+
+\subsubsection{1. Langage Kernel complet}
+Pour définir correctement une sémantique, il faut tout d'abord s'intéresser à son langage Kernel complet. On peut également prouver qu'un programme est correct en analysant son kernel. Par exemple, prenons ce code kernel:
+\begin{lstlisting}
+<s> ::= skip 
+	| <s>1 <s>2 
+	| local <x> in <s> end 
+	| <x>1=<x>2 
+	| <x>=<v> 
+	| if <x> then <s>1 else <s>2 end 
+	| {<x> <y>1 ... <y>n} 
+	| case <x> of <p> then <s>1 else <s>2 end
+
+<v> ::= <number> | <procedure> | <record>  
+<number> ::= <int> | <float> 
+<procedure> ::= proc {$ <x>1 ... <x>n} <s> end
+<record>, <p> ::= <lit> | <lit>(<f>1:<x>1 ... <f>n:<x>n)
+\end{lstlisting}
+donc "<s>" contient le programme exécuté, "<v>" est une structure de donné contenant différent type de structure de donné qui sont définis juste en dessous. 
+
+\subsubsection{2. La machine abstraite}
+Voici ci-dessous comment s'exécute un programme initialement.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/kernel.png}
+\includegraphics[width=5cm]{img/kernel1.png}
+\caption{à gauche: programme écrit en Oz $\qquad$ à droite: état initiale d'exécution}
+\end{figure}
+Au début, l'environnement et la mémoire sont vides. L'état d'exécution est écrit typiquement comme:
+\begin{lstlisting}
+([(<s>,E)],sigma)
+\end{lstlisting} %trouver comment utiliser un code dans lst
+Sur la machine abstraite, on va d'instructions en instructions. C'est-à-dire on descend petit à petit.
+donc on a pour la suite:
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/kernel2.png}
+\includegraphics[width=5cm]{img/kernel3.png}
+\caption{à gauche: on descend de 1 cran $\qquad$ à droite: on descend encore de 1 cran}
+\end{figure}
+On voit que au fur et à mesure qu'on descend, la pile de mémoire et d'environnement s'agrandit. Ensuite on va \textit{séparer} la \textit{composition séquentielle} comme suit:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/kernel4.png}
+\includegraphics[width=5cm]{img/kernel5.png}
+\caption{à gauche: on sépare en deux $\qquad$ à droite: on attribue à b la valeur définit à gauche}
+\end{figure}
+Une nouvelle instruction va s'ajouter à cause du "then" de notre condition:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/kernel6.png}
+\includegraphics[width=3cm]{img/kernel7.png}
+\caption{à gauche: la nouvelle instruction $\qquad$ à droite: les instructions sont vides, c'est fini}
+\end{figure}
 
 \end{document}
