@@ -312,4 +312,51 @@ Une nouvelle instruction va s'ajouter à cause du "then" de notre condition:
 \caption{à gauche: la nouvelle instruction $\qquad$ à droite: les instructions sont vides, c'est fini}
 \end{figure}
 
+\subsubsection{3. Définir la machine abstraite}
+\begin{itemize}
+\item Pour chaque instructions dans le langage Kernel, on associe sa règle dans la machine abstraite
+\item Chaque instructions prends un état d'exécution en entrée et sort un état d'exécution en sortie $\rightarrow (ST, \sigma)$.
+\end{itemize}
+L'instruction la plus simple est "\textcolor{blue}{skip}" car il fonctionne comme $([(skip, E), S_2, ..., S_n], \sigma)$ et renvoie $([S_2, S_n], \sigma)$ 
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Instructions & entrée & sortie\\
+\hline
+\textcolor{blue}{skip} & $1$ & $2$\\
+\hline 
+\textcolor{blue}{$(<s>_1 <s>_2)$} & $([(S_a S_b), S_2, ..., S_n], \sigma)$ & $([S_a, S_b, S_2, ..., S_n], \sigma)$\\
+\hline 
+\textcolor{blue}{local in <x> in <s> end} & $([(\text{local } <x> \text{ in } <s> \text{ end }, E)$ & $([(<s>, E+\{<x>\rightarrow x\})$\\
+ & $, S_2, ..., S_n], \sigma)$ & $, S_2, ..., S_n], \sigma)$\\
+\hline 
+\end{tabular}
+\end{center}
+Il y a également d'autres types d'instructions dont on détaillera pas le langage en machine abstraite:
+
+\begin{itemize}
+\item \textcolor{blue}{<x>=<v> (crée et assigne une valuer)}: quand <v> est une procédure, on \textbf{doit} crée un environnement contextuel.
+\item \textcolor{blue}{if <x> then <s>1 else <s>2 end (condition)} : si <x> n'est pas attribué, l'instruction va attendre (“\textit{block}”) jusqu'à ce que <x> soit attribuer à une valeur.
+\item \textcolor{blue}{case <x> of <p> then <s>1 else <s>2 end} : Le system de "\textit{case}" se construit en combinant des structures de données Kernel.
+\item \textcolor{blue}{\{<x> <y>1 ... <y>n\}} : ceci est la base de l'abstraction de donnée
+\end{itemize}
+Par ailleurs, voici d'autres concepts de machine abstraite:
+\begin{itemize}
+\item \textcolor{blue}{Single-assignment memory }\textcolor{red}{$s = \{x1=10,x2,x3=20\}$}: Définition d'une variable et la valeur associée.
+\item \textcolor{blue}{Environnement }\textcolor{red}{$E = \{X \rightarrow x, Y \rightarrow y\}$}: Lien entre un identificateur et son lien dans la mémoire
+\item \textcolor{blue}{Instruction sémantique }\textcolor{red}{$(<s>, E)$}: Une instruction avec son environnement.
+\item \textcolor{blue}{Stack Sémantique }\textcolor{red}{$ST = [(<s>_1,E_1), ..., (<s>_n,E_n)]$}: Un stack d'instructions sémantiques.
+\item \textcolor{blue}{État d'exécution }\textcolor{red}{$(ST,\sigma)$}: Une paire d'un stack sémantique et sa mémoire.
+\item \textcolor{blue}{Execution }\textcolor{red}{$(ST_1,s_1) \rightarrow (ST_2,s_2) \rightarrow (ST_3,s_3) \rightarrow ...$}: Une séquence d'état d'exécution. 
+\end{itemize}
+
+\subsubsection{4. Programme correcte}
+grâce à la sémantique, on sait prouver qu'un programme est correct. On dit qu'un programme produit une solution correcte, on l'appelle une \textit{spécification} et on voit qu'un programme est correct via la \textit{sémantique}.\\
+Donc on prouve qu'un programme satisfait la \textit{spécification} quand on utilise une certaine \textit{sémantique}. La sémantique lie le \textit{programme} à un résultat mathématique appelé \textit{spécification}.\\
+
+
+
 \end{document}
+
+
