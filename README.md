@@ -18,11 +18,10 @@ Salut, bienvenue à toi ! Ici, tu peux retrouver les synthèses écrites au cour
 | Nom                                                |                     Nom                     |                          Nom                           |
 | -------------------------------------------------- | :-----------------------------------------: | :----------------------------------------------------: |
 | [Julien Monfils](https://github.com/JulienMonfils) | [Thomas Debelle](https://github.com/Tfloow) | [Speculoos](https://github.com/Tfloow "l'homme sucré") |
-| Nathan fockedey                                    |[Brieuc Dallemagne](https://github.com/BrieucDallemagne)|                                             |
+| Nathan fockedey                                    |[Brieuc Dallemagne](https://github.com/BrieucDallemagne)|            [PurpleXP](https://github.com/PurpleXP)                         |
 
 (Pour y être ajouté simplement contribue à une des synthèses (*oui oui, même si c'est une petite faute que tu as corrigé*))
 ### on cherche en priorité
-- [ ] GC
 - [ ] FYKI
 - [ ] GBIO
 

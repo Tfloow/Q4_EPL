@@ -201,5 +201,115 @@ Donc on est face à un \textit{algorithme} qui calcule si $x$ est dans A ou non.
 
 On dit qu'un ensemble d'algorithme est \textcolor{red}{récursivement énumérable} s'il est \textit{récursif} sauf qu'il retourne $\neq 1 \quad x \notin A$ ou ne se termine pas.
 
+\subsubsection{Fonctions caractéristiques}
+Une fonction caractéristique de $A \subseteq N$ et:
+\begin{align}
+X_A : N \rightarrow N : X_A(x) &= 1 \text{ si } x \in A\\
+&= 0 \text{ si } x \in A
+\end{align} 
+C'est une autre manière de déterminer si un ensemble est récursift si $X_A$ est une fonction \textit{calculable}.\\
+On dit qu'une fonction est récursivement énumérable ssi il existe une fonction f calculable ayant pour domaine A. Ou bien, on dit que A est vide \textit{ou} l'image de f est A ayant une fonction f \textit{totale} calculable.\\
+Un \textcolor{red}{ensemble récursivement \textit{énumérable}} est un ensemble dont la bijection des $\mathbb{N}$ est énumérable et calculable.
+
+Propriétés:
+\begin{itemize}
+\item A récursif $\Rightarrow$ A récursivement énumérable 
+\item A récursif $\Rightarrow$ (N \ A) récursivement énumérable 
+\item A récursif $\Rightarrow$ (N \ A) récursif 
+\item A récursivement énumérable et (N \ A) récursivement énumérable $\Rightarrow$ A récursif 
+\item A fini $\Rightarrow$ A récursif
+\item (N \ A) fini $\Rightarrow$ A récursif
+\item A récursif $\Rightarrow$ $\bar{A}$ récursif
+\end{itemize}
+
+\section{Thèse de Church-Turing}
+Comment démontrer qu'une fonction \textbf{n'est pas} calculable.\\
+Les 4 grands points de la thèse:
+\begin{enumerate}
+\item Aucun modèle de la notion de fonction calculable n’est plus puissant que les Machines de Turing (ici Java)
+\item Toute fonction calculable (au sens intuitif) est calculable par une machine de Turing (ici Java)
+\item Toutes les définitions formelles de la calculabilité connues à ce jour sont équivalentes (Théorème)
+\item Toutes les formalisations de la calculabilité établies par la suite seront
+équivalentes aux définitions connues
+\end{enumerate}
+On établit que Java à accès à une infinité de mémoire (donc physiquement possible). Ainsi, on a $P$ qui est l'ensemble des programmes Java syntaxiquement corrects, qui reçoivent 1 données \textit{entières} et qui retournent un résultat \textit{entier}.
+\begin{itemize}
+\item P est un ensemble récursif (infini dénombrable)
+\item $P = P_0, P_1, ..., P_k, ...$ sans répétition donc chaque programme est unique.
+\item Pour simplifier, $f(k) = P_k$
+\item f est calculable.
+\item k et $P_k$ représente le même objet
+\end{itemize}
+
+donc on dit que $P_k$ donne le programme $k$ dans l'ensemble $P$. on dit que $\varphi_k$ est la fonction mathématique calculé par $P_k$. Donc on peut avoir $\varphi_m == \varphi_n$ car réalise le même travail mais sont issues de programmes \textit{différents}. $\varphi_k: N \rightarrow N$. 
+
+\section{Non calculabilité}
+Pour rappel:
+\begin{itemize}
+\item Nombre de fonctions de $\mathbb{N} \rightarrow \mathbb{N}$ est \textbf{non} dénombrable.
+\item Nombre de programmes Java est dénombrable.
+\end{itemize}
+En programmation, on s'intéresse aux fonctions définies de manière finie, donc on a une \textcolor{red}{infinité dénombrable}. Mais si une fonction est définie de manière finie, peut-elle être calculable ?
+
+\subsection{Problème de l'arrêt}
+Une fonction prends 2 paramètres: halt: P x N. P est le numéro du programme et N est son entrée.\\
+\begin{align}
+\text{halt}(n,x) &= 1 \text{ si } \varphi_n(x) \neq \perp\\
+&= 0 \text{ sinon}\\
+\text{halt}(n,x) &= 1 \text{ si l'exécution du } P_n \text{ se termine}\\
+&= 0 \text{ sinon}
+\end{align}
+On a donc une table finie, mais décrite de manière finie donc bien définie. Peut-on la calculer ?
+
+\subsubsection{Preuve par l'absurde} 
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+& $0$ & $1$ & ... & $k$& ...\\
+\hline
+$P_0$ & halt(0,0) & halt(0,1) & ... & halt(0,k) & ...\\
+\hline
+\end{tabular}
+\end{center}
+
+On va sélectionner les valeurs sur la diagonale et stocker cela comme une variable s'appelant "\textit{diag}". On va donc modifié cette valeur et est représenté par "\textit{$diag_{mod}$}" qui inverse chaque nombre. (donc $0 \rightarrow 1$ et $1 \rightarrow 0$) Donc \textit{$diag_{mod}$} est calculable sous l'hypothèse que la fonction "halt" l'est.\\
+
+Donc, il existe un programme Java qui calcule cette "$diag_{mod}$" qu'on trouvera en ligne $d$. Mais à cause de cela, $diag_{mod}(d) \neq diag(d)$ donc ne peut exister par \textit{définition}.\\
+
+En conclusion, la fonction "halt" \textbf{n'est pas} calculable.
+
+\subsubsection{Conclusion}
+\begin{itemize}
+\item  Aucun algorithme ne permet de déterminer pour tout programme Pn et donnée x si Pn(x) se termine ou non
+\item Seule possibilité serait d’avoir un langage de programmation dans lequel tous les programmes se terminent. La fonction halt est alors calculable pour les programmes de ce formalisme
+\item halt non calculable ne signifie pas que pour un programme k donné, halt(k,x) est
+non calculable
+\end{itemize}
+Pour le premier point, on ne peut séparer le soucis en 2 algorithmes car on ne peut changer de programmes selon l'input. Un algorithme donne le \textbf{bon résultat} en fonction du résultat.\\
+
+On dit que halt n'est pas calulable dans le sens où il n'existe pas d'algorithmes \textbf{généraux}.
+
+\subsubsection{Exemple non-récursif}
+
+\begin{align}
+Halt &= \{(n,x) | \text{ halt}(n,x) = 1\}\\
+&= \{(n,x) | P_n (x) \text{ se termine}\}\\
+K &= \{n | (n,n) \in \text{HALT}\}\\
+&= \{n | halt(n,n) = 1\}\\
+&= \{n | diag(n) = 1\}\\
+&= \{n | P_n(n) \text{ se termine}\}\\
+\end{align}
+Donc K et HALT \textbf{ne sont pas} récursifs mais sont récursivement énumérable car si un élément n'appartient pas à K ou HALT, il va boucler mais fournir la bonne solution s'il appartient à ces ensembles.\\
+
+$\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de prouver qu'un probable n'appartient pas à cet ensemble. pareil pour $\overline{K}$
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/ensembleFonction.png}
+\caption{Schématisation des fonctions et ensembles de fonctions}
+\end{figure}
+
+Le fait de ne pas pouvoir calculer "halt" nous pose soucis et va ouvrir tout un pan de soucis et limitations.
 
 \end{document}
