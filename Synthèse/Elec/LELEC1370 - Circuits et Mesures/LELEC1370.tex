@@ -151,6 +151,11 @@ Dans un circuit électrique, on peut faire face à des arrangements de résistan
 \includegraphics[width=7cm]{img/triangleEtoile.png}
 \caption{Passage d'une forme de triangle à une forme d'étoiles}
 \end{figure}
+Les équations sont:
+\begin{align}
+R_1 &= \frac{R_a R_b + R_b R_c + R_a R_c}{R_b}\\
+R_a &= \frac{R_1 R_2}{R_1 + R_2 + R_3}
+\end{align}
 
 
 
@@ -252,7 +257,7 @@ L'équation \ref{eq:RCdiff} correspond à l'équation différentielle et à pour
 \begin{equation} 
 \begin{cases}
 V_C(0) = 0\\
-V_C(t) = \frac{V_p}{\textcolor{blue}{\sqrt{1 + \frac{\omega^2}{\omega_0^2}}}} \Bigl[\textcolor{brown}{-cos(\phi)e^{-\frac{t}{\tau}}} + \textcolor{green}{cos(\omega t + \phi)} \Bigl] \label{eq:RCsol}
+V_C(t) = \frac{V_p}{\textcolor{blue}{\sqrt{1 + \frac{\omega^2}{\omega_0^2}}}} \Bigl[\textcolor{brown}{-cos(\varphi)e^{-\frac{t}{\tau}}} + \textcolor{green}{cos(\omega t + \varphi)} \Bigl] \label{eq:RCsol}
 \end{cases} 
 \end{equation}
 L'équation \ref{eq:RCsol} nous indique plusieurs choses:
@@ -289,14 +294,14 @@ En électricité, on représente le nombre complexe par $j$. $\psi$ représente 
 L'utilisation des \textit{phaseurs} vient de l'idée de la \textit{formule d'Euler} où quand on ajouter une partie imaginaire, cela n'affecte pas la partie \textit{réelle}. Donc on peut faire ceci:
 \begin{equation}
 \begin{cases}
-A cos(\omega t + \phi) \rightarrow A cos(\omega t + \phi) + j A sin(\omega t + \phi) \qquad -\frac{\pi}{2}  \geq \phi \geq \frac{\pi}{2} \\
-A cos(\omega t + \phi) \rightarrow \bigr[ Ae^{j\phi} \bigr]e^{j\omega t}
-\end{cases} %mettre le bon signe
+A cos(\omega t + \varphi) \rightarrow A cos(\omega t + \varphi) + j A sin(\omega t + \varphi) \qquad -\frac{\pi}{2}  \geq \varphi \geq \frac{\pi}{2} \\
+A cos(\omega t + \varphi) \rightarrow \bigr[ Ae^{j\varphi} \bigr]e^{j\omega t}
+\end{cases} 
 \end{equation}
 Ici, la deuxième équation utilise des \textit{phaseurs} (mis entre parenthèses, l'utilisation de phaseurs va simplifier notre notation surtout en dérivée et intégrale:
 \begin{align}
-\frac{d}{dt}\bigr[ Ae^{j\phi} \bigr]e^{j\omega t} &= \bigr[ j \omega Ae^{j\phi} \bigr]e^{j\omega t} \\
-\int \bigr[ Ae^{j\phi} \bigr]e^{j\omega t} &= \bigr[ \frac{1}{j \omega} Ae^{j\phi} \bigr]e^{j\omega t}
+\frac{d}{dt}\bigr[ Ae^{j\varphi} \bigr]e^{j\omega t} &= \bigr[ j \omega Ae^{j\varphi} \bigr]e^{j\omega t} \\
+\int \bigr[ Ae^{j\varphi} \bigr]e^{j\omega t} &= \bigr[ \frac{1}{j \omega} Ae^{j\varphi} \bigr]e^{j\omega t}
 \end{align}
 
 Il est important de se rappeler que lorsqu'on travaille en \textit{complexe}, multiplier par $j$ reviens à faire une rotation \textit{anti-horlogé} de $\frac{\pi}{2}$.
@@ -328,11 +333,54 @@ Pour des \textbf{dipôles}:
 \hline
 $\textbf{V} = \textbf{ZI}$ & $\textbf{I} = \textbf{YV}$\\
 \hline
-$\textbf{Z} = \frac{\textbf{V}}{\textbf{I}} = \frac{|\textbf{V}|}{|\textbf{I}|}e^{j(arg(\textbf{V})-arg(\textbf{I})} = \frac{V}{I} e^{j{(\psi_V-\psi_I)}}$ & $\textbf{Y} = \frac{\textbf{I}}{\textbf{V}} = |\textbf{Y}|e^{j(arg(\textbf{Y}))} = Y e^{j{(\phi)}}$\\
+$\textbf{Z} = \frac{\textbf{V}}{\textbf{I}} = \frac{|\textbf{V}|}{|\textbf{I}|}e^{j(arg(\textbf{V})-arg(\textbf{I})} = \frac{V}{I} e^{j{(\psi_V-\psi_I)}}$ & $\textbf{Y} = \frac{\textbf{I}}{\textbf{V}} = |\textbf{Y}|e^{j(arg(\textbf{Y}))} = Y e^{j{(\varphi)}}$\\
 \hline
 \end{tabular}
 \end{center}
 
+On a différente notation pour $\textbf{Z}$:
+\begin{align}
+\textbf{Z} &= |\textbf{Z}|e^{j arg(\textbf{Z})} = Z e^{j\varphi} \qquad \text{représentation polaire}\\
+\textbf{Z} &= R +jX \qquad \text{représentation cartésienne}
+\end{align}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=7cm]{img/impedance.png}
+\end{wrapfigure}
+
+R est la \textit{résistance} et X la \textit{réactance}. Si cette dernière est \textbf{négative}, on a affaire à une \textit{capacité}. Si elle est \textbf{positive}, il s'agit d'une \textit{inductance}
+
+Donc on voit clairement que notre vecteur \textbf{Z} a une composante \textit{complexe} et \textit{réelle}. Et cela vaut de même pour le vecteur \textbf{Y}.
+
+\subsubsection{Impédance de résistance pure}
+\begin{itemize}
+\item $\textbf{V} = R \textbf{I}$ et donc $\textbf{Z} = R$
+\item Tension en phase: $\varphi = 0 \rightarrow \textbf{V} = RI_Me^{j\psi_I}$
+\item Admittance: $\textbf{Y} = G = \frac{1}{R}$ 
+\end{itemize}
+
+\subsubsection{Impédance d'inductance pure}
+\begin{itemize}
+\item $\textbf{V} = j \omega L \textbf{I}$ et donc $\textbf{Z} = j \omega L$
+\item Tension en \textbf{avance} sur le courant: $\varphi = \frac{\pi}{2} \rightarrow \textbf{V} = \omega L I_M e^{j(\psi_I + \frac{\pi}{2})}$
+\item Admittance: $\textbf{Y} = jB = \frac{1}{j \omega L}$ 
+\end{itemize}
+
+
+\subsubsection{Impédance de capacité pure}
+\begin{itemize}
+\item $\textbf{I} = j \omega C \textbf{V}$ et donc $\textbf{Y} = j \omega C$
+\item Tension en retard sur le courant: $\varphi = \frac{-\pi}{2} \rightarrow \textbf{I} = \omega C V_M e^{\psi_V + \frac{\pi}{2}}$
+\item Impédance: $\textbf{Z} = jX = \frac{1}{j \omega C}$ 
+\end{itemize}
+Attention à bien remarquer l'utilisation d'une impédance au lieu d'une admittance comme précédemment.
+
+\subsubsection{Même dipôle}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/memeDipole.png}
+
+\end{figure}
 
 \end{document}
 

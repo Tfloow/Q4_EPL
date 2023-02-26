@@ -201,7 +201,7 @@ Donc on est face à un \textit{algorithme} qui calcule si $x$ est dans A ou non.
 
 On dit qu'un ensemble d'algorithme est \textcolor{red}{récursivement énumérable} s'il est \textit{récursif} sauf qu'il retourne $\neq 1 \quad x \notin A$ ou ne se termine pas.
 
-\subsubsection{Fonctions caractéristiques}
+\subsubsection{Fonctions caractéristiques} \label{caract}
 Une fonction caractéristique de $A \subseteq N$ et:
 \begin{align}
 X_A : N \rightarrow N : X_A(x) &= 1 \text{ si } x \in A\\
@@ -268,7 +268,15 @@ On a donc une table finie, mais décrite de manière finie donc bien définie. P
 \hline
 & $0$ & $1$ & ... & $k$& ...\\
 \hline
-$P_0$ & halt(0,0) & halt(0,1) & ... & halt(0,k) & ...\\
+$P_0$ & \textcolor{red}{halt(0,0)} & halt(0,1) & ... & halt(0,k) & ...\\
+\hline
+$P_1$ & halt(1,0) & \textcolor{red}{halt(1,1)} & ... & halt(1,k) & ...\\
+\hline
+... & ... & ... & ... & ... & ... \\
+\hline
+$P_k$ & halt(k,0) & halt(k,1) & ... & \textcolor{red}{halt(k,k)} & ...\\
+\hline
+... & ... & ... & ... & ... & ... \\
 \hline
 \end{tabular}
 \end{center}
@@ -311,5 +319,40 @@ $\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de
 \end{figure}
 
 Le fait de ne pas pouvoir calculer "halt" nous pose soucis et va ouvrir tout un pan de soucis et limitations.
+
+
+
+
+\chapter{Questions Test d'entrée}
+
+\section{TP1}
+\begin{enumerate}
+\item Effectivement, il existe une bijection entre les N et les nombres impairs positifs $\rightarrow$ en somme il existe une fonction qui transforme les N en impair positif
+\item J'imagine qu'il y a une bijection mais je ne vois pas quel formule passant de N aux impairs existent car c'est le propre des nombres impairs 
+\item Même raisonnement que la question 1
+\item La fameuse formule qui lie N et Q car Q est juste une paire de N
+\item Effectivement, sachant la diagonalisation de Cantor il est simple de le prouver
+\item Pour N dans N il en existe une infinité et l'ensemble d'arrivé ne change pas grand-chose car on s'intéresse au nombre de fonction.
+\item Effectivement, on a un nombre fini de langage donc de mot. Cela est dû grâce à l'alphabet fini et la longueur fixe. Donc on sait énumérer
+\item Question typique vu au cours. En effet comme on a une infinité et il n'existe aucune bijection depuis les naturels etc.
+\item Même cardinalité = bijection, il ne peut y avoir de bijection entre un ensemble non énumérable et énumérable
+\item Une infinité de nombre mais effectivement même cardinalité car tous peuvent être ramené aux naturels.
+
+
+\end{enumerate}
+
+\section{TP2}
+\begin{enumerate}
+\item Effectivement, on ne doit pas être en capacité de coder l'algorithme pour que la fonction soit calculable.
+\item Nombre premier est récursif car on a le crible d'eratosthène.
+\item Si un ensemble $\textbf{X}$ est récursif (donc donne 1 ou 0) alors $\bar{X}$ l'est également car il inverse les 1 et 0.
+\item Si $\textbf{X}$ est récursivement énumérable (donne 1 ou quelque chose d'autre mais pas 1) et que son opposé $\bar{X}$ est récursivement énumérable. Alors bien évidemment $\textbf{X}$ est récursif.
+\item Oui, trivial.
+\item Non, juste au simple fait que si $\textbf{X}$ est récursivement énumérable alors $\bar{X}$ ne peut être récursivement énumérable.
+\item Vrai car on a une fonction calculable car ce sont des combinaisons linéaires de calculables.
+\item Voir sous-section \ref{caract}.
+\item Oui car être énumérable c'est dire qu'on peut compter tous les résultats même si ça prend un temps infini.
+\item Voir sous-section \ref{caract}.
+\end{enumerate}
 
 \end{document}
