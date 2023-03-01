@@ -3,11 +3,11 @@
 # based on pre-commit
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v4.4.0
     hooks:
     -   id: check-yaml
     -   id: check-added-large-files
 -   repo: https://github.com/Tfloow/Q4_EPL
-    rev: v1.1.1
+    rev: v1.2.0
     hooks:
     -   id: some-id

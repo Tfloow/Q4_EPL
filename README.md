@@ -38,7 +38,7 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 <img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp%20(2).gif" width="300">
 
 1. Fork ce Github depuis cette page (regarde tout au-dessus à droite)
-2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github. **Attention n'oublie de r'ajouter `.git` à la fin**
+2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github. **Attention n'oublie de rajouter `.git` à la fin**
 3. Crée un dossier sur ton pc et lance Git depuis ce dossier (*donc ouvre le dossier dans le terminal*)
 4. Exécute `git clone https://www.github.com/nom/Q4_EPL.git`
 5. N'oublie d'être dans le dossier où se trouve le repo en faisant la commande `cd Q4_EPL`
@@ -76,6 +76,8 @@ Pour ajouter ta synthèse, tu dois:
 Si jamais tu as des difficultés à suivre les différentes étapes, regarde re-lis bien les différentes instructions à ton aise. (Git peut être intimidant pour les nouveaux utilisateurs) Si tu veux plus d'information sur les commandes utiles et/ou comprendre ce qu'elles font rends toi sur le [Wiki](https://github.com/Tfloow/Q4_EPL/wiki).
 Si tu es bloqué ou que tu as rencontré un problème que tu ne sais pas résoudre, ouvre une "Issue" [ici](https://github.com/Tfloow/Q4_EPL/issues) pour que tout le monde puisse t'aider.
 N'hésite pas à contacter directement les membres du projet pour toute autre question.
+
+Si tu as un soucis pour **commit**, que le commit ne passe pas en _local_. Ouvre un ticket dans Issues! Et envoie le fichier **LogGit.txt** qui se trouve dans répertoire Q4_EPL. Merci !
 
 ## Les liens utiles <a name="L"></a>
 1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
