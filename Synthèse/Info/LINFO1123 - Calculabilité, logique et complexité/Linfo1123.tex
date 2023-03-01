@@ -320,6 +320,76 @@ $\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de
 
 Le fait de ne pas pouvoir calculer "halt" nous pose soucis et va ouvrir tout un pan de soucis et limitations.
 
+\section{Insuffisance des fonctions totales}
+Pourquoi est-ce utile d'avoir un programme qui tourne en \textit{boucle}? N'avons-nous pas besoin de fonctions qui donnent un résultat précis tout le temps donc \textit{totale}?
+
+Imaginons que nous créons un \textit{langage de programmation} qui a que des fonctions totales.
+Donc, \textbf{Halt} est calculable et on a une réponse pour toutes fonctions. Halt serait la fonction constante 1.
+
+Notre langage \textit{Q} est calculable donc ayant un interpréteur calculable.
+
+\subsection{Théorème de Hoare-Allison}
+Donc en résumé de notre langage \textit{Q}:
+\begin{itemize}
+\item L'interpréteur de ce programme est calculable
+\item La fonction \textit{halt} est totale et correspond à la fonction constante de 1.
+\item Mais l'interpréteur \textcolor{red}{n'est pas} calculable \textit{dans Q}.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+& $0$ & $1$ & ... & $k$& ...\\
+\hline
+$Q_0$ & \textcolor{red}{interpret(0,0)} & interpret(0,1) & ... & interpret(0,k) & ...\\
+\hline
+$Q_1$ & interpret(1,0) & \textcolor{red}{interpret(1,1)} & ... & interpret(1,k) & ...\\
+\hline
+... & ... & ... & ... & ... & ... \\
+\hline
+$Q_k$ & interpret(k,0) & interpret(k,1) & ... & \textcolor{red}{interpret(k,k)} & ...\\
+\hline
+... & ... & ... & ... & ... & ... \\
+\hline
+\end{tabular}
+\end{center}
+La colonne \textit{Q} correspond à l'ensemble des programmes et la ligne de nombre correspond aux entrées de chaque programme.
+
+Tous les programmes se terminent donc \textit{jamais} $\perp$. On sélectionne la diagonale:
+\begin{align}
+diag(n) &= interpret(n,n)\\
+diag_{mod}(n) &= interpret(n,n) + 1\\
+Q_l &= diag_{mod}
+\end{align}
+Et donc, on voit facilement que à la ligne $l$ il y aura un souci avec $diag$ et notre entrée à $Q_l$ qui n'est autre que $diag_{mod}$. en effet $diag_{mod}(l) \neq diag(l)$. Donc la fonction \textit{interpret} n'est \textbf{pas} calculable en \textit{Q}.\\
+
+Le \textit{théorème} nous dit donc que: Si un langage de programmation (non trivial) ne permet que le calcul de fonctions totales, alors: 
+\begin{itemize}
+\item l’interpréteur de ce langage n’est pas programmable dans ce langage 
+\item il existe des fonctions totales non programmables dans ce langage
+\item ce langage est \textcolor{red}{restrictif}
+\end{itemize}
+
+Donc si on peut faire un interpréteur d'un langage dans son langage, la fonction \textit{halt} n'est pas totale. Donc c'est soit programmable par lui-même soit fonction totale de halt.\\
+
+Si on veut qu’un langage de programmation permette la programmation de toutes les fonctions totales calculables, alors ce langage doit également permettre
+la programmation de fonctions non totales.\\
+
+De plus, si on avait une fonction qui regarde si des fonctions sont totales, cela pose problème. Cela est impossible et donc cette fonction $tot(n)$ n'est pas récursif.
+
+\subsection{Interpréteur}
+Pour qu'un formalisme soit assez puissant, il faut que ce dernier arrive à programmer son propre interpréteur.
+
+\begin{equation}
+\exists z \forall n,x : \varphi_z(n,x) = \varphi_n(x)
+\end{equation}
+Avec $\varphi_z$ qu'on appelle la fonction universelle. et $P_z$ est le programme universel. Par convention, on appelle $\theta(n,x)$ la \textcolor{red}{fonction universelle}.
+
+\section{Extension des fonctions partielles}
+Pour l'instant, nous n'avons vu que des fonctions qui soit donnent le bon résultat soit donne $\perp$ et donc boucle. On va réaliser des \textit{extensions}, c'est-à-dire que nous allons retourner la valeur correcte dans les cas possible et un message ou autre chose pour le reste des entrées.\\
+
+Un \textit{théorème} nous dit que, \textit{Il existe une fonction partielle calculable g telle qu’aucune fonction totale calculable n’est une extension de g}.\\
+Pour prouver cela, on utilise la fonction \textit{nbstep(n,x)} qui correspond au nombre d'instruction avec l'arrêt de $P_n(x)$. ($P_n(x) = \perp$)La preuve se fait pas diagonalisation comme avant (\href{http://ezcast.uclouvain.be/ezplayer/index.php?action=view_asset_bookmark&album=LINFO1123-pub&asset=2021_02_17_21h51_34s&t=224&type=cam&token=EVKUMNQV}{vidéo}).\\
 
 
 
