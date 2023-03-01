@@ -451,6 +451,58 @@ Quand on écrit un programme, il faut comprendre la sémantique (l'utilisateur n
 On peut voir la sémantique comme le langage de programmation \textit{ultime}.\\
 Il ne faut pas oublier que les pc sont baser sur les mathématiques \textit{discrètes}.
 
+\section{Rappel procédure sémantique}
+Tout d'abord, en programmation nous avons différentes étapes qui reposent chacun sur les précédentes. Fermeture $\rightarrow$ Programmation d'ordre supérieur $\rightarrow$ Abstraction des données $\rightarrow$ Technologie de l'information.\\
+
+Rappel sur l'exécution d'un programme:
+\begin{lstlisting}
+{Browse {Inc 10}}	#Langage pratique (classique)
+local M in		 	#Langage Kernel
+	local N in
+		M=10
+		{Inc M N}
+		{Browse N}
+	end
+end
+\end{lstlisting}
+A l'exécution,$[(\{Inc M N\},\{M\rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
+\{m=10,n,i=(proc \{\$ X Y\} Y=X+A end, \{A \rightarrow a\}), a=1,b=(... browser code…)\}$ et Inc va référencer cela:\\
+$[(Y=X+A,\{A\rightarrow,X \rightarrow m,Y \rightarrow n\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
+\sigma$
+
+
+\chapter{Programmation d'ordre supérieur}
+Ce concept découle directement du concept d'\textit{environnement contextuel}. Dans un \textit{procédure} ou \textit{fonction} (les mêmes pour un langage kernel) peuvent prendre des valeurs ou des fonctions en arguments.
+\subsubsection{Définition}
+\begin{itemize}
+\item Une fonction est dit \textcolor{red}{de premier ordre} si elle ne prend et ne ressort aucune fonction.
+\item Une fonction est \textcolor{red}{N+1} si son entrée et sortie contiennent $N$ arguments.
+\end{itemize}
+Nomenclature des différentes fonctions:
+\begin{itemize}
+\item \textbf{Une génératrice} est le fait de prendre une fonction en entrée d'une fonction.
+\item \textbf{Une instantiation} est le fait de retourner une fonction en sortie d'une fonction.
+\item \textbf{Une composition de fonctions} est le fait de prendre 2 fonctions en entrée et on retourne leur composition.
+\end{itemize}
+
+\subsubsection{Utilisation}
+Via la programmation d'ordre supérieure, on peut caché un accumulateur. On dit qu'on fait une \textit{abstraction d'accumulateur}.\\
+Une fonction type est la fonction \textbf{FoldL} (\textit{reduce}). En effet, la fonction FoldL fait:
+\begin{lstlisting}
+declare
+fun {FoldL L F U}
+	case L
+	of nil then U
+	[] H|T then {FoldL T F {F U H}}
+	end
+end
+
+{FoldL LIST Function Acc}
+\end{lstlisting}
+On peut, un peu dans le même style, faire de l'encapsulation afin de cacher sa valeur à l'intérieur. $\rightarrow$ C'est la base de \textit{l'abstraction de donnés}.\\
+
+Il faut faire attention à l'\textbf{exécution retardé}. En effet, si on ne stocke pas le résultat d'une fonction, elle ne sera exécuté que quand on appellera la valeur. Donc cela peut prendre beaucoup de place en mémoire de stocker une fonction plutôt que son résultat.
+
 
 \end{document}
 
