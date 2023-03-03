@@ -199,7 +199,7 @@ Le principe de décision de \textit{calculabilité} est le principe dit \textit{
 \end{itemize}
 Donc on est face à un \textit{algorithme} qui calcule si $x$ est dans A ou non. C'est un algorithme complet et se termine toujours. (attention de ne pas confondre \textit{récursif} et \textit{récursivité})\\
 
-On dit qu'un ensemble d'algorithme est \textcolor{red}{récursivement énumérable} s'il est \textit{récursif} sauf qu'il retourne $\neq 1 \quad x \notin A$ ou ne se termine pas.
+On dit qu'un ensemble d'algorithme est \textcolor{red}{récursivement énumérable} s'il est \textit{récursif} sauf qu'il retourne $\neq 1 \quad x \notin A$ ou ne se termine pas et qu'on puisse énuméré cet ensemble.
 
 \subsubsection{Fonctions caractéristiques} \label{caract}
 Une fonction caractéristique de $A \subseteq N$ et:
@@ -309,6 +309,7 @@ K &= \{n | (n,n) \in \text{HALT}\}\\
 &= \{n | P_n(n) \text{ se termine}\}\\
 \end{align}
 Donc K et HALT \textbf{ne sont pas} récursifs mais sont récursivement énumérable car si un élément n'appartient pas à K ou HALT, il va boucler mais fournir la bonne solution s'il appartient à ces ensembles.\\
+De plus K est la diagonale de \textit{HALT}.
 
 $\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de prouver qu'un probable n'appartient pas à cet ensemble. pareil pour $\overline{K}$
 
