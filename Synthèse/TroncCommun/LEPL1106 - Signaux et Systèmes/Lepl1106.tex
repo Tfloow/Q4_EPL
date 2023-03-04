@@ -84,7 +84,7 @@ Pour le cas discrets ou continu, nous pouvons réaliser les opérations suivante
 \item Translation $ \rightarrow x(t - t_0), t_0 \in \mathbb{R}$
 \item Renversement $ \rightarrow x(-t)$
 \item Différentiation (que pour le cas continu) $ \rightarrow \frac{d^n x(t)}{dt^n}$
-\item Intégration (que pour le cas continu)
+\item Intégration (que pour le cas continu) $\rightarrow \int x(t) dt$
 \end{itemize}
 
 \section{Signaux élémentaires}
@@ -137,14 +137,13 @@ Ce type de signal élémentaire est encore plus trivial puisqu'il se résume à:
 0 \rightarrow n < 0
 \end{cases}
 \end{equation}
-On peut aussi voir l'échelon comme une somme infinie d'impulsion comme $\sum_{k \geq 0}^{\infty} \delta[n-k]$.\\
-Il existe également un échelon en temps continu qui se résume à la même équation \ref{eq:1} mais pour des valeurs continues.
+On peut aussi voir l'échelon comme une somme infinie d'impulsion comme $\sum_{k \geq 0}^{\infty} \delta[n-k]$.
 
 \subsection{L'impulsion (temps continu)}
 \begin{equation}
 \begin{cases}
-\delta (t) = 0 si t \neq 0\\
-\delta (0) = ?(+\infty)\\
+\delta (t) = 0 \text{ si } t \neq 0\\
+\delta (0) = (+\infty)\\
 \int_{-a}^a \delta (s) ds = 1 \rightarrow \forall a > 0
 \end{cases}
 \end{equation}
@@ -165,23 +164,11 @@ On peut décomposer tout signal en impulsion comme ci-dessous:
 \begin{equation}
 \begin{cases}
 \text{temps discret } \Rightarrow x[n] = \sum_{k=-\infty}^{\infty}x[k]\delta[n-k] \\
-\text{temps continu } \Rightarrow x(t) = \int_{-\infty}^{infty} x(s) \delta(t-s)ds
+\text{temps continu } \Rightarrow x(t) = \int_{-\infty}^{\infty} x(s) \delta(t-s)ds
 \end{cases}
 \end{equation}
 
 
-
-\section{Convolution} \label{convo}
-La convolution est une nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
-\begin{equation}
-f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
-\end{equation}
-La méthode pour trouver le résultat d'une convolution est:
-\begin{enumerate}
-\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
-\item Puis multiplier ces deux nouvelles fonctions.
-\item L'\textit{aire} sous la courbe créer par cela est le résultat de la convolution.
-\end{enumerate}
 
 \chapter{Fourier}
 \section{La représentation de Fourier}
@@ -189,25 +176,25 @@ La méthode pour trouver le résultat d'une convolution est:
 \subsection{Signaux continus}
 \subsubsection{Stocker un signal efficacement}
 Un signal est composé de sinus et de cosinus à des amplitudes, phases et fréquences différentes.\\
-La manière la plus efficace pour stocker un signal est d'avoir pour chaque fréquence \textit{multiple} de la fréquence de base $\omega_0$ son amplitude. (on verra que en effet, on peut faire cette supposition que chaque fréquence sont des multiples fréquences) Cela ressemble donc à ça:
+La manière la plus efficace pour stocker un signal est d'avoir pour chaque fréquence \textit{multiple} de la fréquence de base $\omega_0$ son amplitude. (on verra que en effet, on peut faire cette supposition que chaque fréquence sont des multiples de fréquences) Cela ressemble donc à ça:
 \begin{align}
 x(t) &= \textcolor{red}{1}cos(\textcolor{red}{1}\omega_0t) + \textcolor{blue}{2}sin(\textcolor{blue}{2}\omega_0t) + \textcolor{red}{\frac{1}{2}}cos(\textcolor{red}{2}\omega_0t) + \textcolor{blue}{\frac{1}{2}}sin(\textcolor{blue}{3}\omega_0t) +  \textcolor{red}{\frac{4}{5}}cos(\textcolor{red}{4}\omega_0t) \label{eq:signal}\\
 cos &= [\textcolor{red}{1}, \textcolor{red}{\frac{1}{2}}, \textcolor{red}{0}, \textcolor{red}{\frac{4}{5}}]\\
-sin &= [\textcolor{blue}{0}, \textcolor{blue}{2}, \textcolor{blue}{3}]
+sin &= [\textcolor{blue}{0}, \textcolor{blue}{2}, \textcolor{blue}{\frac{1}{2}}]
 \end{align}
 \subsubsection{Périodicité}
-On sait que $x(t)$ est \textcolor{blue}{périodique} et d'\textit{énergie finie}.(Périodicité de $\omega_0 = \frac{1}{T_0}$ Pour décomposer notre signal en \textbf{Série de Fourier \textit{trigonométrique}}:
+On sait que $x(t)$ est \textcolor{blue}{périodique} et d'\textit{énergie finie}.(Périodicité de $\omega_0 = \frac{1}{T_0}$) On peut décomposer notre signal en \textbf{Série de Fourier \textit{trigonométrique}}:
 \begin{align}
 x(t) &= a_0 + \sum_{k=1}^{+\infty} \Bigl(2 a_k cos(k\omega_0 t) + 2b_k sin(k \omega_0 t) \Bigl)\\
 a_k &= \frac{1}{T_0} \int_0^{T_0} x(t) cos(k\omega_0t)dt\\
 b_k &= \frac{1}{T_0} \int_0^{T_0} x(t) sin(k\omega_0t)dt
 \end{align}
-De plus, on peut toujours décomposé un signal \textit{périodique} en une partie \textbf{impaire} et \textbf{paire}. (en fourier, il suffit de prendre la partie cos donc paire et sin donc impaire)\\
+De plus, on peut toujours décomposer un signal \textit{périodique} en une partie \textbf{impaire} et \textbf{paire}. (en Fourier, il suffit de prendre la partie $cos$ donc paire et $sin$ donc impaire)\\
 
 Chose importante à remarquer, on va souvent tracer des graphes avec un axe y de type $2a[n]$. Ce 2 est un des prémices de Fourier complexe.
 
 \subsubsection{Signaux carrés}
-Un signal carré est de type avec une période de $2\pi$:
+Un signal carré est exprimé comme ci-dessous avec une période de $2\pi$:
 \begin{align}
 x(t) = \begin{cases}
 1 \qquad &\text{si } 0 \leq t < \pi\\
@@ -276,7 +263,7 @@ x(t) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} X(j\omega) e^{j\omega t} d\omega 
 \end{align}
 On appelle l'équation \ref{eq:invF}, la transformée de Fourier \textbf{inverse}.\\
 
-Pour arriver ce résultat, nous avons réaliser quelque modification à la série de Fourier:
+Pour arriver à ce résultat, nous avons réalisés quelques modifications à la série de Fourier:
 \begin{align}
 \omega_k &= k \omega_0 = \frac{2 \pi k}{T_0} \Rightarrow \omega_{k+1} - \omega{k} = \Delta \omega = \frac{2\pi}{T_0}\\
 \int_0^{T} & \approx \int_{\frac{-T}{2}}^{\frac{T}{2}} \qquad \text{ Pour "couvrir" tout le domaine}\\
@@ -395,7 +382,7 @@ On également ces propriétés:
 \end{center}
 
 \section{Convolution (temps continu)}
-Cette formule ressemble très fort à celle vu en temps continu à la section \ref{convo}. Si on a \textit{2 signaux} $f(t)$ et $g(t)$ leur convolution est donnée par:
+Si on a \textit{2 signaux} $f(t)$ et $g(t)$ leur convolution est donnée par (ressemble très fort à \ref{convo}):
 \begin{equation}
 f(t) \ast g(t) = \int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau
 \end{equation}
@@ -460,8 +447,8 @@ Comme vu précédemment, la réponse impulsionnelle est le résultat du système
 \subsection{Inconvénient}
 \begin{enumerate}
 \item Fonction de taille \textit{infinie} et représentation donc \textit{peu simple}.
-\item La modélisation d'un système ne mène généralement pas à une réponse impulsionnelle .
-\item On doit connaitre l'entrée depuis $-\infty$
+\item La modélisation d'un système ne mène généralement pas à une réponse impulsionnelle.
+\item On doit connaitre l'entrée depuis $-\infty$.
 \end{enumerate}
 
 
@@ -492,7 +479,7 @@ I_L
 1/L & 0
 \end{pmatrix} \begin{pmatrix}
 V_0\\
-L
+I_L
 \end{pmatrix} + \begin{pmatrix}
 1/RC\\
 0
