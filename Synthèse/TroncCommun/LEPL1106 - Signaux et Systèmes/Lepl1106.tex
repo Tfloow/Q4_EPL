@@ -191,7 +191,7 @@ La méthode pour trouver le résultat d'une convolution est:
 Un signal est composé de sinus et de cosinus à des amplitudes, phases et fréquences différentes.\\
 La manière la plus efficace pour stocker un signal est d'avoir pour chaque fréquence \textit{multiple} de la fréquence de base $\omega_0$ son amplitude. (on verra que en effet, on peut faire cette supposition que chaque fréquence sont des multiples fréquences) Cela ressemble donc à ça:
 \begin{align}
-x(t) &= \textcolor{red}{1}cos(\textcolor{red}{1}\omega_0t) + \textcolor{blue}{2}sin(\textcolor{blue}{2}\omega_0t) + \textcolor{red}{\frac{1}{2}}cos(\textcolor{red}{2}\omega_0t) + \textcolor{blue}{\frac{1}{2}}sin(\textcolor{blue}{3}\omega_0t) +  \textcolor{red}{\frac{4}{5}}cos(\textcolor{red}{4}\omega_0t)\\
+x(t) &= \textcolor{red}{1}cos(\textcolor{red}{1}\omega_0t) + \textcolor{blue}{2}sin(\textcolor{blue}{2}\omega_0t) + \textcolor{red}{\frac{1}{2}}cos(\textcolor{red}{2}\omega_0t) + \textcolor{blue}{\frac{1}{2}}sin(\textcolor{blue}{3}\omega_0t) +  \textcolor{red}{\frac{4}{5}}cos(\textcolor{red}{4}\omega_0t) \label{eq:signal}\\
 cos &= [\textcolor{red}{1}, \textcolor{red}{\frac{1}{2}}, \textcolor{red}{0}, \textcolor{red}{\frac{4}{5}}]\\
 sin &= [\textcolor{blue}{0}, \textcolor{blue}{2}, \textcolor{blue}{3}]
 \end{align}
@@ -231,19 +231,73 @@ cos(t) = \frac{e^{jt} + e^{-jt}}{2} \qquad \qquad sin(t) = \frac{e^{jt} - e^{-jt
 \end{equation}
 Donc le lien avec la série en Réelle est: $X_0 = a_0$, $X_k = X_{-k}^{*} = a_k -jb_k$. On trouve cela en injectant dans l'équation \ref{eq:coefComplexe} la formule d'Euler.
 
-\subsubsection{Représentation de Fourier}
+\subsubsection{Représentation de Fourier} %télécharger les images des slides à jour
+Pour faire la représentation de Fourier, on va commencer par prendre l'équation \ref{eq:signal} et la transformer:
+\begin{align}
+x(t) &= 2(\textcolor{red}{\frac{1}{2}}cos(\textcolor{red}{1}\omega_0t) + \textcolor{red}{\frac{1}{4}}cos(\textcolor{red}{2}\omega_0t) + \textcolor{red}{\frac{4}{10}}cos(\textcolor{red}{4}\omega_0t)) + 2(\textcolor{blue}{1}sin(\textcolor{blue}{2}\omega_0t)  + \textcolor{blue}{\frac{1}{4}}sin(\textcolor{blue}{3}\omega_0t)) \label{eq:signalT}
+\end{align}
+Ensuite on injecte la formule d'Euler dans l'équation \ref{eq:signalT} ce qui donne:
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/signalTE.png} %oui c'est une photo donc si quelqu'un est chaud ré-écrire proprement l'équation
+\includegraphics[width=6cm]{img/grapheSignalTE.png}
+\end{figure}
+Notre signal $x(t)$ est bien défini de manière unique via ses coefficients !
+
 
 \subsubsection{Base orthogonale}
 Les exponentielles complexes de Fourier sont orthogonales dans l'espace de Hilbert $\mathcal{H}_T$ équipé avec le produit scalaire:
 \begin{align}
-\langle x, y\rangle &= \frac{1}{T_0}\int_0^{T_0}x(t)y^{*}(tt)dt\\
+\langle x, y\rangle &= \frac{1}{T_0}\int_0^{T_0}x(t)y^{*}(t)dt\\
 \{e^{jk\omega_0t}\}&, k \in \mathbb{Z} \rightarrow \textbf{ est }\perp
 \end{align}
+
+\subsection{Signaux discrets}
+La périodicité d'un signal change puisqu'on ne peut avoir que des valeurs $\mathbb{N}$. En effet, on dit qu'un signal est de période N si $x[n + N] = x[n]$. De plus, N est en $[rad]$ et pas $[\frac{rad}{s}]$ car la \textcolor{blue}{pulsation fondamentale} est $\Omega_0 = \frac{2\pi}{N}$
+
+\subsubsection{Calcul de la série de Fourier}
+\begin{align}
+x[n] &= \sum_{k=0}^{N-1} X[k] e^{jk\Omega_0n}\\
+X[k] &= \frac{1}{N} \sum_{m=0}^{N-1} x[m] e^{-jk\Omega_0m}
+\end{align}
+On a seulement besoin de $N$ coefficient grâce à la \textbf{périodicité}. En effet, $e^{j(N+k)\Omega_0n} = e^{jk\Omega_0n}$
+
+
 
 \section{La transformée de Fourier}
 Cela s'applique sur les signaux \textit{non-périodiques} et \textit{continus}.\\
 Il faut donc voir le signal comme ayant un $\omega = 0 = \frac{1}{T_0} = \frac{1}{\infty}$ et y appliquer la série de Fourier!
+
 \subsection{Calcul de la transformée}
+On dit que le \textcolor{blue}{spectre} $X(j\omega)$ du signal $x(t)$ est sa \textbf{transformée de Fourier}.
+\begin{align}
+X(j\omega) &= \int_{-\infty}^{\infty} x(t) e^{-j \omega t}dt\\
+x(t) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} X(j\omega) e^{j\omega t} d\omega \label{eq:invF}
+\end{align}
+On appelle l'équation \ref{eq:invF}, la transformée de Fourier \textbf{inverse}.\\
+
+Pour arriver ce résultat, nous avons réaliser quelque modification à la série de Fourier:
+\begin{align}
+\omega_k &= k \omega_0 = \frac{2 \pi k}{T_0} \Rightarrow \omega_{k+1} - \omega{k} = \Delta \omega = \frac{2\pi}{T_0}\\
+\int_0^{T} & \approx \int_{\frac{-T}{2}}^{\frac{T}{2}} \qquad \text{ Pour "couvrir" tout le domaine}\\
+x(t) &= \sum_{-\infty}^{\infty} X_k e^{j \omega_0 k t}\\
+	 &= \sum_{-\infty}^{\infty} \Bigl \{ \frac{1}{T_0} \int_{\frac{-T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j k \omega_0 t} dt \Bigl \} e^{j k \omega_0 t}\\
+	 &= \sum_{-\infty}^{\infty} \frac{1}{2 \pi} \int_{\frac{-T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j k \omega_0 t} dt\quad e^{j k \omega_0 t} \Delta \omega \label{eq:finalF}
+\end{align} 
+On remarque qu'on a 2 parties intéressantes dans l'équation \ref{eq:finalF}. On a une partie qui évolue dans le temps, c'est notre \textit{signal continu}, c'est notre \textcolor{blue}{spectre}. L'autre partie dépend de la fréquence et c'est la \textit{reconstruction du signal}. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/reconstructionF.png}
+\caption{à gauche, un signal pair \qquad à droite, le spectre}
+\end{figure}
+
+\subsection{Calcul discret}
+On a un signal $x[n]$ qui s'exprime de manière unique selon ses fréquences:
+\begin{align}
+x[n] &= \frac{1}{2\pi}\int_{-\pi}^{\pi} X \bigl(e^{j\Omega} \bigl) e^{j\Omega n} d\omega\\
+X\bigl(e^{j\Omega} \bigl) &= \sum_{m=-\infty}^{\infty} x[m]e^{-j\Omega m} \label{eq:transfoDF}
+\end{align}
+L'équation \label{eq:transfoDF} donne la \textcolor{blue}{transformée} de Fourier.
 
 
 \part{Systèmes}
