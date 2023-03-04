@@ -183,6 +183,68 @@ La méthode pour trouver le résultat d'une convolution est:
 \item L'\textit{aire} sous la courbe créer par cela est le résultat de la convolution.
 \end{enumerate}
 
+\chapter{Fourier}
+\section{La représentation de Fourier}
+
+\subsection{Signaux continus}
+\subsubsection{Stocker un signal efficacement}
+Un signal est composé de sinus et de cosinus à des amplitudes, phases et fréquences différentes.\\
+La manière la plus efficace pour stocker un signal est d'avoir pour chaque fréquence \textit{multiple} de la fréquence de base $\omega_0$ son amplitude. (on verra que en effet, on peut faire cette supposition que chaque fréquence sont des multiples fréquences) Cela ressemble donc à ça:
+\begin{align}
+x(t) &= \textcolor{red}{1}cos(\textcolor{red}{1}\omega_0t) + \textcolor{blue}{2}sin(\textcolor{blue}{2}\omega_0t) + \textcolor{red}{\frac{1}{2}}cos(\textcolor{red}{2}\omega_0t) + \textcolor{blue}{\frac{1}{2}}sin(\textcolor{blue}{3}\omega_0t) +  \textcolor{red}{\frac{4}{5}}cos(\textcolor{red}{4}\omega_0t)\\
+cos &= [\textcolor{red}{1}, \textcolor{red}{\frac{1}{2}}, \textcolor{red}{0}, \textcolor{red}{\frac{4}{5}}]\\
+sin &= [\textcolor{blue}{0}, \textcolor{blue}{2}, \textcolor{blue}{3}]
+\end{align}
+\subsubsection{Périodicité}
+On sait que $x(t)$ est \textcolor{blue}{périodique} et d'\textit{énergie finie}.(Périodicité de $\omega_0 = \frac{1}{T_0}$ Pour décomposer notre signal en \textbf{Série de Fourier \textit{trigonométrique}}:
+\begin{align}
+x(t) &= a_0 + \sum_{k=1}^{+\infty} \Bigl(2 a_k cos(k\omega_0 t) + 2b_k sin(k \omega_0 t) \Bigl)\\
+a_k &= \frac{1}{T_0} \int_0^{T_0} x(t) cos(k\omega_0t)dt\\
+b_k &= \frac{1}{T_0} \int_0^{T_0} x(t) sin(k\omega_0t)dt
+\end{align}
+De plus, on peut toujours décomposé un signal \textit{périodique} en une partie \textbf{impaire} et \textbf{paire}. (en fourier, il suffit de prendre la partie cos donc paire et sin donc impaire)\\
+
+Chose importante à remarquer, on va souvent tracer des graphes avec un axe y de type $2a[n]$. Ce 2 est un des prémices de Fourier complexe.
+
+\subsubsection{Signaux carrés}
+Un signal carré est de type avec une période de $2\pi$:
+\begin{align}
+x(t) = \begin{cases}
+1 \qquad &\text{si } 0 \leq t < \pi\\
+-1 \qquad &\text{sinon}
+\end{cases}
+\end{align}
+Si on fait la série de Fourier, on peut se rendre compte que ce signal est composé d'une \textit{infinité} de sinus de tel sorte que:
+\begin{equation}
+x(t) = \sum_0^{+\infty} \frac{1}{2n+1} sin((2n+1)t)
+\end{equation}
+
+\subsubsection{Fourier Complexes}
+On voit que cette série est bien plus simple et est une révolution pour calculer \textit{Fourier}:
+\begin{align}
+x(t) &= \sum_{k = - \infty}^{+ \infty} X_k e^{jk\omega_0 t}\\
+X_k &= \frac{1}{T_0} \int_0^{T_0} x(t) e^{-jk\omega_0t}dt \label{eq:coefComplexe}
+\end{align}
+Donc on prend le conjugué pour calculer $X_k$. C'est ici que le coefficient $2$ fait du sens, on se rappelle les formules d'Euler.
+\begin{equation}
+cos(t) = \frac{e^{jt} + e^{-jt}}{2} \qquad \qquad sin(t) = \frac{e^{jt} - e^{-jt}}{2j}
+\end{equation}
+Donc le lien avec la série en Réelle est: $X_0 = a_0$, $X_k = X_{-k}^{*} = a_k -jb_k$. On trouve cela en injectant dans l'équation \ref{eq:coefComplexe} la formule d'Euler.
+
+\subsubsection{Représentation de Fourier}
+
+\subsubsection{Base orthogonale}
+Les exponentielles complexes de Fourier sont orthogonales dans l'espace de Hilbert $\mathcal{H}_T$ équipé avec le produit scalaire:
+\begin{align}
+\langle x, y\rangle &= \frac{1}{T_0}\int_0^{T_0}x(t)y^{*}(tt)dt\\
+\{e^{jk\omega_0t}\}&, k \in \mathbb{Z} \rightarrow \textbf{ est }\perp
+\end{align}
+
+\section{La transformée de Fourier}
+Cela s'applique sur les signaux \textit{non-périodiques} et \textit{continus}.\\
+Il faut donc voir le signal comme ayant un $\omega = 0 = \frac{1}{T_0} = \frac{1}{\infty}$ et y appliquer la série de Fourier!
+\subsection{Calcul de la transformée}
+
 
 \part{Systèmes}
 
