@@ -8,4 +8,8 @@ jobs:
   compiling:
     runs-on: ubuntu-latest
     steps:
-      - run: make Makefile
+      - run: sudo apt-get install texlive-latex-base
+      - run: sudo apt-get install texlive-fonts-recommended
+      - run: sudo apt-get install texlive-fonts-extra
+      - run: sudo apt-get install texlive-latex-extra
+      - run: make -f Makefile
