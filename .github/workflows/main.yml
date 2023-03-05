@@ -8,4 +8,4 @@ jobs:
   compiling:
     runs-on: ubuntu-latest
     steps:
-      - run: make
+      - run: make full
