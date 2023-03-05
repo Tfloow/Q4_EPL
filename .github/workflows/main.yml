@@ -14,8 +14,8 @@ jobs:
 #      - run: sudo apt-get install texlive-latex-extra
   compiling:
     runs-on: ubuntu-latest
+    
     steps:
-      - run: echo "${GITHUB_WORKSPACE}"  
-      - run: cd ${GITHUB_WORKSPACE}
       - run: ls
-      - run: make -f Makefile
+      - name: Test
+        run: echo "${GITHUB_WORKSPACE}"
