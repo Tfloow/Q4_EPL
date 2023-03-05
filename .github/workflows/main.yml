@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - run: ls
-      - name: Test
-        run: echo "${GITHUB_WORKSPACE}"
+      - name: Directory
+        working-directory: ./Q4_EPL
+        run: |
+          ls
