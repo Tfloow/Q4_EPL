@@ -103,10 +103,10 @@ p(t) = vi(t) = \frac{v^2(t)}{R} = Ri^2(t)
 \end{equation}
 
 \subsubsection{Loi des noeuds de Kirchoff}
-La somme des courants de tous les noeuds a pour résultat 0. Autrement dit, tout courant qui apparait disparait quelque part.
+La somme des courants de tous les noeuds a pour résultat 0. Autrement dit, tout courant qui apparait, disparait quelque part.
 
 \subsubsection{Loi des mailles de Kirchoff}
-Dans un circuit électrique, on peut dessiner des \textit{mailles} ou des sortes de carrés. En tournant dans un sens, on fait la somme des tensions (\textit{faire attention au sens des tensions}) on obtient une somme nulle.
+Dans un circuit électrique, on peut dessiner des \textit{mailles} ou des sortes de carrés. En tournant dans un sens, on fait la somme des tensions (\textit{faire attention au sens des tensions}) on doit obtenir une somme nulle.
 
 \subsubsection{Sources multiples - Diviseur de tension}
 On peut simplifier un circuit et sommer des sources de tension en additionnant leur tension. On utilise également la règle des diviseurs de tension pour les résistances:
@@ -118,7 +118,7 @@ On peut simplifier un circuit et sommer des sources de tension en additionnant l
 \end{equation}
 
 \subsubsection{Mise en parallèle et sources multiples}
-Les sources de courant en parallèle peuvent être sommé pour les simplifier et n'en avoir qu'une seule source de courant.
+Les sources de \textit{courant} en parallèle peuvent être sommé pour les simplifier et n'en avoir qu'une seule source de courant. Pour les sources de \textit{tension}, on les additionne quand elles sont en série.
 
 \subsubsection{Équivalent Thévenin Norton}
 On peut simplifier une alimentation d'un circuit via les circuits de Thévenin et Norton. Thévenin est composé d'une source de tension et d'une résistance en série tandis que Norton a une source de courant et une résistance en parallèle.\\
@@ -136,7 +136,7 @@ v_{oc} = R_{Th}i_{sc}
 \includegraphics[width = 10cm]{img/ThNo.png}
 \caption{Illustration du passage de Thévenin à Norton}
 \end{figure}
-Pour trouver la résistance $R_{Th}$ on met en \textit{court-circuit} les générateurs de tensions et en \textit{circuit ouvert} les générateurs de courant. Ensuite, on enlève la résistance et on regarde à ses bornes les \textit{résistances} et on trouve donc \textit{l'équivalent des résistances}. On peut faire cela uniquement avec des générateurs \textbf{non commandés}.\\
+Pour trouver la résistance $R_{Th}$ on met en \textit{court-circuit} les générateurs de tensions et en \textit{circuit ouvert} les générateurs de courant. Ensuite, on enlève la résistance ou la partie de circuit qu'on veut garder après la transformation. On regarde à ses bornes les \textit{résistances} et on trouve donc \textit{l'équivalent des résistances}. On peut faire cela uniquement avec des générateurs \textbf{non commandés}.\\
 
 Pour trouver le \textit{courant de Norton} et la \textit{tension de Thévenin} (on est \textbf{obligé} de passer par cette étape en premier avec des \textit{sources commandées}). Pour \textit{Thévenin} on met notre résistance en \textit{circuit ouvert} et on trouve le voltage à ses bornes.\\
 Pour \textit{Norton} on met notre résistance en \textit{court-circuit} et on trouve le courant circulant dans ce fil.
@@ -188,7 +188,7 @@ Le but de cette représentation est une simplification de circuit. De plus, mêm
 Ce type de quadripole peut être réalisé de 4 manières différentes détaillées ci-dessus.
 \begin{figure}[H]
 \centering
-\includegraphics[width=6cm]{img/YZGH.png}
+\includegraphics[width=8cm]{img/YZGH.png}
 \caption{Les 4 types de quadripoles}
 \end{figure}
 On peut facilement représenter ces différents systèmes via des matrices détaillants le système
@@ -240,7 +240,7 @@ Il est à noter que l'équation \ref{eq:LCsinus} est une équation propre au cir
 \subsection{Régime sinusoïdal}
 Quelques notions à bien comprendre:
 \begin{itemize}
-\item La phase est établi par l'observateur car c'est lui qui définit "\textit{le début de la sinusoïdale}
+\item La phase est établi par l'observateur car c'est lui qui définit "\textit{le début de la sinusoïdale}"
 \item Un cosinus est un sinus \textit{déphasé} de $\frac{\pi}{2}$
 \end{itemize}
 
@@ -291,7 +291,7 @@ Seulement si cela est respecté, alors on peut utiliser les \textbf{phaseurs}:
 \textbf{I} &= I_M e^{j\psi_I}
 \end{align}
 En électricité, on représente le nombre complexe par $j$. $\psi$ représente les phases.\\
-L'utilisation des \textit{phaseurs} vient de l'idée de la \textit{formule d'Euler} où quand on ajouter une partie imaginaire, cela n'affecte pas la partie \textit{réelle}. Donc on peut faire ceci:
+L'utilisation des \textit{phaseurs} vient de l'idée de la \textit{formule d'Euler} où quand on ajoute une partie imaginaire, cela n'affecte pas la partie \textit{réelle}. Donc on peut faire ceci:
 \begin{equation}
 \begin{cases}
 A cos(\omega t + \varphi) \rightarrow A cos(\omega t + \varphi) + j A sin(\omega t + \varphi) \qquad -\frac{\pi}{2}  \geq \varphi \geq \frac{\pi}{2} \\
@@ -317,7 +317,7 @@ Passer en phaseur est un opération \textbf{linéaire} donc toutes les lois de \
 Élément & Résistance & Inductance & Capacité\\
 \hline 
 Paramètre & $\textbf{Z} = R$ & $\textbf{Z} = j\omega L$ & $\textbf{Z} = \frac{1}{j \omega C}$\\
-$\textbf{Z} = \frac{1}{\textbf{Y}}$ & $\textbf{Y} = \frac{1}{R}$ & $\textbf{Y} = \frac{1}{j \omega L}$ & $j \omega C$ \\
+$\textbf{Z} = \frac{1}{\textbf{Y}}$ & $\textbf{Y} = \frac{1}{R}$ & $\textbf{Y} = \frac{1}{j \omega L}$ & $\textbf{Y} = j \omega C$ \\
 \hline 
 Équation constitutive & $V = \textbf{Z}I$ & $V = \textbf{Z}I$ & $V = \textbf{Z}I$\\
  & $I = \textbf{Y}V$ & $I = \textbf{Y}V$ & $I = \textbf{Y}V$\\
@@ -355,7 +355,7 @@ Donc on voit clairement que notre vecteur \textbf{Z} a une composante \textit{co
 \subsubsection{Impédance de résistance pure}
 \begin{itemize}
 \item $\textbf{V} = R \textbf{I}$ et donc $\textbf{Z} = R$
-\item Tension en phase: $\varphi = 0 \rightarrow \textbf{V} = RI_Me^{j\psi_I}$
+\item Tension en phase: $\varphi = 0 \rightarrow $\textbf{V}$ = R I_{M} e^{j \psi_{I}}$
 \item Admittance: $\textbf{Y} = G = \frac{1}{R}$ 
 \end{itemize}
 
@@ -414,11 +414,11 @@ Comme dit au début du chapitre, on conserve toutes les lois classiques des circ
 	\end{itemize}
 \item Pour les admittances:
 	\begin{itemize}
-	\item On réalise la formule $\frac{1}{\frac{1}{Z_1} + ... + \frac{1}{Z_n}}$ pour des admittances en série.
+	\item On réalise la formule $\frac{1}{\frac{1}{Y_1} + ... + \frac{1}{Y_n}}$ pour des admittances en série.
 	\item On additionne simplement les admittances en parallèle.
 	\end{itemize}
 \end{itemize}
-Cette \textit{dualité} impédances admittances est très utile et simplifie de nombreux calculs pour les circuits \textit{AC}.
+Cette \textit{dualité} impédance-admittance est très utile et simplifie de nombreux calculs pour les circuits \textit{AC}.
 
 \subsection{Thévenin et Norton}
 On fait les mêmes démarches qu'en \textit{DC}, il faut faire attention aux impédances complexes et les sources de courants et tension qui sont des \textit{phaseurs}.
