@@ -17,6 +17,7 @@ jobs:
     
     steps:
       - name: Directory
-        working-directory: ./Q4_EPL
         run: |
+          ls
+          cd ..
           ls
