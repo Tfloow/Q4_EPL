@@ -15,6 +15,15 @@ jobs:
   compiling:
     runs-on: ubuntu-latest
     steps:
-      - run: cd "${{ vars.GITHUB_ACTION_PATH }}"
-      - run: ls
-      - run: make -f Makefile
+    - name: Check directory
+      run: |
+        echo "repository variable : ${{ vars.REPOSITORY_VAR }}"
+        echo "organization variable : ${{ vars.ORGANIZATION_VAR }}"
+        echo "overridden variable : ${{ vars.OVERRIDE_VAR }}"
+        echo "variable from shell environment : $env_var"
+        
+    - name: cd
+      run: cd "${{ vars.GITHUB_ACTION_PATH }}"
+      
+    - name: make
+      run: make -f Makefile
