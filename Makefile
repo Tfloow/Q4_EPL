@@ -1,8 +1,4 @@
 full: Lepl1106 LELEC1370 Linfo1123 Linfo1104
-	Lepl1106
-	LELEC1370
-	Linfo1123
-	Linfo1104
 	echo "Finish Full compiling"
 
 Lepl1106 : Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes
