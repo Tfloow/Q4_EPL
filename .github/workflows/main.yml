@@ -17,10 +17,15 @@ jobs:
     
     steps:
       - uses: actions/checkout@v1
-      - name: Directory
+      - name: Setting up
         run: |
           sudo apt-get install texlive-latex-base
           sudo apt-get install texlive-fonts-recommended
           sudo apt-get install texlive-fonts-extra
           sudo apt-get install texlive-latex-extra
-          make -f Makefile
+          sudo apt install texlive-lang-french
+
+      - name: Make
+          run : |
+            ls
+            make -f Makefile
