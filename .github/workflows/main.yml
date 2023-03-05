@@ -18,13 +18,12 @@ jobs:
     - name: Check directory
       run: |
         echo "${GITHUB_WORKSPACE}"
-        echo "repository variable : ${{ vars.REPOSITORY_VAR }}"
-        echo "organization variable : ${{ vars.ORGANIZATION_VAR }}"
-        echo "overridden variable : ${{ vars.OVERRIDE_VAR }}"
-        echo "variable from shell environment : $env_var"
         
     - name: cd
-      run: cd "${{ vars.GITHUB_ACTION_PATH }}"
+      run: cd "${GITHUB_WORKSPACE}"
+      
+    - name: listing
+      run: ls
       
     - name: make
       run: make -f Makefile
