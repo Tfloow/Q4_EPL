@@ -1,0 +1,11 @@
+name: Compiling
+run-name: Compiling of .tex
+on:
+  push:
+    branches:
+      - main
+jobs:
+  compiling:
+    runs-on: ubuntu-latest
+    steps:
+      - run: make
