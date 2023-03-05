@@ -15,15 +15,7 @@ jobs:
   compiling:
     runs-on: ubuntu-latest
     steps:
-    - name: Check directory
-      run: |
-        echo "${GITHUB_WORKSPACE}"
-        
-    - name: cd
-      run: cd "${GITHUB_WORKSPACE}"
-      
-    - name: listing
-      run: ls
-      
-    - name: make
-      run: make -f Makefile
+      - run: echo "${GITHUB_WORKSPACE}"  
+      - run: cd ${GITHUB_WORKSPACE}
+      - run: ls
+      - run: make -f Makefile
