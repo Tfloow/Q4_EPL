@@ -8,6 +8,4 @@ jobs:
   compiling:
     runs-on: ubuntu-latest
     steps:
-      - run: cd Q4_EPL
-      - run: ls
-      - run: make full
+      - run: make Makefile
