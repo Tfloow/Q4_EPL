@@ -24,8 +24,5 @@ jobs:
           sudo apt-get install texlive-fonts-extra
           sudo apt-get install texlive-latex-extra
           sudo apt install texlive-lang-french
-
-      - name: Make
-          run : |
-            ls
-            make -f Makefile
+          ls
+          make -f Makefile
