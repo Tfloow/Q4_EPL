@@ -17,6 +17,7 @@ jobs:
     steps:
     - name: Check directory
       run: |
+        echo "${GITHUB_WORKSPACE}"
         echo "repository variable : ${{ vars.REPOSITORY_VAR }}"
         echo "organization variable : ${{ vars.ORGANIZATION_VAR }}"
         echo "overridden variable : ${{ vars.OVERRIDE_VAR }}"
