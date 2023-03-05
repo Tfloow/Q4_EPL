@@ -5,15 +5,16 @@ on:
     branches:
       - main
 jobs:
-  downloading:
-    runs-on: ubuntu-latest
-    steps:
-      - run: sudo apt-get install texlive-latex-base
-      - run: sudo apt-get install texlive-fonts-recommended
-      - run: sudo apt-get install texlive-fonts-extra
-      - run: sudo apt-get install texlive-latex-extra
+#  downloading:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: sudo apt-get install texlive-latex-base
+#      - run: sudo apt-get install texlive-fonts-recommended
+#      - run: sudo apt-get install texlive-fonts-extra
+#      - run: sudo apt-get install texlive-latex-extra
   compiling:
     runs-on: ubuntu-latest
     steps:
-      - run: cd ${{ vars.GITHUB_ACTION_PATH }}
+      - run: cd "${{ vars.GITHUB_ACTION_PATH }}"
+      - run: ls
       - run: make -f Makefile
