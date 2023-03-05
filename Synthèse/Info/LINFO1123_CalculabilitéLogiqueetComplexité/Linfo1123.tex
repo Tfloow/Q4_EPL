@@ -319,7 +319,9 @@ $\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de
 \caption{Schématisation des fonctions et ensembles de fonctions}
 \end{figure}
 
-Le fait de ne pas pouvoir calculer "halt" nous pose soucis et va ouvrir tout un pan de soucis et limitations.
+Le fait de ne pas pouvoir calculer "halt" nous pose soucis et va ouvrir tout un pan de soucis et limitations.\\
+
+De plus, on peut faire face à des ensembles \textbf{co-récursivement} énumérable. En effet, il existe des ensembles co-récursivement énumérable tel que: $\overline{\textbf{K}}$ et tous les ensembles \textit{récursifs}.
 
 \section{Insuffisance des fonctions totales}
 Pourquoi est-ce utile d'avoir un programme qui tourne en \textit{boucle}? N'avons-nous pas besoin de fonctions qui donnent un résultat précis tout le temps donc \textit{totale}?
@@ -426,5 +428,20 @@ Pour prouver cela, on utilise la fonction \textit{nbstep(n,x)} qui correspond au
 \item Oui car être énumérable c'est dire qu'on peut compter tous les résultats même si ça prend un temps infini.
 \item Voir sous-section \ref{caract}.
 \end{enumerate}
+
+\section{TP3}
+\begin{enumerate}
+\item En effet, si on a que des fonctions totales, on sait qu'on aura toujours une réponses pour n'importe quelle input.
+\item Oui, le théorème de \textit{Hoare-Allison} ne dit pas l'inverse
+\item Mais si on peut avoir la fonction halt en L, on ne peut avoir sa fonction \textit{interpret}
+\item Mais, on peut calculer cette fonction \textit{interpret} avec un langage de programmation qui n'est pas \textcolor{red}{restrictif}.
+\item Effectivement on ne peut pas calculer toutes les fonctions totales avec L.
+\item Il existe un langage qui peut calculer sa fonction halt et son interpréteur (le langage vide trivial)
+\item Effectivement, ne pas être récursif n'empêche pas d'être récursivement énumérable.
+\item Faux exemple: $\overline{\textbf{K}}$.
+\item Non, on peut imaginer 2 fonctions non récursives qui se "\textit{complètent}" et comblent les lacunes de chacune.
+\item Non, on peut imaginer une intersection qui ne comportent que des entrées avec une réponse.
+\end{enumerate}
+
 
 \end{document}
