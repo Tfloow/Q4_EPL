@@ -1,4 +1,6 @@
 # Q4: Synthèse
+<img src="https://github.com/Tfloow/Q4_EPL/actions/workflows/main.yml/badge.svg">
+
 <details>
 <summary><h2><b>Table des matières</b></h2></summary>
  &nbsp; &nbsp; • <a href="#getting-started-">Getting Started</a>
@@ -61,6 +63,12 @@ Pour ajouter ta synthèse, tu dois:
 4. Fais un Pull request pour que ton commit se fasse sur ce Github
 5. Attends et tadaaaa ta synthèse est dispo sur le Github
 
+### Compilation Rapide
+Si vous avez téléchargé pdflatex (via Miktex ou autre), vous pouvez utiliser la commande `make` dans ce répertoire pour:
+1. Compiler tous les pdf
+2. Déplacer tous les pdf dans le dossier `Synthèse compilée`
+Pour que `make` compile *vos synthèses*, modifier le fichier `Makefile` en vous inspirant des commandes déjà présente.
+
 ## Répartition <a name="R"></a>
 
 | Tronc commun   | Info  | Elec  |  MAP  | Méca  |  GC   | GBio  | FYKI  | Projet |
@@ -80,7 +88,7 @@ N'hésite pas à contacter directement les membres du projet pour toute autre qu
 Si tu as un soucis pour **commit**, que le commit ne passe pas en _local_. Ouvre un ticket dans Issues! Et envoie le fichier **LogGit.txt** qui se trouve dans répertoire Q4_EPL. Merci !
 
 ## Les liens utiles <a name="L"></a>
-1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK)
+1. [le Drive](https://uclouvain-my.sharepoint.com/:f:/r/personal/martin_brans_student_uclouvain_be/Documents/EPL-Drive?csf=1&web=1&e=fRialK "le Drive")
 2. [le Github du Drive](https://github.com/Gp2mv3/Syntheses "la masterclass de nos prédecesseurs")
-3. [les PDF](https://github.com/Tfloow/Q4_EPL/tree/main/SynthèseCompilé)
-4. [le Template](https://github.com/Tfloow/Q4_EPL/tree/main/Template)
+3. [les PDF](https://github.com/Tfloow/Q4_EPL/tree/main/SynthèseCompilée "Synthèse compilée")
+4. [le Template](https://github.com/Tfloow/Q4_EPL/tree/main/Template "Template")
