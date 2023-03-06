@@ -32,6 +32,6 @@ jobs:
       - name: Storing
         uses: actions/upload-artifact@v3
         with:
-          name: 1106Test
-          path: Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/Lepl1106.pdf
+          name: SynthèseCompilée
+          path: SynthèseCompilée/
 
