@@ -34,4 +34,9 @@ jobs:
         with:
           name: SynthèseCompilée
           path: SynthèseCompilée/
+      - name: Download(test)
+        uses: actions/download-artifact@v3
+        with:
+          SynthèseCompilée
+          path: SynthèseCompilée/
 
