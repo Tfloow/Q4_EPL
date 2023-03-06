@@ -125,7 +125,7 @@ Ci-contre, on voit une fonction classique en Oz qui analyse une liste et déterm
 Le langage Kernel est la première partie de la sémantique formelle d'un langage de programmation. Une règle importante est que tout programme écrit en programmation fonctionelle \textit{peut être traduit en langage kernel}.
 Les grands principes du langage Kernel sont:
 \begin{itemize}
-	\item Tous les résultats intermédiaires de calculs sont visibles.
+	\item Tous les résultats intermédiaires de calculs sont visibles. Donc on a 1 opération par ligne et la déclaration en locale de toutes les variables.
 	\item Toutes les fonctions deviennent des \textit{procédures} avec un argument en plus. Cet argument donne le résultat de la fonction.
 	\item Les fonctions dans une fonction sont sortis de leur fonction et on leur donne un nouvel identificateur.
 \end{itemize}
@@ -135,12 +135,12 @@ Les résultats de la traduction: Les programmes Kernel sont plus longs mais on v
 Les arbres sont des structures de données extrêmement utiles et utilisées. On peut y stocker des données spécifiques, faire des calculs, ... Les arbres illustrent bien \textit{la programmation orienté but}. Par le standard \textit{EBNF}, on définit un arbre comme suit: <tree T> ::= leaf | t(T <tree T> ... <tree T>). Donc un arbre est une feuille ou \textit{leaf} qui est suivie par un ensemble de \textit{sous-arbres}. Les arbres sont forts similaires au liste si ce n'est que les listes n'ont qu'une sous-listes alors qu'un arbre peut avoir plusieurs sous-arbres.
 
 \subsection{Ordered Binary tree}
-Un arbre de ce type à 2 particularités:
+Un arbre de ce type a 2 particularités:
 \begin{itemize}
 \item \textcolor{red}{Binary}: toutes les éléments hors les feuilles possèdes 2 sous-arbres.
 \item \textcolor{red}{Ordered}: pour chaque arbre, la clé à gauche est plus petite que la clé de l'arbre et la clé à droite est plus grande.
 \end{itemize}
-Ce type d'arbre est très utile pour par exemple effectuer des recherches binaires et permet de facilement et rapidement trouver des données.
+Ce type d'arbre est très utile pour; par exemple, effectuer des recherches binaires et permet de facilement et rapidement trouver des données.
 
 \subsubsection{Lookup K T}
 Nous permet de trouver une valeur. Ce programme est plutôt simple et il nous suffit de regarder la clé de l'arbre où on est. Puis on compare avec notre recherche, si on est plus grand, on va à droite sinon à gauche. On répète le processus jusqu'à trouver la clé.\\
@@ -163,7 +163,7 @@ Celle-ci est plus compliqué, on a 4 possibilités
 \item on supprime un sous-arbre à gauche.
 \item on supprime un sous-arbre à droite.
 \end{enumerate}
-Voici.
+\textcolor{red}{TODO} %ajouter le code et l'explication
 
 \section{Tuples et Records}
 
@@ -189,7 +189,7 @@ X = mid(Y Z)
 \includegraphics[width=5cm]{img/treeTuple.png}
 \end{figure}
 \subsubsection{Comparaison}
-Il est très simple de comparer des tuples via "$==$", il ne faut simplement comparer leur value à chaque champ. Attention au \textit{loop} causé par les approches naïves.\\
+Il est très simple de comparer des tuples via "$==$", il faut simplement comparer leur value à chaque champ. Attention au \textit{loop} causé par les approches naïves.\\
 
 \subsection{Similitude Tuples et liste}
 En effet, une liste qui n'est autre que "H|T" peut facilement être traduit en tuple '|' (H T). Quand on peut déterminer un même élément via différentes manières, on appelle ça du \textit{sucre syntaxique}. Dans le \textit{kernel}, on fait au plus simple donc que des tuples.
@@ -212,10 +212,10 @@ Si on ne nomme pas un \textit{field} dans un \textit{record}, Oz va attribuer un
 
 \section{Sémantique Formelle}
 \subsection{Les environnements}
-Un environnement est une fonction qui passe des \textit{identifieurs} aux \textit{variables en mémoire} autrement dit: $E_1 = {X \rightarrow x, Y \rightarrow y)}$
+Un environnement est une fonction qui passe des \textit{identifieurs} aux \textit{variables en mémoire} autrement dit: $E_1 = ({X \rightarrow x, Y \rightarrow y)}$
 
 \subsubsection{Environnement contextuel}
-Un \textit{environnement contextuel} d'une fonction contiens tous les \textit{identificateurs} qui sont usés dans la fonction mais déclaré \textit{en dehors}. Donc ce sont des fonctions qui lorsqu'on appelle une variable va pointer en dehors du scope de la fonction.
+Un \textit{environnement contextuel} d'une fonction contient tous les \textit{identificateurs} qui sont utilisés dans la fonction mais déclarés \textit{en dehors}. Donc ce sont des fonctions qui lorsqu'on appelle une variable va pointer en dehors du scope de la fonction.
 
 \subsubsection{Stocker une Procédure}
 Les procédures sont stocker dans la mémoire sous le forme de procédure anonyme symboliser par le "\$".
@@ -228,9 +228,9 @@ local P Q in
 	{Browse 'another something'}
 end
 \end{lstlisting}
-Notre "proc {Q}" sera stocker comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et fini (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocker avec le code de procédure.\\
-On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand défini.\\
-Donc l'avantage d'un environnement contextuel nous permet d'être sûr qu'on appellera la bonne valeur même si elle est déclaré en dehors de la fonction.\\
+Notre "proc {Q}" sera stocker comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et fini (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocké avec le code de procédure.\\
+On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand définis.\\
+Donc l'avantage d'un environnement contextuel est d'être sûr qu'on appellera la bonne valeur même si elle est déclaré en dehors de la fonction.\\
 
 Un \textit{identificateur libre} est un identificateur utilisé dans une \textit{fonction} qui est déclaré \textit{en dehors} de la fonction.\\
 Les arguments d'une procédure \textbf{ne sont pas} des identificateurs libres car l'argument défini l'identificateur.
@@ -282,8 +282,8 @@ Voici ci-dessous comment s'exécute un programme initialement.
 \caption{à gauche: programme écrit en Oz $\qquad$ à droite: état initiale d'exécution}
 \end{figure}
 Au début, l'environnement et la mémoire sont vides. L'état d'exécution est écrit typiquement comme:
-\begin{lstlisting}
-([(<s>,E)],sigma)
+\begin{lstlisting}[escapechar=\%]
+([(<s>,E)], %$\sigma$)
 \end{lstlisting} %trouver comment utiliser un code dans lst
 Sur la machine abstraite, on va d'instructions en instructions. C'est-à-dire on descend petit à petit.
 donc on a pour la suite:
@@ -341,7 +341,7 @@ Il y a également d'autres types d'instructions dont on détaillera pas le langa
 \end{itemize}
 Par ailleurs, voici d'autres concepts de machine abstraite:
 \begin{itemize}
-\item \textcolor{blue}{Single-assignment memory }\textcolor{red}{$s = \{x1=10,x2,x3=20\}$}: Définition d'une variable et la valeur associée.
+\item \textcolor{blue}{Single-assignment memory }\textcolor{red}{$s = \{x_1=10, x_2, x_3=20\}$}: Définition d'une variable et la valeur associée.
 \item \textcolor{blue}{Environnement }\textcolor{red}{$E = \{X \rightarrow x, Y \rightarrow y\}$}: Lien entre un identificateur et son lien dans la mémoire
 \item \textcolor{blue}{Instruction sémantique }\textcolor{red}{$(<s>, E)$}: Une instruction avec son environnement.
 \item \textcolor{blue}{Stack Sémantique }\textcolor{red}{$ST = [(<s>_1,E_1), ..., (<s>_n,E_n)]$}: Un stack d'instructions sémantiques.
@@ -350,7 +350,7 @@ Par ailleurs, voici d'autres concepts de machine abstraite:
 \end{itemize}
 
 \subsubsection{4. Programme correcte}
-grâce à la sémantique, on sait prouver qu'un programme est correct. On dit qu'un programme produit une solution correcte, on l'appelle une \textit{spécification} et on voit qu'un programme est correct via la \textit{sémantique}.\\
+grâce à la sémantique, on sait prouver qu'un programme est correct. On dit qu'un programme produit une solution correcte, on l'appelle une \textit{spécification}.\\
 Donc on prouve qu'un programme satisfait la \textit{spécification} quand on utilise une certaine \textit{sémantique}. La sémantique lie le \textit{programme} à un résultat mathématique appelé \textit{spécification}.\\
 
 Donc on lie une vérité mathématique à un programme. Et on prouve cela via ces différentes étaps: (exemple avec une factorielle)

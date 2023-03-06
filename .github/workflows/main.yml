@@ -1,28 +1,21 @@
 name: Compiling
 run-name: Compiling of .tex
-on:
-  push:
-    branches:
-      - main
+on: [push]
+
 jobs:
-#  downloading:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - run: sudo apt-get install texlive-latex-base
-#      - run: sudo apt-get install texlive-fonts-recommended
-#      - run: sudo apt-get install texlive-fonts-extra
-#      - run: sudo apt-get install texlive-latex-extra
-  compiling:
+  build-resume:
     runs-on: ubuntu-latest
-    
+    name: Create document
     steps:
-      - uses: actions/checkout@v1
-      - name: Setting up
-        run: |
-          sudo apt-get install texlive-latex-base
-          sudo apt-get install texlive-fonts-recommended
-          sudo apt-get install texlive-fonts-extra
-          sudo apt-get install texlive-latex-extra
-          sudo apt install texlive-lang-french
-          ls
-          make -f Makefile
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Convert to pdf
+      id: convert-to-pdf
+      uses: closoco/pdflatex-action@v1.0.0
+      with:
+        texFile: ./Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/Lepl1106.tex
+    - name: Store pdf
+      uses: actions/upload-artifact@v2
+      with:
+        name: Lepl1106Test.pdf
+        path: /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/Lepl1106.tex
