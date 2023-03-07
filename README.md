@@ -45,7 +45,6 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 4. Exécute `git clone https://www.github.com/nom/Q4_EPL.git`
 5. N'oublie d'être dans le dossier où se trouve le repo en faisant la commande `cd Q4_EPL`
 6. Exécute `git remote add upstream https://www.github.com/Tfloow/Q4_EPL.git`
-7. Lance `INSTALLER.sh` (on te conseille d'utiliser Git BASH qui est fourni avec Git pour l'exécuter)
 
 <img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif" width="300">
 
@@ -58,10 +57,11 @@ Pour y contribuer, il faut d'abord avoir réalisé [Getting Stared](#getting-sta
 Pour ajouter ta synthèse, tu dois:
 
 1. Aller dans le dossier Synthèse et trouver le bon sous-dossier
-2. Crée ton dossier de synthèse s'appelant par exemple `LEPLXXXX - Nom Du Cours` ou encore `LINFOXXXX - Nom Du Cours`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
-3. Git commit et push sur ton fork
-4. Fais un Pull request pour que ton commit se fasse sur ce Github
-5. Attends et tadaaaa ta synthèse est dispo sur le Github
+2. Crée ton dossier de synthèse s'appelant par exemple `LEPLXXXX_Nom_Du_Cours` ou encore `LINFOXXXX_Nom_Du_Cours`. N'oublie pas d'y mettre une version compilé du PDF s'appelant `LEPLXXXX.pdf` ou encore `LELECXXXX.pdf` (merci de respecter ce standard la, ça nous aide à toutes les regrouper dans le dossier Synthèse Compilée)
+3. Pour compiler facilement toutes les synthèse, regarde <a href="#Compilation-rapide">compilation rapide</a>.
+4. Git commit et push sur ton fork
+5. Fais un Pull request pour que ton commit se fasse sur ce Github
+6. Attends et tadaaaa ta synthèse est dispo sur le Github
 
 ### Compilation Rapide
 Si vous avez téléchargé pdflatex (via Miktex ou autre), vous pouvez utiliser la commande `make` dans ce répertoire pour:

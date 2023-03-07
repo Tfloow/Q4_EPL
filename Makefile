@@ -4,8 +4,8 @@ List= 1 4
 full: Lepl1106 LELEC1370 Linfo1123 Linfo1104 Sorting
 	echo "Finish Full compiling and moving"
 
-Lepl1106 : Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/Lepl1106.tex Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes
-	cd $(word 2,$^);ls; pdflatex -synctex=1 -interaction=nonstopmode $@.tex
+Lepl1106 : Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes
+	cd $^; ls; pdflatex -synctex=1 -interaction=nonstopmode $@.tex
 	echo "Done with $@"
 
 LELEC1370 : Synthèse/Elec/LELEC1370_CircuitsetMesures
