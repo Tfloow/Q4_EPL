@@ -349,7 +349,7 @@ Par ailleurs, voici d'autres concepts de machine abstraite:
 \item \textcolor{blue}{Execution }\textcolor{red}{$(ST_1,s_1) \rightarrow (ST_2,s_2) \rightarrow (ST_3,s_3) \rightarrow ...$}: Une séquence d'état d'exécution. 
 \end{itemize}
 
-\subsubsection{4. Programme correcte}
+\subsubsection{4. Programme correct}
 grâce à la sémantique, on sait prouver qu'un programme est correct. On dit qu'un programme produit une solution correcte, on l'appelle une \textit{spécification}.\\
 Donc on prouve qu'un programme satisfait la \textit{spécification} quand on utilise une certaine \textit{sémantique}. La sémantique lie le \textit{programme} à un résultat mathématique appelé \textit{spécification}.\\
 
@@ -415,7 +415,7 @@ Ensuite, on met ces instructions sur la \textit{pile} $(\langle s \rangle , E_C 
 La machine abstraite fait 2 choses:
 \begin{enumerate}
 \item \textcolor{red}{Adjonction}: $E_2 = E_1+\{X \rightarrow y\}$ Donc ajoute une paire (identificateur $\rightarrow$ variable) à l'environnement. Ré-écrit par dessus $E_1$ si existe déjà. Utile pour \textcolor{blue}{local} $<x>$ \textcolor{blue}{in} $<s>$ \textcolor{blue}{end}.
-\item \textcolor{red}{restriction}: $E_C = E_{|\{X,Y,Z\}}$ Donc limite les \textit{identificateurs} dans un environnement. On a besoin de cela pour calculer l'environnement \textit{contextuel}.
+\item \textcolor{red}{Restriction}: $E_C = E_{|\{X,Y,Z\}}$ Donc limite les \textit{identificateurs} dans un environnement. On a besoin de cela pour calculer l'environnement \textit{contextuel}.
 \end{enumerate}
 Une adjonction:
 \begin{lstlisting}[escapechar=\%]
@@ -431,15 +431,14 @@ E2 = E1 + {X %$\rightarrow$% y} = {Browse %$\rightarrow$% b, X %$\rightarrow$% y
 \end{lstlisting}
 Une restriction:
 \begin{lstlisting}[escapechar=\%]
-local X in 
-	(E1) X=1	
-	local X in 
-		(E2) X=2
-		{Browse X}
+local A B C AddB in
+	A=1 B=2 C=3 %\textcolor{red}{(E)}%
+	fun {AddB X} %\textcolor{red}{(EC: contextual environment)}%
+		X+B
 	end
 end
-E1 = {Browse %$\rightarrow$% b, X %$\rightarrow$% x}
-E2 = E1 + {X %$\rightarrow$% y} = {Browse %$\rightarrow$% b, X %$\rightarrow$% y}
+E = {A %$\rightarrow$% a, B %$\rightarrow$% b, C %$\rightarrow$% c, AddB %$\rightarrow$% a' }
+%$E_C$% = %$E_{|\{B\}}$% = {B %$\rightarrow$% b }
 \end{lstlisting}
 \subsection{Résumé}
 Définir la sémantique permet de relier les programmes au mathématique. On donne des instructions \textit{sémantique} au \textit{kernel} pour qu'il sache comment exécuter dans la \textit{machine abstraite}. La sémantique nous permet de prouver qu'un programme est \textit{correct}.\\
@@ -452,8 +451,9 @@ Il ne faut pas oublier que les pc sont baser sur les mathématiques \textit{disc
 Tout d'abord, en programmation nous avons différentes étapes qui reposent chacun sur les précédentes. Fermeture $\rightarrow$ Programmation d'ordre supérieur $\rightarrow$ Abstraction des données $\rightarrow$ Technologie de l'information.\\
 
 Rappel sur l'exécution d'un programme:
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 {Browse {Inc 10}}	#Langage pratique (classique)
+%\hrulefill%
 local M in		 	#Langage Kernel
 	local N in
 		M=10
@@ -518,7 +518,6 @@ Voici une liste d'astuces et de choses importantes à savoir sur Oz:
 \item Pour être plus \textit{productif}, télécharger "Powertoys" sur Windows et activer l'option "\textbf{toujours afficher}" (\textbf{always on top}).
 \end{itemize}
 
-PETIT TEST POUR GITHUB
 \end{document}
 
 
