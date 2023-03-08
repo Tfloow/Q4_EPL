@@ -18,6 +18,7 @@
 \usepackage{titlesec}
 \usepackage{xparse}
 \usepackage{wrapfig}
+\usepackage{enumitem}
 
 \hypersetup{
     colorlinks=true,
@@ -432,8 +433,85 @@ Le Diagramme de Bode est une façon conventionnelle de représenter un circuit s
 \begin{figure}[H]
 \centering
 \includegraphics[width=6.5cm]{img/BodeEx.png}
-\caption{Exemple pour $\textbf{A} = A_0 \frac{1}{1 + \frac{j \omega}{\omega_0}}$}
+\caption{Exemple pour $\textbf{A} = A_0 \frac{1}{1 + \frac{j \omega}{\omega_0}}$} \label{BodeEx}
 \end{figure}
+
+\subsection{Info}
+Il est important de ne pas oublie qu'un diagramme de \textit{Bode} est un diagramme qui est \textbf{logarithmique} et il faut en produire \textbf{2}, un pour l'\textbf{amplitude} et un pour la \textbf{phase}.\\
+
+L'axe \textbf{X} est d'une entrée $log(\omega)$. Donc si on descend en-dessous de \textit{1Hz}, on tombe à $-\infty$ sur l'axe abscisses.
+
+\subsection{Calculer}
+\subsubsection{Amplitude} \label{AmplCalc}
+L'exemple montré en \ref{BodeEx} est un exemple classique qu'on rencontre en circuit AC.La formule pour transformer \textbf{A} en $log$ est:
+\begin{equation}
+20log(\textbf{A}) = 20 log\Bigl(A_0\frac{1}{1+\frac{j\omega}{\omega_0}}\Bigl) = 20log(A_0) - 20log\Bigl(1+ \frac{j\omega}{\omega_0}\Bigl)
+\end{equation}
+Pour tracer un graphe il faut:
+\begin{itemize}
+\item Regarder quand $\omega < < \omega_0 \rightarrow$ ici on a donc une équation qui devient $\textbf{A} = A_0$
+\item Regarde quand  $\omega > > \omega_0 \rightarrow$ On peut donc ignorer le $1$ au dénominateur. Ce qui devient donc $20log(A_0) - 20log(j\omega) + 20 log(\omega_0)$ Donc on a une droite qui "descend" de 20 dB par décade.
+\end{itemize}
+
+\subsubsection{Phase}
+Le rapport d'argument de l'exemple \ref{BodeEx} est:
+\begin{equation}
+arg(H) =  arg(A_0) - arg\Bigl(1 + \frac{j\omega}{\omega_0}\Bigl)
+\end{equation}
+Donc on utilise le même principe qu'au point \ref{AmplCalc}:
+\begin{itemize}
+\item Regarder quand $\omega < < \omega_0 \rightarrow$ l'équation devient donc $arg(A_0)-arg(1) = 0$ donc on a aucun déphasage.
+\item Regarder quand $\omega > > \omega_0 \rightarrow$ l'équation devient donc $arg(A_0) -arg\Bigl(\frac{j\omega}{\omega_0}\Bigl) = -\frac{\pi}{2}$
+\end{itemize}
+
+\subsubsection{Tracer}
+Pour tracer notre graphe, on doit "\textit{arrondir}" les angles pour retranscrire plus le coté physique et réaliste.
+
+\subsection{Interprétation}
+Toujours en se basant sur \ref{BodeEx}, on est sur un "\textit{filtre passe-bas}". C'est même plus que ça car la valeur $A_0$ agit comme un amplificateur des basses fréquences. Et puis, on perd de plus en plus les hautes fréquences par un système \textit{intégrateur}.
+
+\subsection{Modèle plus compliqué}
+Pour cela, on répète autant de fois qu'il y a de $\omega_n$ l'opération. On retient que quand la fonction est au \textit{numérateur}, on croit. Au \textit{dénominateur}, on décroit.\\
+Ainsi, on aurait un ensemble de courbe et de droite qu'on doit simplement sommer entre elle. (ne pas oublier d'arrondir les angles pour donner un côté plus réaliste)\\
+La partie complexe est toujours renvoyer vers l'argument où là celle-ci aura un impact plutôt que sur l'amplitude !
+
+\subsection{Formule générale}
+L'équation du rapport de puissance est en général de forme:
+\begin{equation}
+A_V = \textcolor{red}{A_{V0}(j\omega)^{\pm N}}\frac{\textcolor{blue}{\Bigl(1 + \frac{j\omega}{\omega_1}\Bigl)} \textcolor{orange}{\Bigl( 1 + 2 j \xi_a \frac{\omega}{\omega_a} - \Bigl[ \frac{\omega}{\omega_a}\Bigl]^2 \Bigl)}}{\textcolor{blue}{\Bigl(1 + \frac{j\omega}{\omega_2}\Bigl)} \textcolor{orange}{\Bigl( 1 + 2 j \xi_b \frac{\omega}{\omega_b} - \Bigl[ \frac{\omega}{\omega_b}\Bigl]^2 \Bigl)}}
+\end{equation}
+\newpage
+\begin{enumerate}
+\item $\textcolor{red}{A_{V0}(j\omega)^{\pm N}}$:
+	\begin{itemize}
+	\item Amplitude: est une constante
+	\item Phase: nous déphase de $\pm \frac{\pi}{2}$ en fonction de $\pm N$ et ce de manière rectiligne de 20 dB par décade.
+	\end{itemize}
+\item $\textcolor{blue}{\frac{\textcolor{blue}{\Bigl(1 + \frac{j\omega}{\omega_1}\Bigl)}}{\textcolor{blue}{\Bigl(1 + \frac{j\omega}{\omega_2}\Bigl)}}}$:
+	\begin{itemize}
+	\item Amplitude: au \textbf{dénominateur}, on est face à un filtre \textit{passe-bas}. Au \textbf{numérateur} on est face à un "amplificateur" \textbf{passe-haut}.
+	\item Phase: au \textbf{dénominateur}, déphasage de $-\frac{\pi}{2}$ et déphasage de $\frac{\pi}{2}$ au \textbf{numérateur}.
+	\end{itemize}
+\item $\textcolor{orange}{\frac{\textcolor{orange}{\Bigl( 1 + 2 j \xi_a \frac{\omega}{\omega_a} - \Bigl[ \frac{\omega}{\omega_a}\Bigl]^2 \Bigl)}}{\textcolor{orange}{\Bigl( 1 + 2 j \xi_b \frac{\omega}{\omega_b} - \Bigl[ \frac{\omega}{\omega_b}\Bigl]^2 \Bigl)}}}$ cette partie est plus subtile et on doit s'intéresser au $\xi$:
+	\begin{enumerate}
+		\item $\xi >  1$ (on suppose que $\omega_a < \omega_b$)
+		\begin{itemize}
+			\item Amplitude: une augmentation/diminution en 20dB par décade de $\omega_a \leq \omega \leq \omega_b$ puis de 40 dB à partir de $\omega_b$ si cela est au numérateur/dénominateur.
+			\item Phase: Rotation de $\pi$ si au \textit{numérateur} ou rotation de $\pi$ au \textit{dénominateur}.
+		\end{itemize}
+		
+		\item $\xi = 1$ (on suppose que $\omega_a < \omega_b$)
+		\begin{itemize}
+			\item Amplitude: une augmentation/diminution de 40 dB par décade à partir de $\omega_b = \omega_a$ si cela est au numérateur/dénominateur.
+			\item Phase: Rotation de $\pi$ si au \textit{numérateur} ou rotation de $\pi$ au \textit{dénominateur}.
+		\end{itemize}
+		\item $0 \leq \xi < 1$ cas très spécial ! (on suppose que $\omega_a < \omega_b$)
+		\begin{itemize}
+			 \item Amplitude: 
+		\end{itemize}
+	\end{enumerate}
+\end{enumerate}
+%enlever la double coloration 
 
 
 \end{document}
