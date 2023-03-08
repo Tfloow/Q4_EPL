@@ -505,14 +505,21 @@ A_V = \textcolor{red}{A_{V0}(j\omega)^{\pm N}}\frac{\textcolor{blue}{\Bigl(1 + \
 			\item Amplitude: une augmentation/diminution de 40 dB par décade à partir de $\omega_b = \omega_a$ si cela est au numérateur/dénominateur.
 			\item Phase: Rotation de $\pi$ si au \textit{numérateur} ou rotation de $\pi$ au \textit{dénominateur}.
 		\end{itemize}
-		\item $0 \leq \xi < 1$ cas très spécial ! (on suppose que $\omega_a < \omega_b$)
+		\item $0 \leq \xi < 1$ cas très spécial ! (on suppose que $\omega_a < \omega_b$) on un phénomène de résonance d'amplitude. \textit{overshoot}
 		\begin{itemize}
-			 \item Amplitude: 
+			 \item Amplitude: comme au point (b) mais au centre, on une asymptote qui tend vers le bas/haut si c'est au numérateur/dénominateur.
+			 \item Phase: changement de phase mais avec une pente plus raide autour du centre. voir \ref{XI}.
 		\end{itemize}
 	\end{enumerate}
 \end{enumerate}
 %enlever la double coloration 
 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=7cm]{img/AmpXI.png}
+\includegraphics[width=7cm]{img/PhaseXI.png}
+\caption{Amplitude et Phase pour le (c)}\label{XI}
+\end{figure}
 
 \end{document}
 
