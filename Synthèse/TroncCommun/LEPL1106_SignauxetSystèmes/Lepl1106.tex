@@ -286,6 +286,96 @@ X\bigl(e^{j\Omega} \bigl) &= \sum_{m=-\infty}^{\infty} x[m]e^{-j\Omega m} \label
 \end{align}
 L'équation \label{eq:transfoDF} donne la \textcolor{blue}{transformée} de Fourier.
 
+\section{Transformée usuelle}
+
+\subsubsection{Delta de Dirac} \label{Dirac}
+C'est plutôt simple, il faut appliquer simplement la formule:
+\begin{equation}
+\begin{cases}
+\delta(t) = 0 \text{ si } t \neq 0\\
+\int_a^{-a} \delta(t) dt = 1 \forall a > 0\\
+\int_{-\infty}^{\infty} x(t) \delta(t) dt = x(0)
+\end{cases}
+\end{equation}
+Via toutes ces propriétés on voit facilement que:
+\begin{equation}
+X(j\omega) = \int_{-\infty}^{\infty} \delta(t) e^{-j \omega t} dt = 1(e^0) = 1
+\end{equation}
+
+\subsubsection{Delta de Kronecker}
+Même idée que à \ref{Dirac} si ce n'est qu'on est en discret. Le résultat reste le même.
+
+
+\section{Propriétés de Fourier}
+
+\subsection{Dualité} \label{Dua}
+\begin{align}
+x(t) & \longleftrightarrow X(j\omega)\\
+X(jt) & \longleftrightarrow 2\pi x(-\omega)
+\end{align}
+Donc on échange $t \rightarrow -\omega$ et $\omega \rightarrow t$ et on échange les fonctions.
+\subsubsection{Démonstration}
+\begin{align*}
+X(j \omega) &= \int_{-\infty}^{\infty} x(t) e^{-j\omega t} dt\\
+x(t) &= \frac{1}{2\pi} \int_{\infty}^{\infty} X(j\omega) e^{j\omega t} d\omega\\
+x(-t) &= \frac{1}{2\pi} \int_{\infty}^{\infty} X(j\omega) e^{-j\omega t} d\omega\\
+2 \pi x(-t) &= \int_{\infty}^{\infty} X(j\omega) e^{-j\omega t} d\omega\\
+2 \pi x(-\omega) &= \int_{\infty}^{\infty} X(jt) e^{-j\omega t} dt
+\end{align*}
+
+\subsection{Linéarité}
+En effet,
+\begin{align*}
+x_k(t) & \longleftrightarrow X_k(j\omega)\\
+\sum_k x_k(t) & \longleftrightarrow \sum_k X_k(j\omega)
+\end{align*}
+
+\subsection{Translation}
+On a:
+\begin{align*}
+x(t) & \longleftrightarrow X(j\omega)\\
+x(t-t_0) & \longleftrightarrow X(j\omega)e^{-j \omega t_0}
+\end{align*}
+Il faut bien retenir qu'une translation en temporelle amène à une exponentielle en phasorielle. Combiner à la propriété de dualité venant de \ref{Dua} est très puissant et utile.\\
+On doit aussi noter que cela ne change \textbf{pas} l'amplitude du spectre mais change sa \textbf{phase}.
+
+\subsection{Modulation}
+C'est quand on combine la translation et la dualité:
+\begin{align*}
+x(t) & \longleftrightarrow X(j\omega)\\
+e^{j\omega_0 t}x(t) & \longleftrightarrow X(j(\omega - \omega_0))
+\end{align*}
+Cette modulation va elle modifier l'amplitude du signal car déplace son "espace" phasoriel revient à déplacer ses fréquences et en ajoute.
+\begin{align*}
+x(t) & \longleftrightarrow X(j\omega)\\
+cos(\omega_0 t)x(t) \longleftrightarrow \frac{1}{2}(X(j(\omega - \omega_0)) + X(j(\omega + \omega_0))) 
+\end{align*}
+On reconnait clairement les formules d'Euleur.
+
+\subsection{Train d'impulsions (peigne) de Dirac}
+On a donc une fonction qui ressemble à cela: (d'où le nom)
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/peigne.png}
+\caption{peigne de Dirac (avec un petit spoil)}
+\end{figure}
+formellement un peigne de Dirac est:
+\begin{equation}
+x(t) = \sum_{k \in \mathbb{Z}} \delta(t-kT_0)
+\end{equation}
+et son $X(j\omega)$ est:
+\begin{equation}
+x(t) \longleftrightarrow X(j\omega) = \omega_0 x_{\omega_0} (\omega) \text{ avec } \omega_0 = \frac{2\pi}{T_0}
+\end{equation}
+
+\subsubsection{Preuve}
+\begin{align*}
+X(j\omega) &= \int_{-\infty}^{\infty} x(t) e^{-j \omega t} dt\\
+&= \sum_{k = -\infty}^{\infty} \int_{-\infty}^{\infty} \delta(t- kT_0) e^{-j \omega t} dt\\
+&= \sum_{k = -\infty}^{\infty} e^{-j \omega k T_0} \text{ car on a une énergie finie}\\
+\mathcal{F}(\delta(t-kT_0)) &= e^{-j\omega k T_0}
+\end{align*}
+
 
 \part{Systèmes}
 

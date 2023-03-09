@@ -432,16 +432,20 @@ Pour prouver cela, on utilise la fonction \textit{nbstep(n,x)} qui correspond au
 \section{TP3}
 \begin{enumerate}
 \item En effet, si on a que des fonctions totales, on sait qu'on aura toujours une réponses pour n'importe quelle input.
-\item Oui, le théorème de \textit{Hoare-Allison} ne dit pas l'inverse
+\item Oui, le théorème de \textit{Hoare-Allison} ne dit pas l'inverse et pour le sous langage:
+\begin{lstlisting}
+P = return 1;
+\end{lstlisting}
 \item Mais si on peut avoir la fonction halt en L, on ne peut avoir sa fonction \textit{interpret}
 \item Mais, on peut calculer cette fonction \textit{interpret} avec un langage de programmation qui n'est pas \textcolor{red}{restrictif}.
 \item Effectivement on ne peut pas calculer toutes les fonctions totales avec L.
 \item Il existe un langage qui peut calculer sa fonction halt et son interpréteur (le langage vide trivial)
 \item Effectivement, ne pas être récursif n'empêche pas d'être récursivement énumérable.
 \item Faux exemple: $\overline{\textbf{K}}$. (voir \ref{coreq})
-\item Non, on peut imaginer 2 fonctions non récursives qui se "\textit{complètent}" et comblent les lacunes de chacune.
+\item Non, on peut imaginer 2 fonctions non récursives qui se "\textit{complètent}" et comblent les lacunes de chacune. Exemple: $K \text{ et } \overline{K}$
 \item Non, on peut imaginer une intersection qui ne comportent que des entrées avec une réponse.
 \end{enumerate}
 
+\chapter{QCM}
 
 \end{document}
