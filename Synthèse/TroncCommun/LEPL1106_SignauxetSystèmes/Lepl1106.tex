@@ -359,6 +359,36 @@ x(t) \longleftrightarrow X(j\omega)\\
 \end{align*}
 La partie en rouge est dû au fait qu'un résultat d'une intégration à toujours une \textcolor{red}{constante d'intégration} (le fameux $+C$)
 
+\subsection{Dilatation}
+Quand on \textit{dilate} un signal, on \textit{compresse} son espace spectre.
+\begin{align*}
+x(t) \longleftrightarrow X(j\omega)\\
+x(t/a) \longleftrightarrow |a|X(aj\omega)
+\end{align*}
+Un truc utile est de penser au vidéo au ralenti où on \textit{dilate} le temps et on \textit{compresse} son spectre donc on entend plus les \textit{basses fréquences}.
+
+\subsubsection{Parseval}
+On \textbf{conserve} l'énergie du signal grâce à son spectre. donc:
+\begin{align*}
+x(t) \longleftrightarrow X(j\omega)\\
+\int_{-\infty}^{\infty} |x(t)|^2 dt \longleftrightarrow \frac{1}{2\pi} \int_{-\infty}^{\infty} |X(j\omega)|^2 d\omega
+\end{align*}
+
+\subsection{Renversement}
+Renverser un signal revient à renverser son spectre.
+\begin{align}
+x(t) \longleftrightarrow X(j\omega)\\
+x(-t) \longleftrightarrow X(-j\omega)
+\end{align}
+C'est une dilatation par $a = -1$.
+\subsubsection{Complexe conjugué}
+Le spectre d'un \textcolor{blue}{signal conjugué} est le \textcolor{blue}{conjugué renversé} du spectre du signal.
+\begin{align*}
+x(t) \longleftrightarrow X(j\omega)\\
+x^*(t) \longleftrightarrow X^*(-j\omega)
+\end{align*}
+
+
 \section{Transformée usuelle}
 On utilisera des propriétés vu à la section \ref{proprF}.
 
@@ -435,6 +465,37 @@ u(t) &=  \int_0^{\infty} \delta(t) dt\\
 u(j\omega) &= \frac{1}{j \omega} + \pi \delta(\omega)
 \end{align*}
 
+\subsection{Fonction fenêtre}
+Cette fonction, correspond à 2 impulsion. tel que:
+\begin{equation}
+imp = u(t+1) - u(t-1)
+\end{equation}
+Ces fonctions sont des filtres \textit{passes-bandes} et à pour transformé de Fourier:
+\begin{align*}
+x(t) = \Pi (t) \longleftrightarrow X(j\omega) = 2 sinc(t) = 2\frac{sin(\omega)}{\omega}
+\end{align*}
+
+\subsubsection{Preuve}
+On utilise l'\textit{addition} de 2 échelons \textit{translatés}.
+%Refaire toute la preuve
+
+\subsection{Fonction signe}
+La fonction signe est:
+\begin{equation}
+sign(t) = \begin{cases}
+-1 \quad t < 0\\
+0 \quad t = 0\\
+1 \quad t > 0
+\end{cases}
+\end{equation}
+et à pour transformée de Fourier:
+\begin{align*}
+x(t) = sign(t) = \longleftrightarrow X(j\omega) = \frac{2}{j\omega}
+\end{align*}
+Cela se prouve avec la dilatation et la translation de la fonction échelon.
+
+\section{Tableau de Check}
+%insérer tableau slide 22 cours 4
 
 \part{Systèmes}
 
