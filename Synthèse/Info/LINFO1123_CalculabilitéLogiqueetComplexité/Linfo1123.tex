@@ -394,8 +394,114 @@ Pour l'instant, nous n'avons vu que des fonctions qui soit donnent le bon résul
 Un \textit{théorème} nous dit que, \textit{Il existe une fonction partielle calculable g telle qu’aucune fonction totale calculable n’est une extension de g}.\\
 Pour prouver cela, on utilise la fonction \textit{nbstep(n,x)} qui correspond au nombre d'instruction avec l'arrêt de $P_n(x)$. ($P_n(x) = \perp$)La preuve se fait pas diagonalisation comme avant (\href{http://ezcast.uclouvain.be/ezplayer/index.php?action=view_asset_bookmark&album=LINFO1123-pub&asset=2021_02_17_21h51_34s&t=224&type=cam&token=EVKUMNQV}{vidéo}).\\
 
-%test for pre-commit
+\section{Théorème de Rice}
+\subsection{Réduction à Halt}
+Pour montrer que f(x) est non calculable on suppose que:
+\begin{itemize}
+\item f(x) est calculable.
+\item Sous cette hypothèse la fonction halt(n,x) est alors calculable.
+\item Comme halt(n,x) est enfaite non-calculable, f(x) est également non-calculable.
+\end{itemize}
 
+\subsubsection{Raisonnement}
+Définissons une fonction qui dit que:
+\begin{align*}
+f(n) &= 1 \quad \text{ si } \varphi_n(x) = \perp\\
+&= 0 \quad \text{ sinon}
+\end{align*}
+On suppose que $f(n)$ est calculable et on veut montrer que halt est calculable. Pour se faire:
+\begin{enumerate}
+\item On \textcolor{red}{construit} (pas exécute) un programme qui dit: $P(z) \equiv P_n(x); print(1)$
+\item On obtient le numéro de programme: $d = \text{ numéro de programme } P(z)$
+\item On regarde si le résultat de cette fonction calculable pour créer halt:
+\begin{lstlisting}[escapechar=\%]
+if F(d) = 1 then
+	print(0) %//\textit{car on est bottom et cela boucle}%
+else
+	print(1) %//\textit{car le programme se termine}%
+\end{lstlisting}
+\item Donc on en conclue que cette fonction halt est non-calculable
+\end{enumerate}
+On utilise ce type de démarche pour tout autre fonction du même genre. (on doit impérativement définir le comportement de la fonction)
+
+\subsection{Théorème}
+On s'intéresse à comparer des programmes entre eux, savoir si un programme est correct.
+\subsubsection{Idée de base}
+Dans l'ensemble des programmes, on va séparer cet ensemble en 2 \textit{sous-ensembles}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/rice.png}
+\end{figure}
+On a que:
+\begin{align*}
+\text{Soit } A &\subseteq \mathbb{N}\\
+\text{Si } A \text{ récursif et } A \neq \varnothing &\text{ et } A \neq \mathbb{N}\\
+\text{Alors } \exists i \in A &\text{ et } j \in \mathbb{N} \setminus A : \varphi_i = \varphi_j 
+\end{align*}
+Ce qui revient à dire que:
+\begin{align*}
+\text{Si } \forall i \in A &\text{ et } \forall j \in \mathbb{N}: \varphi_i \neq \varphi_j\\
+\text{Alors } A \text{ non récursif \textit{ou} } &A = \varnothing \text{ ou } A = \mathbb{N}
+\end{align*}
+De plus, si un programme est récursif, on peut savoir de quel ensemble il est.
+
+\subsubsection{Compréhension}
+\begin{enumerate}
+\item \textcolor{red}{Si} une propriété de programmes, vérifiée par certains programmes mais pas tous, est décidable, \\
+\textcolor{red}{alors} il existe deux programmes équivalents (calculant la même fonction) dont un vérifie la propriété et l’autre pas
+\item \textcolor{red}{Si} une propriétéde la fonctioncalculée par un programme est vérifiée par certains programmes, mais pas par tous, \\
+\textcolor{red}{alors} cette propriété ne peut être décidée par un algorithme
+\item \textcolor{red}{S'il} existe un algorithme permettant de déterminer si un programme quelconque calcule une fonction ayant cette propriété, \\
+\textcolor{red}{alors} toutes les fonctions calculables ont cette propriété ou aucune fonction
+calculable n’a cette propriété
+\end{enumerate}
+Voyons plus en détail ce que chacun veule dire:
+\begin{enumerate}
+\item C'est une simple traduction du théorème en français.
+\item Cela signifie qu'on ne peut pas vérifier si 2 programmes sont équivalents !
+\item Autre façon d'énoncer le théorème de \textit{Rice}.
+\end{enumerate}
+
+\subsection{Exmple}
+Commençons avec: $ A_1 = \{i | \varphi_i \text{ est totale}\}$ ($P_i$ s'arrête toujours)\\
+Donc on sait que $A_1 \neq \varnothing$ car on a une fonction $P_k(x) \equiv print(1)$ et on sait ainsi que $k \in A_1$. Ce n'est pas $A_1 \neq \mathbb{N}$ car $P_l(x) \equiv while true$ n'est pas total ! De plus, notre ensemble $A$ a des fonctions totales et l'ensemble $\overline{A}$ des fonctions non-totales, par construction: $\forall i \in A \text{ et } \forall j \in \mathbb{N}: \varphi_i \neq \varphi_j$\\
+
+Via le théorème de \textit{Rice}, $A_1$ est un ensemble non-vide et non égale à $\mathbb{N}$. On a également prouvé que les fonctions ne sont pas égales entre les 2 \textit{ensembles}. On en \textit{conclut} que l'enseble \textbf{n'est pas récursif}.
+
+\subsection{Analyse du théorème}
+Bonne nouvelle, on est pas remplaçable (ou presque).
+\begin{enumerate}
+\item Aucune question relative aux programmes, vus sous l’angle de la \textbf{fonction} qu’ils calculent, ne peut être décidée par l’application d’un algorithme
+\item Les propriétés intéressantes d’un programme concernent la fonctionqu’il calcule, nonpas la forme (syntaxe) du programme
+\item La plupart des problèmes intéressants au sujet des programmes sont non
+calculables
+\end{enumerate}
+Mauvaise, on ne peut pas automatiser qu'un programme est correct.
+
+\subsection{Démonstration}
+Supposons que $A \neq \varnothing$ et $A \neq \mathbb{N}$. Et on suppose que $\forall i \in A, \forall j \in \overline{A}: \varphi_i \neq \varphi_j$ Donc $A$ ne peut être récursif. On va \textbf{démontrer} cela.\\
+
+Pour prouver cela on va utiliser une réduction à \textit{halt}. On fait les choses suivantes:
+\begin{enumerate}
+\item On suppose que $A$ est récursif.
+\item Donc halt est calculable mais ce n'est pas le cas.
+\item Donc est n'est pas récursif.
+\end{enumerate}
+On va donc séparer notre ensemble des Programmes et on effectue ces manipulations:
+\begin{enumerate}
+\item $\mathbb{N}$ en $A$ et $\overline{A}$. On dit que $P_k(x) \equiv while true$ et que $k \in \overline{A}$
+\item On sait que $A \neq \varnothing, \exists m \in A$ (on sait que c'est différent du vide donc il existe au moins 1 programme quelconque)
+\item On peut affirmer que (par hypothèse de récursif) $\varphi_k \neq \varphi_m$
+\item On crée un programme pour \textit{halt}:
+	\begin{itemize}
+	\item On construit: $P(z) \equiv P_n(x); P_m(z)$
+	\item On assigne un numéro de programme qu'on a construit: $d = \#P(z)$. Cela dépend de ma donnée $n$ et $x$.
+	\item on exécute un programme qui regarde si $d \in A$ il print $1$ qu'il appartient sinon il imprime $0$.
+	\end{itemize}
+\item On exécute le programme: si $P_n(x)$ se \textbf{termine} alors $\varphi_d = \varphi_m$. \textbf{Sinon} il boucle et est $\varphi_d = \varphi_k = \perp$
+\item Donc aucun programme dans $A$ et $overline{A}$ n'est équivalent. Donc tester que $\varphi_d = \varphi_m$ est la même chose que tester que $d \in A$ et inversement.
+\item Donc, \textcolor{red}{Halt est non calculable} car il boucle, donc A est bien \textbf{non récursif}.
+\end{enumerate} 
 
 \chapter{Questions Test d'entrée}
 
@@ -446,6 +552,37 @@ P = return 1;
 \item Non, on peut imaginer une intersection qui ne comportent que des entrées avec une réponse.
 \end{enumerate}
 
-\chapter{QCM}
+\chapter{QCM} %améliorer la mise en page
+
+\section{S5}
+\begin{enumerate}
+\item L'ensemble des programmes Java calculant une fonction $f$ telle que $f(10) = 10$ n'est pas récursif (car ici on caractérise que fait le programme !)
+\item L’ensemble des programmes Java calculant une fonction $f$ telle que $f(10)=10$ est un ensemble récursivement énumérable. (n'a aucun rapport avec Rice !!!)
+\item Toute propriété relative aux programmes est calculable (théorème de rice parle des propriétés calculés par la fonction pas lié à la fonction
+\item Si A est un sous-ensemble (strict et non vide)  récursif de programmes Java, alors toute fonction calculée par un programme de A n'est pas aussi calculée par un programme du complément de A (car il existe pas qu'il existe pour tout !!!)
+\item Soit la fonction $revenu1_yde(n) =$ le revenu imposable de Yves Deville à l'année $n$.  Si n est inférieur à $1960$ ou supérieur à $2060$, le résultat de cette fonction est $\perp$. Par hypothèse, une personne décédée a un revenu de $0$.  Cette fonction est-elle calculable ? (Car n'est définie que pour $101$ inputs. Calculable car nb fini de point à calculer. Domaine finie == calculable au sens théorique du terme)
+\item Soit la fonction $revenu2_yde(n) =$ le revenu imposable de Yves Deville à l'année $n$. Par hypothèse, une personne pas encore née ou décédée a un revenu de $0$. Cette fonction est-elle calculable ? ( car est constante sauf pour un certain input. Ici on n'est jamais bottom donc il existe toujours une fonction)
+\item Un programme Java étant fini, l’exécution de ce programme sera aussi finie (car il peut boucler)
+	Soient les programmes $P_32$ 
+\item (n) dont le code est « print(1) » et $P_57(n)$ dont le code est « print(0) ».  Cochez les affirmations correctes (on peut pas varier de l'un à l'autre)
+\item Une extension d’une fonction partielle calculable est toujours calculable (faux car il existe des fonctions qui ne peuvent être étendue ex: HALT)
+\item L’ensemble des sous-ensembles des entiers est énumérable (car autant que les réelles, on a besoin d'une chaine infinie de caractère)
+\item Il existe un ensemble infini de chaînes finies de caractères (A-Z) qui est non énumérable (on peut créer des chaines de caractères de chiffres et ce sera fini)
+\item Il existe un ensemble infini de chaînes finies de caractères (A-Z) qui est non récursivement énumérable (ensemble non récursif $\rightarrow$ complément K $\rightarrow$ c'est une représentation
+\item La fonction $halt(18,x)$ est calculable (cela dépend de la numérotation choisie des programmes Java)
+\item L'ensemble des fonctions non calculables est énumérable (Faux car infinité)
+\item Soit A est un ensemble (infini) récursivement énumérable.  Si $ B \subseteq A $, alors $B$ est aussi récursivement énumérable. (Faux car le sous-ensemble peut prendre que des choses bottoms)
+\item Il existe des langages de programmation (non triviaux) dans lesquels toutes les fonctions calculées sont totales (Vrai, mini-Java ne calcule que des fonctions totales et calculables. Toutes les fonctions sont totales)
+\item Si une fonction $f$ est calculable, alors toute fonction g dont f est une extension est calculable (Faux, $\rightarrow$ le théorème de l'extension parle pas de ça. Car g peut être bottom et donc ne pas être calculable (genre 1 si élément appartient au complément de $K$ ou $\perp \rightarrow$ fonction pas calculable et $f$ est une extension))
+\item Soit le programme numéro n calculant la fonction factorielle ($f(x)=x!$ si $x$ non négatif et $f(x)=\perp$ si $x$ négatif,).  Cochez les affirmations correctes:
+	\begin{enumerate}
+	\item $\varphi_l(n)$ calcule bien quelque soit l'énumération choisie pour les programmes
+	\item Pas énumération car n est positif
+	\item Une infinité de programmes calculent la même fonction
+	\item Par hasard
+	\item Pas injectif car ne fait d'office correspondre au max $1$ une fois. (penser à $0!$ Et $1!$ Même réponse)
+		\end{enumerate}
+
+\end{enumerate}
 
 \end{document}
