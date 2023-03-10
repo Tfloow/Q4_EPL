@@ -286,27 +286,8 @@ X\bigl(e^{j\Omega} \bigl) &= \sum_{m=-\infty}^{\infty} x[m]e^{-j\Omega m} \label
 \end{align}
 L'équation \label{eq:transfoDF} donne la \textcolor{blue}{transformée} de Fourier.
 
-\section{Transformée usuelle}
 
-\subsubsection{Delta de Dirac} \label{Dirac}
-C'est plutôt simple, il faut appliquer simplement la formule:
-\begin{equation}
-\begin{cases}
-\delta(t) = 0 \text{ si } t \neq 0\\
-\int_a^{-a} \delta(t) dt = 1 \forall a > 0\\
-\int_{-\infty}^{\infty} x(t) \delta(t) dt = x(0)
-\end{cases}
-\end{equation}
-Via toutes ces propriétés on voit facilement que:
-\begin{equation}
-X(j\omega) = \int_{-\infty}^{\infty} \delta(t) e^{-j \omega t} dt = 1(e^0) = 1
-\end{equation}
-
-\subsubsection{Delta de Kronecker}
-Même idée que à \ref{Dirac} si ce n'est qu'on est en discret. Le résultat reste le même.
-
-
-\section{Propriétés de Fourier}
+\section{Propriétés de Fourier} \label{proprF}
 
 \subsection{Dualité} \label{Dua}
 \begin{align}
@@ -352,6 +333,52 @@ cos(\omega_0 t)x(t) \longleftrightarrow \frac{1}{2}(X(j(\omega - \omega_0)) + X(
 \end{align*}
 On reconnait clairement les formules d'Euleur.
 
+\subsection{Différentiation}
+Dériver un signal à \textbf{énergie finie} revient à \textcolor{blue}{amplifier} ses \textcolor{blue}{hautes} fréquences.
+\begin{align*}
+x(t) \longleftrightarrow X(j\omega)\\
+\frac{d^kx}{dt^k}(t) \longleftrightarrow (j\omega)^kX(j\omega)
+\end{align*}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/diff.png}
+\caption{Exemple de transformation de Fourier}
+\end{figure}
+
+\subsection{Multiplication par un monôme}
+Par dualité, faire ceci:
+\begin{align*}
+x(t) \longleftrightarrow X(j\omega)\\
+t^nx(t) \longleftrightarrow j^n \frac{d^nX}{d\omega^n} (j\omega)
+\end{align*}
+\subsection{Intégration}
+Donc intégrer, augmente les \textcolor{blue}{basses} fréquences:
+\begin{align*}
+x(t) \longleftrightarrow X(j\omega)\\
+\sum_{-\infty}^t	x(t)dt \longleftrightarrow \frac{X(j\omega}{j\omega} + \textcolor{red}{\pi X(0) \delta(\omega)}
+\end{align*}
+La partie en rouge est dû au fait qu'un résultat d'une intégration à toujours une \textcolor{red}{constante d'intégration} (le fameux $+C$)
+
+\section{Transformée usuelle}
+On utilisera des propriétés vu à la section \ref{proprF}.
+
+\subsubsection{Delta de Dirac} \label{Dirac}
+C'est plutôt simple, il faut appliquer simplement la formule:
+\begin{equation}
+\begin{cases}
+\delta(t) = 0 \text{ si } t \neq 0\\
+\int_a^{-a} \delta(t) dt = 1 \forall a > 0\\
+\int_{-\infty}^{\infty} x(t) \delta(t) dt = x(0)
+\end{cases}
+\end{equation}
+Via toutes ces propriétés on voit facilement que:
+\begin{equation}
+X(j\omega) = \int_{-\infty}^{\infty} \delta(t) e^{-j \omega t} dt = 1(e^0) = 1
+\end{equation}
+
+\subsubsection{Delta de Kronecker}
+Même idée que à \ref{Dirac} si ce n'est qu'on est en discret. Le résultat reste le même.
+
 \subsection{Train d'impulsions (peigne) de Dirac}
 On a donc une fonction qui ressemble à cela: (d'où le nom)
 \begin{figure}[H]
@@ -374,6 +401,38 @@ X(j\omega) &= \int_{-\infty}^{\infty} x(t) e^{-j \omega t} dt\\
 &= \sum_{k = -\infty}^{\infty} \int_{-\infty}^{\infty} \delta(t- kT_0) e^{-j \omega t} dt\\
 &= \sum_{k = -\infty}^{\infty} e^{-j \omega k T_0} \text{ car on a une énergie finie}\\
 \mathcal{F}(\delta(t-kT_0)) &= e^{-j\omega k T_0}
+\end{align*}
+Ensuite, on va refaire une série de Fourier:
+\begin{align*}
+x(t) &= \sum_{l = -\infty}^{\infty} X_l e^{j\omega_0 t} & X_l &=  \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j \omega_0 lt} dt\\
+&= \frac{1}{T_0} \sum_{l = -\infty}^{\infty} e^{j\omega_0 lt} & &= \frac{1}{T_0} \int \delta(t) e^{-j \omega_0 lt} dt\\
+& & &= \frac{1}{T_0}
+\end{align*} %pas sûr sûr pour cette démo je doisd recheck
+Ensuite, on utiliser la dualité:
+\begin{align*}
+x(t) &\longleftrightarrow X(j\omega)\\
+X(jt) &\longleftrightarrow 2\pi x(-\omega)\\
+\mathcal{F}(e^{j\omega_0 lt}) &= 2 \pi \delta(\omega - \omega_0 l)\\
+x(t) = \frac{1}{T_0} \sum_{l = - \infty}^{\infty} 2 \pi \delta(\omega - l \omega_0) &= \omega_0 \sum (\delta(\omega -l \omega_0) = \omega_0 x(\omega)
+\end{align*}
+
+\subsection{Fonction échelon}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/echeF.png}
+\caption{Transformé de la fonction échelon}
+\end{figure}
+Sa transformée de Fourier est:
+\begin{equation}
+x(t) = u(t) \longleftrightarrow X(j\omega) = \pi \delta(t) + \frac{1}{j \omega}
+\end{equation}
+
+\subsubsection{Preuve}
+On utilise l'intégration car on sait que:
+\begin{align*}
+u(t) &=  \int_0^{\infty} \delta(t) dt\\
+\mathcal{F}(\delta(t)) &= 1\\
+u(j\omega) &= \frac{1}{j \omega} + \pi \delta(\omega)
 \end{align*}
 
 
