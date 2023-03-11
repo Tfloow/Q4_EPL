@@ -552,7 +552,87 @@ P = return 1;
 \item Non, on peut imaginer une intersection qui ne comportent que des entrées avec une réponse.
 \end{enumerate}
 
-\chapter{QCM} %améliorer la mise en page
+\chapter{Question cours}
+\section{S1}
+
+\section{S2}
+Une densité du nombre de rationnel
+Un langage est un ensemble de chaine de caractère ! Attention de ne pas confondre langage le mot vulgaire et langage en informatique.\\
+Fonction totale s'intéresse au domaine.\\
+Fonction surjective s'intéresse à l'image.\\
+\begin{itemize}
+\item Injective max une flèche.
+\item Surjective min une flèche.
+\item Étendre une fonction est rajouté une flèche.
+\end{itemize}
+
+\section{S3}
+Attention à la notation entre$ \rightarrow P_{12} \neq P_{47}$ car $P$ sont des chaines de caractères bien déterminés et donc différentes
+$\varphi_{12}=\varphi_{47}$ effectivement car phi est créé depuis des P différents mais peuvent créer des fonctions donnant le même résultat\\
+
+$Halt(n,37)$ n'est pas calculable car si ce serait, halt serait calculable\\
+Print(1) car tous les Entiers appartiennent à $\mathbb{N}$\\
+
+Recursif: calculable
+Récursivement énumérable: calculable et ne dit pas s'il ne l'est pas.
+
+\section{S4}
+Différence entre Q et JAVA, toutes les fonctions se terminent et rendent une valeur. 
+Java lui peut rendre une fonction bottom !
+Donc notre démonstration ne fonctionne plus car $interpret(k,k)= \perp$ et donc $diag_{mod}= \perp+1= \perp$\\
+
+Est-ce le fait qu'un interpréteur ne puisse être écrit en Q problématique ?
+Un interpréteur prend en entrée un code et met des mots-clés. L'interpréteur va créer un arbre d'exécution.\\
+SQL est un langage qui ne boucle jamais. $\rightarrow$ Donc SQL ne peut être utiliser pour faire des programmes complexes.\\
+
+Impossible de détecter les cas sans réponses. (fonction HALT en exemple)
+
+\chapter{Vrai ou Faux cours} %améliorer la mise en page
+Cette section regroupe toutes les réponses et raisonnements des questions \textbf{wooclap} posées au cours.
+
+\section{S1}
+Introduction donc pas de QCM.
+
+\section{S2}
+\textcolor{red}{Besoin de contributeurs}
+Je n'ai pas noté :(( 
+%ajoutez le questionnaire
+
+\section{S3}
+%ajouter les questions pas que les réponses
+\textcolor{red}{TODO ajouter les questions pas que les réponses}
+
+\begin{enumerate}
+\item Tout language n'est pas récursif car c'est un ensemble de fonction dont Halt qui n'est pas récursif
+\item Tout ensemble énumérables n'est pas récursif.
+\item Un ensemble fini est récursif
+\item Le complément d'un ensemble récursif est récursif
+\item L'ensemble des rationnels est récursivement énumérable
+\item Un sous-ensemble infini d'un ensemble récursivement énumérable n'est pas récursivement énumérable
+\item Un sous-ensemble fini d'un ensemble récursivement énumérable n'est pas récursivement énumérable
+\item L’union d’une infinité énumérable d’ensembles récursivement énumérable n'est pas récursivement énumérable: Exemple avec l'ensemble K
+\item Le complément d’un ensemble récursivement énumérable n'est  pas récursivement énumérable: Exemple avec K et inverse de K
+\item Une fonction dont la table est infinie est calculable
+\item Un algorithme ne calcule qu'une et une seule fonction
+\item Il existe des ensembles non récursivement calculable
+\item Une fonction calculable est peut être calculée par une infinité de programmes
+\item L'ensemble HALT n'est pas récursivement énumérable
+\item Il existe des ensembles récursifs qui sont récursivement énumérables
+\item Il existe des ensembles récursifs qui ne sont pas énumérables
+\item Si le domaine d'une fonction est finie, alors cette fonction est calculable: on peut faire une liste de tous les cas possibles
+\item Si le domaine de fonction est infini, alors cette fonction est calculable
+\end{enumerate}
+
+\section{S4}
+\begin{enumerate}
+\item Il existe un langage non trivial dans lequel la fonction halt est calculable. $\rightarrow$ on sait que tout ce fini en Q donc oui on sait calculer halt car c'est la fonction constante 1 (non trivial $\rightarrow$ pas les réponses facile type langage vide)
+\item Il n'existe pas un langage de programmation (non trivial) dans lequel on peut programmer le fonction halt ainsi que l’interpréteur de ce langage
+\item Si un langage de programmation (non trivial) permet de programmer son interpréteur, alors la fonction halt n'est pas calculable dans ce langage
+\item Il existe de langage de programmation (non trivial) dans lequel toutes les fonctions calculées sont totales
+\item Il n'existe pas un langage de programmation ne permettant de calculer que des fonctions totales, mais toutes les fonctions totales calculables $\rightarrow$ l'interpréteur ne peut pas être calculé en Q
+\item il n'existe pas une fonction totale calculable qui n'est l'extension d'aucune fonction partielle calculable $\rightarrow$ effectivement car on a une fonction calculable totale elle est d'office l'extension d'une fonction partielle calculable.
+Il existe une fonction partielle calculable telle qu’aucune fonction totale calculable n’est une extension de cette fonction partielle --> énoncé du théorème, pas de messages d'erreur.
+\end{enumerate}
 
 \section{S5}
 \begin{enumerate}
