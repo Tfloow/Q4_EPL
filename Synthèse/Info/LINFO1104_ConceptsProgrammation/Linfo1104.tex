@@ -502,6 +502,148 @@ Il faut faire attention à l'\textbf{exécution retardé}. En effet, si on ne st
 
 %Here
 
+\chapter{Lambda Calcul}
+\begin{enumerate}
+\item C'est un modèle de calcul qui est \textcolor{red}{Turing complete}. 
+\item \textbf{Tous} les types de données peuvent être encodé en lambda calcul.
+\item Par le théorème de \textbf{Church-Rosser}, le lambda calcul est \textcolor{red}{confluent}. Même résultat peu importe l'ordre de réduction
+\item C'est la base de la programmation ordre supérieur et de la programmation formelle.
+\end{enumerate}
+\section{Introduction}
+Le \textit{lambda calcul} est une manière mathématique formelle pour représenter des calculs informatiques. Cela a été créé avant l'arrivée des ordinateurs. Cela ne contient que des \textbf{définitions}, \textbf{appels} et utilise des \textbf{liens de variables} et de la \textbf{substitution}.\\
+
+Le \textit{lambda calcul} est une manière universelle de calcul. On peut l'utiliser pour simuler des \textbf{machines de Turing}.
+
+\subsection{Fonctionnement}
+Le lambda calcul n'a que des \textit{fonctions anonymes d'un seul argument}. Donc si on veut en avoir plusieurs, il faut combiner les fonctions:
+\begin{lstlisting}[escapechar=\%]
+sum_square(x,y) = %$x^2+y^2$ //fonction classique%
+(x,y) %$\rightarrow x^2 + y^2$ //fonction anonyme%
+x %$\rightarrow$% (y %$\rightarrow x^2 + y^2$%) %//d'une seul argument%
+%$\lambda x. \lambda y. x^2+y^2$ //en lambda calcul%    
+\end{lstlisting}
+Le fait de combiner et de "\textit{nest}" des fonctions s'appellent le \textcolor{red}{currying}.
+
+\subsection{Syntaxe}
+Les expressions lambdas sont composées de:
+\begin{itemize}
+\item Variables (x,y, ...)
+\item Du symboles d'abstractions ($\lambda$) et de point (.)
+\item Et des parenthèses
+\end{itemize}
+En syntaxe EBNF c'est:
+\begin{lstlisting}[escapechar=\%]
+t ::= x | (%$\lambda$%x.t) | %$t_1 \quad t_2$%
+\end{lstlisting}
+($\lambda$x.t): est appelé une abstraction (\textit{définition de fonction})\\
+$t_1 \quad t_2$: c'est \textit{l'appel de fonction}.
+
+\subsection{En Oz}
+\begin{enumerate}
+\item La définition de fonction ($\lambda$x.t)
+\begin{lstlisting}[escapechar=\%]
+fun %\{\$ X\}% T end
+\end{lstlisting}
+\item L'appel de fonction ($t_1 \quad t_2$)
+\begin{lstlisting}[escapechar=\%]
+%\{$T_1 \quad T_2$\}%
+\end{lstlisting}
+\end{enumerate}
+Le currying en Oz:
+\begin{enumerate}
+\item Définition
+\begin{lstlisting}[escapechar=\%]
+F = fun %\{\$ X\}% fun %\{\$ Y\}% T end end
+\end{lstlisting}
+\item Appel
+\begin{lstlisting}[escapechar=\%]
+%\{\{F X\} Y\}%
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{Sémantique des expressions lambdas}
+Le sens d'une expression lambda dépend de comment on peut la réduire. Il en existe 3 types.
+\begin{enumerate}
+\item \textcolor{red}{$\alpha$-renaming}: change le nom des variables liés
+\item \textcolor{red}{$\beta$-renaming}: applique une fonction à un argument
+\item \textcolor{red}{$\eta$-reduction}: enlève les variables inutilisés
+\end{enumerate}
+
+\subsubsection{Variables libres et liées}	
+Si nous avons: $\lambda x.t$ on dit que \textit{l'opérateur} $\lambda x$ lie la variable $x$ à $t$. Mais la variable $t$ est libre car n'est lié à \textit{aucune} fonction. Si $x$ est libre dans $t$ alors on dit qu'on \textcolor{blue}{capture} $x$.\\
+On dénote $FV(t)$ l'ensemble des variables libres:
+\begin{itemize}
+\item $FV(x) = \{x\}$ où $x$ est une variable
+\item $FV(\lambda x.t) = FV(t) \textbackslash \{x\}$
+\item $FV((t_1 \quad t_2))=FV(t_1) \cup FV(t_2)$
+\end{itemize}
+
+\subsubsection{$\alpha$-renaming}
+Ainsi, on peut changer le nom d'une variable lié:
+\begin{lstlisting}[escapechar=\%]
+%$\lambda$%.x x %$\rightarrow_{\alpha}\lambda$%.y y
+\end{lstlisting}
+Il faut faire attention à ce qu'on ait pas de \textit{conflit de nom} et de \textit{capture de variable}.\\
+Des termes qui diffèrent d'un $\alpha$-renaming sont dits $\alpha$-equivalent.
+
+\subsubsection{Substitution} \label{sub}
+\textcolor{red}{TODO}
+
+\subsubsection{$\beta$-renaming}
+C'est une application de fonction et se décrit via la substitution. (cfr \ref{sub})\\
+Définition:  $(\lambda x.t_1) t_2 \rightarrow t_1[::=t_2]$\\
+Exemple: $(\lambda x.(x \quad x))y \rightarrow (y \quad y)$
+
+\subsubsection{$\eta$-reduction}
+C'est l'idée que 2 fonctions sont les \textit{mêmes} si elles produisent le \textit{même résultat} pour tous les arguments possibles. On appelle cela \textcolor{red}{extensibilité}. Donc 2 fonctions sont les mêmes si elles ont les mêmes propriétés extérieures.\\
+Définition: $\lambda x.(t \quad x) \rightarrow t$ if $x \notin FV(t)$
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/lambdaCal.png}
+\caption{Résumé}
+\end{figure}
+
+\subsubsection{Convention de notation}
+Quand on manipule des expression lambda, il est important de suivre quelques règles:µ
+\begin{itemize}
+\item Enlever les parenthèses les plus extérieur. ex: $(t_1 \quad t_2) \rightarrow t_1 \quad t_2$
+\item Les applications sont associatives depuis la gauche. ex: $t_1 \quad t_2 \quad t_3 \rightarrow ((t_1 \quad t_2) \quad t_3)$
+\item On étend vers la droit. ex: $\lambda x.t_1 t_2 \rightarrow \lambda x.(t_1 t_2)$
+\item On peut simplifier les séquences d'abstractions. ex: $\lambda x. \lambda y. \lambda z.t \rightarrow \lambda xyz.t$
+\end{itemize}
+
+\section{Types de données}
+Le lambda calcul peut faire tout type de calcul, il est \textcolor{red}{Turing complete}.\\
+Pour le démontrer, on va encoder des chiffres, opérations, ... en lambda calcul. Donc tous les chiffres, booléens, ... seront encodés en lambda calcul
+
+\subsection{Nombres}
+On utilise une notation appelé \textcolor{red}{Church Numerals}:
+\begin{itemize}
+\item $0 \triangleq \lambda f.(\lambda x.x)$
+\item $1 \triangleq \lambda f.(\lambda x.(f  x))$
+\item $2 \triangleq \lambda f.(\lambda x.(f (f  x))$
+\item $3 \triangleq \lambda f.(\lambda x.(f (f (f  x))$
+\end{itemize}
+On peut remarquer que ces fonctions dont d'ordre supérieur. En effet, il prend en argument une fonction et ressort une fonction. (d'un seul argument)\\
+Le nombre $n$ retourne donc la fonction qui est une composition de $n$ fois de f. Donc on dit que \textbf{f est appliqué n fois}.
+
+\subsection{Opérations}
+\subsubsection{Fonction successeur}
+Prend le nombre de Church $n$ et retourne $n+1$.
+\begin{align*}
+SUCC &\triangleq \lambda n.\lambda f.\lambda x.f((n f)x)\\
+SUCC &\triangleq \lambda n.\lambda f.\lambda x.f(n fx)
+\end{align*}
+
+\subsubsection{Addition}
+Retourne donc la composition de $m+n$.
+\begin{align*}
+PLUS &\triangleq \lambda m.\lambda n.\lambda f	. \lambda x.(m f)((n f)x)\\
+PLUS &\triangleq \lambda m.\lambda n.\lambda f	. \lambda x.m f(n fx)
+\end{align*}
+
+
 \chapter{Conseils pour la syntaxe d'Oz}
 Voici une liste d'astuces et de choses importantes à savoir sur Oz:
 \begin{itemize}

@@ -37,7 +37,7 @@ Si tu veux en apprendre d'avantage, pense à jeter un coup d'oeil au [Wiki](http
 
 Tu as tout ça ? parfait ! maintenant suit ces instructions:
 
-<img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp%20(2).gif" width="300">
+<img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif" width="350">
 
 1. Fork ce Github depuis cette page (regarde tout au-dessus à droite)
 2. Copie l'adresse git de ton fork qui devrait être du style <https://github.com/nom/Q4_EPL.git> avec `nom` étant ton nom Github. **Attention n'oublie de rajouter `.git` à la fin**
@@ -46,7 +46,6 @@ Tu as tout ça ? parfait ! maintenant suit ces instructions:
 5. N'oublie d'être dans le dossier où se trouve le repo en faisant la commande `cd Q4_EPL`
 6. Exécute `git remote add upstream https://www.github.com/Tfloow/Q4_EPL.git`
 
-<img src="https://github.com/Tfloow/randomshit/blob/main/Vid%C3%A9o%20sans%20titre%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif" width="300">
 
 Voilà tu as accès à ce Github sur ta machine et pour le garder à jour exécute simplement `git pull upstream main`.
 
