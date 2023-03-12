@@ -441,7 +441,7 @@ On a que:
 \end{align*}
 Ce qui revient à dire que:
 \begin{align*}
-\text{Si } \forall i \in A &\text{ et } \forall j \in \mathbb{N}: \varphi_i \neq \varphi_j\\
+\text{Si } \forall i \in A &\text{ et } \forall j \in \mathbb{N} \setminus A: \varphi_i \neq \varphi_j\\
 \text{Alors } A \text{ non récursif \textit{ou} } &A = \varnothing \text{ ou } A = \mathbb{N}
 \end{align*}
 De plus, si un programme est récursif, on peut savoir de quel ensemble il est.
@@ -551,6 +551,20 @@ P = return 1;
 \item Faux exemple: $\overline{\textbf{K}}$. (voir \ref{coreq})
 \item Non, on peut imaginer 2 fonctions non récursives qui se "\textit{complètent}" et comblent les lacunes de chacune. Exemple: $K \text{ et } \overline{K}$
 \item Non, on peut imaginer une intersection qui ne comportent que des entrées avec une réponse.
+\end{enumerate}
+
+\section{TP4}
+\begin{enumerate}
+\item Faux, l'ensemble des programmes qui ont pour fonction $2n$ est non récursif car notre ensemble à toutes les fonctions qui ont ce résultat.
+\item Faux, car on possède toutes les fonctions qui renvoient $0$ pour n'importe quelle entrée.
+\item Vrai, car certains programmes peuvent hors de notre ensemble ont la même fonction. C'est le \textit{1000 instructions} qui posent soucis. Car des programmes qui en ont + peuvent retourner le même résultat.
+\item Faux, en effet un programme qui prend 3 entrées (donc hors de notre ensemble) a le même résultat qu'un faisant partie de notre ensemble. Et ceci est valable pour \textbf{tous} programmes dans notre ensemble.
+\item Cela dépend de la fonction f, en effet, même sorte de raisonnement que pour le 4. donc cela dépend.
+\item Il faudrait tester toutes les entrées pour en être sûr donc $\mathbb{N}$.
+\item Oui, voir l'idée avec halt, ...
+\item C'est l'ensemble formé par Halt donc pas récursif.
+\item Mais c'est bien récursivement énumérable comme Halt.
+\item Non, il faut faire une réduction à halt.
 \end{enumerate}
 
 \chapter{Question cours}
