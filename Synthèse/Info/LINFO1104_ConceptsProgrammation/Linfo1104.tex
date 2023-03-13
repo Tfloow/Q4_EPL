@@ -120,6 +120,7 @@ Pour définir une liste en Oz, on utilise soit la notation \textcolor{blue}{[1 2
 \end{wrapfigure}
 Grâce à cette représentation en arbre, il est facile de voir si une liste est bien une liste.\\
 Ci-contre, on voit une fonction classique en Oz qui analyse une liste et détermine si elle est d'une structure correcte. Le \textcolor{blue}{[]} correspond au cas où l'élément \textcolor{blue}{L} est une liste avec une Head et une Tail. On appelle cela une \textit{Clause} et H|T est le pattern de la clause. Le premier cas est définit par \textcolor{blue}{of}.
+\newpage
 
 \section{Introduction au langage Kernel}
 Le langage Kernel est la première partie de la sémantique formelle d'un langage de programmation. Une règle importante est que tout programme écrit en programmation fonctionelle \textit{peut être traduit en langage kernel}.
@@ -193,9 +194,14 @@ Il est très simple de comparer des tuples via "$==$", il faut simplement compar
 
 \subsection{Similitude Tuples et liste}
 En effet, une liste qui n'est autre que "H|T" peut facilement être traduit en tuple '|' (H T). Quand on peut déterminer un même élément via différentes manières, on appelle ça du \textit{sucre syntaxique}. Dans le \textit{kernel}, on fait au plus simple donc que des tuples.
+\begin{lstlisting}[escapechar=\%]
+List1 = [1 2 3]
+List2 = (1:1 2:(1:2 2:(1:3 2:nil)))
+List1 == List2 %//Vrai%
+\end{lstlisting}
 
 \subsection{Les Records}
-Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différence avec les tuples est que le \textit{field} peut être n'importe quel valeur et ne doit pas être consécutif. Donc ceci est un \textit{record} correct:
+Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différence avec les tuples est que le \textit{field} peut être n'importe quel valeur et ne doit pas être consécutif. Donc ceux-ci sont des \textit{records} corrects:
 \begin{lstlisting}
 X = state(a:1 2:a b:2)
 Y = inv(3:a 2:b 1:c)
@@ -236,7 +242,7 @@ Un \textit{identificateur libre} est un identificateur utilisé dans une \textit
 Les arguments d'une procédure \textbf{ne sont pas} des identificateurs libres car l'argument défini l'identificateur.
 
 \subsection{Sémantique}
-Il est important de comprendre le fonctionnement même d'un programme car si on ne comprend pas comme celui-ci fonctionne, il nous domine. \textit{If you do not understand something, then you do not master it – it masters you!}
+Il est important de comprendre le fonctionnement même d'un programme car si on ne comprend pas comment celui-ci fonctionne, il nous domine. \textit{If you do not understand something, then you do not master it – it masters you!}
 \subsubsection{Définition}
 La \textit{sémantique} d'un langage de programmation est une explication \textit{précise} de comment un programme s'exécute. Nous verrons la sémantique pour tous les paradigmes. Il en existe 4 types:
 \begin{enumerate}
@@ -315,7 +321,7 @@ Une nouvelle instruction va s'ajouter à cause du "then" de notre condition:
 \item Pour chaque instructions dans le langage Kernel, on associe sa règle dans la machine abstraite
 \item Chaque instructions prends un état d'exécution en entrée et sort un état d'exécution en sortie $\rightarrow (ST, \sigma)$.
 \end{itemize}
-L'instruction la plus simple est "\textcolor{blue}{skip}" car il fonctionne comme $([(skip, E), S_2, ..., S_n], \sigma)$ et renvoie $([S_2, S_n], \sigma)$ 
+L'instruction la plus simple est "\textcolor{blue}{skip}" car il fonctionne comme $([(skip, E), S_2, ..., S_n], \sigma)$ et renvoie $([S_2,..., S_n], \sigma)$ 
 
 \begin{center}
 \begin{tabular}{|c|c|c|}
@@ -334,10 +340,10 @@ Instructions & entrée & sortie\\
 Il y a également d'autres types d'instructions dont on détaillera pas le langage en machine abstraite:
 
 \begin{itemize}
-\item \textcolor{blue}{<x>=<v> (crée et assigne une valuer)}: quand <v> est une procédure, on \textbf{doit} crée un environnement contextuel.
-\item \textcolor{blue}{if <x> then <s>1 else <s>2 end (condition)} : si <x> n'est pas attribué, l'instruction va attendre (“\textit{block}”) jusqu'à ce que <x> soit attribuer à une valeur.
-\item \textcolor{blue}{case <x> of <p> then <s>1 else <s>2 end} : Le system de "\textit{case}" se construit en combinant des structures de données Kernel.
-\item \textcolor{blue}{\{<x> <y>1 ... <y>n\}} : ceci est la base de l'abstraction de donnée
+\item \textcolor{blue}{<x>=<v> (crée et assigne une valeur)}: quand <v> est une procédure, on \textbf{doit} crée un environnement contextuel.
+\item \textcolor{blue}{if <x> then $<s>_1$ else $<s>_2$ end (condition)} : si <x> n'est pas attribué, l'instruction va attendre (“\textit{block}”) jusqu'à ce que <x> soit attribuer à une valeur.
+\item \textcolor{blue}{case <x> of <p> then $<s>_1$ else $<s>_2$ end} : Le system de "\textit{case}" se construit en combinant des structures de données Kernel.
+\item \textcolor{blue}{\{$<x> <y>_1, ..., <y>_n$\}} : ceci est la base de l'abstraction de donnée
 \end{itemize}
 Par ailleurs, voici d'autres concepts de machine abstraite:
 \begin{itemize}
@@ -389,7 +395,7 @@ local P in
 	end
 end 
 \end{lstlisting}
-Ici, à la ligne de la création de la procédure P, son environnement contextuel est $E_c = \{Z \rightarrow z\}$. Au moment de l'exécution de P avec les valeurs A et B, on va donc ajouter un environnement qui de la sorte: $E_P = \{Y \rightarrow b, X \rightarrow a, Z \rightarrow z\}$
+Ici, à la ligne de la création de la procédure P, son environnement contextuel est $E_c = \{Z \rightarrow z\}$. Au moment de l'exécution de P avec les valeurs A et B, on va donc ajouter un environnement qui est de la sorte: $E_P = \{Y \rightarrow b, X \rightarrow a, Z \rightarrow z\}$
 Donc en langage \textit{sémantique}, la définition d'une procédure ressemble à cela:
 \begin{itemize}
 \item \textbf{Instruction sémantique}: (<x>=\textcolor{blue}{proc}\{\$ $<x>_1, ..., <x>_n$\} <s> \textcolor{blue}{end}, E)
@@ -465,7 +471,8 @@ end
 A l'exécution,$[(\{Inc M N\},\{M\rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
 \{m=10,n,i=(proc \{\$ X Y\} Y=X+A end, \{A \rightarrow a\}), a=1,b=(... browser code…)\}$ et Inc va référencer cela:\\
 $[(Y=X+A,\{A\rightarrow,X \rightarrow m,Y \rightarrow n\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
-\sigma$
+\sigma$\\
+Il est important de remarquer que dans la mémoire, quand on stocke une procédure, on stocke le tout donc avec son environnement contextuel.
 
 
 \chapter{Programmation d'ordre supérieur}
@@ -473,7 +480,7 @@ Ce concept découle directement du concept d'\textit{environnement contextuel}. 
 \subsubsection{Définition}
 \begin{itemize}
 \item Une fonction est dit \textcolor{red}{de premier ordre} si elle ne prend et ne ressort aucune fonction.
-\item Une fonction est \textcolor{red}{N+1} si son entrée et sortie contiennent $N$ arguments.
+\item Une fonction est \textcolor{red}{N+1} si son entrée et sortie prennent en tout $N$ fonctions en argument.
 \end{itemize}
 Nomenclature des différentes fonctions:
 \begin{itemize}
@@ -621,9 +628,9 @@ Pour le démontrer, on va encoder des chiffres, opérations, ... en lambda calcu
 On utilise une notation appelé \textcolor{red}{Church Numerals}:
 \begin{itemize}
 \item $0 \triangleq \lambda f.(\lambda x.x)$
-\item $1 \triangleq \lambda f.(\lambda x.(f  x))$
-\item $2 \triangleq \lambda f.(\lambda x.(f (f  x))$
-\item $3 \triangleq \lambda f.(\lambda x.(f (f (f  x))$
+\item $1 \triangleq \lambda f.(\lambda x.(f \quad x))$
+\item $2 \triangleq \lambda f.(\lambda x.(f (f \quad x))$
+\item $3 \triangleq \lambda f.(\lambda x.(f (f (f \quad x))$
 \end{itemize}
 On peut remarquer que ces fonctions dont d'ordre supérieur. En effet, il prend en argument une fonction et ressort une fonction. (d'un seul argument)\\
 Le nombre $n$ retourne donc la fonction qui est une composition de $n$ fois de f. Donc on dit que \textbf{f est appliqué n fois}.
@@ -632,16 +639,69 @@ Le nombre $n$ retourne donc la fonction qui est une composition de $n$ fois de f
 \subsubsection{Fonction successeur}
 Prend le nombre de Church $n$ et retourne $n+1$.
 \begin{align*}
-SUCC &\triangleq \lambda n.\lambda f.\lambda x.f((n f)x)\\
-SUCC &\triangleq \lambda n.\lambda f.\lambda x.f(n fx)
+SUCC &\triangleq \lambda n.\lambda f.\lambda x.f((n \quad f)x) & SUCC &\triangleq \lambda n.\lambda f.\lambda x.f(n \quad f \quad x)
 \end{align*}
 
 \subsubsection{Addition}
 Retourne donc la composition de $m+n$.
 \begin{align*}
-PLUS &\triangleq \lambda m.\lambda n.\lambda f	. \lambda x.(m f)((n f)x)\\
-PLUS &\triangleq \lambda m.\lambda n.\lambda f	. \lambda x.m f(n fx)
+PLUS &\triangleq \lambda m.\lambda n.\lambda f	. \lambda x.(m \quad f)((n \quad f)x) & PLUS &\triangleq \lambda m.\lambda n.\lambda f	. \lambda x.m \quad f(n \quad f \quad x)
 \end{align*}
+
+\subsubsection{Multiplication}
+\begin{align*}
+MULT &\triangleq \lambda m.\lambda n.\lambda f.m (n \quad f) & MULT &\triangleq \lambda m.\lambda n.m (PLUS \quad n)\quad 0
+\end{align*}
+La deuxième façon de faire $MULT$ est comme si on disait, "fait une somme m fois en commençant à 0.
+
+\subsubsection{Exponentielle}
+\begin{align*}
+POW &\triangleq \lambda b.\lambda e.e \quad b
+\end{align*}
+
+\subsubsection{Prédécesseur}
+\begin{align*}
+PRED &\triangleq \lambda n.\lambda f.\lambda x.n (\lambda g.\lambda h.h (g f)) (\lambda u.u)
+\end{align*}
+
+\subsubsection{Soustraction}
+Grâce à la méthode du prédécesseur, on peut définir la soustraction:
+\begin{align*}
+SUB \triangleq \lambda m.\lambda n.n PRED m
+\end{align*}
+Donc pour $m-n$ on effectue la fonction prédécesseur $n$ fois en commençant à $m$. 
+
+\subsection{Opération logique}
+
+\subsubsection{Booléens}
+\begin{align*}
+TRUE &\triangleq \lambda x.\lambda y.x & FALSE &\triangleq \lambda x.\lambda y.y
+\end{align*}
+
+\subsubsection{Opérateur logique}
+\begin{align*}
+AND &\triangleq \lambda p.\lambda q.p \quad q \quad p & OR &\triangleq \lambda p.\lambda q.p \quad p \quad p\\
+NOT &\triangleq \lambda p.p \quad FALSE \quad TRUE & IFTHENELSE &\triangleq \lambda p.\lambda a.\lambda b.p \quad a \quad b
+\end{align*} 
+
+\subsubsection{Prédicat}
+Ce sont des fonctions qui retournent une valeur booléenne:
+\begin{align*}
+ISZERO &\triangleq \lambda .n (\lambda x.FALSE) TRUE & LEQ &\triangleq \lambda m.\lambda n.ISZERO (SUB \quad m \quad n)
+\end{align*}
+
+\subsubsection{Paire}
+Ce sont des tuples de \textit{width = 2} et peuvent être définis en terme de booléens:
+\begin{align*}
+PAIR &= (x,y) \text{ le tuple} & PAIR &\triangleq \lambda x.\lambda y.\lambda f.f \quad x \quad y\\
+FIRST &\triangleq \lambda p.p \quad TRUE & SECOND &\triangleq \lambda p.p \quad FALSE\\ 
+NIL &\triangleq \lambda x.TRUE & NULL &\triangleq \lambda p.p (\lambda x.\lambda y.FALSE)
+\end{align*}
+\textcolor{red}{TODO: montrer l'utilité des paires}
+
+\subsection{Fonctions récursives}
+Comme les fonctions sont anonymes, on ne peut pas faire d'appel direct récursif. On va faire en sorte qu'une fonction devient l'argument d'une expression lambda. Par exemple:
+$G \triangleq \lambda f.\lambda n.$(if n = 0 then 1 else n(f n-1))
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
