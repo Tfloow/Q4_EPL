@@ -703,6 +703,43 @@ NIL &\triangleq \lambda x.TRUE & NULL &\triangleq \lambda p.p (\lambda x.\lambda
 Comme les fonctions sont anonymes, on ne peut pas faire d'appel direct récursif. On va faire en sorte qu'une fonction devient l'argument d'une expression lambda. Par exemple:
 $G \triangleq \lambda f.\lambda n.$(if n = 0 then 1 else n(f n-1))
 
+\subsubsection{Y combinator}
+Cela nous permet de passer de $Y(g)$ à $g(Y \quad g)$.
+\begin{align*}
+Y
+\end{align*}
+
+\subsection{Théorème de Church-Rosser}
+Ce théorème nous dit que l'\textbf{ordre de réduction} n'a pas d'importance.\\
+Concrètement, si $a$ se réduit à $b$ avec aucune ou plusieurs étapes et que si $a$ se réduit à $c$ avec aucune ou plusieurs étapes. Alors, il existe un $d$ tel que $b$ et $c$ peuvent se réduire à ce dernier.\\
+Le programme est \textcolor{red}{confluent} ou possède la \textit{propriété de Church-Rosser}.
+
+\subsection{Le lambda calcul et les langages de programmation}
+La \textit{programmation fonctionnel} peut être compris en terme de lambda calcul.
+\begin{itemize}
+\item Les valeurs de procédures (donc \textit{lexically scope closures}) \textbf{sont} des fonctions lambda.
+\item l'\textit{Eager et lazy evaluation} est une juste une stratégie de réduction différente.
+\end{itemize}
+
+\subsubsection{2 approches}
+\begin{tabular}{|c|c|}
+Eager évaluation méthode de réduction & La lazy évaluation elle, va\\
+qui commence par l'intérieur & calculer que ce qui est \\
+ donc on exécute un programme comme suit: &  nécessaire et réduit si nécessaire pour \\
+ & l'exécution. On va de l'extérieur à l'intérieur\\
+  & \\
+\includegraphics[width=4cm]{img/Eager.png} & \includegraphics[width=4cm]{img/Lazy.png}
+\end{tabular}
+
+\subsubsection{If statement}
+Dans la plupart des langages de programmation, la condition \textcolor{blue}{if} est réalisé de manière applicative. La partie de l'action \textcolor{blue}{then} est réalisé de manière \textcolor{blue}{lazy}. Donc si une action produit une erreur mais quelle est dans une clause qui ne serait pas atteint, alors le programme ne crashe pas.
+
+\subsection{Variation et extension}
+\textcolor{red}{TODO}
+
+
+
+
 
 \chapter{Conseils pour la syntaxe d'Oz}
 Voici une liste d'astuces et de choses importantes à savoir sur Oz:
