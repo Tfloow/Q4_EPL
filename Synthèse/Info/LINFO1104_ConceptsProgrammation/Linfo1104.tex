@@ -735,10 +735,17 @@ qui commence par l'intérieur & calculer que ce qui est \\
 Dans la plupart des langages de programmation, la condition \textcolor{blue}{if} est réalisé de manière applicative. La partie de l'action \textcolor{blue}{then} est réalisé de manière \textcolor{blue}{lazy}. Donc si une action produit une erreur mais quelle est dans une clause qui ne serait pas atteint, alors le programme ne crashe pas.
 
 \subsection{Variation et extension}
-\textcolor{red}{TODO}
+Le lambda calcul est une base fondamentale dans la théorie de l'informatique. Dans les extensions du lambda calcul, on retrouve:
+\begin{itemize}
+\item \textcolor{red}{Lambda calcul typé}: donc avec des variables et fonctions
+\item \textcolor{red}{System F}: avec des variables de \textbf{types}
+\item \textcolor{red}{Constructions de calcul}: les types sont les valeurs de classes premières
+\item \textcolor{red}{Combinateur logique}: logique sans variables
+\item \textcolor{red}{Calcul de combinateur SKI}: comme le lambda calcul mais sans substitution de variables. On utilise les combinateurs S,K et I.
+\item \textcolor{red}{Langage Kernel d'OZ}: le lambda calcul avec des variables \textit{dataflow}(une seule attribution), exécution \textit{dataflow}, \textit{threads} et evaluation \textit{lazy} explicite.
+\end{itemize}
 
-
-
+\chapter{État mutable et abstraction des données}
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
