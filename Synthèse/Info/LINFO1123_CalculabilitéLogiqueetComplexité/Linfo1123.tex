@@ -504,6 +504,85 @@ On va donc séparer notre ensemble des Programmes et on effectue ces manipulatio
 \item Donc, \textcolor{red}{Halt est non calculable} car il boucle, donc A est bien \textbf{non récursif}.
 \end{enumerate} 
 
+
+\section{Théorème de la paramétrisation}
+De manière générale, une fonction peut être vu comme $f: N \rightarrow N$ mais \textit{également} comme $f: P \rightarrow P$. Donc $f(a) = b$ et en combinant $P_a = P_B$ notre $f$ devient un \textbf{transformateur de programmes}. Pour être plus précis c'est le $P_k$ qui calcule $f$ qui est le \textit{transformateur de programmes}.
+
+\subsection{Théorème S-m-n via S-1-1}
+On dit qu'il existe une fonction calculable qui prend 2 arguments tel que:
+\begin{align*}
+S_1^1 : N^2 &\rightarrow N \text{ et } \forall k\\
+\varphi_k^{(2)} (x_1, x_2) &= \varphi_{S_1^1 (k,x_2)} (x_1)
+\end{align*}
+\subsubsection{Compréhension}
+On dit qu'il existe un \textit{transformateur} ($S_1^1$) qui prend en arguments: - Un programme à 2 arguments et 1 valeur $v_2$\\
+Cela donne comme résultat un programme $P(x_1)$ qui calcule la même chose que $P_k(x_1,v_2)$.
+
+\subsection{Via S-m-n}
+On dit que:
+\begin{align*}
+\forall m, n \geq 0 &, \exists S_n^m : N^{m+1} \rightarrow N : \forall k\\
+\varphi_k^{n+m} (x_1, ..., x_n, x_{n+1}, ..., x_{n+m}) &= \varphi_{S_n^m (k, x_{n+1}, ..., x_{n+m})}^{(n)} (x_1, ..., x_n)
+\end{align*}
+\subsubsection{Compréhension}
+Comme nous avons $m,n \geq 0$, il existe un transformateur de programmes appelés $S_n^m$ qui reçoit: - $P_k$ avec $m+n$ arguments, $m$ valeurs $v_1, ..., v_m$\\
+Cela renvoi comme résultat un programme P à $n$ arguments. Donc $P(x_1, ..., x_n)$ calcule la \textit{même} fonction que $P_k(x1, ..., x_n, x_{n+1}, ..., x_{n+m})$
+
+
+
+\textcolor{red}{TODO section 10 et 11}
+
+\section{Autre problèmes non calculables}
+\subsubsection{Liste équivalente de mot}
+Si on a 2 listes comme ci-dessous, il n'existe \textbf{aucun} algorithme qui nous permettent de trouver une suite d'indice qui produit 2 mots équivalents depuis deux listes. C'est donc un problème \textbf{non calculable}.
+\begin{lstlisting}[escapechar=\%]
+%$\Sigma$% = {a,b} 
+U = {u1=b, u2=babbb, u3=ba}
+V = { v1=bbb, v2=ba, v3=a}
+Res = {2 1 1 3} //%car U: babb, b, b, ba et V: ba, bbb,bbb, a%
+\end{lstlisting}
+
+\subsubsection{Équations diophantiennes}
+C'est une équation de la forme: $D(x_1, ..., x_n) = 0$. L'équation ne possède que des \textit{coefficients entiers} et on cherche des solutions \textit{entières}.\\
+C'est bel et bien un problème \textbf{non calculable}.
+\begin{align*}
+P(a) \leftrightarrow \exists x_1, ..., x_n [D(a,x_1, ..., x_n) = 0]
+\end{align*}
+Ci-dessus, c'est la condition pour être diophantien pour une fonction.
+
+\section{Codage et représentation}
+Jusqu'ici, on avait des fonctions $N^n \rightarrow N$ et on avait des représentations décimales des nombres. Mais on ne prend pas en compte les autres types de donnés, ... Donc on va créer des fonctions de codage et représentation.
+
+\subsubsection{Codage}
+On va définir une bijection entre notre nouveau type et les entiers. On peut identifier chaque objet par un entier \textit{distinct}. Ce qui nous amène à une propriété très utile:
+\begin{enumerate}
+\item la fonction de codage est bijective
+\item la fonction de codage est calculable
+\item la fonction de codage inverse est calculable
+\end{enumerate}
+
+\subsection{Les nombres calculables}
+On sait que tout nombre réel est fini tout comme la limite d'une suite \textit{convergente} vers un rationnel $\mathbb{Q}$ Donc:
+\begin{align*}
+\forall x \in \mathbb{R}, \exists s &: N \rightarrow Q : \text{ (s est total)}\\
+lim_{n\rightarrow \infty} &| x - s(n)| = 0
+\end{align*}
+
+\subsubsection{Définition}
+On dit qu'un réel $x$ est \textbf{calculable} si il existe une \textcolor{red}{fonction totale calculable}:
+\begin{align*}
+s: N \rightarrow Q\\
+\forall n: |x-s(n)| \leq 2^{-n}
+\end{align*}
+Donc notre fonction ne fait que s'approcher autant qu'on veut de notre réel.
+
+\subsubsection{Propriétés}
+Donc un $\mathbb{R}$ est calculable s'il existe un programme qui le calcule. Ce qui par induction rend l'ensemble des nombres calculables énumérables.\\
+Il existe des réels donc non-calculables mais qui peuvent être définie de manière finie comme:
+\begin{align*}
+x = \sum_{0 \geq n \geq \infty} \chi_K (n) 3^{-n}
+\end{align*}
+
 \chapter{Questions Test d'entrée}
 
 \section{TP1}
@@ -559,7 +638,7 @@ P = return 1;
 \item Faux, car on possède toutes les fonctions qui renvoient $0$ pour n'importe quelle entrée.
 \item Vrai, car certains programmes peuvent hors de notre ensemble ont la même fonction. C'est le \textit{1000 instructions} qui posent soucis. Car des programmes qui en ont + peuvent retourner le même résultat.
 \item Faux, en effet un programme qui prend 3 entrées (donc hors de notre ensemble) a le même résultat qu'un faisant partie de notre ensemble. Et ceci est valable pour \textbf{tous} programmes dans notre ensemble.
-\item Cela dépend de la fonction f, en effet, même sorte de raisonnement que pour le 4. donc cela dépend.
+\item Cela dépend de la fonction f, en effet, même sorte de raisonnement que pour le 4. donc cela dépend. On peut aussi avoir des fonctions non calculables.
 \item Il faudrait tester toutes les entrées pour en être sûr donc $\mathbb{N}$.
 \item Oui, voir l'idée avec halt, ...
 \item C'est l'ensemble formé par Halt donc pas récursif.
@@ -601,6 +680,24 @@ Un interpréteur prend en entrée un code et met des mots-clés. L'interpréteur
 SQL est un langage qui ne boucle jamais. $\rightarrow$ Donc SQL ne peut être utiliser pour faire des programmes complexes.\\
 
 Impossible de détecter les cas sans réponses. (fonction HALT en exemple)
+
+\section{S6}
+\begin{enumerate}
+\item Pourquoi la propriété S est-elle une conséquence du théorème S-m-n ? Avec le théorème S-1-1 Il existe une fonction totale calculable $S_1^1:N^2\rightarrow N$
+\item Lesquelles de ces affirmations sont vraies
+\begin{enumerate}
+	\item Si f est une transformateur de programmes (f fonction totale calculable), alors il existe deux programmes P1 et P2 tels que $f(P1) = P2$ ainsi que P1 et P2 calculent la même fonction  Le théorème de u point fixe
+	\item Si f est une transformateur de programmes (f fonction totale calculable), alors il existe deux programmes P1 et P2 tels que f(P1) = P2 ainsi que P1 et P2 calculent la même fonction totale $\rightarrow$ le totale nous force à avoir quelque chose qui se termine toujours
+\end{enumerate}
+\item À quoi sert le théorème du point fixe:
+\begin{enumerate}
+\item Faire un programme qui sans paramètre donne son propre code en sortie standard
+\end{enumerate}
+\item Post $\rightarrow$ impossible même avec Bruteforce. Diophantienne $\rightarrow$ l'utilité est minime.
+\item Nombre réels non-calculables est-elle une conséquence immédiate du fait que R est non énumérable.
+Donne un output fini aussi précis que je le voudrais. R n'est pas énumérable et j'ai un nombre énumérable de programme donc je ne peux pas représenter tous les R.
+\end{enumerate}
+
 
 \chapter{Vrai ou Faux cours} %améliorer la mise en page
 Cette section regroupe toutes les réponses et raisonnements des questions \textbf{wooclap} posées au cours.
@@ -678,6 +775,21 @@ Il existe une fonction partielle calculable telle qu’aucune fonction totale ca
 	\item Pas injectif car ne fait d'office correspondre au max $1$ une fois. (penser à $0!$ Et $1!$ Même réponse)
 		\end{enumerate}
 
+\end{enumerate}
+
+\section{S6}
+\begin{enumerate}
+\item La propriété S-m-n affirme que tout numéro de programme calculable peut être transformé en un numéro équivalent, mais avec moins de paramètres $\rightarrow$ \textcolor{red}{Faux}, on transforme un programme en un autre programme. Les fonctions sont équivalentes.
+\item Les propriétés S-m-n et S  sont équivalentes $\rightarrow$ \textcolor{red}{Faux}, S-m-n implique S mais pas dans l'autre sens.
+\item Tous les langages de programmation (standards) satisfont la propriété S-m-n, on peut spécialiser un programme par ses arguments
+\item Le théorème du point fixe est une conséquence du théorème de Rice $\rightarrow$ \textcolor{red}{Faux} c'est l'inverse
+\item Si deux programmes P1 et P2 calculent la même fonction, alors il existe un transformateur f de programmes (f  fonction totale calculable) , tel que f(P1)=P2 $\rightarrow$ \textcolor{green}{Vrai}, ce n'est pas le théorème du point fixe. On a 2 programmes qui calculent la même fct, on une fct qui transforme P1 et P2 (return P2)
+\item Si f est un transformateur de programmes (f  fonction totale calculable),  alors il existe deux programmes P1 et P2 tels que f(P1)=P2 ainsi que  P1 et P2 calculent la même fonction $\rightarrow$ \textcolor{green}{Vrai} énoncé du point fixe mais un peu moins math.
+\item Si f est un transformateur de programmes (f  fonction totale calculable),  alors il existe deux programmes P1 et P2 tels que f(P1)=P2 ainsi que  P1 et P2 calculent la même fonction totale $\rightarrow$ \textcolor{red}{Faux}, attention au totale, on n'exige pas que les programmes s'exécutent toujours.
+\item Le théorème du point fixe permet de démontrer que la fonction halt  est non calculable $\rightarrow$ \textcolor{green}{Vrai}, pt-fixe donne halt
+\item La non calculabilité du problème de Post est une conséquence du théorème de Rice $\rightarrow$ \textcolor{red}{Faux}, c'est une autre famille de problème non calculables, c'est lié au problème des chaines de caractères
+\item L’ensemble des nombres réels calculables est énumérable $\rightarrow$ \textcolor{green}{Vrai} car on l'approche via un programme et le nombre de programme est calculable
+\item Il existe une infinité non énumérable de nombres réels non calculables $\rightarrow$  \textcolor{green}{Vrai} les réels calculables sont énumérables donc l'ensemble opposé doit être non énumérable sinon ça voudrait dire que les réels sont énumérables.
 \end{enumerate}
 
 \end{document}

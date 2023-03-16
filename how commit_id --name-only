@@ -1,0 +1,1497 @@
+[33mcommit c4b26708feb8d370ec86861225faf86e7530f1cf[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 15 23:54:22 2023 +0100
+
+    Finished cours5.pdf starting next part of lecture 6
+
+[33mcommit 7977112c364ca0e3943450a72264bf6ee5c2a1cb[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 7b38741 9d0e01f
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Mar 14 23:34:16 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 7b38741de2ff60cdf4773928b267b606b3764b2d[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Mar 14 23:34:07 2023 +0100
+
+    Finished lecture 5 slides beginning lecture 6 of LINFO1104
+
+[33mcommit 9d0e01f07f2f5049a6f0874dfbc02cd8ae0a2c5d[m
+Merge: 2710f55 974842f
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 13 08:44:05 2023 +0100
+
+    Merge pull request #19 from Tfloow/imgbot
+    
+    [ImgBot] Optimize images
+
+[33mcommit 2710f557842d2844626660828fe2f9b845c386fc[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 13 08:32:05 2023 +0100
+
+    Almost done lecture 5 LINFO1104
+
+[33mcommit 974842fdb49f08beb179b0163e492c1c1db94bfb[m
+Author: ImgBotApp <ImgBotHelp@gmail.com>
+Date:   Sun Mar 12 20:09:24 2023 +0000
+
+    [ImgBot] Optimize images
+    
+    *Total -- 195.97kb -> 179.41kb (8.45%)
+    
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/diff.png -- 37.97kb -> 33.70kb (11.25%)
+    /Synthèse/Info/LINFO1104_ConceptsProgrammation/img/lambdaCal.png -- 70.89kb -> 64.31kb (9.28%)
+    /Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité/img/rice.png -- 56.17kb -> 51.06kb (9.09%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/echeF.png -- 30.95kb -> 30.34kb (1.96%)
+    
+    Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+
+[33mcommit 5919d18ebe5a7f92bbf4351b81685d1480522a12[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 12 17:58:20 2023 +0100
+
+    Added answer to quiz LINFO1123
+
+[33mcommit c6828bfcad9c3450494ceff5e44a42b2d4a00fcb[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 12 12:43:11 2023 +0100
+
+    Working on lecture 5 LINFO1104 50% done
+
+[33mcommit 4ed5bdcb0c31fbf419e8a58ce7b855100fbb8988[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Mar 11 10:18:25 2023 +0100
+
+    Added True and False for LINFO1123 and questions discussed during class
+
+[33mcommit 35ee28febb28d7248620da1ed5b24f3799167aca[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 10 22:52:47 2023 +0100
+
+    Finished lecture 5 LINFO1123 and added section for Questions given during class
+
+[33mcommit e06aa3e98384d5d7adf849f7b45651c4025381f2[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 10 16:02:59 2023 +0100
+
+    Worked until 'exercices' part of LEPL1106
+
+[33mcommit 66aecd4f9cc2c4b90452454d1f5fcd23c6c7fb55[m
+Merge: b504998 d823a25
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 10 13:26:38 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit b504998d353473332432ef1bb6c851a5cce6d5c2[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 10 13:26:14 2023 +0100
+
+    Covered 17/33 slides LEPL1106
+
+[33mcommit d823a25a26c5ed10acfd6d468dadc9ee257600fd[m
+Merge: 0833ea9 411075c
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Mar 9 23:03:36 2023 +0100
+
+    Merge pull request #18 from Tfloow/imgbot
+    
+    [ImgBot] Optimize images
+
+[33mcommit 0833ea92d363d7d91eea609058d8e3e5e87b1ce8[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Mar 9 23:00:02 2023 +0100
+
+    Covered 12/33 slides of LEPL1106
+
+[33mcommit 411075cf1e8dd698ae5ed93a4617611bd5e4048f[m
+Author: ImgBotApp <ImgBotHelp@gmail.com>
+Date:   Thu Mar 9 02:53:33 2023 +0000
+
+    [ImgBot] Optimize images
+    
+    *Total -- 497.23kb -> 440.65kb (11.38%)
+    
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/reconstructionF.png -- 44.76kb -> 18.94kb (57.68%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/signalTE.png -- 26.16kb -> 13.98kb (46.56%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/grapheSignalTE.png -- 20.61kb -> 13.87kb (32.71%)
+    /Synthèse/Info/LINFO1104_ConceptsProgrammation/img/patternMatching.png -- 17.23kb -> 14.49kb (15.93%)
+    /Synthèse/Elec/LELEC1370_CircuitsetMesures/img/PhaseXI.png -- 111.06kb -> 106.05kb (4.51%)
+    /Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/Elec/LELEC1370_CircuitsetMesures/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/Info/LINFO1104_ConceptsProgrammation/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/Elec/LELEC1370_CircuitsetMesures/img/AmpXI.png -- 123.50kb -> 122.46kb (0.85%)
+    
+    Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+
+[33mcommit bf02e9f2d283029a4e8badec03aa5742cd03d44e[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 8 23:44:24 2023 +0100
+
+    Done with lecture 4 LELEC1370
+
+[33mcommit da863f4352a40e28829a671b63a87f2aa4d27bb0[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 8 22:58:44 2023 +0100
+
+    Almost done with lecture 4 LELEC1370
+
+[33mcommit 4237292e4dd72608702a8db4aba098b62de21944[m[33m ([m[1;31morigin/V2[m[33m, [m[1;32mV2[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Mar 7 18:06:36 2023 +0100
+
+    Cleaned and change instructions
+
+[33mcommit fa01de7501c3938dfa9d8ac3505316ca7985ef3c[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Mar 7 14:49:57 2023 +0100
+
+    Test w/o pre-commit
+
+[33mcommit 72efb272ca364e6413f39771e392660ade56b20b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 11:09:04 2023 +0100
+
+    Test artifact download
+
+[33mcommit ee2b75a1db0345495ebf37e7f4bc9b6946b40b29[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 11:08:27 2023 +0100
+
+    Test artifact download
+
+[33mcommit 7cffb47b6b0cec54d5e911b5b4ebc0685cb4571e[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 10:56:00 2023 +0100
+
+    Test compilation
+
+[33mcommit da92e8b7400536ca9f228998ef03cd3a7c827c1c[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 10:51:13 2023 +0100
+
+    Testing storing after compiling
+
+[33mcommit 459b6ed6da97740620b0b61ea554b4bc72d4946b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 10:46:03 2023 +0100
+
+    Roll back
+
+[33mcommit e172c9a258bc579ee6e836fd515f06916a317b5b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 10:41:59 2023 +0100
+
+    Test tex
+
+[33mcommit 568efcebf3f0e743bf477137f6f8b93c670641a5[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Mar 6 10:08:37 2023 +0100
+
+    Fixed typo and enhanced LEPL1104
+
+[33mcommit 78d154cec5a00b372c8c1d8f4ad6982d844dd733[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 15:03:29 2023 +0100
+
+    Added Test3 thoughts on
+
+[33mcommit c11b47756f3baba800473dfb1560bb04b69354f4[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 14:08:47 2023 +0100
+
+    Fixed yaml
+
+[33mcommit 3e3e2b034fb982261a672a38404377f36a754ecd[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 14:07:38 2023 +0100
+
+    Fixed yaml, changed to french babel
+
+[33mcommit 4de3e9c86be349eec26016184f03e44d69e76758[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:59:07 2023 +0100
+
+    Update main.yml
+
+[33mcommit 9436ca2d98209eee26411791e7f46748d01e0d58[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:57:57 2023 +0100
+
+    FOLIEEE
+
+[33mcommit f716f9a2a8c636aa8c6a342b28f95c73966717e8[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:56:09 2023 +0100
+
+    Update main.yml
+
+[33mcommit e6036aa4617c10c46627b033f8e0eeed0816b396[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:55:10 2023 +0100
+
+    Update main.yml
+
+[33mcommit 49e0b3d69a3226f1e2e12042381539b6bcae59df[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:54:07 2023 +0100
+
+    Update main.yml
+
+[33mcommit 08857a0d00f81ce36863014c453df1277ba3a768[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:49:56 2023 +0100
+
+    Update main.yml
+
+[33mcommit 0aea0dbcfad30c6b95ed99ee39caf1831f4e4e25[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:46:06 2023 +0100
+
+    Update main.yml
+
+[33mcommit a196e236c7cf39aa6dfdf30d2b98b957f37d9350[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:44:36 2023 +0100
+
+    Update main.yml
+
+[33mcommit 1322716baa5bf7454f1797fdf64bae09ecde1714[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:41:40 2023 +0100
+
+    Update main.yml
+
+[33mcommit b795fd84596a7338a9c9b68565a73f0612b28d25[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:39:56 2023 +0100
+
+    Update main.yml
+
+[33mcommit 539849ccb84e94b3cbc8ec3a9ce21cbde36f1566[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:37:16 2023 +0100
+
+    Update main.yml
+
+[33mcommit 98456c41195b8d9c591f7f6386eecbda47764bcb[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:35:04 2023 +0100
+
+    Update main.yml
+
+[33mcommit 1533cefd9a1d31c589ae45f5683cb8ca6c08e9c9[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:29:58 2023 +0100
+
+    Update main.yml
+
+[33mcommit 50574173aadef49f14c7b15bb5b66f8c6f1685dd[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:24:55 2023 +0100
+
+    Update main.yml
+
+[33mcommit 95925ef274ee533d716d4ef30a4595a4afa7ce51[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:23:07 2023 +0100
+
+    Update main.yml
+
+[33mcommit eb7873b5f34ba0e31f7c02ac08df9456d50a53e4[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:19:51 2023 +0100
+
+    Update main.yml
+
+[33mcommit bb04c8589c70e3ec7c1d1c4b94fe101b2e7028ba[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:18:20 2023 +0100
+
+    Update main.yml
+
+[33mcommit 65abad80bcaa95f8e43c87a4318bcf1cc1f4ee27[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:17:23 2023 +0100
+
+    Create .github/workflows/main.yml
+
+[33mcommit ab5b63c57ab898f41f5d86f64c6be23475754432[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 12:01:31 2023 +0100
+
+    Makefile now compile and move all new Resume in folder just run make
+
+[33mcommit 3fe25b86b98d30e87619178d84e7c3f8eb266b67[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 11:55:56 2023 +0100
+
+    Re-compiled with Makefile
+
+[33mcommit 0a825bc0e7b88ae1ad9a3916824cec19b0c02650[m
+Merge: af74617 f758bd8
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 11:49:50 2023 +0100
+
+    Merge branch 'MakeFile'
+
+[33mcommit af746177218c82d0ad82e2c59d30bbf93bb97728[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 11:34:08 2023 +0100
+
+    Enhanced LELEC1370, fixed typo
+
+[33mcommit ebc276bb3a65a859e64d54da41d003456e9ca8c5[m
+Merge: 16c2aec 756ce4a
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 10:23:56 2023 +0100
+
+    Merge pull request #15 from Tfloow/imgbot
+    
+    [ImgBot] Optimize images
+
+[33mcommit 756ce4a26316120d29e4ced169df3782d0719abf[m[33m ([m[1;31morigin/imgbot[m[33m)[m
+Author: ImgBotApp <ImgBotHelp@gmail.com>
+Date:   Sun Mar 5 04:06:07 2023 +0000
+
+    [ImgBot] Optimize images
+    
+    *Total -- 283.91kb -> 235.37kb (17.1%)
+    
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/reconstructionF.png -- 44.76kb -> 18.94kb (57.68%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/signalTE.png -- 26.16kb -> 13.98kb (46.56%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/img/grapheSignalTE.png -- 20.61kb -> 13.87kb (32.71%)
+    /Template/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/Info/LINFO1104_ConceptsProgrammation/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    /Synthèse/Elec/LELEC1370_CircuitsetMesures/UCL_Logo.png -- 38.47kb -> 37.71kb (1.98%)
+    
+    Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+
+[33mcommit 16c2aec1322a6b4f975778a1da1d415c67f9fca4[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 00:26:00 2023 +0100
+
+    vive le changement de nom
+
+[33mcommit 9e3e24a99fa08391b818a86765b83df0918af4bb[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 00:24:13 2023 +0100
+
+    Revert "camelCase for subfolder"
+    
+    This reverts commit a37be30dc28b797ec6629c43ffe94673c361856e.
+
+[33mcommit f4a5f90e8c8bf5b2865eaa38569b273b53fe16c9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Mar 4 22:46:35 2023 +0100
+
+    Fixed typo and added accuracy in LEPL1106
+
+[33mcommit a37be30dc28b797ec6629c43ffe94673c361856e[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 00:12:05 2023 +0100
+
+    camelCase for subfolder
+
+[33mcommit f758bd8828c0abd473c61a1e2860f021296d21ee[m[33m ([m[1;32mMakeFile[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Mar 5 00:08:52 2023 +0100
+
+    Created a Makefile for easier compiling, renamed folder with camelCase
+
+[33mcommit 4bba2fc8d258e84e1d91fd31651247740aa93211[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Mar 4 22:46:35 2023 +0100
+
+    Fixed typo and added accuracy in LEPL1106
+
+[33mcommit bb1035b9faac5759d02c39d34e80779e540c06dd[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Mar 4 17:58:12 2023 +0100
+
+    Done with lecture 4 LEPL1106
+
+[33mcommit 03186eb13b2a2bba6ef721af0e6d565717bf4323[m
+Merge: 32c0591 305821c
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Mar 4 13:45:09 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 32c05918b733acfdaff2969b11e0023bc3d2925b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Mar 4 13:44:14 2023 +0100
+
+    Mid lecture 4 of LEPL11°6
+
+[33mcommit 305821c5957aa17b22b2b6d82c3e27d98aa9aadd[m
+Merge: c14fbe5 f072d37
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 3 22:19:29 2023 +0100
+
+    Merge pull request #14 from Tfloow/imgbot
+    
+    [ImgBot] Optimize images
+
+[33mcommit f072d37a587ef911f6c8069efa686ca47c81a228[m
+Author: ImgBotApp <ImgBotHelp@gmail.com>
+Date:   Fri Mar 3 16:31:27 2023 +0000
+
+    [ImgBot] Optimize images
+    
+    *Total -- 136.41kb -> 105.66kb (22.54%)
+    
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/BodeEx.png -- 70.19kb -> 51.96kb (25.98%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/EquivalentRC.png -- 66.22kb -> 53.70kb (18.9%)
+    
+    Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+
+[33mcommit c14fbe5a4435fe50b75461d2fa33fcb97194d88d[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 3 16:28:01 2023 +0100
+
+    Checking for windows or linux
+
+[33mcommit ee1e2e58b17a78d53cfc71e47c0bf14115649ce4[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Mar 3 14:07:50 2023 +0100
+
+    Fixed typo in Template, done lecture 4 LELEC1370 and more see full changelog
+
+[33mcommit 2e030fb9369dbb984bf6b6ac26a1dd45afaaab9b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Mar 2 10:57:42 2023 +0100
+
+    added back the INSTALLER
+
+[33mcommit 7327353e3bd432c4eac117f611e2b52c63e09a0f[m
+Merge: 936d0c0 4de3f36
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Mar 2 10:56:37 2023 +0100
+
+    Merge pull request #12 from Iss25/main
+    
+    Update MAP => Opti
+
+[33mcommit 4de3f369962f5d74282763a6badda2e4076cc839[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Mar 2 10:55:29 2023 +0100
+
+    Delete INSTALLER.sh
+
+[33mcommit 0ad562a9bef7cd8e0dff3122dfd25a8fb98379e4[m
+Author: Iss25 <114648812+Iss25@users.noreply.github.com>
+Date:   Thu Mar 2 10:40:51 2023 +0100
+
+    msg
+
+[33mcommit 936d0c0ebc7657ea9696259882ac28d03f077aca[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 1 23:40:08 2023 +0100
+
+    Finished lecture 4 LINFO1104
+
+[33mcommit d88212d157dc493b1175ccc357a7c85cc0538df0[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 1 17:42:22 2023 +0100
+
+    Pre-commit test
+
+[33mcommit 5f4e6d3d9067017e252588ac3643dddc8a8b284f[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 1 17:38:55 2023 +0100
+
+    Finished lecture 4 LINFO1123
+
+[33mcommit 3829e428a90ebc3de64056adf0b99405bbd03842[m[33m ([m[1;33mtag: v1.2.1[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 1 17:37:44 2023 +0100
+
+    tweaking
+
+[33mcommit c7f8924622c4115d1f2e6d012e1f7ecc8a6d89e2[m[33m ([m[1;33mtag: v1.2.0[m[33m)[m
+Merge: b07c78d 01f4172
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 1 16:41:40 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit b07c78da1a7d157a583a707347a5a4c7558d08c2[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Mar 1 16:35:21 2023 +0100
+
+    Fixing and Deploying v1.2.0
+
+[33mcommit 01f41725f6f049af024fa6145dcb0cffab1d7783[m
+Merge: eda6c52 7317df9
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 27 17:30:39 2023 +0100
+
+    Merge pull request #11 from Tfloow/imgbot
+    
+    [ImgBot] Optimize images
+
+[33mcommit 7317df91e0a59d88357202c973ca5ae6c1ab8ec9[m
+Author: ImgBotApp <ImgBotHelp@gmail.com>
+Date:   Mon Feb 27 15:28:48 2023 +0000
+
+    [ImgBot] Optimize images
+    
+    *Total -- 1,156.59kb -> 898.21kb (22.34%)
+    
+    /Synthèse/Méca/MMC/Images/Cinematique/Etats1.png -- 37.02kb -> 16.70kb (54.9%)
+    /Synthèse/Méca/DAM/Images/ImagesICE/PistonNomenclature.png -- 133.35kb -> 60.47kb (54.66%)
+    /Synthèse/Méca/MMC/Images/Images_Introduciton/VER_Schema.png -- 32.10kb -> 16.67kb (48.06%)
+    /Synthèse/Méca/DAM/Images/imagesCinematique/Figure Chasles 2.png -- 113.49kb -> 69.45kb (38.8%)
+    /Synthèse/Méca/DAM/Images/imagesCinematique/Figure chasles 1.png -- 71.18kb -> 60.14kb (15.51%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/platCylindre.png -- 21.87kb -> 18.61kb (14.9%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/trouCylindre.png -- 22.75kb -> 19.44kb (14.53%)
+    /Synthèse/Méca/MMC/Images/Images_Introduciton/VER_Graphe.png -- 110.68kb -> 94.91kb (14.25%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/AretesCylindre.png -- 20.13kb -> 17.33kb (13.93%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/ArbresDiffÃ©rentesParties.png -- 186.93kb -> 161.08kb (13.83%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/TrousNomenclature.png -- 121.17kb -> 104.73kb (13.56%)
+    /Synthèse/Méca/DAM/Images/imagesCinematique/glissementg.png -- 25.04kb -> 21.76kb (13.11%)
+    /Synthèse/Méca/DAM/Images/imagesCinematique/glissementRoulement.png -- 35.42kb -> 30.79kb (13.05%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/axeRevolution.png -- 54.75kb -> 47.77kb (12.74%)
+    /Synthèse/Méca/DAM/Images/ImagesDessinTechnique/foretCyclindre.png -- 62.90kb -> 55.16kb (12.3%)
+    /Synthèse/Méca/MMC/Images/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    /Synthèse/Méca/DAM/Images/Template/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    
+    Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+
+[33mcommit eda6c529b884ff17bd8aa6030da9ddf75d4c2a00[m[33m ([m[1;32mtest[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 27 08:54:20 2023 +0100
+
+    moved new resume
+
+[33mcommit 1743148553da17c196c64549f5339dbd23d8301c[m
+Merge: 40b87a9 7656d97
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 27 08:50:42 2023 +0100
+
+    Merge pull request #10 from JulienMonfils/main
+    
+    My resume is bad, yes professional
+
+[33mcommit 7656d97a09840e9d9ad1794cfc5eb7e801a87e92[m
+Author: Julien Monfils <monfils.julien@gmail.com>
+Date:   Mon Feb 27 08:48:02 2023 +0100
+
+    My resume is bad, yes professional
+
+[33mcommit 40b87a94183caf1782f1890c3e6674c010142e55[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 26 23:24:19 2023 +0100
+
+    Finished working on lecture 3 LINFO1104
+
+[33mcommit ca79dfa6aedab0deee970c3a9607b3d821d5a669[m
+Merge: 38d05f4 3ffbe72
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 26 17:27:41 2023 +0100
+
+    Merge pull request #9 from Tfloow/imgbot
+    
+    [ImgBot] Optimize images
+
+[33mcommit 3ffbe72f68f1c4ca76489be6adbb769768b5e732[m
+Author: ImgBotApp <ImgBotHelp@gmail.com>
+Date:   Sun Feb 26 15:57:12 2023 +0000
+
+    [ImgBot] Optimize images
+    
+    *Total -- 1,250.56kb -> 1,100.19kb (12.02%)
+    
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/listTree.png -- 14.09kb -> 6.38kb (54.75%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/RCsinus.png -- 9.52kb -> 4.35kb (54.28%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/LCsinus.png -- 7.33kb -> 3.66kb (50.08%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel.png -- 24.87kb -> 19.14kb (23.02%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/maxPuissance.png -- 89.61kb -> 70.03kb (21.85%)
+    /Synthèse/TroncCommun/LEPL1106 - Signaux et Systèmes/Devoir/test_figure_devoir_01.png -- 22.91kb -> 18.15kb (20.76%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/ACDC.png -- 42.49kb -> 34.83kb (18.01%)
+    /Synthèse/Info/LINFO1123 - Calculabilité, logique et complexité/img/ensembleFonction.png -- 82.29kb -> 67.99kb (17.38%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel5.png -- 32.86kb -> 27.52kb (16.24%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/patternMatching.png -- 19.65kb -> 16.80kb (14.53%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/triangleEtoile.png -- 91.78kb -> 79.50kb (13.37%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/impedance.png -- 58.00kb -> 50.36kb (13.17%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel2.png -- 29.95kb -> 26.30kb (12.19%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel7.png -- 10.60kb -> 9.34kb (11.88%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel1.png -- 44.40kb -> 39.25kb (11.6%)
+    /Synthèse/TroncCommun/LEPL1106 - Signaux et Systèmes/img/blocExemple.png -- 30.94kb -> 27.36kb (11.56%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/ThNo.png -- 52.43kb -> 46.48kb (11.35%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel4.png -- 45.93kb -> 41.29kb (10.11%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/treeTuple.png -- 19.56kb -> 17.60kb (10.04%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/quadri2.png -- 12.02kb -> 10.86kb (9.63%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel3.png -- 32.34kb -> 29.29kb (9.44%)
+    /Synthèse/TroncCommun/LEPL1106 - Signaux et Systèmes/img/RLC.png -- 26.53kb -> 24.09kb (9.19%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/kernel6.png -- 19.91kb -> 18.13kb (8.94%)
+    /Synthèse/TroncCommun/LEPL1106 - Signaux et Systèmes/img/bloc.png -- 34.90kb -> 32.29kb (7.49%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/img/scope.png -- 27.55kb -> 25.98kb (5.71%)
+    /Synthèse/Info/LINFO1104 - Concepts Programmation/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    /Template/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    /Synthèse/TroncCommun/LEPL1106 - Signaux et Systèmes/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    /Synthèse/Info/LINFO1123 - Calculabilité, logique et complexité/UCL_Logo.png -- 53.91kb -> 51.59kb (4.29%)
+    /Synthèse/Elec/LELEC1370 - Circuits et Mesures/img/memeDipole.png -- 98.59kb -> 95.28kb (3.36%)
+    
+    Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+
+[33mcommit 38d05f41013bae9b088d6df59d65ce31b797d58d[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 26 14:47:32 2023 +0100
+
+    Finished lecture 1 LELEC1370, added my thought process for TP in LINFO1123, finishing lecture 3 LELEC1370
+
+[33mcommit f58b1a849ee1651e619069a791042deabdf88e5b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 26 00:11:01 2023 +0100
+
+    Finished lecture 3 LINFO1123 + added contributor Readme
+
+[33mcommit 91d8c6c7bcc0c4e6670fbcece96630d163db61bd[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Feb 25 14:15:25 2023 +0100
+
+    Almost done lecture 3 LINFO1104
+
+[33mcommit 95d0dd26d928c8caef62a8e9d1c2a847aa7598b0[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Feb 25 11:25:35 2023 +0100
+
+    Stoppd at abstract machine in lecture 3
+
+[33mcommit 5f4098df396366d954124bdb6ba6d182996c3573[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Feb 25 00:05:32 2023 +0100
+
+    At slide 7 of lecture 3 in LINFO1104
+
+[33mcommit c0a96954e57195476dd6dedab165c623be38e967[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Feb 24 22:43:39 2023 +0100
+
+    Almost done
+
+[33mcommit 1811e370e582ba0b75d5274b837cd2b35088615b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Feb 24 16:57:28 2023 +0100
+
+    Started last part of lecture 3 LELEC1370
+
+[33mcommit fc5d77e52b1f8394891b1908551069859352288a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Feb 24 16:02:13 2023 +0100
+
+    Lecture 3 LELEC1370 in the work
+
+[33mcommit 42488ba1a4cd2683bb4b17dec15e46da9ffdf3e2[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Feb 23 23:48:48 2023 +0100
+
+    Started working on lecture 3 LINFO1123
+
+[33mcommit e90f9fe5c662e09b3d10baa82689e41124623e16[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Feb 21 12:51:57 2023 +0100
+
+    Fixed Typo in LEPL1106 and improved lecture 1 LELEC1370
+
+[33mcommit 540bbd155d9d010cb5ea4a735c77dd48791157ab[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 22:22:51 2023 +0100
+
+    Finished both lecture LEPL1106 and rework of pre-commit incoming
+
+[33mcommit 1aa88660d36ba27f925b3c70ced7226d08cbd077[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 19:02:45 2023 +0100
+
+    Almost done with LEPL1106 first two lecture 80%
+
+[33mcommit 51c493f78b3f68d58693a648db17609492ff7f4e[m[33m ([m[1;33mtag: v1.1.2[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 16:33:37 2023 +0100
+
+    Simplified the pre-commit and finishing LEPL1106
+
+[33mcommit 1eb75187e899d38f4626c6b4902c9c65bfdbb7c4[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 15:50:10 2023 +0100
+
+    Tweaked devoir plot and fixed output
+
+[33mcommit eb169e9dd645221e017dd825a91404c453bc7118[m
+Merge: 6b02a8c 4abc23c
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 15:32:48 2023 +0100
+
+    Merge pull request #8 from PurpleXP/main
+    
+    stp bébou
+
+[33mcommit 4abc23c9da8022d6ddede575dd373f55416845d1[m
+Author: PurpleXP <touzilias01@live.fr>
+Date:   Mon Feb 20 15:28:26 2023 +0100
+
+    Readme updated
+
+[33mcommit cc191772728b3d3956148cb8593f91050b33b36f[m
+Author: PurpleXP <touzilias01@live.fr>
+Date:   Mon Feb 20 15:26:28 2023 +0100
+
+    Touzani le boss
+
+[33mcommit 6b02a8c8805d6eab997f37af5826f5eba40b96d4[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 14:50:31 2023 +0100
+
+    Almost done
+
+[33mcommit 3b0421340432e3c3e2d8a0ed4f6026240cb5af95[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 12:40:20 2023 +0100
+
+    Half of lecture 2 done
+
+[33mcommit 8810f40a5fe9f2c75eb65e78002a50a4c859ee1d[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 11:27:47 2023 +0100
+
+    Progress on lecture 2 LEPL1106
+
+[33mcommit 3769e21b0e3194003bcb3eb87b9e3e1ea181e89b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 20 10:18:08 2023 +0100
+
+    Finished lecture 2 LINFO1123
+
+[33mcommit 437dc489c84c029e6ffcc16ebafa2ec660f0f6a2[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 19 22:04:06 2023 +0100
+
+    Begin lecture 2 circuit et mesure and LINFO1123
+
+[33mcommit 0adf5d7fdb93775ad2f57d624459b38d0a7da0a7[m[33m ([m[1;33mtag: v1.1.1[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 19 14:09:34 2023 +0100
+
+    New 1.1.0 release
+
+[33mcommit 2225cac0c272bd3e90a37daa6dd9f99f08a1cae5[m[33m ([m[1;33mtag: v1.1.0[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 19 13:40:11 2023 +0100
+
+    Working on second lecture LELEC1370
+
+[33mcommit 5317500ace7ee9e1a391ac8d5a68889ceb7d72b3[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 19 13:39:29 2023 +0100
+
+    Working on second lecture LELEC1370
+
+[33mcommit 0d0717c2905a9ba4855ce4d1586ecf65eb520ed4[m
+Merge: 7f4dba5 b3c3a03
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 19 12:32:50 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 7f4dba5279e09e120596d7c3b9a24fd576cc0162[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 19 12:31:50 2023 +0100
+
+    Working on second lecture
+
+[33mcommit b3c3a0342de7dab4cf9647f6a0e0d69e443e2704[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Feb 18 19:10:50 2023 +0100
+
+    Delete Synthèse/TroncCommun/LEPL1106 - Signaux et Systèmes/Devoir/.ipynb_checkpoints directory
+
+[33mcommit 6b29dc29fc57a87198481c41c8ee0d6bb7a652e8[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Feb 18 15:27:47 2023 +0100
+
+    Finished devoir1 V1.0 the window and plot function
+
+[33mcommit 5ab5274dddccb9a6e70f9f8451b53355ebc845e5[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Feb 17 16:40:43 2023 +0100
+
+    Added the 'devoir' folder for easier collaborative work
+
+[33mcommit 386e33660b1a68947ad263a81f151f7b7cdd6b34[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Feb 14 11:28:50 2023 +0100
+
+    Correction
+
+[33mcommit 53f2caf6631f9f4757b734ca6aef8ccc10cd6efc[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 13 16:20:37 2023 +0100
+
+    Finished part1 lesson 1
+
+[33mcommit 6cb9c9d38e40cc7d4d761ed0af3b757f685dcb0c[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 13 14:34:21 2023 +0100
+
+    Started LEPL1106
+
+[33mcommit 386259683aa2953b5e11f93dc67dfaa55c395d68[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Feb 12 13:59:47 2023 +0100
+
+    Finished first lesson, typo in folder name
+
+[33mcommit 31784d91c8b42ede4e56cb7bc7ffcfe5b6b73b86[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Feb 11 18:04:35 2023 +0100
+
+    Starting LINFO1104 Synthèse
+
+[33mcommit 8c83245743b52338511d17519370fbbac0b45a97[m
+Merge: 92c7c78 9412ee7
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 6 08:50:02 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 9412ee7611f601eef3d31f4a724a54b79a69807f[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 6 09:47:34 2023 +0100
+
+    Delete .idea directory
+
+[33mcommit 92c7c789fb4b8e58763fabb8638416f934a31c8a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 6 08:49:45 2023 +0100
+
+    removed idea folder
+
+[33mcommit ecb0ec3586eb8f7917c3beaa27750e033dad469c[m
+Merge: 7e10364 2e36a4c
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 6 08:45:19 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 7e10364f231874c5ab088fefd58eb0ee1a107452[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Feb 6 08:44:16 2023 +0100
+
+    yup
+
+[33mcommit 2e36a4cf4e8f1fd710da80103e53c2ffbd79d897[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 27 14:08:38 2023 +0100
+
+    Fixed Link to Subsection and GIF
+
+[33mcommit 67788870f40efb96372a34f8508fa3ff344235e1[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 27 13:37:05 2023 +0100
+
+    Delete .idea directory
+
+[33mcommit a61e8ad3e7b6c970b60e39244cb17e97e96fbcad[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 27 13:34:17 2023 +0100
+
+    More comment and better GIF
+
+[33mcommit df8356edf97cf66499b763dc11f8bcbe7e8671c5[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Jan 26 23:24:36 2023 +0100
+
+    Changed the PNG, added comment
+
+[33mcommit 3ab95981fe79c0efa0014d8fbe26df4bb66d2d6a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Jan 26 15:50:56 2023 +0100
+
+    Added info in README, added a python script that put all pdf in Synthèse compilée
+
+[33mcommit 127cca71f46b935244b11de22ba1460dea43df5b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Thu Jan 26 15:50:22 2023 +0100
+
+    Added info in README, added a python script that put all pdf in Synthèse compilée
+
+[33mcommit 35eeef8c0b111eb08810315adf37ce20a65e1111[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Wed Jan 25 16:51:32 2023 +0100
+
+    Issue tab added
+
+[33mcommit 7907302b8037031ce9d149dce56a285565937e25[m
+Merge: f5ad78b e78f56a
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 18:50:38 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit f5ad78b138b3f96fe21ca59bd627f0e38f921ab9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 18:50:30 2023 +0100
+
+    local
+
+[33mcommit e78f56a839bd3b40ad307185437f0541174b3050[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 18:29:18 2023 +0100
+
+    Added Gif and more clear instructions
+
+[33mcommit 13f75b5a2ed8e29f5bd52e0ab15b841081127542[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:49:57 2023 +0100
+
+    added comment
+
+[33mcommit c3bf348a2e2e71948196c56457b704c8e96770e2[m[33m ([m[1;33mtag: v1.0.5[m[33m)[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:48:57 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit d3296d4edb7bfd72a688a1bcc82718040cf19c02[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:48:42 2023 +0100
+
+    Update setup.cfg
+
+[33mcommit d08a1e71598ef29f111d57238968b6f72c9cf4bc[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:48:11 2023 +0100
+
+    Update .pre-commit-hooks.yaml
+
+[33mcommit 3fa0aa9ef07e130468230e51af4b59e1c1017296[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:47:50 2023 +0100
+
+    Rename tex_compile.py to print_arguments.py
+
+[33mcommit 631a3f1fbd5f63efeade541380d3defe116dad8b[m[33m ([m[1;33mtag: v1.0.4[m[33m)[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:43:31 2023 +0100
+
+    Update .pre-commit-hooks.yaml
+
+[33mcommit dc2b0062628ed2f4631e3df03225074e212728b7[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:42:55 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit e59dbab7c4c9457a0139e3df4d0ecf3c0cc3f012[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:42:41 2023 +0100
+
+    Update setup.cfg
+
+[33mcommit ea21925bdafc9a8c0c0f5a0f863b5c2264c4bf4b[m
+Author: Thomas Debelle <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:38:36 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit b940b7a565185487a66a15ad762c99550992af17[m[33m ([m[1;33mtag: v1.0.3[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 24 17:37:17 2023 +0100
+
+    changed the name
+
+[33mcommit 427a8820d37bb5e5b367d8ecf0c8dc8ef6ff27d4[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 22:29:12 2023 +0100
+
+    t p
+
+[33mcommit 46d70518f6999e5f062eec23eed69eed1af945d2[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 23:01:36 2023 +0100
+
+    Added info about the Bash script and fixed the pre-commit install
+
+[33mcommit c0b5788470c5bef44248d964365ac5095b598266[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:17:46 2023 +0100
+
+    test
+
+[33mcommit c81979ad13157a6a035afde1fdf0527d7126b403[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:13:05 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit 49400d497b138aa7f2a0542b719602f2bedc9083[m[33m ([m[1;33mtag: v1.0.2[m[33m)[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:12:00 2023 +0100
+
+    Update setup.cfg
+
+[33mcommit 6d198f2ad4936b4ae027c8d277059c789fbac948[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:11:36 2023 +0100
+
+    Update .pre-commit-hooks.yaml
+
+[33mcommit f200dbd4c8573fc4d5be7a1e41b9be63d1504d7f[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:11:16 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit b4f55409351f30b9af8104bcf4b2304f351a5515[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:01:40 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit 15a9b1979af00bc6c5504dbbb65aab28dc8ae041[m[33m ([m[1;33mtag: v1.0.1[m[33m)[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 15:00:38 2023 +0100
+
+    Update .pre-commit-hooks.yaml
+
+[33mcommit ad9dee3b17f20dcf18ad008c2940be31485fbeaa[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 14:58:40 2023 +0100
+
+    Update .pre-commit-config.yaml
+
+[33mcommit aa1c34995cd1cc4d614f7efe643285d2edc3f620[m[33m ([m[1;33mtag: v1.0.0[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 21 14:56:14 2023 +0100
+
+    patched issue with INSTALLER, renamed the hook, added instructions
+
+[33mcommit 20e925a2e73130dcd5d2ba85c2ba15fc2f87612b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 23:01:36 2023 +0100
+
+    Added info about the Bash script and fixed the pre-commit install
+
+[33mcommit 543b47503589f27dbf35f325fa2231083746653c[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 22:31:17 2023 +0100
+
+    issue resolved with pre-commit install
+
+[33mcommit d690b0955ac148fa8ad9b36f4b60f4e2368f30c9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 21:22:25 2023 +0100
+
+    upgraded the INSTALLER; need to handle more environnements exception --> Open issues if you encounter something !
+
+[33mcommit 5f27b4b6788076728fd891c4f4db7bebca472cb0[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 20:47:01 2023 +0100
+
+    better installer
+
+[33mcommit d454afdbe84881d120e39f5c899f4268bba2508a[m
+Merge: 58254f9 6abed1b
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 19:15:05 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 58254f916e1604d75679f4e7ae1959b1020091ae[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 19:14:37 2023 +0100
+
+    moved instructions
+
+[33mcommit 6abed1ba53a935187eb98db865ab290e3e92d698[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:47:00 2023 +0100
+
+    Delete Template.log
+
+[33mcommit 6049b0d3f4615cebef501472e6a3ea3aff46bcf9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:20:16 2023 +0100
+
+    instructions plus claires
+
+[33mcommit 72e90c4547467454b1d8ed9fc1231107d2232e1d[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:13:14 2023 +0100
+
+    Delete Template.log
+
+[33mcommit cdb2a0831ed102fb0d49d0e0d656ffe6b9238f3c[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:12:51 2023 +0100
+
+    fixed .log
+
+[33mcommit 14123dd22c71832dc32957b9c2f0158545c23b91[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:11:55 2023 +0100
+
+    solved merging with .gitignore
+
+[33mcommit 6c47c490747c32b6a03752c1f674dd2009b274fe[m
+Merge: 8e02024 76d41fb
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:10:14 2023 +0100
+
+    Merge branch 'SettingUp'
+
+[33mcommit 76d41fbde1b73f10c226547353dc7e18664e4fc2[m[33m ([m[1;31morigin/SettingUp[m[33m)[m
+Merge: 9262c87 33c5f1d
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:06:56 2023 +0100
+
+    Merge branch 'SettingUp' of https://github.com/Tfloow/Q4_EPL into SettingUp
+
+[33mcommit 9262c875c9b5591dbbdb97c23e1cbc527e523fdc[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 18:03:59 2023 +0100
+
+    added installer and instruction
+
+[33mcommit 48bf450b14d51290a5549b5fc316a04b10d074e0[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 17:28:31 2023 +0100
+
+    fixed typo, improved Template and changed the .gitignore
+
+[33mcommit 8e020244554edd10c89480f1f26c46150bd83d40[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 17:28:31 2023 +0100
+
+    fixed typo, improved Template and changed the .gitignore
+
+[33mcommit f96057315c705e1dbd008f0593a840f59668769a[m
+Merge: 2927315 4f91c38
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 16:47:29 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 2927315ad3ae70c9299b7a0c7ea800bcb19e08f0[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Fri Jan 20 16:46:46 2023 +0100
+
+    hook on this repo
+
+[33mcommit 4f91c3874512f9a6392d799c03e58ab44fad92bc[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 23:37:07 2023 +0100
+
+    Delete .github/ISSUE_TEMPLATE directory
+
+[33mcommit ebb9f61d1ff1edc0328078e65d640a758bbb4101[m
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 23:36:21 2023 +0100
+
+    Update issue templates
+
+[33mcommit f920f77c0fa2d5d0291a972023cd8453f3c9076d[m[33m ([m[1;33mtag: v0.1.0[m[33m)[m
+Merge: fd04f1c e5864bc
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 21:26:42 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit fd04f1c87044256e7969d4e6a217bcab9eb701c7[m
+Merge: 690e674 24b666d
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 21:26:06 2023 +0100
+
+    Merge branch 'Pipeline'
+
+[33mcommit 24b666d78f93d4278af28749bea74180973202a1[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 21:25:23 2023 +0100
+
+    typo and info added to readme
+
+[33mcommit e5864bc54d746f200ddaf6a6904f6a662a15fbe6[m
+Merge: 690e674 b7ff145
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 21:23:28 2023 +0100
+
+    Merge pull request #3 from Tfloow/Pipeline
+    
+    Pipeline
+
+[33mcommit b7ff145855e2cad7d2b4374fdf3bd2e0bba17a07[m[33m ([m[1;31morigin/Pipeline[m[33m)[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Tue Jan 17 21:20:21 2023 +0100
+
+    added working hook, not yet for stable release on main but added the basis
+
+[33mcommit 2b7b904d7b7a708d483ae76824337cee9ca48b12[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 22:43:55 2023 +0100
+
+    added the pre-commit
+
+[33mcommit eb6a5381b9bf8f50941db60a73185e951770136e[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 20:03:00 2023 +0100
+
+    new branch
+
+[33mcommit 690e6740239b38150e40b75704897d5b939373d9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 20:01:57 2023 +0100
+
+    Revert "new branch"
+    
+    This reverts commit 43b9436e022587504522a768237720f07e8fea6b.
+
+[33mcommit 43b9436e022587504522a768237720f07e8fea6b[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 20:01:07 2023 +0100
+
+    new branch
+
+[33mcommit 13f489f160fa88031e31eedb4a7abcbf57288a75[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 19:58:20 2023 +0100
+
+    tidy up
+
+[33mcommit 1b0049768aea19a330a4c18e99146e958bf09b75[m
+Merge: 1b1af72 0857bc5
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 14:15:40 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit 0857bc553b2ecb4cd0f0c3c576ed46ea476e458e[m
+Merge: 1537302 33c5f1d
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 14:13:54 2023 +0100
+
+    Merge pull request #2 from Tfloow/SettingUp
+    
+    added yml set up
+
+[33mcommit 33c5f1df3a885a2b5dcd6c9b94fb4987fec56dac[m
+Merge: eb16720 1537302
+Author: Thomas <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 14:13:31 2023 +0100
+
+    Merge branch 'main' into SettingUp
+
+[33mcommit eb16720cfd88a5259dd0bbfb8bb6ef65b9f0ecb6[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 14:10:57 2023 +0100
+
+    updated and cleaned
+
+[33mcommit 6ecbc07af3fee556c0249d47c873c0926434edf9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 14:08:16 2023 +0100
+
+    pleasee
+
+[33mcommit 977b1f6c4514c5198fc055d6626e9162b6a54477[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 11:45:33 2023 +0100
+
+    testing
+
+[33mcommit 93e0e300344c025defc8293f8e5438658121735f[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 10:53:24 2023 +0100
+
+    struggling please ahamldfjqf
+
+[33mcommit 3c412e15e51419314f3def998bd637148b9fdf5a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 10:01:10 2023 +0100
+
+    added the yaml config
+
+[33mcommit 65b78e71839f45191d149360ac3357d745e1466c[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 09:59:08 2023 +0100
+
+    skeleton of my hook
+
+[33mcommit 1b1af722362bfc3954c20683738a9bbb7e46e6db[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 09:51:29 2023 +0100
+
+    trying to make it work ahaha
+
+[33mcommit a554767a9950dd3a4a50228adff088546ce758af[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Mon Jan 16 09:43:12 2023 +0100
+
+    working on yaml workflow to request compiled pdf version of a tex
+
+[33mcommit 15373023c43f62f88f8348d47768e8c576d8f291[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 11:26:08 2023 +0100
+
+    Wiki and template added
+
+[33mcommit 2836cf060ea8cd5f89478889607000658940e155[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 11:22:58 2023 +0100
+
+    zipped template for easier access
+
+[33mcommit 959923ef587c8ea9536c4db2a696b39c58c05dc1[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 09:40:54 2023 +0100
+
+    Delete Template.tex.orig
+
+[33mcommit f558759452e1197032fb7b5197bd823b88fb40cb[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 09:11:13 2023 +0100
+
+    Create Template.tex.orig
+
+[33mcommit 0d6d3a679524e081cd3f3f72a164fef3f1291c85[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 08:47:10 2023 +0100
+
+    updated branch
+
+[33mcommit 1ac688c067a1e215d9fd39bd7b03d0395a6f3076[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 08:34:11 2023 +0100
+
+    small changes
+
+[33mcommit 726cef78f4ac07ed774d487047102b5d55ca6379[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sun Jan 15 08:34:11 2023 +0100
+
+    small changes
+
+[33mcommit 21ffd54632c0319e0d8a34b1424ce60cc56cc128[m
+Merge: bd5634f 136a558
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 22:21:14 2023 +0100
+
+    Merge branch 'main' of https://github.com/Tfloow/Q4_EPL
+
+[33mcommit bd5634f38d2dd245f211347b53760758f2f1f889[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 22:16:03 2023 +0100
+
+    new template and added a gitignore
+
+[33mcommit 8c3c5b07584901a0592fbca86ba2e45bce78ff1a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 22:15:12 2023 +0100
+
+    added the template and pdf output
+
+[33mcommit 136a5587e843210722907c8010f92338fc8dd4c8[m
+Merge: 1162536 e30a5ce
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 20:21:28 2023 +0100
+
+    Merge pull request #1 from BrieucDallemagne/main
+    
+    ajout BrieucD
+
+[33mcommit e30a5ce83909343b0106a4c1f3698527006fad96[m
+Author: BrieucDallemagne <121724368+BrieucDallemagne@users.noreply.github.com>
+Date:   Sat Jan 14 20:17:07 2023 +0100
+
+    Update README.md
+
+[33mcommit 959c3f1f158a360c2a8f748a8ff174a832561eb8[m
+Author: BrieucDallemagne <121724368+BrieucDallemagne@users.noreply.github.com>
+Date:   Sat Jan 14 20:06:13 2023 +0100
+
+    Update README.md
+
+[33mcommit 1162536b8ef026502fa6d0b8bdd89a89bcb2bd54[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 19:34:52 2023 +0100
+
+    merci Hokkaydo pour la remarque
+
+[33mcommit 87d73cf423c5b1eab3937bd2d9b2f063740bede9[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 19:24:35 2023 +0100
+
+    correction typo
+
+[33mcommit 8aad9f3b148443f4a6c2422201c2a7c84cbad9c5[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 19:21:24 2023 +0100
+
+    Updating Readme
+
+[33mcommit 2d87dbb5ea03e6000112771aab6f80596c1d1927[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 16:42:30 2023 +0100
+
+    Ajouté toutes les filières
+
+[33mcommit 3ce20f54faef9a2b2a2d75cb849f7fef8672bfc8[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 16:16:44 2023 +0100
+
+    Updated the panel and corrected error
+
+[33mcommit 7e5af720d4b067c2bcc5d41bb905d8d3bdd6eca5[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 15:53:42 2023 +0100
+
+    added the base of it
+
+[33mcommit f429767b348f9fc5c9327e6e86c0b500ffb8d21a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 15:14:41 2023 +0100
+
+    Update README.md
+
+[33mcommit 79a382b4daa5ceedb8849d1b7979235dfd8c4d8f[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 15:01:27 2023 +0100
+
+    Update README.md
+
+[33mcommit 17d811d6dad79bb33df92e8e3577afa5bb9cb18f[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 14:52:32 2023 +0100
+
+    Added table
+
+[33mcommit fbebc1514466331eb412ebbe15c1a318fa10b3c3[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 14:46:50 2023 +0100
+
+    Added répartition
+
+[33mcommit 6ca1759239d883c592ae8db340c5ce3b20e60c6a[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 14:18:55 2023 +0100
+
+    Template V0.1
+
+[33mcommit d9f78d861617017ca2e1ebcdbe6cce5be729889e[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 14:14:57 2023 +0100
+
+    Update README.md
+
+[33mcommit 67301e59b7e240cf5a43387977d3d9b5b72e9cf7[m
+Author: Tfloow <88899420+Tfloow@users.noreply.github.com>
+Date:   Sat Jan 14 13:36:05 2023 +0100
+
+    Initial commit
