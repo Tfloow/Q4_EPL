@@ -697,16 +697,24 @@ PAIR &= (x,y) \text{ le tuple} & PAIR &\triangleq \lambda x.\lambda y.\lambda f.
 FIRST &\triangleq \lambda p.p \quad TRUE & SECOND &\triangleq \lambda p.p \quad FALSE\\ 
 NIL &\triangleq \lambda x.TRUE & NULL &\triangleq \lambda p.p (\lambda x.\lambda y.FALSE)
 \end{align*}
-\textcolor{red}{TODO: montrer l'utilité des paires}
+Ceci nous introduit à l'abstraction de donnée. Une chose cruciale à comprendre est que depuis les 3 principes simples du lambda calcul, (définition de fonction, utilisation de fonction, des variables en arguments) on peut tout réaliser !
+
+\subsubsection{Liste}
+En sachant qu'une liste est un ensemble de valeur de nil, on sait utiliser des listes en lambda calcul. On peut même les utiliser pour "\textit{simplement}" définir la fonction PRED via SHIFTINC:
+\begin{align*}
+SHIFTINC &\triangleq \lambda x.PAIR (SECOND \quad x) (SUCC (SECOND \quad x)) \quad (m,n) \rightarrow (n,n+1)\\
+PRED &\triangleq \lambda n.FIRST (n \quad SHIFTINC (PAIR \quad 0 \quad 0))
+\end{align*}
+En effet cela fonctionne car le premier élément sera $n-1$ par rapport au second.
 
 \subsection{Fonctions récursives}
 Comme les fonctions sont anonymes, on ne peut pas faire d'appel direct récursif. On va faire en sorte qu'une fonction devient l'argument d'une expression lambda. Par exemple:
 $G \triangleq \lambda f.\lambda n.$(if n = 0 then 1 else n(f n-1))
 
 \subsubsection{Y combinator}
-Cela nous permet de passer de $Y(g)$ à $g(Y \quad g)$.
+Cela nous permet de passer de $Y(g)$ à $g(Y \quad g)$. Ainsi, on sait faire des factorielles de manière récursive:
 \begin{align*}
-Y
+Y \triangleq \lambda q.(\lambda x.g (x \quad x)) (\lambda x.g(x \quad x))
 \end{align*}
 
 \subsection{Théorème de Church-Rosser}
@@ -734,6 +742,13 @@ qui commence par l'intérieur & calculer que ce qui est \\
 \subsubsection{If statement}
 Dans la plupart des langages de programmation, la condition \textcolor{blue}{if} est réalisé de manière applicative. La partie de l'action \textcolor{blue}{then} est réalisé de manière \textcolor{blue}{lazy}. Donc si une action produit une erreur mais quelle est dans une clause qui ne serait pas atteint, alors le programme ne crashe pas.
 
+\subsection{Astuce pour le Lambda Calcul}
+Voici quelques astuces qui peuvent vous aider à maitriser le lambda calcul qui peut semble de prime abord barbare:
+\begin{enumerate}
+\item Ajouter des parenthèse !! Ex: $\lambda x.\lambda y.x + y \quad 1 \quad 2 \rightarrow (\lambda x.(\lambda y.x+y)1)2$ Cela peut sembler anodin mais cela permet de mieux comprendre et lire les expression qui peuvent vite devenir lourdes.
+\item Utiliser des abréviations. Car on a pas toujours besoin de savoir comment cela fonctionne et permet de faire partie par partie une fonction.
+\end{enumerate}
+
 \subsection{Variation et extension}
 Le lambda calcul est une base fondamentale dans la théorie de l'informatique. Dans les extensions du lambda calcul, on retrouve:
 \begin{itemize}
@@ -746,6 +761,106 @@ Le lambda calcul est une base fondamentale dans la théorie de l'informatique. D
 \end{itemize}
 
 \chapter{État mutable et abstraction des données}
+Une chose importante à réaliser, il n'y a pas de notion de temps en programmation. Toutes les fonctions qu'on a sont mathématiques et ne change pas en fonction du temps. Un programme \textit{ ne peut observer} son évolution dans le temps sur l'ordinateur.
+
+\section{Motivation}
+Une des solutions possibles, on définit le temps abstrait comme une suite de valeurs. On appelle cela un \textbf{état}. \\
+Formellement, un \textcolor{blue}{state} est une séquence calculé de manière \textit{progressive} et contient les résultats \textit{intermédiaire}. Le paradigme fonctionnel peut utiliser les \textcolor{blue}{états}. ci-dessous la définition de \textbf{Sum} comme un état:
+\begin{center}
+\begin{tabular}{c|c}
+\begin{lstlisting}[escapechar=\%]
+fun {Sum Xs A}
+	case Xs
+	of nil then A
+	[] X|Xr then
+		{Sum Xr A+X}
+	end
+end
+{Browse {Sum [1 2 3 4] 0}}
+\end{lstlisting}
+& \begin{lstlisting}[escapechar=\%]
+Xs		A
+[1 2 3 4]	0
+[2 3 4]		1
+[3 4]		3
+[4]		6
+nil		10    
+\end{lstlisting}
+\end{tabular}
+\end{center}
+Mais cela n'est pas suffisant. En effet, on voudrait que le programme remarque \textit{lui-même} ses propres changements. Il faut faire une \textbf{extensions}, on rentre dans un nouveau \textbf{paradigme}.
+
+\section{État explicite}
+On va essayer de montrer les changements en rendant les états \textit{explicites}. On appelle l'extension une \textbf{cellule} ou \textit{cell}(c'est l'équivalent d'un \textit{pointeur} en C).\\
+Donc tout comme en C, on peut changer la référence en changeant le pointeur ou en remplaçant la variable par une autre valeur.
+
+\subsubsection{Cell}
+Une cellule à une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
+
+\begin{itemize}
+\item \textcolor{red}{identité}: c'est constant et correspond au nom/pointeur de la cellule 
+\item \textcolor{red}{contenu}: c'est le contenu stocké qui lui peut varier.
+\end{itemize}
+
+\begin{lstlisting}[escapechar=\%]
+A=5; B=6
+C={NewCell A}	%// on crée une nouvelle cellule%
+{Browse @C}	%// on montre le \textit{contenu} avec @ ici 5%
+C:=B		%// on ré-attribue le pointeur qui pointe vers B maintenant%
+{Browse @C}	%// vaut 6%
+\end{lstlisting}
+
+\subsection{Exemple}
+Une chose à bien comprendre est que lorsqu'on réalise l'opération $:=$, on remplace le contenu de la \textit{box}. Si on lie 2 cell via $=$ on relie notre variable vers la même cell. Donc on peut modifier le contenu de la box via une des deux variables. (\ref{pointerEx1})
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/pointerEx1.png} \label{pointerEx1}
+\includegraphics[width=6cm]{img/pointerEx2.png}
+\end{figure}
+
+\section{Sémantique de cellules}
+On va maintenant étendre la machine abstraite afin d'expliquer comment les \textit{cells} fonctionnent.\\
+Tout d'abord, nous avons maintenant \textbf{2 types de données}. Les données \textcolor{blue}{immutables} ou \textcolor{blue}{assignement unique} et les \textcolor{blue}{mutables} ou \textcolor{blue}{assignements multiples} (les cellules).\\
+Une cellule est une paire de 2 \textit{variables}.
+\begin{itemize}
+\item Une variable constante qui est lié au nom de la \textit{cell}
+\item Une variable qui est lié au contenu de la cellule
+\end{itemize}
+Quand on assigne du nouveau contenu à une \textit{cell}, on change la paire (seulement la deuxième variable).\\
+
+Pour stocker le tout, on a 2 parties comme $\sigma = \sigma_1 \cup \sigma_2$.
+\begin{itemize}
+\item \textcolor{blue}{Single assignement}: $\sigma_1 = \{t,v,x=\xi,y = \zeta\}$
+\item \textcolor{blue}{Multiple assignement}: $\sigma_2 = \{x:t, y:w\}$
+\end{itemize}
+Quand on réalise l'opération $X:=Z$ on change $\sigma_2$. $x:t \rightarrow x:z$
+
+\subsection{Programmation impérative}
+La \textbf{programmation impérative} est le nom du nouveau \textit{paradigme}. C'est donc le cumul du \textit{functional paradigm} et du concept de cellules.\\
+La programmation impérative est fondamentale en \textbf{programmation orienté objet}.
+
+\subsubsection{Langage Kernel de la programmation impérative}
+\begin{lstlisting}[escapechar=\%]
+<s> ::= skip 
+	| %$<s>_1$% %$<s>_2$% 
+	| local <x> in <s> end 
+	| %$<x>_1=<x>_2$%
+	| <x>=<v> 
+	| if <x> then %$<s>_1$% else %$<s>_2$% end 
+	| {%$<x>,<y>_1, ..., <y>_n$%} 
+	| case <x> of <p> then %$<s>_1$% else %$<s>_2$% end 
+	| {NewCell <y> <x>} 
+	| <x>:=<y> ____ {Exchange <x> <y> <z>}
+	| <y>=@<x> __|
+<v> ::= <number> | <procedure> | <record> 
+<number> ::= <int> | <float> 
+<procedure> ::= proc {$ %$<x>_1,...,<x>_n$%} <s> end
+<record>, <p> ::= <lit> | <lit>(%$<f>_1:<x>_1 ... <f>_n:<x>_n$%)
+\end{lstlisting}
+On remplace souvent l'attribution et l'appel du contenu par la fonction \textit{Exchange} qui est une opération atomique (c'est-à-dire 2 opérations indissociables en 1).
+
+\section{Nécessité de l'état mutable}
+On dit qu'un programme est modulaire pour une partie si on peut changer cette dernière sans changer le reste du programme.
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
