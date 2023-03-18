@@ -234,7 +234,7 @@ local P Q in
 	{Browse 'another something'}
 end
 \end{lstlisting}
-Notre "proc {Q}" sera stocker comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et fini (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocké avec le code de procédure.\\
+Notre "proc {Q}" sera stocker comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et finit (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocké avec le code de procédure.\\
 On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand définis.\\
 Donc l'avantage d'un environnement contextuel est d'être sûr qu'on appellera la bonne valeur même si elle est déclaré en dehors de la fonction.\\
 
@@ -261,20 +261,20 @@ Ce type de sémantique à 2 parties majeures:
 
 \subsubsection{1. Langage Kernel complet}
 Pour définir correctement une sémantique, il faut tout d'abord s'intéresser à son langage Kernel complet. On peut également prouver qu'un programme est correct en analysant son kernel. Par exemple, prenons ce code kernel:
-\begin{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 <s> ::= skip 
-	| <s>1 <s>2 
+	| %$<s>_1 <s>_2$% 
 	| local <x> in <s> end 
-	| <x>1=<x>2 
+	| %$<x>_1=<x>_2$% 
 	| <x>=<v> 
-	| if <x> then <s>1 else <s>2 end 
-	| {<x> <y>1 ... <y>n} 
-	| case <x> of <p> then <s>1 else <s>2 end
+	| if <x> then %$<s>_1$% else %$<s>_2$% end 
+	| {<x> %$<y>_1,...,<y>_n$%} 
+	| case <x> of <p> then %$<s>_1$% else %$<s>_2$% end
 
 <v> ::= <number> | <procedure> | <record>  
 <number> ::= <int> | <float> 
-<procedure> ::= proc {$ <x>1 ... <x>n} <s> end
-<record>, <p> ::= <lit> | <lit>(<f>1:<x>1 ... <f>n:<x>n)
+<procedure> ::= proc {$ %$<x>_1, ..., <x>_n$%} <s> end
+<record>, <p> ::= <lit> | <lit>(%$<f>_1:<x>_1, ..., <f>_n:<x>_n$%)
 \end{lstlisting}
 donc "<s>" contient le programme exécuté, "<v>" est une structure de donné contenant différent type de structure de donné qui sont définis juste en dessous. 
 
@@ -490,7 +490,7 @@ Nomenclature des différentes fonctions:
 \end{itemize}
 
 \subsubsection{Utilisation}
-Via la programmation d'ordre supérieure, on peut caché un accumulateur. On dit qu'on fait une \textit{abstraction d'accumulateur}.\\
+Via la programmation d'ordre supérieure, on peut cacher un accumulateur. On dit qu'on fait une \textit{abstraction d'accumulateur}.\\
 Une fonction type est la fonction \textbf{FoldL} (\textit{reduce}). En effet, la fonction FoldL fait:
 \begin{lstlisting}
 declare
@@ -572,7 +572,7 @@ F = fun %\{\$ X\}% fun %\{\$ Y\}% T end end
 Le sens d'une expression lambda dépend de comment on peut la réduire. Il en existe 3 types.
 \begin{enumerate}
 \item \textcolor{red}{$\alpha$-renaming}: change le nom des variables liés
-\item \textcolor{red}{$\beta$-renaming}: applique une fonction à un argument
+\item \textcolor{red}{$\beta$-reduction}: applique une fonction à un argument
 \item \textcolor{red}{$\eta$-reduction}: enlève les variables inutilisés
 \end{enumerate}
 
@@ -594,9 +594,15 @@ Il faut faire attention à ce qu'on ait pas de \textit{conflit de nom} et de \te
 Des termes qui diffèrent d'un $\alpha$-renaming sont dits $\alpha$-equivalent.
 
 \subsubsection{Substitution} \label{sub}
-\textcolor{red}{TODO}
+La substitution de $t_1[x:=t_2]$ remplace toutes les occurrences libres de x dans $t_1$ par $t_2$.\\
+On a parfois recourt à l'$\alpha$-\textit{renaming}. En effet, la substitution ne peut pas \textit{capturer} des variables libres. Donc $(\lambda x.y)[y:=x]$ peut être transformé en $(\lambda z.y)[y:=x]$. La définition:
+\begin{align*}
+x[x:=t] &= t & y[x:=t]&=y, \text{ if } x \neq y & (t_1 \quad t_2)[x:=t]&= (t_1[x:=t])(t_2[x:=t])\\
+(\lambda x.t_1)[x:=t_2]&= \lambda x.t_1 & (\lambda y.t_1)[x:=t_2]&= \lambda y.(t_1[x:=t_2]),& \text{ if } x &\neq y \wedge y \notin FV(t_2)
+\end{align*}
 
-\subsubsection{$\beta$-renaming}
+
+\subsubsection{$\beta$-reduction}
 C'est une application de fonction et se décrit via la substitution. (cfr \ref{sub})\\
 Définition:  $(\lambda x.t_1) t_2 \rightarrow t_1[::=t_2]$\\
 Exemple: $(\lambda x.(x \quad x))y \rightarrow (y \quad y)$
@@ -612,11 +618,11 @@ Définition: $\lambda x.(t \quad x) \rightarrow t$ if $x \notin FV(t)$
 \end{figure}
 
 \subsubsection{Convention de notation}
-Quand on manipule des expression lambda, il est important de suivre quelques règles:µ
+Quand on manipule des expression lambda, il est important de suivre quelques règles:
 \begin{itemize}
 \item Enlever les parenthèses les plus extérieur. ex: $(t_1 \quad t_2) \rightarrow t_1 \quad t_2$
 \item Les applications sont associatives depuis la gauche. ex: $t_1 \quad t_2 \quad t_3 \rightarrow ((t_1 \quad t_2) \quad t_3)$
-\item On étend vers la droit. ex: $\lambda x.t_1 t_2 \rightarrow \lambda x.(t_1 t_2)$
+\item On étend vers la droite ex: $\lambda x.t_1 t_2 \rightarrow \lambda x.(t_1 t_2)$
 \item On peut simplifier les séquences d'abstractions. ex: $\lambda x. \lambda y. \lambda z.t \rightarrow \lambda xyz.t$
 \end{itemize}
 
@@ -625,14 +631,14 @@ Le lambda calcul peut faire tout type de calcul, il est \textcolor{red}{Turing c
 Pour le démontrer, on va encoder des chiffres, opérations, ... en lambda calcul. Donc tous les chiffres, booléens, ... seront encodés en lambda calcul
 
 \subsection{Nombres}
-On utilise une notation appelé \textcolor{red}{Church Numerals}:
+On utilise une notation appelée \textcolor{red}{Church Numerals}:
 \begin{itemize}
 \item $0 \triangleq \lambda f.(\lambda x.x)$
 \item $1 \triangleq \lambda f.(\lambda x.(f \quad x))$
 \item $2 \triangleq \lambda f.(\lambda x.(f (f \quad x))$
 \item $3 \triangleq \lambda f.(\lambda x.(f (f (f \quad x))$
 \end{itemize}
-On peut remarquer que ces fonctions dont d'ordre supérieur. En effet, il prend en argument une fonction et ressort une fonction. (d'un seul argument)\\
+On peut remarquer que ces fonctions dont d'ordre supérieur. En effet, elles prennent en argument une fonction et ressort une fonction. (d'un seul argument)\\
 Le nombre $n$ retourne donc la fonction qui est une composition de $n$ fois de f. Donc on dit que \textbf{f est appliqué n fois}.
 
 \subsection{Opérations}
@@ -667,7 +673,7 @@ PRED &\triangleq \lambda n.\lambda f.\lambda x.n (\lambda g.\lambda h.h (g f)) (
 \subsubsection{Soustraction}
 Grâce à la méthode du prédécesseur, on peut définir la soustraction:
 \begin{align*}
-SUB \triangleq \lambda m.\lambda n.n PRED m
+SUB \triangleq \lambda m.\lambda n.n \quad PRED \quad m
 \end{align*}
 Donc pour $m-n$ on effectue la fonction prédécesseur $n$ fois en commençant à $m$. 
 
@@ -680,7 +686,7 @@ TRUE &\triangleq \lambda x.\lambda y.x & FALSE &\triangleq \lambda x.\lambda y.y
 
 \subsubsection{Opérateur logique}
 \begin{align*}
-AND &\triangleq \lambda p.\lambda q.p \quad q \quad p & OR &\triangleq \lambda p.\lambda q.p \quad p \quad p\\
+AND &\triangleq \lambda p.\lambda q.p \quad q \quad p & OR &\triangleq \lambda p.\lambda q.p \quad p \quad q\\
 NOT &\triangleq \lambda p.p \quad FALSE \quad TRUE & IFTHENELSE &\triangleq \lambda p.\lambda a.\lambda b.p \quad a \quad b
 \end{align*} 
 
@@ -723,10 +729,10 @@ Concrètement, si $a$ se réduit à $b$ avec aucune ou plusieurs étapes et que 
 Le programme est \textcolor{red}{confluent} ou possède la \textit{propriété de Church-Rosser}.
 
 \subsection{Le lambda calcul et les langages de programmation}
-La \textit{programmation fonctionnel} peut être compris en terme de lambda calcul.
+La \textit{programmation fonctionnelle} peut être comprise en terme de lambda calcul.
 \begin{itemize}
 \item Les valeurs de procédures (donc \textit{lexically scope closures}) \textbf{sont} des fonctions lambda.
-\item l'\textit{Eager et lazy evaluation} est une juste une stratégie de réduction différente.
+\item l'\textit{Eager et lazy evaluation} est sont des stratégies de réduction différentes.
 \end{itemize}
 
 \subsubsection{2 approches}
@@ -742,11 +748,12 @@ qui commence par l'intérieur & calculer que ce qui est \\
 \subsubsection{If statement}
 Dans la plupart des langages de programmation, la condition \textcolor{blue}{if} est réalisé de manière applicative. La partie de l'action \textcolor{blue}{then} est réalisé de manière \textcolor{blue}{lazy}. Donc si une action produit une erreur mais quelle est dans une clause qui ne serait pas atteint, alors le programme ne crashe pas.
 
-\subsection{Astuce pour le Lambda Calcul}
-Voici quelques astuces qui peuvent vous aider à maitriser le lambda calcul qui peut semble de prime abord barbare:
+\subsection{Astuces pour le Lambda Calcul}
+Voici quelques astuces pour vous aider à maitriser le lambda calcul qui peut sembler de prime abord barbare:
 \begin{enumerate}
-\item Ajouter des parenthèse !! Ex: $\lambda x.\lambda y.x + y \quad 1 \quad 2 \rightarrow (\lambda x.(\lambda y.x+y)1)2$ Cela peut sembler anodin mais cela permet de mieux comprendre et lire les expression qui peuvent vite devenir lourdes.
-\item Utiliser des abréviations. Car on a pas toujours besoin de savoir comment cela fonctionne et permet de faire partie par partie une fonction.
+\item Ajouter des parenthèse !! Ex: $\lambda x.\lambda y.x + y \quad 1 \quad 2 \rightarrow (\lambda x.(\lambda y.x+y)1)2$ Cela peut sembler anodin mais cela permet de mieux comprendre et lire les expressions qui peuvent vite devenir lourdes.
+\item Utiliser des abréviations. Car on n'a pas toujours besoin de savoir comment cela fonctionne et permet de faire partie par partie une fonction.
+\item Pour bien réaliser un $\eta$\textit{-reduction}, commencer par faire une $\beta$\textit{-reduction}. Vous voyez ce qu'il vous reste. Vous faites une $\alpha$\textit{-renaming} pour retrouver une expression qui correspond à une partie de l'expression de base.
 \end{enumerate}
 
 \subsection{Variation et extension}
