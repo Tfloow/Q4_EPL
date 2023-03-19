@@ -152,12 +152,15 @@ Dans un circuit électrique, on peut faire face à des arrangements de résistan
 \includegraphics[width=7cm]{img/triangleEtoile.png}
 \caption{Passage d'une forme de triangle à une forme d'étoiles}
 \end{figure}
-Les équations sont:
-\begin{align}
-R_1 &= \frac{R_a R_b + R_b R_c + R_a R_c}{R_b}\\
-R_a &= \frac{R_1 R_2}{R_1 + R_2 + R_3}
-\end{align}
-
+Les équations sont pour passer de \textbf{triangles à étoiles}:
+\begin{align*}
+R_c &= \frac{R_1 * R_3}{R_1 + R_2 + R_3} & R_b &= \frac{R_2 * R_3}{R_1 + R_2 + R_3} & R_a &= \frac{R_1 * R_2}{R_1 + R_2 + R_3}
+\end{align*}
+Et pour convertir d'\textbf{étoiles à triangles}:
+\begin{align*}
+R_1 &= \frac{R_a*R_b + R_a*R_c + R_b*R_C}{R_b} & R_2 &= \frac{R_a*R_b + R_a*R_c + R_b*R_C}{R_c} \\
+R_3 &= \frac{R_a*R_b + R_a*R_c + R_b*R_C}{R_a}
+\end{align*}
 
 
 \chapter{Cours 2}

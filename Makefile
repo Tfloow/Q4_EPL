@@ -1,23 +1,25 @@
-PosLatex=0
-List= 1 4
+LELEC1370=Synthèse/Elec/LELEC1370_CircuitsetMesures/LELEC1370
+LEPL1106=Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/Lepl1106
+LINFO1123=Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité/Linfo1123
+LINFO1104=Synthèse/Info/LINFO1104_ConceptsProgrammation/Linfo1104
 
-full: Lepl1106 LELEC1370 Linfo1123 Linfo1104 Sorting
+full: $(LEPL1106).pdf $(LELEC1370).pdf $(LINFO1123).pdf $(LINFO1104).pdf Sorting
 	echo "Finish Full compiling and moving"
 
-Lepl1106 : Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes
-	cd $^; ls; pdflatex -synctex=1 -interaction=nonstopmode $@.tex
+$(LEPL1106).pdf : $(LEPL1106).tex
+	cd Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
-LELEC1370 : Synthèse/Elec/LELEC1370_CircuitsetMesures
-	cd $^; ls; pdflatex -synctex=1 -interaction=nonstopmode $@.tex
+$(LELEC1370).pdf : $(LELEC1370).tex
+	cd Synthèse/Elec/LELEC1370_CircuitsetMesures; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
-Linfo1123 : Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité
-	cd $^; ls; pdflatex -synctex=1 -interaction=nonstopmode $@.tex
+$(LINFO1123).pdf : $(LINFO1123).tex
+	cd Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
-Linfo1104 : Synthèse/Info/LINFO1104_ConceptsProgrammation
-	cd $^; ls; pdflatex -synctex=1 -interaction=nonstopmode $@.tex
+$(LINFO1104).pdf : $(LINFO1104).tex
+	cd Synthèse/Info/LINFO1104_ConceptsProgrammation; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
 Sorting : SynthèseCompilée/

@@ -109,7 +109,7 @@ En utilisant la notation \textbf{Extended Backus-Naur Form} ou \textit{EBNF} pou
 	\centering
 	\includegraphics[width=.3\textwidth]{img/listTree.png}
 \end{wrapfigure}
-Donc une List d'entier se définit comme: <List <Int> >. Une chose importante à remarquer est que j'ai utiliser le mot "représentation" en effet <Int> n'est pas un entier mais une représentation d'entier.\\
+Donc une List d'entier se définit comme: <List <Int> >. Une chose importante à remarquer est que j'ai utilisé le mot "représentation" en effet <Int> n'est pas un entier mais une représentation d'entier.\\
 
 Pour définir une liste en Oz, on utilise soit la notation \textcolor{blue}{[1 2 3]} ou \textcolor{blue}{1 | 2 | 3 | nil}.(il existe d'autre manière semblable qu'on verra plus loin) C'est 2 déclarations reviennent à la même chose en mémoire. Une utilité des listes est leur facilité à être représenté sous forme d'arbre comme montré ci-contre. La \textit{head} est accessible via \textcolor{blue}{list.1} et la \textit{tail} est obtenu via \textcolor{blue}{list.2}.
 
@@ -205,6 +205,7 @@ Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différ
 \begin{lstlisting}
 X = state(a:1 2:a b:2)
 Y = inv(3:a 2:b 1:c)
+
 \end{lstlisting}
 Donc la position d'une valeur et son \textit{field} n'importe plus et on peut déclarer dans le sens qu'on veut.\\
 Si on ne nomme pas un \textit{field} dans un \textit{record}, Oz va attribuer un nombre commençant à $1$ et qui n'est pas utilisé par un autre champ.\\
@@ -470,7 +471,7 @@ end
 \end{lstlisting}
 A l'exécution,$[(\{Inc M N\},\{M\rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
 \{m=10,n,i=(proc \{\$ X Y\} Y=X+A end, \{A \rightarrow a\}), a=1,b=(... browser code…)\}$ et Inc va référencer cela:\\
-$[(Y=X+A,\{A\rightarrow,X \rightarrow m,Y \rightarrow n\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
+$[(Y=X+A,\{A\rightarrow a,X \rightarrow m,Y \rightarrow n\}), (\{Browse N\},\{M \rightarrow m,N \rightarrow n,Inc \rightarrow i,Browse \rightarrow b\})],
 \sigma$\\
 Il est important de remarquer que dans la mémoire, quand on stocke une procédure, on stocke le tout donc avec son environnement contextuel.
 
