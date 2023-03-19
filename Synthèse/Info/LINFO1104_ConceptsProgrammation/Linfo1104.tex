@@ -694,7 +694,7 @@ NOT &\triangleq \lambda p.p \quad FALSE \quad TRUE & IFTHENELSE &\triangleq \lam
 \subsubsection{Prédicat}
 Ce sont des fonctions qui retournent une valeur booléenne:
 \begin{align*}
-ISZERO &\triangleq \lambda .n (\lambda x.FALSE) TRUE & LEQ &\triangleq \lambda m.\lambda n.ISZERO (SUB \quad m \quad n)
+ISZERO &\triangleq \lambda n.n (\lambda x.FALSE) TRUE & LEQ &\triangleq \lambda m.\lambda n.ISZERO (SUB \quad m \quad n)
 \end{align*}
 
 \subsubsection{Paire}
@@ -721,7 +721,7 @@ $G \triangleq \lambda f.\lambda n.$(if n = 0 then 1 else n(f n-1))
 \subsubsection{Y combinator}
 Cela nous permet de passer de $Y(g)$ à $g(Y \quad g)$. Ainsi, on sait faire des factorielles de manière récursive:
 \begin{align*}
-Y \triangleq \lambda q.(\lambda x.g (x \quad x)) (\lambda x.g(x \quad x))
+Y \triangleq \lambda g.(\lambda x.g (x \quad x)) (\lambda x.g(x \quad x))
 \end{align*}
 
 \subsection{Théorème de Church-Rosser}
@@ -752,9 +752,10 @@ Dans la plupart des langages de programmation, la condition \textcolor{blue}{if}
 \subsection{Astuces pour le Lambda Calcul}
 Voici quelques astuces pour vous aider à maitriser le lambda calcul qui peut sembler de prime abord barbare:
 \begin{enumerate}
-\item Ajouter des parenthèse !! Ex: $\lambda x.\lambda y.x + y \quad 1 \quad 2 \rightarrow (\lambda x.(\lambda y.x+y)1)2$ Cela peut sembler anodin mais cela permet de mieux comprendre et lire les expressions qui peuvent vite devenir lourdes.
+\item Ajouter des parenthèse !! Ex: $\lambda x.\lambda y.x + y \quad 1 \quad 2 \rightarrow (\lambda x.(\lambda y.x+y)1)2$ Cela peut sembler anodin mais cela permet de mieux comprendre et lire les expressions qui peuvent vite devenir lourdes. Aussi, garder les parenthèses ça peut aider à voir plus clair. 
 \item Utiliser des abréviations. Car on n'a pas toujours besoin de savoir comment cela fonctionne et permet de faire partie par partie une fonction.
 \item Pour bien réaliser un $\eta$\textit{-reduction}, commencer par faire une $\beta$\textit{-reduction}. Vous voyez ce qu'il vous reste. Vous faites une $\alpha$\textit{-renaming} pour retrouver une expression qui correspond à une partie de l'expression de base.
+\item Cet \href{https://medium.com/@ayanonagon/the-y-combinator-no-not-that-one-7268d8d9c46}{article} est très utile pour comprendre le \textit{y-combinator} et mieux disséquer les opérations en Lambda Calcul.
 \end{enumerate}
 
 \subsection{Variation et extension}
