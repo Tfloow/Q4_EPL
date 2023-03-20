@@ -127,13 +127,13 @@ Le langage Kernel est la première partie de la sémantique formelle d'un langag
 Les grands principes du langage Kernel sont:
 \begin{itemize}
 	\item Tous les résultats intermédiaires de calculs sont visibles. Donc on a 1 opération par ligne et la déclaration en locale de toutes les variables.
-	\item Toutes les fonctions deviennent des \textit{procédures} avec un argument en plus. Cet argument donne le résultat de la fonction.
+	\item Toutes les fonctions deviennent des \textit{procédures anonymes} avec un argument en plus. Cet argument donne le résultat de la fonction.
 	\item Les fonctions dans une fonction sont sortis de leur fonction et on leur donne un nouvel identificateur.
 \end{itemize}
 Les résultats de la traduction: Les programmes Kernel sont plus longs mais on voit facilement comment un programme s'exécute et on voit si il est \textit{tail-recursive}
 
 \section{Les arbres}
-Les arbres sont des structures de données extrêmement utiles et utilisées. On peut y stocker des données spécifiques, faire des calculs, ... Les arbres illustrent bien \textit{la programmation orienté but}. Par le standard \textit{EBNF}, on définit un arbre comme suit: <tree T> ::= leaf | t(T <tree T> ... <tree T>). Donc un arbre est une feuille ou \textit{leaf} qui est suivie par un ensemble de \textit{sous-arbres}. Les arbres sont forts similaires au liste si ce n'est que les listes n'ont qu'une sous-listes alors qu'un arbre peut avoir plusieurs sous-arbres.
+Les arbres sont des structures de données extrêmement utiles et utilisées. On peut y stocker des données spécifiques, faire des calculs, ... Les arbres illustrent bien \textit{la programmation orienté but}. Par le standard \textit{EBNF}, on définit un arbre comme suit: <tree T> ::= leaf | t(T <tree T> ... <tree T>). Donc un arbre est une feuille ou \textit{leaf} qui est suivie par un ensemble de \textit{sous-arbres} (Il faut noter que le $t(...)$ est une façon d'écrire un \textit{record} de label "\textit{t}" qui est vu au \ref{record}). Les arbres sont forts similaires au liste si ce n'est que les listes n'ont qu'une sous-listes alors qu'un arbre peut avoir plusieurs sous-arbres.
 
 \subsection{Ordered Binary tree}
 Un arbre de ce type a 2 particularités:
@@ -200,7 +200,7 @@ List2 = (1:1 2:(1:2 2:(1:3 2:nil)))
 List1 == List2 %//Vrai%
 \end{lstlisting}
 
-\subsection{Les Records}
+\subsection{Les Records} \label{record}
 Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différence avec les tuples est que le \textit{field} peut être n'importe quel valeur et ne doit pas être consécutif. Donc ceux-ci sont des \textit{records} corrects:
 \begin{lstlisting}
 X = state(a:1 2:a b:2)
@@ -396,7 +396,7 @@ local P in
 	end
 end 
 \end{lstlisting}
-Ici, à la ligne de la création de la procédure P, son environnement contextuel est $E_c = \{Z \rightarrow z\}$. Au moment de l'exécution de P avec les valeurs A et B, on va donc ajouter un environnement qui est de la sorte: $E_P = \{Y \rightarrow b, X \rightarrow a, Z \rightarrow z\}$
+Ici, à la ligne de la création de la procédure P, son environnement contextuel est $E_c = \{Z \rightarrow z\}$.On va stocker dans la mémoire notre instruction et son environnement \textit{contextuel} c'est la \textit{semantic rule}. Au moment de l'exécution de P avec les valeurs A et B, on va donc ajouter un environnement qui est de la sorte: $E_P = \{Y \rightarrow b, X \rightarrow a, Z \rightarrow z\}$. Donc ce deuxième environnement est stocker dans le \textit{stack sémantique} \textbf{pas} dans la mémoire avec le fonction !
 Donc en langage \textit{sémantique}, la définition d'une procédure ressemble à cela:
 \begin{itemize}
 \item \textbf{Instruction sémantique}: (<x>=\textcolor{blue}{proc}\{\$ $<x>_1, ..., <x>_n$\} <s> \textcolor{blue}{end}, E)
@@ -589,10 +589,10 @@ On dénote $FV(t)$ l'ensemble des variables libres:
 \subsubsection{$\alpha$-renaming}
 Ainsi, on peut changer le nom d'une variable lié:
 \begin{lstlisting}[escapechar=\%]
-%$\lambda$%.x x %$\rightarrow_{\alpha}\lambda$%.y y
+%$\lambda$% x. x %$\rightarrow_{\alpha}\lambda$%y. y
 \end{lstlisting}
 Il faut faire attention à ce qu'on ait pas de \textit{conflit de nom} et de \textit{capture de variable}.\\
-Des termes qui diffèrent d'un $\alpha$-renaming sont dits $\alpha$-equivalent.
+Des termes qui diffèrent d'un $\alpha$-renaming sont dits $\alpha$-équivalents.
 
 \subsubsection{Substitution} \label{sub}
 La substitution de $t_1[x:=t_2]$ remplace toutes les occurrences libres de x dans $t_1$ par $t_2$.\\
