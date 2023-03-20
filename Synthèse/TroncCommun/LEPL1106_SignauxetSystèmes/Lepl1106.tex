@@ -14,6 +14,7 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage{amsfonts}
+\usepackage{tikz}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{xparse}
@@ -465,7 +466,7 @@ u(t) &=  \int_0^{\infty} \delta(t) dt\\
 u(j\omega) &= \frac{1}{j \omega} + \pi \delta(\omega)
 \end{align*}
 
-\subsection{Fonction fenêtre}
+\subsection{Fonction fenêtre} \label{window}
 Cette fonction, correspond à 2 impulsion. tel que:
 \begin{equation}
 imp = u(t+1) - u(t-1)
@@ -496,6 +497,65 @@ Cela se prouve avec la dilatation et la translation de la fonction échelon.
 
 \section{Tableau de Check}
 %insérer tableau slide 22 cours 4
+
+\chapter{Filtrage et Bode}
+
+\section{Filtre}
+On se souvient, que convoluer 2 signaux revient à multiplier leur spectre. De plus, dans un système \textbf{LIT} le résultat d'un signal x est: $y = h\ast x$. Donc, la plupart du temps quand un programme informatique fait un système LIT, il va faire la \textit{transformée de Fourier} pour simplement multiplier et pas avoir des sommes de multiplications.\\
+Donc en Résumé:
+\begin{align*}
+Y(t) = H(t) \ast X(t) &\longleftrightarrow Y(j\omega) = H(j \omega) X(j \omega)\\
+=|H(j \omega)||X(j \omega)|&e^{j(arg\{H(j\omega )\}+ arg\{X(j \omega) \}}
+\end{align*}
+Donc, il parait clair qu'un système modifie le contenu fréquentiel de notre signal $X$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/signalFreq.png}
+\caption{Exemple de système LIT}
+\end{figure}
+Le fait de modifier le \textit{contenu fréquentiel} est appelé le \textbf{filtrage}.
+\subsection{Type de filtre}
+Il existe 3 grands types de filtres:
+\begin{enumerate}
+\item \textcolor{red}{Les filtres passe-bas}: ils vont atténuer et annuler les \textit{hautes-fréquences} pour ne laisser passer que les \textit{basses}.
+\item \textcolor{red}{Les filtres passe-haut}: ils vont atténuer et annuler les \textit{basses fréquences} et ne laisser passer que les \textit{hautes}.
+\item \textcolor{red}{Les filtres passe-bande}: ils ne vont laisser passer qu'une partie précise de fréquence. On peut voir cela comme la différence entre un filtre passe-bas d'envergure $A$ et un filtre passe-base d'envergure $B$ avec $A>B$. La différence $A-B$ est appelé la \textbf{largeur de bande}. 
+\end{enumerate}
+C'est grâce à cela que la radio fonctionne ou que les filtres photo fonctionnent.\\
+
+\newpage % à enlever si écart 
+
+\subsubsection{Les circuits RC}
+Parmi les exemples typiques, on peut s'intéresser au circuit RC (cf: \href{https://github.com/Tfloow/Q4_EPL/blob/main/SynthèseCompilée/LELEC1370.pdf}{LELEC1370}). 
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/RC.png}
+\caption{RC classique}
+\end{wrapfigure}
+En effet, on peut modéliser les équations d'un tel circuit comme suit:
+\begin{align*}
+x(t) &= R C \frac{du}{dt} + u(t) \longleftrightarrow\\
+X(j \omega) = RC j \omega Y(j \omega) + Y(j \omega) &= Y(j \omega) (j\omega RC+1)\\
+\frac{Y(j \omega)}{X(j \omega)} = H(j \omega) &= \frac{1}{1+ j \omega RC}\\
+\text{Si } \omega_c = \frac{1}{RC}; |H(j\omega)| &= \frac{1}{\sqrt{1 + j(\omega / \omega_c)^2}}
+\end{align*}
+Ici, notre $\omega_c$ représente la \textcolor{blue}{fréquence de coupure}. C'est donc la valeur à partir de laquelle, on aura un changement notable de résultat.\\
+Une chose à remarquer est que le déphasage lié à la fréquence angulaire augmente jusqu'à $\frac{\pi}{2}$. Peu perceptible au début, cela ne change rien fondamentalement.
+
+\subsection{Filtres non-idéaux}
+Un filtre parfait serait un filtre qui soit: nulle partout où on ne veut pas la fréquence et unitaire partout où on la veut.\\
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/sinc.png}
+\caption{Sinus cardinal}
+\end{wrapfigure}
+Mais comme vu au point \ref{window}, un tel signal en phasoriel correspond à:
+\begin{align*}
+H(j\omega) \longleftrightarrow h(t) = \frac{sin(\omega_c t)}{\pi t}
+\end{align*}
+Le gros soucis avec cela, c'est qu'on a une réponse actuelle du système qui dépend de quelque chose se passant dans le \textit{futur} donc pas vraiment physique. Le système n'est pas \textit{causal}.\\
+On peut aussi noter qu'on aura un déphasage nul. En réalité, on cherche à avoir une déphasage linéaire car c'est simplement une modulation et est plus facilement corrigeable.
+
 
 \part{Systèmes}
 
