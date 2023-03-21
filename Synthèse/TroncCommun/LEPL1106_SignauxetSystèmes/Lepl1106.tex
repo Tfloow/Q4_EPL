@@ -5,6 +5,7 @@
 \usepackage[french]{babel}
 \usepackage{graphicx}
 \usepackage{graphics}
+\usepackage{colortbl}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{hyperref}
@@ -555,6 +556,49 @@ H(j\omega) \longleftrightarrow h(t) = \frac{sin(\omega_c t)}{\pi t}
 \end{align*}
 Le gros soucis avec cela, c'est qu'on a une réponse actuelle du système qui dépend de quelque chose se passant dans le \textit{futur} donc pas vraiment physique. Le système n'est pas \textit{causal}.\\
 On peut aussi noter qu'on aura un déphasage nul. En réalité, on cherche à avoir une déphasage linéaire car c'est simplement une modulation et est plus facilement corrigeable.
+
+\subsubsection{Passe-bande non-idéal}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/pbNonIde.png}
+\end{wrapfigure}
+Il en va de même pour le filtre passe-bande qui est composé de deux fonctions fenêtres comme suit:
+\begin{align*}
+|H(j\omega)| &= \sqcap \bigr(\frac{\omega + \omega_0}{B/2}\bigr) + \sqcap \bigr(\frac{\omega - \omega_0}{B/2}\bigr)\\
+h(t) &= \frac{sin(Bt/2}{\pi t}2 cos(\omega_0 t)
+\end{align*}
+Comme au point précédent, c'est la non causalité et donc le manque de sens physique qui rend ce type de filtres idéaux impossibles.
+
+\subsection{Filtre analogique}
+Ce sont des filtres composés d'éléments \textcolor{blue}{passifs} et/ou \textcolor{blue}{actifs}. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=9cm]{img/analogique.png}
+\caption{Réponse impulsionelle en fonction de la fréquence}
+\label{analogique}
+\end{figure}
+
+Un filtre \textit{réel} a un $|H(j\omega)|$ qui ressemblent plus à la figure \ref{analogique}. Le \textbf{gabarit} précise les \textit{tolérances} qu'on accepte quand on design un filtre.
+\begin{enumerate}
+\item \textcolor{red}{Fluctuations bande passante}: on détermine un $\epsilon$ qui définit la largeur de bande passante.
+\item \textcolor{red}{Zone de transition}: correspond au $\Delta$ qui indique la largeur de cette zone.
+\item \textcolor{red}{Fluctuations bande bloquante}: la largeur de cette bande est définit via $\delta$.
+\end{enumerate}
+
+\subsubsection{Les familles de filtre}
+\begin{center}
+\begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
+\hline
+\cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
+\hline
+Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c}^{2n}$ & On a un filtre avec une \textit{fluctuation de bande passante} minime. Une \textit{zone de transition} plus ou moins élevé et une \textit{bande bloquante} qui tend vers 0.\\
+\hline
+Tchebychev Direct & $|H(j\omega)|^2 = \frac{1}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} oscillante mais borné. Une \textit{zone de transition} rapide et une \textit{bande bloquante} qui tend vers 0 et plus vite que \textcolor{blue}{Butterworth}.\\
+\hline
+Tchebychev Inverse & $|H(j\omega)|^2 = \frac{\sqrt{\gamma}T_n(\omega_c/\omega}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} plate. Une \textit{zone de transition} rapide et une \textit{bande bloquante} oscille de manière bornée (l'inverse de \textcolor{blue}{Tchebychev}).\\
+\hline
+\end{tabular}
+\end{center}
 
 
 \part{Systèmes}
