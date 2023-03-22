@@ -13,9 +13,9 @@ def onlyPDF(elemList):
     return good
 
 def run():
-    folderList = ["Elec", "FYKI", "GBio", "GC", "Info", "MAP", "Méca", "TroncCommun"] # name of different folder
-    target = "..\\SynthèseCompilée" # were to put the pdf
-    syntheseFolder = "..\\Synthèse" # from where they should be
+    folderList = ["Elec", "FYKI", "GBio", "GC", "Info", "MAP", "Meca", "TroncCommun"] # name of different folder
+    target = "..\\SyntheseCompilee" # were to put the pdf
+    syntheseFolder = "..\\Synthese" # from where they should be
 
     for i in os.walk(syntheseFolder): # going through all the folder and files of the Synthèse folder
         if len(onlyPDF(i[-1])) > 0:
