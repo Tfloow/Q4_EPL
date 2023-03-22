@@ -23,4 +23,4 @@ $(LINFO1104).pdf : $(LINFO1104).tex
 	echo "Done with $@"
 
 Sorting : SyntheseCompilee/
-	cd $^;ls; python3 $@.py
+	cd $^;ls; python $@.py
