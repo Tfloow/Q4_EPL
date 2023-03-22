@@ -1,26 +1,26 @@
-LELEC1370=Synthèse/Elec/LELEC1370_CircuitsetMesures/LELEC1370
-LEPL1106=Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes/Lepl1106
-LINFO1123=Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité/Linfo1123
-LINFO1104=Synthèse/Info/LINFO1104_ConceptsProgrammation/Linfo1104
+LELEC1370=Synthese/Elec/LELEC1370_CircuitsetMesures/LELEC1370
+LEPL1106=Synthese/TroncCommun/LEPL1106_SignauxetSystemes/Lepl1106
+LINFO1123=Synthese/Info/LINFO1123_CalculabilitéLogiqueetComplexité/Linfo1123
+LINFO1104=Synthese/Info/LINFO1104_ConceptsProgrammation/Linfo1104
 
 full: $(LEPL1106).pdf $(LELEC1370).pdf $(LINFO1123).pdf $(LINFO1104).pdf Sorting
 	echo "Finish Full compiling and moving"
 
 $(LEPL1106).pdf : $(LEPL1106).tex
-	cd Synthèse/TroncCommun/LEPL1106_SignauxetSystèmes; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
+	cd Synthese/TroncCommun/LEPL1106_SignauxetSystemes; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
 $(LELEC1370).pdf : $(LELEC1370).tex
-	cd Synthèse/Elec/LELEC1370_CircuitsetMesures; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
+	cd Synthese/Elec/LELEC1370_CircuitsetMesures; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
 $(LINFO1123).pdf : $(LINFO1123).tex
-	cd Synthèse/Info/LINFO1123_CalculabilitéLogiqueetComplexité; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
+	cd Synthese/Info/LINFO1123_CalculabilitéLogiqueetComplexité; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
 $(LINFO1104).pdf : $(LINFO1104).tex
-	cd Synthèse/Info/LINFO1104_ConceptsProgrammation; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
+	cd Synthese/Info/LINFO1104_ConceptsProgrammation; ls; pdflatex -synctex=1 -interaction=nonstopmode $(subst .pdf,,$(lastword $(subst /, , $@))).tex
 	echo "Done with $@"
 
-Sorting : SynthèseCompilée/
+Sorting : SyntheseCompilée/
 	cd $^;ls; python $@.py
