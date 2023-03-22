@@ -32,11 +32,11 @@ jobs:
       - name: Storing
         uses: actions/upload-artifact@v3
         with:
-          name: SynthèseCompilee
-          path: SynthèseCompilee/
+          name: SyntheseCompilee
+          path: SyntheseCompilee/
       - name: Download(test)
         uses: actions/download-artifact@v3
         with:
-          name: SynthèseCompilee
-          path: SynthèseCompilee/
+          name: SyntheseCompilee
+          path: SyntheseCompilee/
 
