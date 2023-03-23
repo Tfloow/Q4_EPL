@@ -698,6 +698,26 @@ Impossible de détecter les cas sans réponses. (fonction HALT en exemple)
 Donne un output fini aussi précis que je le voudrais. R n'est pas énumérable et j'ai un nombre énumérable de programme donc je ne peux pas représenter tous les R.
 \end{enumerate}
 
+\section{S7}
+\begin{itemize}
+\item \textcolor{blue}{Sémantique}: signification du programme et sa fonction calculé
+\item \textcolor{blue}{Syntaxique}: comment écrire correctement le programme et qu'il soit compréhensible par l'ordinateur
+\end{itemize}
+
+Si un ensemble A est ND-récursif, les différentes exécutions du programme ND-Java qui décide cet ensemble doivent-elles nécessairement se terminer pour chaque input possible.$\rightarrow$ ce sont des arbres de décisions (accepter les résultats si oui ou non etc)\\
+
+Tant qu'une façon d'avancer dit oui même avec une boucle infini, on peut accepter.\\
+Quel est le but d'un langage non déterministe car pas exécutable sur un pc? Car sinon on va saturer et on n'aura pas assez de cœur et on passera en séquentiel. (ex: parcours en largeur): C'est pour modéliser des problèmes\\
+
+Avec BLOOP je peux calculer des choses mais pas toutes les fonctions totales et calculables (hoare allison)\\
+
+Automate fini chose simple qui répète toujours la même chose en boucle sans dépendre du passé.\\
+
+Par hoare allisson que les automates sont toujours finis et s'arrête\\
+
+Si on a une façon acceptante, on peut toujours l'accepter et dire oui.\\
+
+On ne peut pas programmer toutes les fonctions calculables en automate fini
 
 \chapter{Vrai ou Faux cours} %améliorer la mise en page
 Cette section regroupe toutes les réponses et raisonnements des questions \textbf{wooclap} posées au cours.
@@ -790,6 +810,16 @@ Il existe une fonction partielle calculable telle qu’aucune fonction totale ca
 \item La non calculabilité du problème de Post est une conséquence du théorème de Rice $\rightarrow$ \textcolor{red}{Faux}, c'est une autre famille de problème non calculables, c'est lié au problème des chaines de caractères
 \item L’ensemble des nombres réels calculables est énumérable $\rightarrow$ \textcolor{green}{Vrai} car on l'approche via un programme et le nombre de programme est calculable
 \item Il existe une infinité non énumérable de nombres réels non calculables $\rightarrow$  \textcolor{green}{Vrai} les réels calculables sont énumérables donc l'ensemble opposé doit être non énumérable sinon ça voudrait dire que les réels sont énumérables.
+\end{enumerate}
+
+\section{S7}
+\begin{enumerate}
+\item Toutes les fonctions calculables par les programmes du langage BLOOP sont totales $\rightarrow$ \textcolor{green}{Vrai} toujours terminé donc tot
+\item Le langage BLOOP (Bounded Loop) ne permet de programmer que des fonctions totales.  Il existe donc des fonctions totales calculables qui ne peuvent être programmées dans ce langage. $\rightarrow$ \textcolor{green}{Vrai} hoare allison
+\item Les langages non déterministes permettent d’écrire des algorithmes plus efficaces. $\rightarrow$ \textcolor{red}{Faux}, plus simple de les exécuter mais on ne peut pas exécuter tout en parallèle
+\item Tout ensemble ND-récursivement énumérable  est récursif $\rightarrow$ \textcolor{red}{Faux}, ND et déterministe est la même chose. Cela n'apporte rien en calculabilité. ND facilite la description de problème. Donc est-ce un ensemble récursivement énumérable récursif ? Faux bien évidement
+\item Il existe des ensembles récursifs ne pouvant être décidés par un automate fini $\rightarrow$ \textcolor{green}{Vrai}, HOARE ALLISON ! Tous les programmes se terminent 
+\item Tout automate fini non déterministe peut être transformé en un automate fini déterministe équivalent $\rightarrow$ \textcolor{green}{Vrai}, un programme non déterministe Java peut être transformé en déterministe en faisant étape par étape
 \end{enumerate}
 
 \end{document}
