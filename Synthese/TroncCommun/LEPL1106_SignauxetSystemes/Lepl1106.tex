@@ -585,20 +585,63 @@ Un filtre \textit{réel} a un $|H(j\omega)|$ qui ressemblent plus à la figure \
 \item \textcolor{red}{Fluctuations bande bloquante}: la largeur de cette bande est définit via $\delta$.
 \end{enumerate}
 
-\subsubsection{Les familles de filtre}
+\subsubsection{Les filtres passe-bas}
 \begin{center}
 \begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
 \hline
 \cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
 \hline
-Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c}^{2n}$ & On a un filtre avec une \textit{fluctuation de bande passante} minime. Une \textit{zone de transition} plus ou moins élevé et une \textit{bande bloquante} qui tend vers 0.\\
+Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & On a un filtre avec une \textit{fluctuation de bande passante} minime. Une \textit{zone de transition} plus ou moins élevé et une \textit{bande bloquante} qui tend vers 0.\\
 \hline
 Tchebychev Direct & $|H(j\omega)|^2 = \frac{1}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} oscillante mais borné. Une \textit{zone de transition} rapide et une \textit{bande bloquante} qui tend vers 0 et plus vite que \textcolor{blue}{Butterworth}.\\
 \hline
 Tchebychev Inverse & $|H(j\omega)|^2 = \frac{\sqrt{\gamma}T_n(\omega_c/\omega}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} plate. Une \textit{zone de transition} rapide et une \textit{bande bloquante} oscille de manière bornée (l'inverse de \textcolor{blue}{Tchebychev}).\\
 \hline
+Elliptiques/Cauer & $|H(j\omega)|^2 = \frac{1}{1+ \gamma R_n^2(\omega / \omega_n \zeta)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation}, $\zeta$ est le \textcolor{blue}{facteur de sélectivité} et $R_n^2$ est une fonction \textcolor{blue}{rationnelle elliptique}. On a donc un filtre où en modifiant les paramètres $\gamma$ et $\zeta$, on peut obtenir un filtre spécifique.\\
+\hline
 \end{tabular}
 \end{center}
+
+\subsubsection{Les filtres passe-haut}
+\begin{center}
+\begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
+\hline
+\cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
+\hline
+Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & Est très similaire à son homologue passe-bas. Donc on a des bandes très plate et une zone de transition assez rapide dépendant de son degré.\\
+\hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Les filtres passe-bande}
+Pour obtenir un filtre passe-bande, on combine 2 filtres passe-bas. On doit réaliser le changement de variable suivant:
+\begin{align*}
+j\omega \rightarrow \frac{\omega_0^2 - \omega^2}{Bj\omega}
+\end{align*}
+Où $B$ est la largeur du filtre souhaitée et $\omega_0$ est la fréquence à laquelle on va centrer nos deux bandes (une \textit{positive} et \textit{négative}).
+
+\subsubsection{Les filtres à encoche / notch}
+Ce sont des filtres qui ne font passer qu'une seule fréquence \textit{spécifique}.
+\begin{align}
+H(j\omega) = \frac{(j\omega + j\omega_0)(j\omega - j\omega_0)}{(j \omega + \omega_0(cos(\theta) + j\sin(\theta))(j \omega + \omega_0(cos(\theta) -j\sin(\theta))) }
+\end{align}
+
+\subsubsection{Les filtres passe-tout}
+Il existe également une famille de filtre qui fait \textit{tout passer}. Son utilité ? \textcolor{blue}{déphaser} de $+/- \pi$ un signal ce qui peut être fort utile !
+\begin{equation}
+H(j\omega) = \frac{(j\omega - 2)}{(j\omega + 2)}
+\end{equation}
+
+
+\section{Caractérisation d'un filtre}
+Pour se faire, on prend son équation de réponse impulsionnelle et on trace son diagramme de \textcolor{blue}{Bode}. (ne pas oublier que Bode c'est \textit{la norme} \textbf{et} \textit{l'argument})\\
+
+Pour se faire, on utilise une échelle \textit{logarithmique}. On doit également \textcolor{blue}{factoriser} notre réponse impulsionnelle comme suit:
+\begin{align}
+|H(j\omega| &= K \frac{|1 + \frac{j\omega}{\omega{z_1}}||\frac{j\omega}{\omega_{z_2}}|\bigr|(\frac{j\omega}{\omega_{z_3}})^2 + 2 \xi \frac{j\omega}{\omega_{z_3}}+1\bigr|}{|1 + \frac{j\omega}{\omega{p_1}}||\frac{j\omega}{\omega_{p_2}}|\bigr|(\frac{j\omega}{\omega_{p_3}})^2 + 2 \xi \frac{j\omega}{\omega_{p_3}}+1\bigr|}
+\end{align}
+
 
 
 \part{Systèmes}
