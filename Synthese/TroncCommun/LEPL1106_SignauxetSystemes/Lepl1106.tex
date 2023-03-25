@@ -639,10 +639,35 @@ Pour se faire, on prend son équation de réponse impulsionnelle et on trace son
 
 Pour se faire, on utilise une échelle \textit{logarithmique}. On doit également \textcolor{blue}{factoriser} notre réponse impulsionnelle comme suit:
 \begin{align}
-|H(j\omega| &= K \frac{|1 + \frac{j\omega}{\omega{z_1}}||\frac{j\omega}{\omega_{z_2}}|\bigr|(\frac{j\omega}{\omega_{z_3}})^2 + 2 \xi \frac{j\omega}{\omega_{z_3}}+1\bigr|}{|1 + \frac{j\omega}{\omega{p_1}}||\frac{j\omega}{\omega_{p_2}}|\bigr|(\frac{j\omega}{\omega_{p_3}})^2 + 2 \xi \frac{j\omega}{\omega_{p_3}}+1\bigr|}
+|H(j\omega)| &= K \frac{|1 + \frac{j\omega}{\omega{z_1}}||\frac{j\omega}{\omega_{z_2}}|\bigr|(\frac{j\omega}{\omega_{z_3}})^2 + 2 \xi \frac{j\omega}{\omega_{z_3}}+1\bigr|}{|1 + \frac{j\omega}{\omega{p_1}}||\frac{j\omega}{\omega_{p_2}}|\bigr|(\frac{j\omega}{\omega_{p_3}})^2 + 2 \xi \frac{j\omega}{\omega_{p_3}}+1\bigr|}\\
+20 &log(|H(j\omega)|)
 \end{align}
+Grâce aux propriétés des logarithmes, on peut séparer et additionner les multiplications et et divisions.\\
+Ainsi, on trace morceau par morceau notre fonction et on va sommer ses différentes parties.
+\begin{align*}
+\textcolor{orange}{20 log|K|} + \textcolor{red}{20 log \bigr| \frac{j\omega}{\omega_{z_1}}\bigr|} + \textcolor{blue}{20 log(\bigr|1 + \frac{j\omega}{\omega_{z_2}}\bigr|)}
+\end{align*}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.5cm]{img/K.png}
+\includegraphics[width=5cm]{img/jomega.png}
+\includegraphics[width=5cm]{img/jomegacarre.png}
+\end{figure}
 
+et pour la version au \textit{carré} on a ceci. Il faut faire attention aux \textbf{asymptotes} qui peuvent se former !
+\begin{align*}
+\textcolor{green}{20log(\bigr|  \bigr(\frac{j\omega}{\omega_{z_3}}\bigr)^2 + 2 \xi \frac{j\omega}{\omega_{z_3}} +1 \bigr|)}
+\end{align*}
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/jomegamax.png}
+\end{figure}
+Après cela, on additionne/soustrait simplement nos courbes ensembles et on obtient notre \textit{première partie} du diagramme de \textcolor{blue}{Bode}.
+
+\subsection{Argument}
+Pour l'argument, le processus est le même si ce n'est qu'on ne met pas l'argument dans un logarithme mais est représenté sur une échelle logarithmique.\\
+On trace nos différents arguments et on les somme.
 
 \part{Systèmes}
 
