@@ -930,13 +930,125 @@ On va \textcolor{red}{protéger} les données. On utilisera un \textcolor{red}{S
 W={Wrap X} %\text{//encrypte}%
 X={Unwrap W} %\text{//décrypte}%
 \end{lstlisting}
-C'est donc une sorte d'encryption/décryption. Ainsi, on cache et empêche l'accès aux valeurs car on va encrypter les données primaires. L'utilisateur ne peut invoquer les fonctions Wrap et Unwrap.
+C'est donc une sorte d'encryption/décryption. Ainsi, on cache et empêche l'accès aux valeurs car on va encrypter les données primaires. L'utilisateur ne peut invoquer les fonctions Wrap et Unwrap.\\
+Voici l'implémentation d'un stack:
+\begin{lstlisting}[escapechar=\%]
+local Wrap Unwrap in
+  {NewWrapper Wrap Unwrap}
+
+  fun {NewStack} {Wrap nil} end 
+  fun {Push W X} {Wrap X|{Unwrap W}} end 
+  fun {Pop W X} S={Unwrap W} in X=S.1 {Wrap S.2} end
+  fun {IsEmpty W} {Unwrap W}==nil end
+end
+\end{lstlisting}
 
 \subsection{Remarque}
 Le premier langage de programmation à implémenter l'\textit{ADT} est \textcolor{blue}{CLU} et précédé de \textcolor{blue}{Simula 67} en 1967.\\
 Ces langages supportent également la protection, ... De nombreux langages actuels supportent implicitement l'\textit{ADT} (par exemple: \textcolor{blue}{JAVA}, les nombres sont \textit{ADT} et les objets en java ont des propriétés \textit{ADT})
 
 \section{Les objets}
+Cela représente donc à la fois un ensemble de \textcolor{blue}{valeur et d'opérations}. Donc au début, on instantie notre stack. Par la suite on réalise des opérations de la sorte:
+\begin{lstlisting}[escapechar=\%]
+S={NewStack} 
+{S push(X)} 
+{S pop(X)}
+{S isEmpty(B)
+\end{lstlisting}
+Donc on voit que notre $S$ est une sorte de fonction et instance, les deux à la fois. Concrètement, on implémente un objet pour un Stack comme ci-dessous:
+\begin{lstlisting}[escapechar=\%]
+fun {NewStack} 
+	C={NewCell nil} 
+	proc {Push X} C:=X|@C end 
+	proc {Pop X} S=@C in C:=S.2 X=S.1 end 
+	proc {IsEmpty B} B=(@C==nil) end
+in
+	proc {$ M}
+		case M of push(X) then {Push X} 
+		[] pop(X) then {Pop X} 
+		[] isEmpty(B) then {IsEmpty B} end
+	end
+end
+\end{lstlisting}
+Chaque appel à NewStack va donc créer un nouvel \textcolor{blue}{objet}. Pour réaliser ses procédures, on passe 1 seul argument à notre objet. Pas besoin de Wrapper car on ne peut accéder à ces fonctions que via la création de l'objet stack. On le dissimule donc via le \textcolor{blue}{dynamic scoping}.
+
+\subsection{Remarque}
+De nos jours, les objets sont \textit{omniprésents} en programmation.\\
+Ils sont apparus avec \textcolor{blue}{simula67} et a inspiré la plupart des langages actuels.\\
+Cependant, la plupart des langages orientés objets sont en réalité des \textit{ADT} même s'ils incorporent les deux (\textit{ils ont en plus les modules et composants}).
+
+\section{Les 4 types d'abstraction de données}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=7cm]{img/resAbstract.png}
+\caption{Résumé de l'abstraction des données}
+\end{wrapfigure}
+Les 2 à ajouter sont:
+\begin{enumerate}
+\item Les types de données abstraites \textbf{avec état} (\textit{stateful ADT})
+	\begin{enumerate}
+	\item Très utilisé en C mais sans l'\textit{encapsulation} puisqu'impossible en C.
+	\item On les retrouve dans les classes Java avec des attributs \textit{statiques}.
+	\end{enumerate}
+\item Les objets \textbf{sans état} (\textit{functional objects}):
+	\begin{enumerate}
+	\item Les objets sont \textcolor{red}{immutables} Donc appeler un objet, retourne un \textbf{nouvel} objet avec une \textbf{nouvelle} valeur
+	\item Plus en plus à la mode (\textit{oue oue Scala \#EPFL})
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Functional Objects}
+\subsubsection{Constructions}
+Un \textit{objet fonctionnel} n'a pas de sécurité (pas de cellules ni de wrappers) cela utilise que de la programmation \textcolor{red}{d'ordre supérieur}.
+\begin{lstlisting}[escapechar=\%]
+local 
+  fun {StackObject S} 
+    fun {Push E} {StackObject E|S} end 
+    fun {Pop S1} 
+      case S of X|T then S1={StackObject T} X end end 
+    fun {IsEmpty} S==nil end
+  in
+    stack(push:Push pop:Pop isEmpty:IsEmpty) 
+  end 
+  in 
+    fun {NewStack} {StackObject nil} end
+  end
+\end{lstlisting}
+
+\subsubsection{En Scala}
+C'est une sorte de forme hybride entre programmation fonctionnel et orienté objet. Scala supporte les 2 \textit{paradigmes}.\\
+En Scala, on peut définir des objets immutables qui retournent, \textit{eux-mêmes}, des objets immutables.  Les objets immutables sont des objets \textit{fonctionnels}(\textit{donc pas de changement}).
+
+\subsection{Stateful ADT}
+Voici l'implémentation d'un stack en \textit{stateful ADT}:
+\begin{lstlisting}[escapechar=\%]
+local Wrap Unwrap 
+  {NewWrapper Wrap Unwrap} 
+  fun {NewStack} {Wrap {NewCell nil}} end 
+  proc {Push S E} C={Unwrap S} in C:=E|@C end 
+  fun {Pop S} C={Unwrap S} in 
+    case @C of X|S1 then C:=S1 X end end 
+  fun {IsEmpty S} @{Unwrap S}==nil end
+in 
+  Stack=stack(new:NewStack push:Push pop:Pop isEmpty:IsEmpty)
+end
+\end{lstlisting}
+On utilise donc à la fois une \textcolor{blue}{cellule} et un \textcolor{blue}{wrapper}. Pour mettre à jour un stack, on n'utilise pas de \textit{wrapper} car on va utiliser des \textit{cellules} (ex: pour \textit{Push, Pop et IsEmpty})
+
+\section{Conclusion}
+\noindent
+L'abstraction des données est un concept \textcolor{red}{nécessaire} pour construire des programmes plus \textit{complexes}.
+\begin{itemize}
+\item L'abstraction des données est construite sur: \textit{la programmation d'ordre supérieure, le static scoping, les états explicites, les records et les clés secrètes}
+\item L'abstraction des données est définie via ces concepts. Ainsi, on connait la sémantique de l'abstraction de donnée.
+\end{itemize} 
+Il existe 4 types d'abstraction des données orientées selon 2 axes: 
+\begin{enumerate}
+\item Objet et ADTs sur un axe
+\item Stateful et Stateless
+\end{enumerate} 
+Il existe 2 types d'abstraction des données qui sont dominantes mais les 2 dernières sont toujours utiles pour certains types d'abstraction.\\
+Quasi tous les langages de programmation modernes supportent l'abstraction. Ils supportent généralement \textcolor{blue}{plusieurs} types. Ils sont souvent plus des langages "\textit{orientés abstractions des données}" que simplement "\textit{objet orienté}".
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
