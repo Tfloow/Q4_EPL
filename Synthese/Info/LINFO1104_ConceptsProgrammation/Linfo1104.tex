@@ -870,6 +870,73 @@ On remplace souvent l'attribution et l'appel du contenu par la fonction \textit{
 
 \section{Nécessité de l'état mutable}
 On dit qu'un programme est modulaire pour une partie si on peut changer cette dernière sans changer le reste du programme.
+\textcolor{red}{TODO ajouter plus d'info}
+
+\subsection{Comparaison}
+Dans la \textcolor{blue}{programmation fonctionnelle}
+\begin{itemize}
+\item Un composant \textbf{ne change jamais} de comportement (c'est permanent).
+\item Mettre à jour un composant signifie que sont \textcolor{blue}{interface} change et donc on doit mettre à jour d'autres composants.
+\end{itemize}
+Dans la \textcolor{blue}{programmation impérative}
+\begin{itemize}
+\item Un composant peut être \textcolor{blue}{mis à jour} sans changer son interface et donc on ne doit pas tout mettre à jour.
+\item Un composant peut changer de comportement à cause des actions passées sur une \textcolor{blue}{cellule}.
+\end{itemize}
+On peut avoir le meilleur des 2 mondes, en simplifiant les mises à jour de composants tout en s'assurant que les cellules se comportent comme on le souhaite.
+
+\section{Abstraction des données}
+C'est une des bases pour construire des logiciels complexes. L'abstraction des données est supportée par \textit{les fonctions d'ordre supérieur, static scoping et l'état explicite}. La première chose à réaliser est l'\textcolor{blue}{encapsulation}.
+
+\subsection{Encapsulation}
+C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandé via une télécommande ayant un nombre limitée de fonction. Son fonctionnement est \textit{encapsuler} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
+
+\subsubsection{Définition}
+C'est donc une partie d'un programme qui a une partie \textit{extérieur} (au contact avec l'utilisateur) et une partie \textit{intérieur} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être donné à l'utilisateur.\\
+On limite les \textit{fonctionnalités} et l'utilisateur doit suivre des règles établis de notre interface pour s'assurer que son résultat est bien correct.\\
+L'\textcolor{blue}{encapsulation} doit être \textcolor{red}{supporté} par le langage de programmation.
+
+\subsubsection{Avantage}
+\begin{enumerate}
+\item On garantit que si on utilise la partie \textit{extérieur}, les résultats sont corrects
+\item On simplifie l'utilisation du programme:
+	\begin{itemize}
+	\item L'utilisateur \textbf{ne doit pas} savoir comment le programme fonctionne.
+	\item On peut \textcolor{blue}{partitionner} notre programme pour simplifier le développement et l'utilisation
+	\end{itemize}
+\item On simplifie le développement de grands programmes. \textcolor{blue}{Un développeur} est responsable de \textcolor{blue}{son implémentation} et peut la maintenir.
+\item Un développeur ne doit pas connaitre tout le code source pour utiliser les interfaces des autres développeurs.
+\end{enumerate}
+
+\subsection{Les 2 types}
+
+\subsubsection{Objets}
+On regroupe dans une même entité les \textcolor{blue}{valeurs et opérations}. Ex: la \textit{télévision}.
+
+\subsubsection{Type de données abstraites}
+On sépare les \textcolor{blue}{valeurs et opérations}. Ex: un \textit{distributeur de boisson}$\rightarrow$(\textit{on utilise un pièce (fonction) et on reçoit un objet})
+
+\section{Le type de données abstraites}
+Donc cela consiste a un ensemble de \textit{valeurs} et d'\textit{opérations}. Donc par exemple les nombres et les opérations arithmétiques usuelles.\\
+Dans la plupart des \textit{ADT} les valeurs et les opérations n'ont pas \textbf{d'états}. Donc valeurs \textcolor{blue}{constante} et les opérations \textcolor{blue}{n'ont pas de mémoire interne}.\\
+Donc par exemple pour un \textcolor{blue}{stack}, on l'instantie via une fonction qui nous retourne le type de données.\\
+
+\subsection{Encapsulation}
+Le problème avec cette implémentation vu au-dessus d'un stack est que les données ne sont pas protégées donc peuvent être modifier outre les interfaces.\\
+
+On va \textcolor{red}{protéger} les données. On utilisera un \textcolor{red}{Security Wrapper}. On utilise ça comme suit:
+\begin{lstlisting}[escapechar=\%]
+{NewWrapper Wrap Unwrap} %\text{//crée une nouvelle clée d'encryption}%
+W={Wrap X} %\text{//encrypte}%
+X={Unwrap W} %\text{//décrypte}%
+\end{lstlisting}
+C'est donc une sorte d'encryption/décryption. Ainsi, on cache et empêche l'accès aux valeurs car on va encrypter les données primaires. L'utilisateur ne peut invoquer les fonctions Wrap et Unwrap.
+
+\subsection{Remarque}
+Le premier langage de programmation à implémenter l'\textit{ADT} est \textcolor{blue}{CLU} et précédé de \textcolor{blue}{Simula 67} en 1967.\\
+Ces langages supportent également la protection, ... De nombreux langages actuels supportent implicitement l'\textit{ADT} (par exemple: \textcolor{blue}{JAVA}, les nombres sont \textit{ADT} et les objets en java ont des propriétés \textit{ADT})
+
+\section{Les objets}
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
