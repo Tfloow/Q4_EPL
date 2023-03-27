@@ -669,6 +669,92 @@ Après cela, on additionne/soustrait simplement nos courbes ensembles et on obti
 Pour l'argument, le processus est le même si ce n'est qu'on ne met pas l'argument dans un logarithme mais est représenté sur une échelle logarithmique.\\
 On trace nos différents arguments et on les somme.
 
+\chapter{L'échantillonnage}
+L'échantillonnage est quelque chose qui est partout autour de nous. C'est le fait de transformer un signal continu (\textit{son, vidéo, ...}) en un signal discret. (afin de le stocker sur un pc, ...) C'est donc un processus vitale à l'ère de l'informatique.
+\section{Lien entre le continu et le discret}
+Donc, pour sauvegarder un signal en discret, il faut \textit{ponctuellement} le sauvegarder.On appelle cela \textcolor{blue}{l'échantillonnage}
+
+\subsection{L'échantillonnage}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\begin{align*}
+\text{Pas d'échantillonnage: } &T_e\\
+\text{Fréquence d'échnatillonnage: } & f_e = \frac{1}{T_e}\\
+x[n] &= x(nT_e)\\
+x_e(t)=x(t) \sum_{n \in \mathbb{Z}} \delta(t-nT_e) &= \sum_{n \in \mathbb{Z}} x(nT_e)\delta(t-nT_e)
+\end{align*}
+\end{wrapfigure}
+On relève le signal discret toutes les $T_e$ secondes. Notre signal discret correspond à $x[n]$. Donc la transformation continu $\rightarrow$ est \textit{trivial}.\\
+Une fois qu'on a notre signal \textit{discret}, on peu le retransformer en un signal discret ! En effet, on peut lier $x(t)$ à un peigne/train de Dirac.\\
+On remarque que $x(nT_e) = x[n]$.
+
+\subsubsection{Transformé de Fourier via continu}
+Pour trouver la transformer de Fourier de notre $x_e(t)$ on réalise ceci:
+\begin{align*}
+x_e(t)&= x(t) \sum_{n \in \mathbb{Z}} \delta(t-nT_e)\\
+X_e(j\omega) &= \frac{1}{2\pi} \Bigr[ X(j\omega) \ast \frac{2\pi}{T_e} \sum_{k \in \mathbb{Z}} \delta(\omega- \frac{2\pi}{T_e}k) \Big] \qquad  \frac{2\pi}{T_e} = \omega_e\\
+&= \frac{1}{T_e} \Bigr[ X \ast \sum_{k \in \mathbb{Z}} \delta(-\omega_e) \Bigr](j\omega)\\
+&= \frac{1}{T_e} \sum_{k \in \mathbb{Z}} X(j(\omega -k \omega_e))
+\end{align*}
+\newpage
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=7cm]{img/rep.png}
+\end{wrapfigure}
+Donc notre $\omega_e$ représente la période. On observe également une différence entre $|X(j\omega)|$ et $|X_e(j\omega)|$. En effet, on peut remarquer une répétition tous les $\omega_e = 2 \pi f_e$. Cette contrainte va être très importante pour le taux d'échantillonnage et pour le repli spectral (\ref{spec})
+
+\subsubsection{Transformé de Fourier via discret}
+\begin{align*}
+x_e(t)&= \sum_{n \in \mathbb{Z}} x[n]\delta(t-nT_e)\\
+X_e(j\omega) &= \sum_{n \in \mathbb{Z}} x[n] e^{-j \omega n T_e}\\
+&= X(e^{j\Omega})\vert_{\Omega = \omega T_e}
+\end{align*}
+On retrouve également ce phénomène de \textit{répétition} pouvant mener à un enchevêtrement.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/dua.png}
+\caption{Dualité de Fourier}
+\end{figure}
+
+\section{Repli spectral} \label{spec}
+Comme notre transformé de Fourier se répète tous les $\omega_e$, cela indique que le pas de temps \textit{d'échantillonnage} est primordial. Un pas trop \textit{petit} et les répétitions se \textcolor{red}{superposent}. On appelle cela le \textcolor{blue}{repli spectral}(\textit{aliasing}).\\
+On peut penser aux roues d'un voiture, qui si le nombre de \textit{FPS} n'est pas assez élevé pour le nombre de rotation par seconde, nous donnera l'impression qu'elle tourne à l'envers.
+
+\subsection{Bien échantillonner}
+Avec l'idée de la \textit{voiture}, on peut déjà poser le fait qu'un bon échantillonnage est $2T_e \leq T$. Ainsi on verra la rotation.
+
+\subsubsection{Théorème de Shannon} \label{Sha}
+Une fonction (à bande limitée) qui ne contient pas de fréquences supérieures à $f_{max}$ est complètement déterminée par ses échantillons pour autant que:
+\begin{align*}
+f_e \geq 2 f_{max} \longleftrightarrow \omega_e \geq 2 \omega_{max}
+\end{align*}	
+
+\subsection{Reconstruire un signal}
+Si le théorème de Shanon (\ref{Sha}) est bien respecté, on peut donc reconstituer un signal en \textit{continu} en filtrant son \textit{spectre discret}.
+
+\begin{align*}
+X(j\omega) = X_e(j\omega) T_e \sqcap \Bigr( \frac{\omega}{\omega_c} \Bigr) \qquad (\omega_max \leq \omega_c \leq \omega_e - \omega_max)
+\end{align*}
+
+Il existe également une formule s'intitulant la \textcolor{blue}{formule de Shanon}:
+
+\begin{align*}
+\sum_{n \in \mathbb{Z}} x[n] sinc\Bigr( \frac{t-nT_e}{T_e} \Bigr)
+\end{align*}
+L'utilité du sinus \textcolor{blue}{cardinal} est qu'il interpole les points $(t, x(nT_e))$. Il existe d'autres fonctions d'interpolations qui donnent des résultats différents.
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/int.png}
+\caption{Différentes interpolations}
+\end{figure}
+
+\subsection{Généralisation de Shanon}
+Donc de manière plus général, on peut reconstruire tous signaux tant qu'il n'y a pas de recouvrement spectral. Par exemple des signaux plus complexes possédant \textbf{plusieurs} fréquences et qui sont de formes variées. On doit simplement respecter la formule de Shanon et bien lier la fréquence positive et sa fréquence négative. (\textit{dualité fréquentielle})
+
+\section{Sur- et Sous-échantillonnage}
+
+
 \part{Systèmes}
 
 \chapter{Système LIT}
