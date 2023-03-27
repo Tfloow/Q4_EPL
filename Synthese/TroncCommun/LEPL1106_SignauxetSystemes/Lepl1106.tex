@@ -9,7 +9,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{array}
 \usepackage{amssymb}
+\usepackage{colortbl}
+\usepackage{color}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{array}
@@ -753,6 +756,17 @@ L'utilité du sinus \textcolor{blue}{cardinal} est qu'il interpole les points $(
 Donc de manière plus général, on peut reconstruire tous signaux tant qu'il n'y a pas de recouvrement spectral. Par exemple des signaux plus complexes possédant \textbf{plusieurs} fréquences et qui sont de formes variées. On doit simplement respecter la formule de Shanon et bien lier la fréquence positive et sa fréquence négative. (\textit{dualité fréquentielle})
 
 \section{Sur- et Sous-échantillonnage}
+\begin{tabular}{| m{3cm} | m{5cm} | m{5cm} |}
+\hline
+\cellcolor[rgb]{0.8, 0.8, 0.8} & \cellcolor[rgb]{0.8, 0.8, 0.8} Variation du nombre d'échantillon sur une \textit{même} période & \cellcolor[rgb]{0.8, 0.8, 0.8} Variation de la durée de prise de donnée\\
+\hline
+\cellcolor[rgb]{0.8, 0.8, 0.8} Sous-échantillonnage & On a une même largeur de bande mais un rapprochement des spectres & On a une sorte de dilatation des spectres en phasorielles donc plus facile d'avoir de l'\textit{aliasing} même un même espacement entre les répétitions.\\ 
+\hline
+\cellcolor[rgb]{0.8, 0.8, 0.8} Sur-échantillonnage & Si on rajoute des données inutiles (ex: des 0) on a un rétrécissement des bandes mais un même espacement & On a une même bande des spectres et un rapprochement des spectres entre eux. \\
+\hline
+\end{tabular}
+
+
 
 
 \part{Systèmes}
