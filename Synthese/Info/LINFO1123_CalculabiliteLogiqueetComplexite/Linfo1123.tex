@@ -332,7 +332,7 @@ Donc, \textbf{Halt} est calculable et on a une réponse pour toutes fonctions. H
 
 Notre langage \textit{Q} est calculable donc ayant un interpréteur calculable.
 
-\subsection{Théorème de Hoare-Allison}
+\subsection{Théorème de Hoare-Allison} \label{HA}
 Donc en résumé de notre langage \textit{Q}:
 \begin{itemize}
 \item L'interpréteur de ce programme est calculable
@@ -582,6 +582,184 @@ Il existe des réels donc non-calculables mais qui peuvent être définie de man
 \begin{align*}
 x = \sum_{0 \geq n \geq \infty} \chi_K (n) 3^{-n}
 \end{align*}
+
+
+\chapter{Modèles de calculabilité}
+
+\section{Familles de modèles}
+\noindent 
+Il existe \textcolor{red}{2} familles de modèles:
+\begin{enumerate}
+\item Basé sur le \textcolor{red}{calcul}
+\item Basé sur le \textcolor{red}{langage} (chaine de caractère)
+\end{enumerate}
+
+\subsection{Basé sur le calcul}
+Leur objectif est de modéliser le concept de fonctions calculables, processus de calcul, algorithme effectif, ... Ex
+\begin{itemize}
+\item Automate fini
+\item Machine de Turing
+\item Langages de programmation
+\end{itemize}
+Il existe 2 sous-catégories:
+\begin{enumerate}
+\item Modèles \textcolor{blue}{déterministes}: il n'y a qu'un seule exécution possible d'un programme pour un input donné.
+\item Modèles \textcolor{blue}{non déterministes}: il existe plusieurs exécutions possibles pour un input donné.
+\end{enumerate}
+
+\subsection{Langes de programmation}
+C'est le modèle basé sur le \textcolor{red}{calcul} qui est un exemple de la \textbf{calculabilité} qui est le plus \textit{courant}. (on l'a utilisé pour démontrer toutes les théories fondamentales de la \textit{calculabilité})
+
+\subsubsection{Définir un langage}
+\noindent
+On doit définir la:
+\begin{enumerate}
+\item Syntaxe du langage
+\item Sémantique du langage
+\item Convention de représentation d'une fonction par un programme
+\end{enumerate}
+
+\subsubsection{Équivalence des programmes}
+On sait que les langages de programmation sont \textcolor{blue}{équivalents} entre eux. Tous sont équivalents. Une fonction est calculable en \textit{Rust} alors il sera calculable en \textit{C}. On dit que les langages sont \textcolor{red}{Complets}.\\
+Bien évidemment, certains problèmes sont plus simples et/ou plus efficace dans un langage de programmation.\\
+
+\subsubsection{BLOOP}
+BLOOP ou \textit{Bounded loop} qui est Java sans les boucles while, on ne modifie pas la variable de \textit{compteur} dans le corps d'un \textit{for}. Pas de méthodes récursives ni mutuellement récursibles.\\
+Donc \textcolor{blue}{BLOOP} se termine toujours et ne calcule que des fonctions \textit{totales}. Cependant, il ne calcule pas \textcolor{red}{toutes les fonctions totales} (voir \ref{HA}). En effet, l'interpreteur n'est pas programmable en BLOOP. Donc ce \textbf{n'est pas} un modèle complet de la calculabilité.
+
+\subsection{Non-déterministe}
+On va créer \textcolor{blue}{ND-Java} qui est une version \textit{non-déterministe} de Java. On lui ajoute la fonction \textbf{choose(n)} qui renvoie un entier entre \textbf{0 et n} et est donc non déterministe.\\
+On doit considérer n+1 exécution possible à chaque lancement de la fonction. \\
+Donc pour le problème du voyageur de commerce, on va énumérer tous les chemins possibles en swapant un à un les villes. Donc on aura un arbre de décision. Ainsi, on peut regarder la profondeur du chemin pour savoir si le nombre de possibilité est borné.\\
+Il y aura des chemins où ce sera borné et des chemins où ça ne l'est pas.\\
+On dit qu'un programme nous produit une \textcolor{blue}{relation} plutôt qu'une fonction.
+
+\subsubsection{Récursif ND}
+On dit qu'un ensemble A ($A \in \mathbb{N}$) est \textcolor{red}{ND-récursif} si il existe un programme \textbf{ND-Java} tel que lorsqu'il reçoit comme donnée n'importe quel nombre nature $x$.
+\begin{itemize}
+\item si $x \in A$, alors il existe un \textcolor{blue}{exécution} fournissant comme résultat 1 (peu importe le temps)
+\item si $x \notin A$ alors \textbf{toutes} les \textcolor{blue}{exécutions} possibles fournissent comme résultat 0.
+\end{itemize}
+
+\subsubsection{ND Récursivement énumérable}
+On dit que A est \textcolor{red}{ND-récursivement énumérable} si il existe un programme ND-Java tel que lorsqu'il reçoit comme donnée n'importe quel nombre naturel x, il existe une \textcolor{blue}{exécution} fournissant comme résultat 1 \textbf{ssi $x \in A$}. (Si $x \notin A$ alors la fonction retourne autre chose que $1$ ou est $\perp$)
+
+\subsubsection{Propriétés}
+Un ensemble est \textbf{ND-récursif} ssi il est \textbf{récursif}. Si nous avons un arbre d'exécutions possibles, il est toujours possible de parcourir tous les \textbf{étages} de notre arbre et donc parcourir toutes les exécutions \textcolor{blue}{possibles}.\\
+Si la profondeur d'une branche est de taille $n$, alors mon parcours a une complexité exponentielle tel que $b^n$.
+
+\subsection{Basé sur le langage}
+
+Se base sur un ensemble de mot et possède une \textcolor{blue}{grammaire formelle}. On essaye de modéliser une classe de langages. Le langage est donc un ensemble \textit{récursif} ou \textit{récursivement énumérable}. Pas vu dans ce cours
+
+\section{Automates finis}
+\noindent
+C'est une modélisation assez simple du concept de \textit{calcul}, il y a:
+\begin{itemize}
+\item Un nombre \textit{fini d'états}
+\item Une lecture d'une donnée: un mot
+\item Chaque symbole de la donnée est lu \textit{une et une seule} fois
+\item On transitionne d'état en étant en fonction du \textit{symbole lu}.
+\item L'état final est l'état après avoir \textit{lu tous les symboles} de la donnée
+\item On \textbf{ne peut pas} mémoriser quelque chose. 
+\end{itemize}
+Donc l'objectif d'un \textcolor{blue}{automate fini} est de \textbf{décider} si un mot appartient à un langage. Réponse binaire: Oui ou Non. Pas de boucle.
+\subsubsection{Modèle}
+\noindent
+On a un:
+\begin{itemize}
+\item $\sum$ qui est l'ensemble (\textit{fini}) de symboles
+\item $S$ qui est l'ensemble (\textit{fini}) d'états
+\item $s_0 \in S$ qui est l'état initial
+\item $A \subseteq S$ qui est un ensemble d'état acceptant
+\item $ \delta  S  \Sigma \rightarrow S $ qui est une fonction de \textit{transition}. (C'est une sorte de tableau)
+\end{itemize}
+C'est donc un modèle de calcul. On parcourt le mot symbole par symbole et on termine notre exécution à la fin de la lecture de symbole. Pour simplifier tout cela, on va rajouter un état \textit{fail} si on n'a pas tout déterminé pour les multiples possibilités.\\
+
+Un état acceptant est représenté par un \textbf{double cercle} et un état non-acceptant est représenté par un \textbf{simple cercle}. Les flèches ou les \textit{arcs} sont les \textcolor{blue}{fonction de transition}.\\
+
+Un mot est accepté si l'état finale de ce mot est dans l'état \textit{acceptant}. (et vice-versa)\\
+Dans un automate fini, son exécution se finit \textbf{toujours}! Donc cela ne détermine que des ensembles \textcolor{blue}{récursifs} (mais pas tous les ensembles récursifs (\ref{HA}))
+
+\subsection{Extension}
+On peut étendre les automates aux \textcolor{blue}{automates finis non déterministes}. On a donc plusieurs transitions possibles pour une paire. Plusieurs exécutions pour une même donnée.\\
+Un mot m est accepté par \textit{NFDA} si il existe \textbf{une} exécution de NFDA, on finit dans un état acceptant.\\
+Pour toute exécution de NFDA, un mot \textbf{n'est pas accepté} s'il ne tombe jamais sur un état acceptant.\\
+
+On peut voir comme si on rassemblait des exécutions ensemble et des ensemble d'états. \\
+
+\subsubsection{Avec transitions vides}
+On peut faire des transitions sans \textbf{rien} consommer via le symbole $+-\varepsilon$. N'apporte pas de puissances en plus juste un passage sans consommer.
+
+\subsubsection{Interprétation}
+On peut voir ça comme le travail d'un compilateur qui fait une \textcolor{blue}{analyse lexical} via un découpage de \textit{tokens}.\\
+On peut faire de la recherche de paterne (regex). Donc utile dans un éditeur de texte.\\
+Un automate fini est également utile pour les \textit{interfaces utilisateurs}. Cela se comporte toujours de la même manière peu importe ce qu'il s'est passé auparavant.
+
+\section{Machines de Turing}
+C'est une idée inventée par \textit{Alan Turing} en 1936 qui est antérieur aux ordinateurs. C'est un modèle très \textit{simple} mais qui est le plus \textit{puissant} possible.
+
+\subsection{Fonctionnement}
+On dispose d'un \textcolor{blue}{ruban} qui est infini à \textit{droite} et à \textit{gauche}. On a une \textit{tête de lecture} qui peut lire et écrire un caractère à l'endroit qu'elle pointe sur le ruban.\\
+Il y a également un mécanisme de \textit{contrôle} qui gère les actions à l'exécution.
+
+\subsubsection{Contrôle}
+On à un ensemble fini d'états: soit en \textit{état initial} ou un \textit{état d'arrêt}. Le contrôle contient un programme et un \textit{mécanisme} qui exécute les instructions.\\
+Les formes d'instructions sont comme:
+\begin{align*}
+<q, c> \rightarrow <q_{new}, Mouv, c_{new}>
+\end{align*}
+\begin{itemize}
+\item $q$: état courant.
+\item $c$: caractère sous la tête de lecture.
+\item $c_{new}$: caractère à écrire.
+\item $Mouv$: mouvement vers la \textit{gauche} ou la \textit{droite} de la tête de lecture à effectuer.
+\item $q_{new}$: état suivant après instruction.
+\end{itemize}
+
+\subsection{Modélisation Formelle}
+\noindent
+Une machine de Turing est composée de:
+\begin{itemize}
+\item $\sum$: ensemble fini de symboles d'entrée
+\item $\Gamma$: ensemble fini de symboles du ruban donc
+\begin{enumerate}
+	\item $\sum \subset \Gamma$
+	\item $B \in \Gamma, B \notin \sum$(symbole blanc) Contenu implicite de toutes les cases du ruban sauf de l'input.
+\end{enumerate}
+\item $S$: ensemble fini d'états
+\item $s_0 \in S$: état initial
+\item $stop \in S$: état d'arrêt
+\item $ \delta  S  \Gamma \rightarrow S  $ \{G,D\} $ \Gamma $ : fonction de transition (\textit{fini})
+\end{itemize}
+%Problème avec le \time
+
+\subsubsection{Exécution}
+Au début, on a des données sur le ruban et le reste est rempli du symbole \textcolor{blue}{blanc}. L'état initial de la tête est sur le premier caractère du ruban.\\
+Le résultat est le contenu sur le ruban à l'état stop.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/turing.png}
+\caption{Tableau d'exécution pour l'addition binaire}
+\end{figure}
+
+On peut boucler en machine de Turing, par exemple on ne fait qu'aller vers la droite. Donc la machine de Turing est complet.
+
+\subsection{Fonction T-calculables}
+Une fonction f est \textcolor{red}{T-calculable} si et seulement si il existe une machine de Turing qui, recevant comme donnée (\textit{une représentation décimale de}) n'importe quel nombre naturel x, nous fournit comme résultat $f(x)$ si il est \textcolor{red}{défini}. Et ne se termine pas si $\textcolor{red}{f(x) = \perp}$\\
+On peut également étendre cela aux fonctions $\mathbb{N}^n \rightarrow n$. Ce sont des définitions proche de l'idée de la calculabilité pour \textit{Java}.
+
+\subsection{Thèse de Church-Turing}
+\begin{enumerate}
+\item Toute fonction T-calculable est calculable
+\item Toute fonction calculable est T-calculable
+\item Tout ensemble T-récursif est récursif
+\item Tout ensemble récursif est T-récursif
+\item Tout ensemble T-récursivement énumérable est récursivement énumérable
+\item Tout ensemble récursivement énumérable est T-récursivement énumérable
+\end{enumerate}
+Le but de ces machines de \textit{Turing} est d'être à l'essentielle. On est à l'essence même des principes de calculabilité. De plus, la complexité est plutôt simple via le concept de transition.
+
 
 \chapter{Questions Test d'entrée}
 
