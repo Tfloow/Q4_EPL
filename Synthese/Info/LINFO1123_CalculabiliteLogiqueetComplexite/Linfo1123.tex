@@ -760,6 +760,59 @@ On peut également étendre cela aux fonctions $\mathbb{N}^n \rightarrow n$. Ce 
 \end{enumerate}
 Le but de ces machines de \textit{Turing} est d'être à l'essentielle. On est à l'essence même des principes de calculabilité. De plus, la complexité est plutôt simple via le concept de transition.
 
+\subsection{Extensions des Machines de Turing}
+On va donc modifier le modèle de base des machines de Turing. Mais est-ce plus \textit{puissant}(peut calculer plus de fonctions) et plus \textit{efficace}(moins d'étape à réaliser).
+
+\subsubsection{Changement de convention}
+On peut maintenant faire bouger la tête de \textcolor{blue}{plusieurs} cases et on a plusieurs états \textcolor{blue}{stop}. On a donc la même puissance mais une accélération du processus.\\
+On peut aussi limiter l'alphabet en ayant un alphabet \textcolor{blue}{binaire}. Toujours même puissance et efficacité. Mais cela va \textit{limiter} le nombre d'état possible donc va enfaite limiter la machine.\\
+
+On peut aussi imaginer un ruban \textcolor{blue}{uni-directionnel} donc aller que vers la gauche. Toute machine de Turing peut être ré-exprimer dans ce type de machine. Même puissance mais ralentissement linéaire.\\
+On peut avoir un ruban multi case. Donc même puissance et même efficacité.\\
+
+On peut avoir plusieurs rubans avec chacun ayant sa propre tête de lecture. Donc chaque tête est indépendante (\textit{thread}). On aura toujours la même puissance mais une accélération quasi quadratique.\\
+Ou bien avec plusieurs tête, même résultat que précédemment.
+
+\subsubsection{Turing non-déterministe}
+On peut imaginer des relations au lieu de transitions. Via ce système, on sait déterminer si un élément appartient à un ensemble ou non.
+\begin{align*}
+\Delta \subseteq S \Gamma S \{G,D\} \Gamma
+\end{align*}
+Il y a donc plusieurs exécutions possibles.\\
+Si $A \subset \mathbb{N}$, A est NDT-récursif si il existe une ND-machine de Turing telle que lorsqu’elle reçoit comme donnée n’importe quel nombre naturel $x$. Si $x \in A$ alors il \textcolor{blue}{existe une exécution} qui fournit un résultat $=1$. Ou bien \textcolor{blue}{toutes les exécutions} possibles fournissent $0$.\\
+
+$A$ est \textit{NDT-récursivement énumérable} si il existe une ND-machine de Turing telle que lorsqu'elle reçoit comme donnée n'importe quel nombre naturel x, il existe une exécution fournissant $1$ si $x \in A$ et un résultat différent de $1$ sinon.\\
+
+Cela a la même puissance qu'une machine de Turing. Donc on peut toujours créer une machine de ND-Turing qui est équivalent à une machine de Turing et vice versa.\\
+Une ND-machine de Turing peut accélérer de manière exponentielle $b^n$ où $b$ est le facteur de branchement. \textcolor{red}{Attention}, ce \textit{speedup} ne peut pas être utilisé car aucune machine peut avoir un parallélisme infini !
+
+\subsubsection{3 états spéciaux}
+Il existe la Machine avec \textcolor{blue}{oracle}:
+\begin{enumerate}
+\item $oracle_{ask}$: on demande si l'entier \textit{représenté} à droite de la tête de lecture appartient à l'ensemble $A$.
+\item $oracle_{yes}$: l'entier appartient à $A$
+\item $oracle_{no}$: l'entier n'appartient pas à $A$
+\end{enumerate}
+Donc, l'état suivant n'est pas spécifié dans l'instruction. Le nouvel état sera $oracle_{yes}$ ou $oracle_{no}$\\
+En terme de puissance, on est équivalent \textbf{si} $A$ est récursif. Si ce n'est \textbf{pas récursif} alors mon modèle est \textit{plus puissant} que la machine de Turing. Je peux programmer la fonction \textit{HALT}. (c'est bien évidemment un modèle abstrait).\\
+
+
+C'est pour voir les possibilités. On peut établir les indécidables.
+
+\subsubsection{Machine de Turing universelle}
+On veut établir une machine de Turing qui soit un interpréteur de machines de Turing. On peut arriver à cela juste en utilisant les symboles $\{0, 1\}$. Bien évidemment, cette machine est \textit{extrêmement} complexe. L'ensemble des codes de machine de Turing est un ensemble récursif.\\
+
+On peut construire l'interpréteur avec 3 rubans:
+\begin{enumerate}
+\item : codage de la machine de Turing interpréteur
+\item : les données
+\item : résultat intermédiaire de l'interpréteur
+\end{enumerate}
+On utilise donc \ref{HA}, $\exists z \forall n , x : \varphi_z(n,x) = \varphi_n(x)$. $\varphi_n(x)$ est la fonction calculée par la machine de Turing de code n et $\varphi_z$ la fonction universelle calculable. $MT_z$ est le programme universel (\textit{interpréteur})\\
+
+\subsubsection{L'arrêt}
+On peut démontrer, en utilisant le modèle des machine de Turing que le problème de l’arrêt est non calculable. Même méthode de démonstration, mais adaptée aux machines de Turing. La preuve a été faite avec des machines de Turing pour la première fois.
+
 
 \chapter{Questions Test d'entrée}
 
