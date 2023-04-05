@@ -1112,9 +1112,106 @@ On n'utilise pas une exception pour un comportement \textbf{attendu ou prévisib
 
 
 \chapter{Programmation simultanée}
+On a besoin de la \textit{programmation simultanée} car notre monde progresse avec le \textcolor{blue}{temps} et chaque chose progresse indépendamment des autres.
+\subsubsection{Simultanéité en programmation}
+\noindent
+\begin{enumerate}
+\item \textcolor{blue}{Système distribuée}: relié les pc entre eux par un réseau (data center, ...)
+	\begin{enumerate}
+	\item Une activité en simultanée est appelée un \textit{noeud de calcul}.
+	\item Chaque \textit{noeud de calcul} a ses propres ressources (CPU, mémoire, ...).
+	\end{enumerate}
+\item \textcolor{blue}{Système d'exploitation}: le controle d'un pc
+	\begin{enumerate}
+	\item Une activité en simultanée est appelée un \textit{processus}.
+	\item Tous les \textit{processus} partagent les mêmes ressources mais ont des espaces allouées de mémoires distincts.
+	\end{enumerate}
+\item \textcolor{blue}{Processus}: l'exécution d'un seul programme
+	\begin{enumerate}
+	\item Une activité en simultanée est appelée un \textit{thread}.
+	\item Les \textit{threads} partagent le même espace mémoire.
+	\end{enumerate}
+\end{enumerate}
+Ce principe est très naturel car est présent tout autour de nous. Une activités indépendante est donc \textcolor{blue}{simultanée}. Cependant, cela doit être supporté par le langage lui-même.
+
+\section{Les bases}
+On peut avoir des événements qui progressent en même temps mais certaines activités doivent pouvoir \textcolor{blue}{communiquer} entre elle et se \textcolor{blue}{synchroniser}.
+
+\subsubsection{Complexité}
+On peut faire face à de nombreux soucis en utilisant des \textit{threads}: nondeterminism, race conditions, reentrancy, deadlocks, livelocks, fairness, consistency, shared data.\\
+
+Mais, on peut faire en sorte que la \textit{programmation simultanée} soit aussi simple que la \textcolor{blue}{programmation séquentielle}.\\
+Il faut que le paradigme soit correctement choisi. On verra donc le \textcolor{blue}{deterministic dataflow} qui est une forme de programmation fonctionnelle.
 
 
+\section{Deterministic dataflow}
+Les 3 grands paradigmes de la programmation simultanée:
+\begin{enumerate}
+\item \textcolor{red}{Deterministic dataflow}: (\textit{le plus simple et meilleur})
+	\begin{itemize}
+	\item Aussi appelé le \textit{functional dataflow}.
+	\item Supporte toutes les techniques de la programmation fonctionnelle.
+	\end{itemize}
 
+\item \textcolor{red}{Message-passing concurrency}: (Erland et Scala)
+	\begin{itemize}
+	\item Les activités envoient des messages entre eux.
+	\end{itemize}
+
+\item \textcolor{red}{Shared-state concurrency}: (moniteurs Java)
+	\begin{itemize}
+	\item Les activités partagent les mêmes données et essayent de travailler ensemble.
+	\item Plutôt compliqué et encore fort utilisé aujourd'hui.
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Variable non-liée}
+C'est quand on crée une variable dans la mémoire sans qu'elle soit lié à une valeur.\\
+En Oz, quand on veut afficher une variable qui n'est pas encore déclaré, Oz va attendre jusqu'à ce qu'on déclare la variable. Donc ci-dessous, Oz va s'attendre juste avant l'addition de $X$:
+\begin{lstlisting}[escapechar=\%]
+local X Y in
+	Y=X+1
+	{Browse Y}
+end
+\end{lstlisting}
+Donc, un Thread peut interagir sur ce code si il attribue une valeur à X. C'est en cela que correspond le \textcolor{blue}{dataflow execution}
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/dataflow.png}
+\caption{Exemple d'exécution}
+\end{figure}
+L'activité A attend à \textcolor{red}{(1)} jusqu'à ce que l'activité B arrive à \textcolor{red}{(2)}.
+
+\section{Threads}
+C'est donc cela qui nous permet d'implémenter la programmation simultanée en Oz. C'est donc un \textit{fil} d'exécution qui s'exécute en même temps.\\
+Chaque \textit{Threads} fonctionnent de manière \textcolor{blue}{séquentielle} et sont \textcolor{blue}{indépendants} l'un de l'autre.\\
+Cependant il faut bien comprendre quelques détails:
+\begin{itemize}
+\item Il n'y a aucun ordre spécifique pour l'exécution des Threads.
+\item Le système exécute tous les threads en même temps en utilisant l'\textcolor{red}{interleaving semantics}. Donc on a un thread qui exécute un à un les threads et change continuellement.
+\item Le système garantit que chaque Thread reçoit les ressources égales et nécessaires.
+\end{itemize}
+Les Threads peuvent \textit{communiquer} entre eux si ils partagent une variable.\\
+
+\subsubsection{Oz}
+En Oz, créer des Threads est très peu "énergivores" donc on peut se permettre d'en créer un grand nombre.\\
+De plus, on écrit un Thread comme:
+\begin{lstlisting}[escapechar=\%]
+thread <s> end
+\end{lstlisting}
+\noindent
+Donc on peut créer ce programme:
+\begin{lstlisting}[escapechar=\%]
+declare X
+thread {Browse X+1} end
+thread {X=1} end
+\end{lstlisting}
+Il y a donc 2 façons que les Threads se lancent: ligne 2 $\rightarrow$ ligne 3 ou ligne 3 $\rightarrow$ ligne 2. Cependant, le même résultat est le même, 2 est affiché.
+
+\subsubsection{Le Browser}
+Le \textit{Browser} en Oz s'exécute avec son propre Thread.\\
+Pour chaque variable non-liée qui est affiché, on crée un thread dans le \textit{Browser} qui attend jusqu'à ce qu'on lui attribue une valeur.\\
+Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme  "\textit{functional dataflow}" et il ne regarde donc pas l'intérieur de la cellule.
 
 
 
