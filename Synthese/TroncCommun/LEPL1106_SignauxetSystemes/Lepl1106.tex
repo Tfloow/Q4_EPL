@@ -766,7 +766,101 @@ Donc de manière plus général, on peut reconstruire tous signaux tant qu'il n'
 \hline
 \end{tabular}
 
+\chapter{Discrete Fourier Transform (DFT)} 
+On est motivé à trouver la \textit{DFT} car sur les PC, on manipule que des signaux discrets. Donc on veut passer de signal continu à un signal discret, le manipuler et pouvoir le restituer en continu. De plus, un signal ne peut être infini.\\
+Candidat:
+\begin{enumerate}
+\item Transformé de Fourier: signal x est \textcolor{blue}{continu} et sur un support \textcolor{blue}{infini}.
+\item Série de Fourier: signal x est discrète et sur un support \textcolor{blue}{infini}.
+\item Transformé de Fourier en temps discret: est \textcolor{blue}{continue}.
+\item Série de Fourier discrète: on a besoin d'un signal discret \textcolor{blue}{périodique} et nous renvoie un signal \textcolor{blue}{périodique}
+\end{enumerate}
+Donc de ce qu'on a vu, rien ne fonctionne, on doit introduire une nouvelle \textit{transformée}, la \textbf{DFT} ou \textit{transformée de Fourier discrète}.
 
+\section{Définition}
+Depuis une suite \textit{M-périodique} $x[n]$ on construit une suite $X_{DFT}[k]$ qui est aussi \textit{M-périodique} et appelé la \textit{transformée de Fourier discrète} ou DFT de $x[n]$:
+\begin{equation}
+X_{DFT}[k] = \sum_{n=0}^{M-1}x[n]e^{-2\pi j k n /M}
+\end{equation}
+On peut aussi représenter cela via une matrice de Vandermonde:
+\begin{equation}
+\begin{bmatrix}
+X_{DFT}[0]\\
+X_{DFT}[1]\\
+\vdots\\
+X_{DFT}[M-1]
+\end{bmatrix} =
+\begin{bmatrix}
+1 & 1 & \ldots & 1\\
+1 & e^{-2\pi j \frac{1}{M}} & \ldots & e^{-2\pi j \frac{M-1}{M}}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & e^{-2\pi j \frac{M-1}{M}} & \ldots & e^{-2 \pi j \frac{(M-1)^2}{M}} 
+\end{bmatrix}
+\begin{bmatrix}
+x[0]\\
+x[1]\\
+\vdots \\
+x[M-1]
+\end{bmatrix}
+\end{equation}
+
+\subsubsection{non-périodique}
+Si $x[n]$ est \textbf{non-périodique} on va définir sa version périodisé.
+\begin{align*}
+x_M[n] &= \sum_{m \in \mathbb{Z}} x[n + mM]\\
+X(e^{j\Omega_k}) &= \sum_{n\in \mathbb{Z}} x[n]e^{-2\pi j k n/M}\\
+&= X_{M, DFT}[k]
+\end{align*}
+Et donc notre DTFT de $x[n]$ évaluée en $\Omega_k = 2\pi k / M$
+\textcolor{red}{TODO démonstration}
+
+\subsubsection{En pratique}
+Ils existent 3 grandes familles de signaux qui nous intéressent pour la \textit{DFT}:
+\begin{enumerate}
+\item Signaux périodiques de période $M$
+\item Signaux à support fini dans $\{0, ..., M-1\}$
+\item Signaux à support infini.
+\end{enumerate}
+Donc pour le point 3, on doit *tronquer* notre signal pour le périodiser.
+
+\subsubsection{Zero padding}
+C'est le principe du *ré-échantillonnage* de la DTFT. On prend un signal x[n] qui a un support fini et non-périodique.\\
+On va choisir une taille de périodisation $M'$ tel que $M'>M$ en rajoutant des zéros. On évalue donc la DTFT de $x[n]$ en d'autres fréquences.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/zero.png}
+\end{figure}
+
+\subsubsection{Propriétés de la DFT}
+
+\begin{center}
+\begin{tabular}{| m{2cm} | m{3cm} | m{4cm} |}
+\hline
+Opération &$x[n]$& $X_{DFT}[k]$\\
+\hline
+Combinaison linéaire & $\sum_i \alpha_i x_i[n]$ & $\sum_i \alpha_i X_{DFT,i} [k]; \alpha_i \in \mathbb{R}$ \\
+\hline
+Renversement & $x[-n]$ & $X_{DFT}[-k]$ \\
+\hline
+Complexe conjugué & $x[n]^{\ast}$ & $X_{DFT}[-k]^{\ast}$\\
+\hline
+Translation & $x[n-n_0]; n_0 \in \mathbb{Z}$ & $e^{-jk\frac{2\pi n_0}{M}}X_{DFT}[k]$ \\
+\hline
+Modulation & $e^{jk\frac{2\pi k_0}{M}}x[n]; k_0 \in \mathbb{Z}$ & $X_{DFT}[k-k_0]$ \\
+\hline
+Convolution cyclique & $\sum_{m=0}^{M-1}x_1[m]x_2[n-m]$ & $(X_{DFT,1}\cdot X_{DFT,2})[k]$ \\
+\hline
+Multiplication & $(x_1 \cdot x_2)[n]$ & $\frac{1}{M} \sum_{m=0}^{M-1} X_1[m]X_2[k-m]$ \\
+\hline
+Perseval & $\sum_{n=0}^{M-1} |x[n]|^2$ & $\frac{1}{M}\sum_{m=0}^{M-1}|X_{DFT}[k]|^2$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Transformée Rapide}
+On doit en moyenne réaliser $8M^2$ opérations (avec $M$ la portée finie du signal)\\
+En 1965, Cooley et Tukey ont proposé FFT ou \textit{Fast Fourier Transform} qui est basé sur la \textcolor{blue}{décimation temporelle}\\
+Pour simplifier, on factorise $M$ et on divise la somme de la \textit{DFT} en sous-sommes qui correspondent à des DFT de plus petites tailles.
 
 
 \part{Systèmes}
