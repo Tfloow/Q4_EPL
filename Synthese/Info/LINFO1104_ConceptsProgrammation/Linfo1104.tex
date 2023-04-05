@@ -1035,6 +1035,22 @@ end
 \end{lstlisting}
 On utilise donc à la fois une \textcolor{blue}{cellule} et un \textcolor{blue}{wrapper}. Pour mettre à jour un stack, on n'utilise pas de \textit{wrapper} car on va utiliser des \textit{cellules} (ex: pour \textit{Push, Pop et IsEmpty})
 
+\section{Remarques supplémentaires}
+\begin{itemize}
+\item Jave est designé pour supporter les abstractions de données:
+	\begin{enumerate}
+	\item True data abstraction (encapsulation, garbage collector)
+	\item Tout entité en Java est un objet ou un \textbf{ADT}
+	\item Supporte les principes de design orienté objet.
+	\end{enumerate}
+\item Scala a 2 grand principes:
+	\begin{enumerate}
+	\item Séparation entre les états mutables et immutables (programmation fonctionnelle)
+	\item Tout est un objet (même les fonctions)
+	\end{enumerate}
+\end{itemize}
+Scala, en plus de fonctionner sur la JVM, est un successeur important de Java et est très versatile via sa puissance expressive.
+
 \section{Conclusion}
 \noindent
 L'abstraction des données est un concept \textcolor{red}{nécessaire} pour construire des programmes plus \textit{complexes}.
@@ -1049,6 +1065,57 @@ Il existe 4 types d'abstraction des données orientées selon 2 axes:
 \end{enumerate} 
 Il existe 2 types d'abstraction des données qui sont dominantes mais les 2 dernières sont toujours utiles pour certains types d'abstraction.\\
 Quasi tous les langages de programmation modernes supportent l'abstraction. Ils supportent généralement \textcolor{blue}{plusieurs} types. Ils sont souvent plus des langages "\textit{orientés abstractions des données}" que simplement "\textit{objet orienté}".
+
+
+\chapter{Les exceptions}
+Une exception est lorsqu'un programme ne se comporte pas comme prévu ou que les inputs ne peuvent pas être utilisé (\textit{par exemple}: division par zéro, fichier non-existant, ...)\\
+Ainsi, on peut faire fonctionner le programme même si il rencontre une erreur car celle-ci peut être "\textit{intercepté}" via une \textcolor{blue}{exception}.
+
+\section{Fonctionnement}
+On voudrait donc que le programme ne cesse pas quand il rencontre un soucis et on veut qu'une erreur impacte \textit{au minimum} le programme.\\
+On utilise le principe du \textcolor{red}{confinement}.
+
+\subsubsection{Le confinement}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/handler.png}
+\end{wrapfigure}
+Donc notre programme est un \textcolor{blue}{ensemble imbriqué de contexte d'exécution}.\\
+Donc si une erreur apparait, elle influence le contexte et pas tout le programme.\\
+On protège chaque exécution par des \textit{exceptions handlers} qui sont comme des "douaniers" entre chaque zone de contexte. Ainsi, on s'assure que l'erreur est contenu et minimisée.
+
+\subsection{En Oz}
+On a les \textit{try} et \textit{raise} qui sont deux nouvelles instructions:
+\begin{lstlisting}[escapechar=\%]
+try <s1> catch <y> then <s2> end	#%On crée l'intercepteur%
+raise <x> end				#%On établit une erreur%
+\end{lstlisting}
+
+\subsubsection{Try et Raise}
+Le \textit{try} met un \textit{marker} sur le stack et puis exécute l'instruction $<S1>$.\\
+Si il n'y a aucune erreur, l'instruction s'exécute normalement et le \textit{marker} est enlevé à la fin.\\
+Si \textit{raise} est appelé pour signifier une erreur, le stack d'instructions est vidé jusqu'au \textit{marker}. Ensuite, on exécute $<s2>$. Dans notre exemple, $<y>$ est la même erreur que $<x>$. De plus, la porté de <y> est couvre exactement jusqu'à $<s2>$.
+
+\subsubsection{Finally}
+En plus de ces deux instructions, on peut rajouter une instruction s'appelant \textit{finally} qui comporte des étapes à exécuter peu importe si une erreur arrive ou pas.
+
+\subsection{En Java}
+C'est un objet hérité de la class des \textit{Exceptions} (elle-même sous-classe des \textit{Throwable)} et il existe 2 types d'exceptions:
+\begin{itemize}
+\item \textcolor{blue}{Checked exceptions}: le compilateur vérifie que les méthodes ne \textit{throw} que des exceptions déclaré pour la classe
+\item \textcolor{blue}{Unchecked exceptions}: pour gérer les exceptions que le compilateur ne peut pas vérifier (\textit{les rayons cosmiques}). Elles héritent des \textit{RuntimeException} et \textit{Error}.
+\end{itemize}
+Donc en tant que développeur on check les erreurs \textit{checked}.
+
+\subsection{Utilisation correcte}
+On n'utilise pas une exception pour un comportement \textbf{attendu ou prévisible}. C'est-à-dire que, par exemple, on ne lit pas un fichier jusqu'au moment d'une erreur. Non, le fait que le fichier se finisse est prévisible et ne demande pas d'exception.
+
+
+\chapter{Programmation simultanée}
+
+
+
+
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
