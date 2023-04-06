@@ -15,6 +15,7 @@
 \usepackage{float}
 \usepackage{amsfonts}
 \usepackage{fancyhdr}
+\usepackage{circuitikz}
 \usepackage{titlesec}
 \usepackage{xparse}
 \usepackage{wrapfig}
@@ -523,6 +524,34 @@ A_V = \textcolor{red}{A_{V0}(j\omega)^{\pm N}}\frac{\textcolor{blue}{\Bigl(1 + \
 \includegraphics[width=7cm]{img/PhaseXI.png}
 \caption{Amplitude et Phase pour le (c)}\label{XI}
 \end{figure}
+
+\section{Circuits résonants et filtrage}
+\noindent
+Maintenant, voyons des cas concrets de circuit RLC implémentant des courants AC.
+
+\subsection{Circuits résonants}
+
+\subsubsection{Circuits résonants en série}
+
+\begin{figure}[!ht]
+\centering
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\normalsize]
+\draw (7.5,18.25) to[L ] (7.5,17.75);
+\draw [](6.25,17.5) to[short, -o] (5,17.5);
+\draw [ -Stealth] (6.25,17.5) -- (6.5,17.5);
+\draw [](6.5,17.5) to[short] (7,17.5);
+\draw (7,17.5) to[R,l={ \normalsize $R$}] (7,15.75);
+\draw (7,15.75) to[curved capacitor,l={ \normalsize $C$}] (7,14.5);
+\draw (7,14.5) to[L,l={ \normalsize $L$} ] (7,13.25);
+\draw [](7,13.25) to[short] (7,13);
+\draw [](7,13) to[short, -o] (5,13);
+\end{circuitikz}
+
+\label{fig:my_label}
+\end{figure}
+
+
 
 \end{document}
 
