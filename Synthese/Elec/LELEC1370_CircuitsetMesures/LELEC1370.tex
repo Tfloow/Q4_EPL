@@ -532,24 +532,144 @@ Maintenant, voyons des cas concrets de circuit RLC implémentant des courants AC
 \subsection{Circuits résonants}
 
 \subsubsection{Circuits résonants en série}
+Avec un circuit en série d'inductance, capacité et résistance, on a un impédance comme:
+\begin{align*}
+\textbf{Z} = R + j\omega L + \frac{1}{j \omega C} &= R + j \Bigr(\omega L - \frac{1}{\omega C} \Bigr)\\
+\omega_0 &= \frac{1}{\sqrt{LC}}
+\end{align*}
+Pour être en résonance, il faut annuler la partie complexe.On nomme cette \textcolor{blue}{fréquence de résonance} $\omega_0$.\\
+On établit aussi un \textcolor{blue}{facteur de qualité} d'un circuit qui indique si on possède une bonne bobine pour le circuit. De plus, on peut avoir un rapport du voltage de la résistance sur le voltage totale $V_R / V_1$:
+\begin{align*}
+Q &= \frac{\omega_0 L}{R}\\
+\frac{V_R}{V_1} &= \frac{1}{1 + j Q(\omega/ \omega_0 - \omega_0 / \omega)}
+\end{align*}
 
-\begin{figure}[!ht]
+Ceci nous permet d'avoir des pics à des fréquences spécifiques. Avec cela, on va pouvoir créer des filtres (radio tuning, ...).
+
+\begin{figure}[H]
 \centering
-\begin{circuitikz}
-\tikzstyle{every node}=[font=\normalsize]
-\draw (7.5,18.25) to[L ] (7.5,17.75);
-\draw [](6.25,17.5) to[short, -o] (5,17.5);
-\draw [ -Stealth] (6.25,17.5) -- (6.5,17.5);
-\draw [](6.5,17.5) to[short] (7,17.5);
-\draw (7,17.5) to[R,l={ \normalsize $R$}] (7,15.75);
-\draw (7,15.75) to[curved capacitor,l={ \normalsize $C$}] (7,14.5);
-\draw (7,14.5) to[L,l={ \normalsize $L$} ] (7,13.25);
-\draw [](7,13.25) to[short] (7,13);
-\draw [](7,13) to[short, -o] (5,13);
-\end{circuitikz}
-
-\label{fig:my_label}
+\includegraphics[width=8cm]{img/premierOrdre.png}
+\caption{\textit{à gauche}: filtre du premier ordre passe-bas \textit{à droite}: filtre du premier ordre passe-haut}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=9cm]{img/premierOrdre2.png}
+\caption{\textit{à gauche}: passe-bande \textit{au milieu}: stop-bande \textit{à droite}: notch}
+\end{figure}
+
+
+\section{Conception des filtres} 
+Les critères pour un filtre sont:
+\begin{enumerate}
+\item La fluctuation de bande passante: donc l'erreur d'amplification
+\item La zone de transition: à quelle vitesse on passe de la zone passante à non-passante
+\item La fluctuation de bande bloquante: on établit une marge d'erreur pour la partie bloquante
+\end{enumerate}
+On peut aussi remarquer un \textcolor{blue}{délai de groupe}. C'est la dérivé de la phase par rapport à $\omega$.\\
+On va souvent créer des filtres en se basant sur des \textit{polynômes typiques}. On doit également choisir quelles caractéristiques on veut privilégier.
+
+\subsection{Butterworth} \label{But}
+Ce type de filtre à pour but d'avoir une fluctuation de la bande passant \textbf{quasiment nulle}.
+\begin{align*}
+G^2(\omega) = |H(j \omega )|^2 = \frac{G_0^2}{1+(\frac{\omega}{\omega_c})^{2n}} \Rightarrow H(j\omega ) = \frac{G_0}{B_n (\frac{j \omega }{\omega_c })}
+\end{align*}
+
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/Butter.png}
+\end{wrapfigure}
+Son désavantage est son temps de transition plus ou moins long. De plus sa zone bloquante est plutôt stable mais n'annule pas efficacement les fréquences proche de la fréquence de coupure.\\
+On l'implémente comme montré ci-contre.
+\begin{align*}
+C_k &= 2 sin \Bigl( \frac{(2k -1)}{2n} \pi \Bigl)\\
+L_k &= 2 sin \Bigl( \frac{(2k -1)}{2n} \pi \Bigl)
+\end{align*}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/SallenKey.png}
+\end{wrapfigure}
+Il existe également des filtres de \textcolor{blue}{Sallen-Key} qui sont du \textit{deuxième ordre} ce qui permet des filtres plus fiables car ne dépendant pas de ce qu'il y a en aval.\\
+En effet grâce à l'impédance d'entrée \textit{infini} des ampli-ops idéales, on ne sera jamais perturbé par les impédances en aval.
+
+\subsection{Chebyshev}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/Cheby.png}
+\end{wrapfigure}
+L'avantage de ces filtres est qu'on a une zone de transition plus raide que Butterworth (\ref{But}) mais on a de plus fortes oscillations en bande passante.
+
+
+\subsection{Bessel}
+L'avantage des filtres de \textit{Bessel} est qu'il minimise la distorsion de la zone passante tout en ayant un délai de groupe \textbf{constant}.
+\begin{align*}
+H(s) &= \frac{\theta_n (0) }{\theta_n (\frac{s}{\omega_0 })}\\
+n &= 1; s+1\\
+n &= 2; s^2 + 3s + 3\\
+n &= 3; s^3 + 6 s^2 + 15s + 15
+\end{align*}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/Bessel.png}
+\caption{Filtre de Bessel}
+\end{figure}
+\textcolor{red}{TODO transformations ?} hors matière
+
+\section{Rétroaction et circuits en boucle fermée}
+
+\subsection{Rétroaction}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=7cm]{img/Bloc.png} \label{img:ampli}
+\end{wrapfigure}
+Au lieu de régler quelque chose basé sur des instructions pré-déterminés, on va prendre des mesures et les effets d'un système pour pouvoir ajuster celui-ci.\\
+Ceci rend notre machine plus efficace et permet à celle-ci de s'adapter peu importe le milieu.\\
+Ci-contre un exemple en \textit{schéma-bloc} d'un système en \textcolor{blue}{boucle fermée}\\
+\begin{itemize}
+\item Chaine directe: correspond à un gain en puissance important
+\item Chaine retour: l'ensemble des capteurs qui permettent de fournir une image du résultat du système
+\item Soustracteur: permet de faire la différence entre ce qu'on fournit et le résultat ce qui permet d'être plus précis et à s'adapter
+\end{itemize}
+
+\subsubsection{Amplificateur opérationnelle}
+Dans le monde réelle, on implémente ce type de système avec des \textbf{ampli-ops}. Elles ont un gain qui varie aux alentours de $10^5$.\\
+Mais en boucle avec rétroaction \textit{négative} on peut fixer ce gain.
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/ampli.png} 
+\end{figure}
+Et donc le gain est $\frac{1}{24+1}$
+
+
+\subsection{Représentation Schéma-Bloc}
+
+\subsubsection{Fonction de transfert}
+On a en entrée $E(j\omega)$ et le bloc de transfert $T(j\omega)$ nous donne $S(j\omega) = T(j\omega) . E(j\omega)$.\\
+On peut remplacer les $j \omega$ par $s$ (\textcolor{red}{ajouter chapitre ultérieurement})\\
+On retrouve ce genre de bloc dans les \textit{amplificateurs, filtres, intégrateurs, ...}
+
+\subsubsection{Soustracteur} 
+On le représente par une boule (\ref{img:ampli}) et permet de faire la différence entre deux signaux.
+
+\subsubsection{Mesure}
+C'est une utilisation de plusieurs fonctions de transfert pour mesurer différentes choses.
+
+\subsubsection{Déplacer}
+Il n'y a pas qu'une seule configuration qui produit un résultat. On peut intervertir des blocs et les modifier pour avoir en sortie et en entrée les mêmes choses.
+
+\subsubsection{Forme canonique}
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/Bloc2.png}
+\end{figure}
+On peut voir ce système comme:
+\begin{align*}
+T_{bf}(s) = \frac{1}{H(s)}.\frac{G(s) . H(s)}{1 + G(s). H(s)} = T_{idéal} (s) . \frac{T_{bo}(s)}{1+T_{bo}(s)} = T_{idéal} (s) . \frac{1}{1 + \frac{1}{T_{bo}(s)}}
+\end{align*}
+Dans un monde idéal, le gain $G(s)$ tend vers $\infty$. Ainsi la fonction de transfert \textit{idéal} vaut donc $T_{idéal}(s) = 1/H(s)$
+
+
+\subsection{Bode}
 
 
 
