@@ -122,7 +122,7 @@ On peut simplifier un circuit et sommer des sources de tension en additionnant l
 \subsubsection{Mise en parallèle et sources multiples}
 Les sources de \textit{courant} en parallèle peuvent être sommé pour les simplifier et n'en avoir qu'une seule source de courant. Pour les sources de \textit{tension}, on les additionne quand elles sont en série.
 
-\subsubsection{Équivalent Thévenin Norton}
+\subsubsection{Équivalent Thévenin Norton} \label{Th}
 On peut simplifier une alimentation d'un circuit via les circuits de Thévenin et Norton. Thévenin est composé d'une source de tension et d'une résistance en série tandis que Norton a une source de courant et une résistance en parallèle.\\
 Les choses importantes à noter sont:
 \begin{equation}
@@ -670,6 +670,218 @@ Dans un monde idéal, le gain $G(s)$ tend vers $\infty$. Ainsi la fonction de tr
 
 
 \subsection{Bode}
+\subsubsection{Montage non-inverseur}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/nonInv.png}
+\caption{Montage non-inverseur}
+\end{wrapfigure}
+Ce type de montage a pour fonction de transfert selon $\omega$:
+\begin{align*}
+G(j \omega) = G_0 \frac{1}{1 + \frac{j\omega}{\omega_0}}
+\end{align*}
+Et la rétroaction est:
+\begin{align*}
+H(s) &= \beta^{-1}\\
+\frac{V_{out}}{V_{in}} = \frac{G(j\omega}{1 + \beta^{-1} G(j \omega)} &= \frac{1}{\beta^{-1}} \frac{\beta^{-1}G(j\omega}{1 + \beta^{-1} G(j \omega)}\\
+\Rightarrow T_{bf}(j \omega) &= \frac{1}{H} \frac{T_{bo}(j \omega)}{1 + T_{bo} (j \omega)}
+\end{align*}
+Donc on a une fonction constante jusqu'à $\omega_0$ et qui décroit de 20 dB par décade et tombe à 0 à $\omega = GBW$. GBW correspond au \textbf{Gain BandWidth} qui est une caractéristique propre à l'ampli-op.\\
+Il est impossible de réaliser un montage non-inverseur de gain $\beta$ à une fréquence supérieure à $GBW/\beta$.
+\begin{align*}
+\omega_{0, bf} T_{0,bf} = \omega_{0, bf} \beta = \omega_0 G_0
+\end{align*}
+
+\subsubsection{Montage inverseur}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/inv.png}
+\caption{Montage inverseur}
+\end{wrapfigure}
+Ce type de montage a pour fonction de transfert selon $\omega$:
+\begin{align*}
+G(j \omega) = G_0 \frac{1}{1 + \frac{j\omega}{\omega_0}}
+\end{align*}
+Pour établir la rétroaction $H(s)$ cela est plus compliqué et moins direct
+\begin{align*}
+V_{in} - V_{-} &= \frac{V_{-}-V_{out}}{\beta} & 
+V_{out} &= -G(j\omega) V_{-} & \frac{V_{out}}{V_{in}} &= - \frac{\frac{1}{1 + \frac{j \omega}{\omega_0}}}{1+ \beta + G_0 \frac{1}{1 + \frac{j \omega}{\omega_0}}}
+\end{align*}
+Ceci nous donne donc un rapport de tension:
+\begin{align*}
+\frac{V_{out}}{V_{in}} &= \frac{G_0 \beta}{1 + \beta + G_0} \frac{1}{1 + \frac{j\omega ( 1 + \beta)}{(1 + \beta + G_0) \omega_0}}\\
+& \cong \frac{G_0 \beta}{1 + \beta + G_0} \frac{1}{1 + \frac{j \omega G_0 \beta}{(1 + \beta + G_0) G_0 \omega_0}} \equiv T_{0, bf} \frac{1}{1 + \frac{j \omega}{\omega_0 G_0 / T_{0, bf}}}\\
+\omega_{0, bf} &=  \frac{\omega_0 G_0}{|T_{0, bf}|} = \frac{\omega_0 G_0}{\beta} \Rightarrow \beta \omega_{0, bf} = GBW
+\end{align*}
+Il est impossible de réaliser un montage non-inverseur de gain $\beta$ à une fréquence supérieure à $GBW/\beta$.
+
+\subsubsection{Produit amortisseur-fréquence de coupure (second ordre)}
+On a une expression du gain en boucle ouverte du second ordre typique:
+\begin{align*}
+G(j \omega) &= G_0 \frac{1}{1 + 2 j \xi \frac{\omega}{\omega_0} - \Bigr( \frac{\omega}{\omega_0} \Bigr)^2}
+\end{align*}
+Si on est en \textcolor{blue}{boucle fermée}, le produit invariant est $\xi \omega_0$:
+\begin{align*}
+\xi_{bf} &= \frac{\xi}{\sqrt{1 + G_0}} & \omega_{0, bf} &= \omega_0 \sqrt{1 + G_0}
+\end{align*}
+Il faut bien régler l'amortissement car on peut soit rendre le système \textit{sur amorti} et donc oscillatoire amorti ou bien \textit{sous amorti} et le système est trop réactif donc instable. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/amortissement.png}
+\caption{Système complet}
+\end{figure}
+
+\section{Quadripôles}
+\subsection{Rappels}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/QuadriAmp.png}
+\end{wrapfigure}
+On peut simplifier des montages avec des ampli-ops en quadripôles. On remplace donc le montage en rouge ci-contre par le quadripôle en bleu.\\
+Donc on les utilise lorsqu'on fait des opérations sur des signaux avec une idée de \textit{input} et \textit{output}.\\
+Un \textcolor{blue}{accès} implique 2 bornes. Pour un \textit{dipôle} c'est simplement Thévenin et Norton (\ref{Th}). Pour un \textbf{quadripôle} à deux accès, on réalise des représentations \textit{équivalentes} $\textbf{Y, Z, G, H}$ (on ne peut pas avoir de sources indépendantes).
+
+\subsubsection{Quadripôle}
+Les conditions:
+\begin{itemize}
+\item Pas de source indépendante interne
+\item Deux accès
+\item On impose une des deux bornes avec une source de tension
+\end{itemize}
+
+\subsubsection{Équivalence}
+Entre les 4 représentations, on a une équivalence et on ignore la structure et les variables internes. IL existe également des relations transitives comme ci-dessous.
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/Trans.png} \label{img:trans}
+\caption{Solution transitive au milieu}
+\end{figure}
+
+\subsection{L'équivalence}
+On va toujours essayer de transformer un circuit complexe en un circuit quadripôles comme ci-dessous.
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/Transfo.png}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{|m {3cm}| m {4cm}| m {6cm}|}
+\hline
+Représentation & Formule & Définition\\
+\hline
+\textbf{Y} Admittances (transadmittances) & $\begin{bmatrix}
+i_i\\ i_o
+\end{bmatrix} = \begin{bmatrix}
+y_i & y_r\\ y_f & y_o
+\end{bmatrix}  \begin{bmatrix}
+v_i\\ v_o
+\end{bmatrix}$ & $y_i$: admittance d'entrée \newline $y_r$: transadmittance inverse (\textit{reverse}) \newline $y_f$: transadmittance directe (\textit{forward}) \newline $y_o$: admittance de sortie\\
+\hline
+\textbf{Z} impédances (transimpédances) & $\begin{bmatrix}
+v_i\\ v_o
+\end{bmatrix} = \begin{bmatrix}
+z_i & z_r\\ z_f & z_o
+\end{bmatrix}  \begin{bmatrix}
+i_i\\ i_o
+\end{bmatrix}$ & $z_i$: impédance d'entrée \newline $z_r$: transimpédance inverse (\textit{reverse}) \newline $z_f$: transimpédance directe (\textit{forward}) \newline $z_o$: impédance de sortie\\
+\hline
+\textbf{G} hybride & $\begin{bmatrix}
+i_i\\ v_o
+\end{bmatrix} = \begin{bmatrix}
+g_i & g_r\\ g_f & g_o
+\end{bmatrix}  \begin{bmatrix}
+v_i\\ i_o
+\end{bmatrix}$ & $g_i$: admittance d'entrée \newline $g_r$: gain en courant \newline $g_f$: gain en tension \newline $g_o$: impédance de sortie\\
+\hline
+\textbf{H} hybride & $\begin{bmatrix}
+v_i\\ i_o
+\end{bmatrix} = \begin{bmatrix}
+h_i & h_r\\ h_f & h_o
+\end{bmatrix}  \begin{bmatrix}
+i_i \\ v_o
+\end{bmatrix}$ & $h_i$: impédance d'entrée \newline $h_r$: gain en tension \newline $h_f$: gain en courant \newline $h_o$: admittance de sortie\\
+\hline
+\end{tabular}
+\end{center}
+\subsubsection{Représentation via Kirchhoff}
+On peut voir les quadripoles comme des sources \textit{imparfaites}:
+\begin{itemize}
+\item Courant + admittance parasite (type Norton)
+\item Tension + impédance parasite (type Thévenin)
+\item Source commandée: influence d'un accès sur l'autre
+\item Algèbre ou réseau de Kirchoff
+\end{itemize} 
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/Ytransfo.png}
+\includegraphics[width=7cm]{img/Htransfo.png}
+\end{figure}
+Pour passer de \textbf{Y} à \textbf{Z} on passe de Norton à Thévenin et de \textbf{H} à \textbf{G} on passe de Norton à Thévenin pour la \textit{droite} et de Thévenin à Norton pour la \textit{gauche}.
+
+\subsection{Déterminer les coefficients}
+Par exemple, pour un système \textbf{Y}, on peut montrer par algèbre que:
+\begin{align*}
+y_i &= \frac{i_i}{v_i} \biggl\vert_{v_o=0}\\
+i_i &= y_i i + y_r v_o
+\end{align*}
+En effet, en mettant les bornes de sortie en court circuit, on peut ainsi déterminer $y_i$. Ainsi, on fait passer un courant $v_i$ qui est bien déterminé. On réalise des procédures similaires pour tous les coefficients.
+
+\subsubsection{Règle}
+\begin{enumerate}
+\item Redessiner le schéma pour \textit{chaque coefficient}.
+\item Appliquer les conditions de définition.
+\item Source de \textit{test} pour la variable indépendante.
+\item Déterminer la variable dépendante.
+\item Calculer le coefficient.
+\end{enumerate}
+
+\subsection{Changement de représentation}
+Cette partie renvoie directement à l'image \ref{img:trans}. Pour passer de \textbf{Y} à \textbf{H} on peut soit utiliser l'algèbre linéaire ou trouver des coefficients de \textbf{H} en partant de \textbf{Y}.
+
+\subsubsection{Algèbre linéaire}
+On connait:
+\begin{align*}
+i_i &= y_i v_i + y_r v_o\\
+i_o &= y_f v_i + y_o v_o
+\end{align*}
+On veut trouver $v_i$ et $i_o$ en fonction de $i_i$ et $v_o$:
+\begin{align*}
+v_i &= h_i i_i + h_r v_o &
+i_o &= h_f i_i + y_o v_o &
+[H] &= \frac{1}{y_i} \begin{bmatrix}
+1 & -y_r\\
+y_f & \Delta^y
+\end{bmatrix}
+\end{align*}
+
+\subsubsection{Coefficients}
+On peut appliquer la règle de détermination des coefficients sur le schéma équivalent Y. On se rend compte qu'il faut utiliser la technique matricielle de temps en temps car peut vite être très lourde.
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/HYcoeff.png}
+\end{figure}
+
+\subsubsection{Conversion}
+\begin{figure}[H]
+\centering
+\includegraphics[width=11cm]{img/Conversion.png}
+\end{figure}
+\begin{align*}
+Z &= Y^{-1} & Y&= Z^{-1} & G &= H^{-1} & H &= G^{-1}
+\end{align*}
+
+\subsection{Association de quadripôle}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/Assoc.png}
+\end{figure}
+
+
+\subsection{Quadripôle chargé}
+\textcolor{red}{TODO}
+
+\chapter{Puissance}
+\section{Instantanée, moyenne et effective}
 
 
 
