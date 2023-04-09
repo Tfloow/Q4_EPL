@@ -15,7 +15,6 @@
 \usepackage{float}
 \usepackage{amsfonts}
 \usepackage{fancyhdr}
-\usepackage{circuitikz}
 \usepackage{titlesec}
 \usepackage{xparse}
 \usepackage{wrapfig}
@@ -882,6 +881,100 @@ Z &= Y^{-1} & Y&= Z^{-1} & G &= H^{-1} & H &= G^{-1}
 
 \chapter{Puissance}
 \section{Instantanée, moyenne et effective}
+
+\subsection{Instantanée}
+Une puissance est généré par le déplacement d'une charge $dq$ d'un point A vers B. On voit cela comme une énergie \textit{potentielle}. Donc au point X cela vaut $dq V_X$. Le déplacement crée un \textcolor{blue}{Travail} (\textit{Work}): $dW = dq (V_A - V_B)$. On fait un \textit{échange} de puissance avec le monde extérieur:
+\begin{align*}
+p &= \frac{dW}{dt} = \frac{dq}{dt}(V_A - V_B) = iv\\
+p(t) &= v(t) i(t) \quad \text{Peut dépendre du temps}
+\end{align*}
+Dans les normes de ce cours, un dipôle \textcolor{red}{absorbe} de la puissance si le courant et la tension sont positifs ou négatifs.\\
+On stocke cette énergie sous 2 forme.
+\begin{enumerate}
+\item Stocké sous forme d'énergie électrostatique (ex: capacité)
+\item Stocké sous forme d'énergie magnétique (ex: inductance/self)
+\end{enumerate}
+Et on dissipe la puissance sous forme de chaleur pour une résistance ou en énergie mécanique pour un moteur électrique.\\
+
+On dit qu'on fournit de la puissance si la tension est négative et le courant positif ou inversement. Donc on doit générer une puissance depuis une autre source (\textit{générateur de tension, capacité se vidant, ...})
+
+\subsection{Moyenne}
+Dans une résistance, la puissance est \textbf{toujours positive}. En effet, une résistance ne peut fournir de la puissance donc sa puissance moyenne est toujours positive.\\
+Son voltage vaut: $v(t) = R i(t)$ et sa puissance \textcolor{blue}{instantanée} vaut donc $p(t) = R i^2(t)$ donc $p(t) = \frac{v^2(t)}{R}$.\\
+La puissance moyenne se calcule via:
+\begin{align*}
+P_{moy} \triangleq \frac{1}{T} \int_{t_0}^{t_0 + T} p(t) dt = \frac{1}{T}\int_{t_0}^{t_0 + T} R i^2 (t) dt
+\end{align*}
+le $T$ correspond à une \textit{période} de notre signal d'entrée (alimentation).
+
+\subsection{Valeur efficace}
+
+\subsubsection{Courant}
+Pour le courant \textit{continu}, on le nomme $I_{eff}$. Ainsi, la \textbf{puissance dissipée} dans la résistance vaut donc $R I_{eff}^2 = P_{moy}$.
+\begin{align*}
+I_{eff} = \sqrt{\frac{P_{moy}}{R}} = \sqrt{\frac{1}{T}\int_{t_0}^{t_0 + T} i^2 (t) dt}
+\end{align*}
+
+\subsubsection{Tension}
+La tension \textit{continu}, on la nomme $V_{eff}$. Ainsi, la \textbf{puissance dissipée} dans la résistance $V_{eff}^2 / R = P_{moy}$.
+\begin{align*}
+V_{eff} = \sqrt{R P_{moy}} = \sqrt{\frac{1}{T}\int_{t_0}^{t_0 + T} v^2 (t) dt}
+\end{align*}
+
+\subsection{Courant sinusoïdal}
+Si on a une pulsation de $\omega$ et une valeur de \textbf{crête} de $I_{max}$ et non déphasé, notre courant vaut: $i(t)= I_{max} cos(\omega t)$\\
+Toujours avec une \textit{résistance}, sa puissance vaut donc:
+\begin{align*}
+p(t) &= R I_{max}^2 cos^2(\omega t)\\
+&= \frac{R I_{max}^2}{2} (cos(2 \omega t) + 1)\\
+&= P_{moy} (cos (2 \omega t ) +1 )\\
+P_{moy} &= \frac{R I_{max}^2}{2} = R \left( \frac{I_{max}}{\sqrt{2}} \right)^2
+\end{align*}
+Pour ce type de courant et tension, on peut établir ces égalités:
+\begin{align*}
+I_{eff} &= \frac{I_{max}}{\sqrt{2}} & V_{eff} &= \frac{V_{max}}{\sqrt{2}}
+\end{align*}
+
+\subsubsection{Impédance quelconque}
+On a une valeur de crête $I_{max}$ et $V_{max}$ qui ont la même pulsation de $\omega$ et une phase de $\varphi_i$ et $\varphi_v$ respectivement.\\
+La puissance instantanée s'obtient ainsi:
+\begin{align*}
+p(t) &= V_{max}I_{max}cos(\omega t + \varphi_v) cos(\omega t + \varphi_i)
+&= \frac{1}{2}V_{max}I_{max} [cos(\varphi_v -\varphi_i) + cos(2 \omega t + \varphi_v + \varphi_i)]
+\end{align*}
+On voit bien qu'on a donc un terme \textcolor{red}{constant} à gauche et un terme qui \textcolor{blue}{fluctue} à droite en fonction de la pulsation $2 \omega$\\
+Ainsi, la puissance moyenne (par la propriété des cosinus) vaut le terme \textcolor{red}{constant}:
+\begin{align*}
+P_{moy} &= \frac{1}{2}V_{max}I_{max} cos(\varphi_v -\varphi_i) = V_{eff}I_{eff}cos(\varphi_v -\varphi_i)
+\end{align*}
+
+\section{Puissance active, réactive et apparente}
+\subsection{Impédance quelconque}
+On va tout d'abord transformer notre courant \textit{sinusoïdal} en phaseur: $\overline{I} = I_{max}e^{j\varphi_i}$\\
+Comme nous sommes en impédance quelconque, cela signifie que: $\overline{Z} = R + j X = Z e^{j \varphi}$ petit rappel:
+\begin{align*}
+X &= \omega L & \varphi &= atan(\frac{X}{R}) & R &= Z cos(\varphi)\\
+X &=  -\frac{1}{\omega C} & Z &= \sqrt{R^2 + X^2} & X &= Z sin(\varphi)
+\end{align*}
+Donc on peut en tirer ces équations en régime permanent:
+\begin{align*}
+\overline{V} &= \overline{Z} \overline{I}  = Z I_{max}e^{j (\varphi_i + \varphi)} & &\Rightarrow & \overline{V} &= V_{max}e^{j\varphi_v}\\
+v(t) &= Ri(t) + L \frac{di(t)}{dt} & &\Rightarrow & v(t) &= Z I_{max} cos(\omega t + \varphi_i + \varphi)\\
+& & i(t) &= C\frac{d}{dt}[v(t) -Ri(t)] & &
+\end{align*}
+La puissance instantanée vaut donc:
+\begin{align*}
+p(t) &= v(t) i(t) & p(t) &= V_{eff} I_{eff}(cos(\varphi_v - \varphi_i) + cos(2 \omega t + \varphi_v + \varphi_i ))\\
+p(t) &= ZI_{eff}^2(cos(\varphi ) + cos(2 \omega t + \varphi + 2\varphi_i )) & p(t) &= RI_{eff}^2 + V_{eff}I_{eff} cos(2 \omega t + \varphi + 2\varphi_i )
+\end{align*}
+
+\subsubsection{Puissance active}
+La puissance moyenne nous indique la puissance fournit au dipôle mais la puissance \textcolor{red}{active} indique un échange \textbf{unidirectionnel} de l'énergie entre la source et une charge (par exemple la résistance ici)
+\begin{equation}
+P \triangleq V_{eff} I_{eff} cos(\varphi) = R I_{eff}^2
+\end{equation}
+
+\subsubsection{Puissance apparente}
 
 
 
