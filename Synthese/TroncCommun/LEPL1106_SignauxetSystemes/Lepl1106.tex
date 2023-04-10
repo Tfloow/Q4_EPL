@@ -175,6 +175,106 @@ On peut décomposer tout signal en impulsion comme ci-dessous:
 
 
 
+
+\section{Opération sur les signaux}
+Voici un tableau résumant les différentes opérations possibles sur les signaux:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+	\hline
+	 & Temps discret & Temps continu\\
+	\hline
+	Combinaison linéaire & $\alpha_1 x_1[n] + \alpha_2 x_2[n]$ & $\alpha_1 x_1(t) + \alpha_2 x_2(t)$\\
+	\hline
+	Multiplication & $x_1[n]x_2[n]$ & $x_1(t)x_2(t)$\\
+	\hline
+	Différentiation &  & $d^nx(t)/dt^n$\\
+	\hline
+	Intégration &  & $\int_{-\infty}^t x(\tau)d\tau$\\
+	\hline
+	\textbf{Convolution} & $x_1[n] \ast x_2[n]$ & $x_1(t) \ast x_2(t)$\\
+	\hline
+	Dilatation & $x[n/a]$ (arrondi $n/a$) & $x(t/a) a>0$\\
+	\hline
+	Translation & $x[n-n_0], n_0 \in \mathbb{Z}$ & $x(t-t_0), t_0 \in \mathbb{R}$\\
+	\hline
+	Renversement & $x[-n]$ & $x(-t)$\\
+	\hline
+\end{tabular}
+\end{center}
+Une chose importante à voir dans ces formules est que $x$ est un \textit{signal}, $x[k]$ la \textit{valeur} de ce signal en k et on a $\mathcal{H}$ qui est un \textit{système} prenant et donnant des signaux.
+
+\section{Convolution (temps discret)} \label{convo}
+La convolution est un nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
+\begin{equation} \label{eqn:convolution}
+f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
+\end{equation}
+La méthode pour trouver le résultat d'une convolution de manière \textbf{graphique} est:
+\begin{enumerate}
+\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
+\item On décale une des fonctions le plus à droite. (on prend le $k_0$ où après, tous les résultats de $f[k]g[n-k]$ valent $0$) 
+\item Puis multiplier chaque point entre eux et les sommer.
+\item On met le résultat sur un \textit{graphe} au point $k$.
+\item On décale notre fonction d'un point vers la gauche et on répète le processus.
+\end{enumerate}
+Pour trouver de manière \textbf{calculatoire}, on applique simplement la formule \ref{eqn:convolution}.
+
+\subsection{Propriétés}
+\begin{center}
+\begin{tabular}{c|c}
+	Commutativité & $(f\ast g)[n] = (g \ast f)[n]$ \\
+	\hline
+	Associativité & $(f \ast (g \ast h))[n] = ((f \ast g) \ast h)[n]$ \\
+	\hline
+	Distributivité & $(f \ast (g + h))[n] = (f \ast g + f \ast h)[n]$ \\
+\end{tabular}
+\end{center}
+On également ces propriétés:
+\begin{center}
+\begin{tabular}{c|c}
+	Élément neutre & $f[n] \ast \delta[n] = f[n]$ \\
+	\hline
+	Décalage & $f[n] \ast \delta[n-n_0] = f[n-n_0], n_0 \in \mathbb{Z}$ \\
+\end{tabular}
+\end{center}
+
+\section{Convolution (temps continu)}
+Si on a \textit{2 signaux} $f(t)$ et $g(t)$ leur convolution est donnée par (ressemble très fort à \ref{convo}):
+\begin{equation}
+f(t) \ast g(t) = \int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau
+\end{equation}
+Pour calculer de manière \textbf{graphique} il faut suivre ces étapes:
+\begin{enumerate}
+\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f(t) \rightarrow f(-t)$.
+\item On décale une des fonctions le plus à droite. (on prend le $\tau_0$ où après, tous les résultats de $f(t)g(t-\tau_0)$ valent $0$) 
+\item Puis multiplier chaque point entre eux et on les intègre. (on prend la surface sous la courbe).
+\item On met le résultat sur un \textit{graphe} au pont $\tau$.
+\item On décale notre fonction d'une distance (pas trop loin mais pas trop proche pour ainsi avoir une nuée de points) vers la gauche et on répète le processus.
+\end{enumerate}
+En somme, nous avons une méthode très proche du temps discret si ce n'est l'utilisation d'intégrale allant de $-\infty$ à $\infty$.
+
+\subsection{Propriétés}
+On retrouve les mêmes propriétés que en temps discret.
+\begin{center}
+\begin{tabular}{c|c}
+	Commutativité & $(f\ast g)(t) = (g \ast f)(t)$ \\
+	\hline
+	Associativité & $(f \ast (g \ast h))(t) = ((f \ast g) \ast h)(t)$ \\
+	\hline
+	Distributivité & $(f \ast (g + h))(t) = (f \ast g + f \ast h)(t)$ \\
+\end{tabular}
+\end{center}
+On également ces propriétés:
+\begin{center}
+\begin{tabular}{c|c}
+	Élément neutre & $f(t) \ast \delta(t) = f(t)$ \\
+	\hline
+	Décalage & $f(t) \ast \delta(t-t_0) = f(t-t_0), n_0 \in \mathbb{R}$ \\
+\end{tabular}
+\end{center}
+
+
+
+
 \chapter{Fourier}
 \section{La représentation de Fourier}
 
@@ -291,6 +391,13 @@ X\bigl(e^{j\Omega} \bigl) &= \sum_{m=-\infty}^{\infty} x[m]e^{-j\Omega m} \label
 \end{align}
 L'équation \label{eq:transfoDF} donne la \textcolor{blue}{transformée} de Fourier.
 
+\subsection{Astuce}
+Ne jamais oublier la forme complexe des fonctions sinus et cosinus et repasser en forme complexe.\\
+%On peut simplifier un échelon en modifiant la borne de l'intégrale. En effet, un échelon $u(t-a)$ ne fait exister un signal que sur $[a;\rightarrow[$\\
+Une fonction qui revient souvent est le sinus \textit{cardinal} qui peut être transformé comme suit:
+\begin{align*}
+sinc(u) &= \frac{sin( u)}{ u}
+\end{align*}
 
 \section{Propriétés de Fourier} \label{proprF}
 
@@ -500,177 +607,45 @@ x(t) = sign(t) = \longleftrightarrow X(j\omega) = \frac{2}{j\omega}
 Cela se prouve avec la dilatation et la translation de la fonction échelon.
 
 \section{Tableau de Check}
-%insérer tableau slide 22 cours 4
-
-\chapter{Filtrage et Bode}
-
-\section{Filtre}
-On se souvient, que convoluer 2 signaux revient à multiplier leur spectre. De plus, dans un système \textbf{LIT} le résultat d'un signal x est: $y = h\ast x$. Donc, la plupart du temps quand un programme informatique fait un système LIT, il va faire la \textit{transformée de Fourier} pour simplement multiplier et pas avoir des sommes de multiplications.\\
-Donc en Résumé:
-\begin{align*}
-Y(t) = H(t) \ast X(t) &\longleftrightarrow Y(j\omega) = H(j \omega) X(j \omega)\\
-=|H(j \omega)||X(j \omega)|&e^{j(arg\{H(j\omega )\}+ arg\{X(j \omega) \}}
-\end{align*}
-Donc, il parait clair qu'un système modifie le contenu fréquentiel de notre signal $X$.
-\begin{figure}[H]
-\centering
-\includegraphics[width=8cm]{img/signalFreq.png}
-\caption{Exemple de système LIT}
-\end{figure}
-Le fait de modifier le \textit{contenu fréquentiel} est appelé le \textbf{filtrage}.
-\subsection{Type de filtre}
-Il existe 3 grands types de filtres:
-\begin{enumerate}
-\item \textcolor{red}{Les filtres passe-bas}: ils vont atténuer et annuler les \textit{hautes-fréquences} pour ne laisser passer que les \textit{basses}.
-\item \textcolor{red}{Les filtres passe-haut}: ils vont atténuer et annuler les \textit{basses fréquences} et ne laisser passer que les \textit{hautes}.
-\item \textcolor{red}{Les filtres passe-bande}: ils ne vont laisser passer qu'une partie précise de fréquence. On peut voir cela comme la différence entre un filtre passe-bas d'envergure $A$ et un filtre passe-base d'envergure $B$ avec $A>B$. La différence $A-B$ est appelé la \textbf{largeur de bande}. 
-\end{enumerate}
-C'est grâce à cela que la radio fonctionne ou que les filtres photo fonctionnent.\\
-
-\newpage % à enlever si écart 
-
-\subsubsection{Les circuits RC}
-Parmi les exemples typiques, on peut s'intéresser au circuit RC (cf: \href{https://github.com/Tfloow/Q4_EPL/blob/main/SynthèseCompilée/LELEC1370.pdf}{LELEC1370}). 
-\begin{wrapfigure}{r}{.5\textwidth}
-\centering
-\includegraphics[width=5cm]{img/RC.png}
-\caption{RC classique}
-\end{wrapfigure}
-En effet, on peut modéliser les équations d'un tel circuit comme suit:
-\begin{align*}
-x(t) &= R C \frac{du}{dt} + u(t) \longleftrightarrow\\
-X(j \omega) = RC j \omega Y(j \omega) + Y(j \omega) &= Y(j \omega) (j\omega RC+1)\\
-\frac{Y(j \omega)}{X(j \omega)} = H(j \omega) &= \frac{1}{1+ j \omega RC}\\
-\text{Si } \omega_c = \frac{1}{RC}; |H(j\omega)| &= \frac{1}{\sqrt{1 + j(\omega / \omega_c)^2}}
-\end{align*}
-Ici, notre $\omega_c$ représente la \textcolor{blue}{fréquence de coupure}. C'est donc la valeur à partir de laquelle, on aura un changement notable de résultat.\\
-Une chose à remarquer est que le déphasage lié à la fréquence angulaire augmente jusqu'à $\frac{\pi}{2}$. Peu perceptible au début, cela ne change rien fondamentalement.
-
-\subsection{Filtres non-idéaux}
-Un filtre parfait serait un filtre qui soit: nulle partout où on ne veut pas la fréquence et unitaire partout où on la veut.\\
-\begin{wrapfigure}{r}{.5\textwidth}
-\centering
-\includegraphics[width=6cm]{img/sinc.png}
-\caption{Sinus cardinal}
-\end{wrapfigure}
-Mais comme vu au point \ref{window}, un tel signal en phasoriel correspond à:
-\begin{align*}
-H(j\omega) \longleftrightarrow h(t) = \frac{sin(\omega_c t)}{\pi t}
-\end{align*}
-Le gros soucis avec cela, c'est qu'on a une réponse actuelle du système qui dépend de quelque chose se passant dans le \textit{futur} donc pas vraiment physique. Le système n'est pas \textit{causal}.\\
-On peut aussi noter qu'on aura un déphasage nul. En réalité, on cherche à avoir une déphasage linéaire car c'est simplement une modulation et est plus facilement corrigeable.
-
-\subsubsection{Passe-bande non-idéal}
-\begin{wrapfigure}{r}{.5\textwidth}
-\centering
-\includegraphics[width=6cm]{img/pbNonIde.png}
-\end{wrapfigure}
-Il en va de même pour le filtre passe-bande qui est composé de deux fonctions fenêtres comme suit:
-\begin{align*}
-|H(j\omega)| &= \sqcap \bigr(\frac{\omega + \omega_0}{B/2}\bigr) + \sqcap \bigr(\frac{\omega - \omega_0}{B/2}\bigr)\\
-h(t) &= \frac{sin(Bt/2}{\pi t}2 cos(\omega_0 t)
-\end{align*}
-Comme au point précédent, c'est la non causalité et donc le manque de sens physique qui rend ce type de filtres idéaux impossibles.
-
-\subsection{Filtre analogique}
-Ce sont des filtres composés d'éléments \textcolor{blue}{passifs} et/ou \textcolor{blue}{actifs}. 
-\begin{figure}[H]
-\centering
-\includegraphics[width=9cm]{img/analogique.png}
-\caption{Réponse impulsionelle en fonction de la fréquence}
-\label{analogique}
-\end{figure}
-
-Un filtre \textit{réel} a un $|H(j\omega)|$ qui ressemblent plus à la figure \ref{analogique}. Le \textbf{gabarit} précise les \textit{tolérances} qu'on accepte quand on design un filtre.
-\begin{enumerate}
-\item \textcolor{red}{Fluctuations bande passante}: on détermine un $\epsilon$ qui définit la largeur de bande passante.
-\item \textcolor{red}{Zone de transition}: correspond au $\Delta$ qui indique la largeur de cette zone.
-\item \textcolor{red}{Fluctuations bande bloquante}: la largeur de cette bande est définit via $\delta$.
-\end{enumerate}
-
-\subsubsection{Les filtres passe-bas}
 \begin{center}
-\begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
-\hline
-\cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
-\hline
-Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & On a un filtre avec une \textit{fluctuation de bande passante} minime. Une \textit{zone de transition} plus ou moins élevé et une \textit{bande bloquante} qui tend vers 0.\\
-\hline
-Tchebychev Direct & $|H(j\omega)|^2 = \frac{1}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} oscillante mais borné. Une \textit{zone de transition} rapide et une \textit{bande bloquante} qui tend vers 0 et plus vite que \textcolor{blue}{Butterworth}.\\
-\hline
-Tchebychev Inverse & $|H(j\omega)|^2 = \frac{\sqrt{\gamma}T_n(\omega_c/\omega}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} plate. Une \textit{zone de transition} rapide et une \textit{bande bloquante} oscille de manière bornée (l'inverse de \textcolor{blue}{Tchebychev}).\\
-\hline
-Elliptiques/Cauer & $|H(j\omega)|^2 = \frac{1}{1+ \gamma R_n^2(\omega / \omega_n \zeta)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation}, $\zeta$ est le \textcolor{blue}{facteur de sélectivité} et $R_n^2$ est une fonction \textcolor{blue}{rationnelle elliptique}. On a donc un filtre où en modifiant les paramètres $\gamma$ et $\zeta$, on peut obtenir un filtre spécifique.\\
-\hline
+    \begin{tabular}{|m {5cm}| m {5cm}|}
+    \hline
+    \cellcolor[gray]{0.8} Domaine temporel &  \cellcolor[gray]{0.8} Domaine spectral \\ \hline
+    $x(t) = u(t)$ & $X(j \omega) = \frac{1}{j\omega} + \pi \delta(\omega)$ \\\hline
+    $x(t) = \delta(t)$ & $X(j \omega) = 1$ \\\hline
+    $x(t) = 1$ & $X(j \omega) = 2\pi\delta(\omega)$ \\\hline
+    $x(t) = \left\{\begin{aligned}
+    1 \text{ si } |t| \leqslant T_0 \\
+    0 \text{ sinon}
+    \end{aligned}\right.
+    $ & $X(j \omega) = \frac{2T_0\sin(\omega T_0)}{\omega T_0}$ \\\hline
+    $x(t) = \frac{1}{t\pi}\sin(Wt)$ & $X(j \omega) = \left\{\begin{aligned}
+    1 \text{ si } |\omega| \leqslant W \\
+    0 \text{ sinon}
+    \end{aligned}\right.$ \\ \hline
+    $x(t) = e^{-at}u(t), \Re(a) > 0$ & $X(j\omega) = \frac{1}{a + j\omega}$\\\hline
+    $x(t) = \sum_{n \in \mathbb{Z}} \delta(t-nT)$ & $X(j \omega) = \frac{2\pi}{T}\sum_{k\in\mathbb{Z}}\delta(\omega - k \frac{2\pi}{T})$ \\\hline
 \end{tabular}
 \end{center}
-
-\subsubsection{Les filtres passe-haut}
+\subsubsection{Transformées de signaux discrets}
 \begin{center}
-\begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
-\hline
-\cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
-\hline
-Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & Est très similaire à son homologue passe-bas. Donc on a des bandes très plate et une zone de transition assez rapide dépendant de son degré.\\
-\hline
-
+    \begin{tabular}{|m {6cm}| m {6cm}|}
+    \hline
+    \cellcolor[gray]{0.8} Domaine temporel & \cellcolor[gray]{0.8} Domaine spectral \\  \hline
+    $x[n] = u[n]$ & $X(e^{j\Omega}) = \frac{1}{1-e^{-j\Omega}} + \pi \sum_{p\in\mathbb{Z}} \delta(\Omega - 2\pi p)$ \\\hline
+    $x[n] = \delta[n]$ & $X(e^{j\Omega}) = 1$ \\\hline
+    $x[n] = \left\{\begin{aligned}
+    1 \text{ si } |n| \leqslant M \\
+    0 \text{ sinon}
+    \end{aligned}\right.
+    $ & $X(e^{j\Omega}) = \frac{\sin(\Omega(M + 1/2))}{\sin(\Omega/2)}$ \\\hline
+    $x[n] = \frac{1}{n\pi}\sin(Wn), 0<W \leqslant \pi$ & $X(e^{j\Omega}) = \left\{\begin{aligned}
+    1 \text{ si } |\Omega| \leqslant W \\
+    0 \text{ sinon}
+    \end{aligned}\right.$ \\ \hline
+    $x[n] = \alpha^nu[n], |\alpha|<1$ & $X(e^{j\Omega}) = \frac{1}{1-\alpha e^{-j\Omega}}$\\ \hline
 \end{tabular}
 \end{center}
-
-\subsubsection{Les filtres passe-bande}
-Pour obtenir un filtre passe-bande, on combine 2 filtres passe-bas. On doit réaliser le changement de variable suivant:
-\begin{align*}
-j\omega \rightarrow \frac{\omega_0^2 - \omega^2}{Bj\omega}
-\end{align*}
-Où $B$ est la largeur du filtre souhaitée et $\omega_0$ est la fréquence à laquelle on va centrer nos deux bandes (une \textit{positive} et \textit{négative}).
-
-\subsubsection{Les filtres à encoche / notch}
-Ce sont des filtres qui ne font passer qu'une seule fréquence \textit{spécifique}.
-\begin{align}
-H(j\omega) = \frac{(j\omega + j\omega_0)(j\omega - j\omega_0)}{(j \omega + \omega_0(cos(\theta) + j\sin(\theta))(j \omega + \omega_0(cos(\theta) -j\sin(\theta))) }
-\end{align}
-
-\subsubsection{Les filtres passe-tout}
-Il existe également une famille de filtre qui fait \textit{tout passer}. Son utilité ? \textcolor{blue}{déphaser} de $+/- \pi$ un signal ce qui peut être fort utile !
-\begin{equation}
-H(j\omega) = \frac{(j\omega - 2)}{(j\omega + 2)}
-\end{equation}
-
-
-\section{Caractérisation d'un filtre}
-Pour se faire, on prend son équation de réponse impulsionnelle et on trace son diagramme de \textcolor{blue}{Bode}. (ne pas oublier que Bode c'est \textit{la norme} \textbf{et} \textit{l'argument})\\
-
-Pour se faire, on utilise une échelle \textit{logarithmique}. On doit également \textcolor{blue}{factoriser} notre réponse impulsionnelle comme suit:
-\begin{align}
-|H(j\omega)| &= K \frac{|1 + \frac{j\omega}{\omega{z_1}}||\frac{j\omega}{\omega_{z_2}}|\bigr|(\frac{j\omega}{\omega_{z_3}})^2 + 2 \xi \frac{j\omega}{\omega_{z_3}}+1\bigr|}{|1 + \frac{j\omega}{\omega{p_1}}||\frac{j\omega}{\omega_{p_2}}|\bigr|(\frac{j\omega}{\omega_{p_3}})^2 + 2 \xi \frac{j\omega}{\omega_{p_3}}+1\bigr|}\\
-20 &log(|H(j\omega)|)
-\end{align}
-Grâce aux propriétés des logarithmes, on peut séparer et additionner les multiplications et et divisions.\\
-Ainsi, on trace morceau par morceau notre fonction et on va sommer ses différentes parties.
-\begin{align*}
-\textcolor{orange}{20 log|K|} + \textcolor{red}{20 log \bigr| \frac{j\omega}{\omega_{z_1}}\bigr|} + \textcolor{blue}{20 log(\bigr|1 + \frac{j\omega}{\omega_{z_2}}\bigr|)}
-\end{align*}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=4.5cm]{img/K.png}
-\includegraphics[width=5cm]{img/jomega.png}
-\includegraphics[width=5cm]{img/jomegacarre.png}
-\end{figure}
-
-et pour la version au \textit{carré} on a ceci. Il faut faire attention aux \textbf{asymptotes} qui peuvent se former !
-\begin{align*}
-\textcolor{green}{20log(\bigr|  \bigr(\frac{j\omega}{\omega_{z_3}}\bigr)^2 + 2 \xi \frac{j\omega}{\omega_{z_3}} +1 \bigr|)}
-\end{align*}
-\begin{figure}[H]
-\centering
-\includegraphics[width=6cm]{img/jomegamax.png}
-\end{figure}
-Après cela, on additionne/soustrait simplement nos courbes ensembles et on obtient notre \textit{première partie} du diagramme de \textcolor{blue}{Bode}.
-
-\subsection{Argument}
-Pour l'argument, le processus est le même si ce n'est qu'on ne met pas l'argument dans un logarithme mais est représenté sur une échelle logarithmique.\\
-On trace nos différents arguments et on les somme.
 
 \chapter{L'échantillonnage}
 L'échantillonnage est quelque chose qui est partout autour de nous. C'est le fait de transformer un signal continu (\textit{son, vidéo, ...}) en un signal discret. (afin de le stocker sur un pc, ...) C'est donc un processus vitale à l'ère de l'informatique.
@@ -682,9 +657,9 @@ Donc, pour sauvegarder un signal en discret, il faut \textit{ponctuellement} le 
 \centering
 \begin{align*}
 \text{Pas d'échantillonnage: } &T_e\\
-\text{Fréquence d'échnatillonnage: } & f_e = \frac{1}{T_e}\\
+\text{Fréquence d'échnatillonnage: }  f_e &= \frac{1}{T_e}\\
 x[n] &= x(nT_e)\\
-x_e(t)=x(t) \sum_{n \in \mathbb{Z}} \delta(t-nT_e) &= \sum_{n \in \mathbb{Z}} x(nT_e)\delta(t-nT_e)
+x_e(t)=x(t) \sum_{n \in \mathbb{Z}} \delta(t-nT_e)&= \sum_{n \in \mathbb{Z}} x(nT_e)\delta(t-nT_e)
 \end{align*}
 \end{wrapfigure}
 On relève le signal discret toutes les $T_e$ secondes. Notre signal discret correspond à $x[n]$. Donc la transformation continu $\rightarrow$ est \textit{trivial}.\\
@@ -740,7 +715,7 @@ Si le théorème de Shanon (\ref{Sha}) est bien respecté, on peut donc reconsti
 X(j\omega) = X_e(j\omega) T_e \sqcap \Bigr( \frac{\omega}{\omega_c} \Bigr) \qquad (\omega_max \leq \omega_c \leq \omega_e - \omega_max)
 \end{align*}
 
-Il existe également une formule s'intitulant la \textcolor{blue}{formule de Shanon}:
+Il existe également une formule s'intitulant la \textcolor{blue}{formule de Shanon}. On rappelle que $x[n]$ correspond au signal échantillonné à un interval $T_e$:
 
 \begin{align*}
 \sum_{n \in \mathbb{Z}} x[n] sinc\Bigr( \frac{t-nT_e}{T_e} \Bigr)
@@ -886,127 +861,40 @@ On remarque qu'on peut ré-écrire tous signaux via une somme d'impulsions. De p
 \mathcal{H}\{x\} = \mathcal{H}\biggl\{\sum_{k= -\infty}^{\infty} x[k]\delta[n-k] \biggl\} = \sum_{k=-\infty}^{\infty} x[k]\mathcal{H}\{\delta[n-k]\}
 \end{equation}
 Si $\mathcal{H}$ est \textit{invariant} au temps et qu'on pose $h := \mathcal{H}\{\delta\}$
-\begin{align}
+\begin{align*}
 \mathcal{H}\{\delta[n-k]\} = \mathcal{H}\{\delta\}[n-k] &= h[n-k]\\
 \mathcal{H}\{x\} = \sum_{k=-\infty}^{\infty} x[k]h[n-k] &=: x \ast h
-\end{align}
+\end{align*}
 A noter que "$\ast$" fais référence à la convolution, sujet abordé à la section \ref{convo}.\\
 
 Il est important de noter que toutes ces propriétés et caractéristiques des systèmes \textit{LIT} en \textbf{temps discret} sont également valables et ont un équivalent en \textbf{temps continu}.
 
 
-
-\section{Opération sur les signaux}
-Voici un tableau résumant les différentes opérations possibles sur les signaux:
-\begin{center}
-\begin{tabular}{|c|c|c|}
-	\hline
-	 & Temps discret & Temps continu\\
-	\hline
-	Combinaison linéaire & $\alpha_1 x_1[n] + \alpha_2 x_2[n]$ & $\alpha_1 x_1(t) + \alpha_2 x_2(t)$\\
-	\hline
-	Multiplication & $x_1[n]x_2[n]$ & $x_1(t)x_2(t)$\\
-	\hline
-	Différentiation &  & $d^nx(t)/dt^n$\\
-	\hline
-	Intégration &  & $\int_{-\infty}^t x(\tau)d\tau$\\
-	\hline
-	\textbf{Convolution} & $x_1[n] \ast x_2[n]$ & $x_1(t) \ast x_2(t)$\\
-	\hline
-	Dilatation & $x[n/a]$ (arrondi $n/a$) & $x(t/a) a>0$\\
-	\hline
-	Translation & $x[n-n_0], n_0 \in \mathbb{Z}$ & $x(t-t_0), t_0 \in \mathbb{R}$\\
-	\hline
-	Renversement & $x[-n]$ & $x(-t)$\\
-	\hline
-\end{tabular}
-\end{center}
-Une chose importante à voir dans ces formules est que $x$ est un \textit{signal}, $x[k]$ la \textit{valeur} de ce signal en k et on a $\mathcal{H}$ qui est un \textit{système} prenant et donnant des signaux.
-
-\section{Convolution (temps discret)} \label{convo}
-La convolution est un nouvel opérateur qui nous sera très utile. Son signe est "$\ast$" et la formule qui définit cette opération est:
-\begin{equation} \label{eqn:convolution}
-f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
-\end{equation}
-La méthode pour trouver le résultat d'une convolution de manière \textbf{graphique} est:
-\begin{enumerate}
-\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
-\item On décale une des fonctions le plus à droite. (on prend le $k_0$ où après, tous les résultats de $f[k]g[n-k]$ valent $0$) 
-\item Puis multiplier chaque point entre eux et les sommer.
-\item On met le résultat sur un \textit{graphe} au point $k$.
-\item On décale notre fonction d'un point vers la gauche et on répète le processus.
-\end{enumerate}
-Pour trouver de manière \textbf{calculatoire}, on applique simplement la formule \ref{eqn:convolution}.
-
-\subsection{Propriétés}
-\begin{center}
-\begin{tabular}{c|c}
-	Commutativité & $(f\ast g)[n] = (g \ast f)[n]$ \\
-	\hline
-	Associativité & $(f \ast (g \ast h))[n] = ((f \ast g) \ast h)[n]$ \\
-	\hline
-	Distributivité & $(f \ast (g + h))[n] = (f \ast g + f \ast h)[n]$ \\
-\end{tabular}
-\end{center}
-On également ces propriétés:
-\begin{center}
-\begin{tabular}{c|c}
-	Élément neutre & $f[n] \ast \delta[n] = f[n]$ \\
-	\hline
-	Décalage & $f[n] \ast \delta[n-n_0] = f[n-n_0], n_0 \in \mathbb{Z}$ \\
-\end{tabular}
-\end{center}
-
-\section{Convolution (temps continu)}
-Si on a \textit{2 signaux} $f(t)$ et $g(t)$ leur convolution est donnée par (ressemble très fort à \ref{convo}):
-\begin{equation}
-f(t) \ast g(t) = \int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau
-\end{equation}
-Pour calculer de manière \textbf{graphique} il faut suivre ces étapes:
-\begin{enumerate}
-\item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f(t) \rightarrow f(-t)$.
-\item On décale une des fonctions le plus à droite. (on prend le $\tau_0$ où après, tous les résultats de $f(t)g(t-\tau_0)$ valent $0$) 
-\item Puis multiplier chaque point entre eux et on les intègre. (on prend la surface sous la courbe).
-\item On met le résultat sur un \textit{graphe} au pont $\tau$.
-\item On décale notre fonction d'une distance (pas trop loin mais pas trop proche pour ainsi avoir une nuée de points) vers la gauche et on répète le processus.
-\end{enumerate}
-En somme, nous avons une méthode très proche du temps discret si ce n'est l'utilisation d'intégrale allant de $-\infty$ à $\infty$.
-
-\subsection{Propriétés}
-On retrouve les mêmes propriétés que en temps discret.
-\begin{center}
-\begin{tabular}{c|c}
-	Commutativité & $(f\ast g)(t) = (g \ast f)(t)$ \\
-	\hline
-	Associativité & $(f \ast (g \ast h))(t) = ((f \ast g) \ast h)(t)$ \\
-	\hline
-	Distributivité & $(f \ast (g + h))(t) = (f \ast g + f \ast h)(t)$ \\
-\end{tabular}
-\end{center}
-On également ces propriétés:
-\begin{center}
-\begin{tabular}{c|c}
-	Élément neutre & $f(t) \ast \delta(t) = f(t)$ \\
-	\hline
-	Décalage & $f(t) \ast \delta(t-t_0) = f(t-t_0), n_0 \in \mathbb{R}$ \\
-\end{tabular}
-\end{center}
-
 \section{Réponse impulsionnelle}
 La réponse impulsionnelle d'un système \textit{LIT} $\mathcal{H}$ est la réaction du système à une \textit{impulsion d'entrée} ($\delta[0]$) on le note $h$.\\
 
-Pour \textbf{tout} système \textit{LIT}, le signal de sortie est le résultat de la convolution entre \textit{le signal d'entrée} et \textit{la réponse impulsionnelle}.
+Pour \textbf{tout} système \textit{LIT}, le signal de sortie est le résultat de la convolution entre \textit{le signal d'entrée} et \textit{la réponse impulsionnelle}. Cela est d'autant plus utile grâce au propriété d'un tel système et sa linéarité.
 \begin{align}
 y[n] &= x[n] \ast h[n]\\
 y(t) &= y(t) \ast h(t)
 \end{align}
 
+\subsubsection{Réponse indicielle}
+C'est comme la \textit{réponse impulsionnelle} mais quand on fait passer un \textbf{échelon} dans notre système.
+
+\subsubsection{Réponse fréquentielle}
+Pour établir cette réponse, on applique un transformée de Fourier à la réponse impulsionnelle \textbf{OU} on utilise la propriété de convolution et multiplication:
+\begin{align*}
+H(j \omega) &= \mathcal{F}(h(t))\\
+H(j \omega) &= \frac{Y(j \omega)}{X(j \omega)}
+\end{align*}
+Pour plus d'informations sur les réponse fréquentielles, il faut aller voir \ref{Bode}.
+
 \section{Type de système}
 \begin{center}
-\begin{tabular}{|c|c|}
+\begin{tabular}{|m{4cm}|m{10cm}|}
 	\hline
-	Système sans mémoire & Si la sortie du système \textit{à un temps donné}\\
-	&  ne dépend que de l'entrée à \textbf{cet instant}.\\
+	Système sans mémoire & Si la sortie du système \textit{à un temps donné} ne dépend que de l'entrée à \textbf{cet instant}.\\
 	\hline
 	Système causal & Le système \textbf{ne dépend pas} de ce qui se passe dans le \textit{futur}\\
 	\hline
@@ -1205,6 +1093,176 @@ A_d \approx A_c \Delta t \text{ si } \Delta t \text{ petit}
 Une forme usuelle des systèmes LIT dans la vraie vie est de type $\dot{x}(t) = f(x(t), u(t), t)$.\\
 \textbf{Invariance temporelle}: tout système fait face à l'usure mais on estime que sur la période d'observation, l'usure est minime et peut être ignorée.\\
 \textbf{Linéarité}: aucun système n'est pas linéaire. Cela peut être dû à des \textit{imperfections} ou si on augmente \textit{énormément} l'entrée ce qui change le comportement du système.\\
+
+\chapter{Filtrage et Bode}
+
+\section{Filtre}
+On se souvient, que convoluer 2 signaux revient à multiplier leur spectre. De plus, dans un système \textbf{LIT} le résultat d'un signal x est: $y = h\ast x$. Donc, la plupart du temps quand un programme informatique fait un système LIT, il va faire la \textit{transformée de Fourier} pour simplement multiplier et pas avoir des sommes de multiplications.\\
+Donc en Résumé:
+\begin{align*}
+Y(t) = H(t) \ast X(t) &\longleftrightarrow Y(j\omega) = H(j \omega) X(j \omega)\\
+=|H(j \omega)||X(j \omega)|&e^{j(arg\{H(j\omega )\}+ arg\{X(j \omega) \}}
+\end{align*}
+Donc, il parait clair qu'un système modifie le contenu fréquentiel de notre signal $X$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/signalFreq.png}
+\caption{Exemple de système LIT}
+\end{figure}
+Le fait de modifier le \textit{contenu fréquentiel} est appelé le \textbf{filtrage}.
+\subsection{Type de filtre}
+Il existe 3 grands types de filtres:
+\begin{enumerate}
+\item \textcolor{red}{Les filtres passe-bas}: ils vont atténuer et annuler les \textit{hautes-fréquences} pour ne laisser passer que les \textit{basses}.
+\item \textcolor{red}{Les filtres passe-haut}: ils vont atténuer et annuler les \textit{basses fréquences} et ne laisser passer que les \textit{hautes}.
+\item \textcolor{red}{Les filtres passe-bande}: ils ne vont laisser passer qu'une partie précise de fréquence. On peut voir cela comme la différence entre un filtre passe-bas d'envergure $A$ et un filtre passe-base d'envergure $B$ avec $A>B$. La différence $A-B$ est appelé la \textbf{largeur de bande}. 
+\end{enumerate}
+C'est grâce à cela que la radio fonctionne ou que les filtres photo fonctionnent.\\
+
+\newpage % à enlever si écart 
+
+\subsubsection{Les circuits RC}
+Parmi les exemples typiques, on peut s'intéresser au circuit RC (cf: \href{https://github.com/Tfloow/Q4_EPL/blob/main/SynthèseCompilée/LELEC1370.pdf}{LELEC1370}). 
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/RC.png}
+\caption{RC classique}
+\end{wrapfigure}
+En effet, on peut modéliser les équations d'un tel circuit comme suit:
+\begin{align*}
+x(t) &= R C \frac{du}{dt} + u(t) \longleftrightarrow\\
+X(j \omega) = RC j \omega Y(j \omega) + Y(j \omega) &= Y(j \omega) (j\omega RC+1)\\
+\frac{Y(j \omega)}{X(j \omega)} = H(j \omega) &= \frac{1}{1+ j \omega RC}\\
+\text{Si } \omega_c = \frac{1}{RC}; |H(j\omega)| &= \frac{1}{\sqrt{1 + j(\omega / \omega_c)^2}}
+\end{align*}
+Ici, notre $\omega_c$ représente la \textcolor{blue}{fréquence de coupure}. C'est donc la valeur à partir de laquelle, on aura un changement notable de résultat.\\
+Une chose à remarquer est que le déphasage lié à la fréquence angulaire augmente jusqu'à $\frac{\pi}{2}$. Peu perceptible au début, cela ne change rien fondamentalement.
+
+\subsection{Filtres non-idéaux}
+Un filtre parfait serait un filtre qui soit: nulle partout où on ne veut pas la fréquence et unitaire partout où on la veut.\\
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/sinc.png}
+\caption{Sinus cardinal}
+\end{wrapfigure}
+Mais comme vu au point \ref{window}, un tel signal en phasoriel correspond à:
+\begin{align*}
+H(j\omega) \longleftrightarrow h(t) = \frac{sin(\omega_c t)}{\pi t}
+\end{align*}
+Le gros soucis avec cela, c'est qu'on a une réponse actuelle du système qui dépend de quelque chose se passant dans le \textit{futur} donc pas vraiment physique. Le système n'est pas \textit{causal}.\\
+On peut aussi noter qu'on aura un déphasage nul. En réalité, on cherche à avoir une déphasage linéaire car c'est simplement une modulation et est plus facilement corrigeable.
+
+\subsubsection{Passe-bande non-idéal}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/pbNonIde.png}
+\end{wrapfigure}
+Il en va de même pour le filtre passe-bande qui est composé de deux fonctions fenêtres comme suit:
+\begin{align*}
+|H(j\omega)| &= \sqcap \bigr(\frac{\omega + \omega_0}{B/2}\bigr) + \sqcap \bigr(\frac{\omega - \omega_0}{B/2}\bigr)\\
+h(t) &= \frac{sin(Bt/2}{\pi t}2 cos(\omega_0 t)
+\end{align*}
+Comme au point précédent, c'est la non causalité et donc le manque de sens physique qui rend ce type de filtres idéaux impossibles.
+
+\subsection{Filtre analogique}
+Ce sont des filtres composés d'éléments \textcolor{blue}{passifs} et/ou \textcolor{blue}{actifs}. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=9cm]{img/analogique.png}
+\caption{Réponse impulsionelle en fonction de la fréquence}
+\label{analogique}
+\end{figure}
+
+Un filtre \textit{réel} a un $|H(j\omega)|$ qui ressemblent plus à la figure \ref{analogique}. Le \textbf{gabarit} précise les \textit{tolérances} qu'on accepte quand on design un filtre.
+\begin{enumerate}
+\item \textcolor{red}{Fluctuations bande passante}: on détermine un $\epsilon$ qui définit la largeur de bande passante.
+\item \textcolor{red}{Zone de transition}: correspond au $\Delta$ qui indique la largeur de cette zone.
+\item \textcolor{red}{Fluctuations bande bloquante}: la largeur de cette bande est définit via $\delta$.
+\end{enumerate}
+
+\subsubsection{Les filtres passe-bas}
+\begin{center}
+\begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
+\hline
+\cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
+\hline
+Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & On a un filtre avec une \textit{fluctuation de bande passante} minime. Une \textit{zone de transition} plus ou moins élevé et une \textit{bande bloquante} qui tend vers 0.\\
+\hline
+Tchebychev Direct & $|H(j\omega)|^2 = \frac{1}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} oscillante mais borné. Une \textit{zone de transition} rapide et une \textit{bande bloquante} qui tend vers 0 et plus vite que \textcolor{blue}{Butterworth}.\\
+\hline
+Tchebychev Inverse & $|H(j\omega)|^2 = \frac{\sqrt{\gamma}T_n(\omega_c/\omega}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} plate. Une \textit{zone de transition} rapide et une \textit{bande bloquante} oscille de manière bornée (l'inverse de \textcolor{blue}{Tchebychev}).\\
+\hline
+Elliptiques/Cauer & $|H(j\omega)|^2 = \frac{1}{1+ \gamma R_n^2(\omega / \omega_n \zeta)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation}, $\zeta$ est le \textcolor{blue}{facteur de sélectivité} et $R_n^2$ est une fonction \textcolor{blue}{rationnelle elliptique}. On a donc un filtre où en modifiant les paramètres $\gamma$ et $\zeta$, on peut obtenir un filtre spécifique.\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Les filtres passe-haut}
+\begin{center}
+\begin{tabular}{|m{3cm}|m{5cm}|m{7cm}|}
+\hline
+\cellcolor[gray]{0.8} Nom &\cellcolor[gray]{0.8} Réponse impulsionnelle & \cellcolor[gray]{0.8} Avantages \& Inconvénients\\
+\hline
+Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & Est très similaire à son homologue passe-bas. Donc on a des bandes très plate et une zone de transition assez rapide dépendant de son degré.\\
+\hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Les filtres passe-bande}
+Pour obtenir un filtre passe-bande, on combine 2 filtres passe-bas. On doit réaliser le changement de variable suivant:
+\begin{align*}
+j\omega \rightarrow \frac{\omega_0^2 - \omega^2}{Bj\omega}
+\end{align*}
+Où $B$ est la largeur du filtre souhaitée et $\omega_0$ est la fréquence à laquelle on va centrer nos deux bandes (une \textit{positive} et \textit{négative}).
+
+\subsubsection{Les filtres à encoche / notch}
+Ce sont des filtres qui ne font passer qu'une seule fréquence \textit{spécifique}.
+\begin{align}
+H(j\omega) = \frac{(j\omega + j\omega_0)(j\omega - j\omega_0)}{(j \omega + \omega_0(cos(\theta) + j\sin(\theta))(j \omega + \omega_0(cos(\theta) -j\sin(\theta))) }
+\end{align}
+
+\subsubsection{Les filtres passe-tout}
+Il existe également une famille de filtre qui fait \textit{tout passer}. Son utilité ? \textcolor{blue}{déphaser} de $+/- \pi$ un signal ce qui peut être fort utile !
+\begin{equation}
+H(j\omega) = \frac{(j\omega - 2)}{(j\omega + 2)}
+\end{equation}
+
+
+\section{Caractérisation d'un filtre} \label{Bode}
+Pour se faire, on prend son équation de réponse impulsionnelle et on trace son diagramme de \textcolor{blue}{Bode}. (ne pas oublier que Bode c'est \textit{la norme} \textbf{et} \textit{l'argument})\\
+
+Pour se faire, on utilise une échelle \textit{logarithmique}. On doit également \textcolor{blue}{factoriser} notre réponse impulsionnelle comme suit:
+\begin{align}
+|H(j\omega)| &= K \frac{|1 + \frac{j\omega}{\omega{z_1}}||\frac{j\omega}{\omega_{z_2}}|\bigr|(\frac{j\omega}{\omega_{z_3}})^2 + 2 \xi \frac{j\omega}{\omega_{z_3}}+1\bigr|}{|1 + \frac{j\omega}{\omega{p_1}}||\frac{j\omega}{\omega_{p_2}}|\bigr|(\frac{j\omega}{\omega_{p_3}})^2 + 2 \xi \frac{j\omega}{\omega_{p_3}}+1\bigr|}\\
+20 &log(|H(j\omega)|)
+\end{align}
+Grâce aux propriétés des logarithmes, on peut séparer et additionner les multiplications et et divisions.\\
+Ainsi, on trace morceau par morceau notre fonction et on va sommer ses différentes parties.
+\begin{align*}
+\textcolor{orange}{20 log|K|} + \textcolor{red}{20 log \bigr| \frac{j\omega}{\omega_{z_1}}\bigr|} + \textcolor{blue}{20 log(\bigr|1 + \frac{j\omega}{\omega_{z_2}}\bigr|)}
+\end{align*}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.5cm]{img/K.png}
+\includegraphics[width=5cm]{img/jomega.png}
+\includegraphics[width=5cm]{img/jomegacarre.png}
+\end{figure}
+
+et pour la version au \textit{carré} on a ceci. Il faut faire attention aux \textbf{asymptotes} qui peuvent se former !
+\begin{align*}
+\textcolor{green}{20log(\bigr|  \bigr(\frac{j\omega}{\omega_{z_3}}\bigr)^2 + 2 \xi \frac{j\omega}{\omega_{z_3}} +1 \bigr|)}
+\end{align*}
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/jomegamax.png}
+\end{figure}
+Après cela, on additionne/soustrait simplement nos courbes ensembles et on obtient notre \textit{première partie} du diagramme de \textcolor{blue}{Bode}.
+
+\subsection{Argument}
+Pour l'argument, le processus est le même si ce n'est qu'on ne met pas l'argument dans un logarithme mais est représenté sur une échelle logarithmique.\\
+On trace nos différents arguments et on les somme.
 
 
 

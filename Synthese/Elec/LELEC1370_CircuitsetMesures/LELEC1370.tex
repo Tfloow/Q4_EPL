@@ -975,6 +975,50 @@ P \triangleq V_{eff} I_{eff} cos(\varphi) = R I_{eff}^2
 \end{equation}
 
 \subsubsection{Puissance apparente}
+Son amplitude de la composante est fluctuante et s'écrit $S$ en \textbf{Volt ampère}:
+\begin{align*}
+S \triangleq V_{eff} I_{eff} = Z I_{eff}^2
+\end{align*}
+
+\subsubsection{Puissance réactive}
+Traduit un échange \textbf{bidirectionnel} d'énergie entre une source et une charge (donc ici stocké et transmis depuis la \textit{réactance} \textcolor{blue}{$X$}. Cela s'écrit $Q$ en \textbf{Volt ampère réactif}. On ne peut utiliser cela que en régime \textcolor{red}{sinusoïdal}:
+\begin{align*}
+Q &\triangleq V_{eff} I_{eff} sin(\varphi) = XI_{eff}^2
+S &= \sqrt{P^2 + Q^2}
+\end{align*}
+
+\subsection{Résistance pure}
+Ainsi, notre tension en régime permanent est parallèle au courant comme suit:
+\begin{align*}
+\overline{V} &= R \overline{I} & \overline{V} &= V_{max}e^{j \varphi_v} \qquad (V_{max} = R I_{max}, \quad \varphi_v = \varphi_i)\\
+v(t) &= R i(t) & v(t) &= R I_{max} cos(\omega t + \varphi_i)
+\end{align*} 
+
+\subsubsection{Puissance instantanée}
+\begin{align*}
+p(t) = RI_{eff}^2 (1 + cos(2 \omega t + 2 \varphi_i))
+\end{align*}
+
+\subsubsection{Puissance active}
+\begin{align*}
+P = R I_{eff}^2
+\end{align*}
+
+\subsubsection{Puissance apparente}
+\begin{align*}
+S = R I_{eff}^2
+\end{align*}
+
+\subsubsection{Puissance réactive}
+\begin{align*}
+Q &= 0\\
+S &= P
+\end{align*}
+
+\subsection{Inductance pure}
+\textcolor{red}{TODO}
+
+
 
 
 
