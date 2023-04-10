@@ -208,7 +208,7 @@ La convolution est un nouvel opérateur qui nous sera très utile. Son signe est
 \begin{equation} \label{eqn:convolution}
 f[n] \ast g[n] := \sum_{k=-\infty}^{\infty} f[k]g[n-k] 
 \end{equation}
-La méthode pour trouver le résultat d'une convolution de manière \textbf{graphique} est:
+La méthode pour trouver le résultat d'une convolution de manière \textbf{graphique}\footnote{\href{https://upload.wikimedia.org/wikipedia/commons/c/c6/Convolucion_Funcion_Pi.gif}{Gif} pour mieux visualiser} est:
 \begin{enumerate}
 \item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f[n] \rightarrow f[-n]$.
 \item On décale une des fonctions le plus à droite. (on prend le $k_0$ où après, tous les résultats de $f[k]g[n-k]$ valent $0$) 
@@ -441,15 +441,15 @@ e^{j\omega_0 t}x(t) & \longleftrightarrow X(j(\omega - \omega_0))
 Cette modulation va elle modifier l'amplitude du signal car déplace son "espace" phasoriel revient à déplacer ses fréquences et en ajoute.
 \begin{align*}
 x(t) & \longleftrightarrow X(j\omega)\\
-cos(\omega_0 t)x(t) \longleftrightarrow \frac{1}{2}(X(j(\omega - \omega_0)) + X(j(\omega + \omega_0))) 
+cos(\omega_0 t)x(t) &\longleftrightarrow \frac{1}{2}(X(j(\omega - \omega_0)) + X(j(\omega + \omega_0))) 
 \end{align*}
 On reconnait clairement les formules d'Euleur.
 
 \subsection{Différentiation}
 Dériver un signal à \textbf{énergie finie} revient à \textcolor{blue}{amplifier} ses \textcolor{blue}{hautes} fréquences.
 \begin{align*}
-x(t) \longleftrightarrow X(j\omega)\\
-\frac{d^kx}{dt^k}(t) \longleftrightarrow (j\omega)^kX(j\omega)
+x(t) &\longleftrightarrow X(j\omega)\\
+\frac{d^kx}{dt^k}(t) &\longleftrightarrow (j\omega)^kX(j\omega)
 \end{align*}
 \begin{figure}[H]
 \centering
@@ -460,44 +460,44 @@ x(t) \longleftrightarrow X(j\omega)\\
 \subsection{Multiplication par un monôme}
 Par dualité, faire ceci:
 \begin{align*}
-x(t) \longleftrightarrow X(j\omega)\\
-t^nx(t) \longleftrightarrow j^n \frac{d^nX}{d\omega^n} (j\omega)
+x(t) &\longleftrightarrow X(j\omega)\\
+t^nx(t) &\longleftrightarrow j^n \frac{d^nX}{d\omega^n} (j\omega)
 \end{align*}
 \subsection{Intégration}
 Donc intégrer, augmente les \textcolor{blue}{basses} fréquences:
 \begin{align*}
-x(t) \longleftrightarrow X(j\omega)\\
-\sum_{-\infty}^t	x(t)dt \longleftrightarrow \frac{X(j\omega}{j\omega} + \textcolor{red}{\pi X(0) \delta(\omega)}
+x(t) &\longleftrightarrow X(j\omega)\\
+\sum_{-\infty}^t	x(t)dt &\longleftrightarrow \frac{X(j\omega}{j\omega} + \textcolor{red}{\pi X(0) \delta(\omega)}
 \end{align*}
 La partie en rouge est dû au fait qu'un résultat d'une intégration à toujours une \textcolor{red}{constante d'intégration} (le fameux $+C$)
 
 \subsection{Dilatation}
 Quand on \textit{dilate} un signal, on \textit{compresse} son espace spectre.
 \begin{align*}
-x(t) \longleftrightarrow X(j\omega)\\
-x(t/a) \longleftrightarrow |a|X(aj\omega)
+x(t) &\longleftrightarrow X(j\omega)\\
+x(t/a) &\longleftrightarrow |a|X(aj\omega)
 \end{align*}
 Un truc utile est de penser au vidéo au ralenti où on \textit{dilate} le temps et on \textit{compresse} son spectre donc on entend plus les \textit{basses fréquences}.
 
 \subsubsection{Parseval}
 On \textbf{conserve} l'énergie du signal grâce à son spectre. donc:
 \begin{align*}
-x(t) \longleftrightarrow X(j\omega)\\
-\int_{-\infty}^{\infty} |x(t)|^2 dt \longleftrightarrow \frac{1}{2\pi} \int_{-\infty}^{\infty} |X(j\omega)|^2 d\omega
+x(t) &\longleftrightarrow X(j\omega)\\
+\int_{-\infty}^{\infty} |x(t)|^2 dt &\longleftrightarrow \frac{1}{2\pi} \int_{-\infty}^{\infty} |X(j\omega)|^2 d\omega
 \end{align*}
 
 \subsection{Renversement}
 Renverser un signal revient à renverser son spectre.
-\begin{align}
-x(t) \longleftrightarrow X(j\omega)\\
-x(-t) \longleftrightarrow X(-j\omega)
-\end{align}
+\begin{align*}
+x(t) &\longleftrightarrow X(j\omega)\\
+x(-t) &\longleftrightarrow X(-j\omega)
+\end{align*}
 C'est une dilatation par $a = -1$.
 \subsubsection{Complexe conjugué}
 Le spectre d'un \textcolor{blue}{signal conjugué} est le \textcolor{blue}{conjugué renversé} du spectre du signal.
 \begin{align*}
-x(t) \longleftrightarrow X(j\omega)\\
-x^*(t) \longleftrightarrow X^*(-j\omega)
+x(t) &\longleftrightarrow X(j\omega)\\
+x^*(t) &\longleftrightarrow X^*(-j\omega)
 \end{align*}
 
 
@@ -547,10 +547,9 @@ X(j\omega) &= \int_{-\infty}^{\infty} x(t) e^{-j \omega t} dt\\
 Ensuite, on va refaire une série de Fourier:
 \begin{align*}
 x(t) &= \sum_{l = -\infty}^{\infty} X_l e^{j\omega_0 t} & X_l &=  \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j \omega_0 lt} dt\\
-&= \frac{1}{T_0} \sum_{l = -\infty}^{\infty} e^{j\omega_0 lt} & &= \frac{1}{T_0} \int \delta(t) e^{-j \omega_0 lt} dt\\
-& & &= \frac{1}{T_0}
+&= \frac{1}{T_0} \sum_{l = -\infty}^{\infty} e^{j\omega_0 lt} & &= \frac{1}{T_0} \int \delta(t) e^{-j \omega_0 lt} dt= \frac{1}{T_0}
 \end{align*} %pas sûr sûr pour cette démo je doisd recheck
-Ensuite, on utiliser la dualité:
+Ensuite, on utilise la dualité:
 \begin{align*}
 x(t) &\longleftrightarrow X(j\omega)\\
 X(jt) &\longleftrightarrow 2\pi x(-\omega)\\
@@ -580,7 +579,7 @@ u(j\omega) &= \frac{1}{j \omega} + \pi \delta(\omega)
 \subsection{Fonction fenêtre} \label{window}
 Cette fonction, correspond à 2 impulsion. tel que:
 \begin{equation}
-imp = u(t+1) - u(t-1)
+\Pi = u(t+1) - u(t-1)
 \end{equation}
 Ces fonctions sont des filtres \textit{passes-bandes} et à pour transformé de Fourier:
 \begin{align*}
@@ -648,7 +647,7 @@ Cela se prouve avec la dilatation et la translation de la fonction échelon.
 \end{center}
 
 \chapter{L'échantillonnage}
-L'échantillonnage est quelque chose qui est partout autour de nous. C'est le fait de transformer un signal continu (\textit{son, vidéo, ...}) en un signal discret. (afin de le stocker sur un pc, ...) C'est donc un processus vitale à l'ère de l'informatique.
+L'échantillonnage est quelque chose qui est partout autour de nous. C'est le fait de transformer un signal continu (\textit{son, vidéo, ...}) en un signal discret. (afin de le stocker sur un pc, ...) C'est donc un processus vital à l'ère de l'informatique.
 \section{Lien entre le continu et le discret}
 Donc, pour sauvegarder un signal en discret, il faut \textit{ponctuellement} le sauvegarder.On appelle cela \textcolor{blue}{l'échantillonnage}
 
@@ -796,10 +795,10 @@ Ils existent 3 grandes familles de signaux qui nous intéressent pour la \textit
 \item Signaux à support fini dans $\{0, ..., M-1\}$
 \item Signaux à support infini.
 \end{enumerate}
-Donc pour le point 3, on doit *tronquer* notre signal pour le périodiser.
+Donc pour le point 3, on doit \textit{tronquer} notre signal pour le périodiser.
 
 \subsubsection{Zero padding}
-C'est le principe du *ré-échantillonnage* de la DTFT. On prend un signal x[n] qui a un support fini et non-périodique.\\
+C'est le principe du \textit{ré-échantillonnage} de la DTFT. On prend un signal x[n] qui a un support fini et non-périodique.\\
 On va choisir une taille de périodisation $M'$ tel que $M'>M$ en rajoutant des zéros. On évalue donc la DTFT de $x[n]$ en d'autres fréquences.
 \begin{figure}[H]
 \centering
@@ -809,7 +808,7 @@ On va choisir une taille de périodisation $M'$ tel que $M'>M$ en rajoutant des 
 \subsubsection{Propriétés de la DFT}
 
 \begin{center}
-\begin{tabular}{| m{2cm} | m{3cm} | m{4cm} |}
+\begin{tabular}{| m{2cm} | m{4cm} | m{4cm} |}
 \hline
 Opération &$x[n]$& $X_{DFT}[k]$\\
 \hline
