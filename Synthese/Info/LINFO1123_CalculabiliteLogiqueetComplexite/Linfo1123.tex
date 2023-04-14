@@ -6,15 +6,20 @@
 \usepackage[french]{babel}
 \usepackage{graphicx}
 \usepackage{graphics}
+\usepackage{colortbl}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{array}
 \usepackage{amssymb}
+\usepackage{colortbl}
+\usepackage{color}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{float}
 \usepackage{amsfonts}
+\usepackage{tikz}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{xparse}
@@ -814,6 +819,196 @@ On utilise donc \ref{HA}, $\exists z \forall n , x : \varphi_z(n,x) = \varphi_n(
 On peut démontrer, en utilisant le modèle des machine de Turing que le problème de l’arrêt est non calculable. Même méthode de démonstration, mais adaptée aux machines de Turing. La preuve a été faite avec des machines de Turing pour la première fois.
 
 
+\chapter{Logique}
+\section{Logique des propositions}
+On va décrire la syntaxe des formules logiques.\\
+Son but premier est de:
+\begin{itemize}
+\item Représenter des connaissances
+\item Raisonner de manière automatique sur ces connaissances
+\end{itemize}
+Il existe la logique de \textbf{propositions}, des \textbf{prédicats}, \textbf{temporelle}, \textbf{floue}, \textbf{modale}, ...
+
+\subsection{Composition de la logique}
+\begin{center}
+\begin{tabular}{|m {3cm}| m {5cm}| m{5cm}|}
+\hline
+Type & Description \\
+\hline
+Syntaxe & On détermine la structure accepté dans un langage \\
+\hline
+Sémantique & On leur donne un sens à ces formules \\
+\hline
+Raisonnement & On propose une méthode pour manipuler les formules et obtenir des informations pertinentes \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Description}
+C'est la logique "\textit{la plus simple}" et la plus ancienne.\\
+On se base sur le principe de proposition. Ce sont des affirmations qui sont vraies ou fausses. (ex: \textit{le soleil brille}, \textit{le sommet $V_2$ du graphe a la couleur rouge}, ...)\\
+
+On représente ces affirmations par une \textbf{suite de caractères} qu'on peut appeler \textit{variable propositionnelle}\\
+On lie ces variables via des \textcolor{blue}{connecteur logique} (ET, OU, ...)
+
+\subsubsection{Symboles}
+\begin{itemize}
+\item \textit{Constante}: True et False.
+\item \textit{Variables propositionnelles}: nos chaines de caractères.
+\item \textit{Connecteur logique}: ne pas $\neg$, conjonction $\wedge$, disjunction $\vee$, implication $\Rightarrow$ et équivalence $\Leftrightarrow$
+\item \textit{Parenthèses}
+\end{itemize}
+
+\subsubsection{Formules propositionnelles}
+Une \textit{constante logique} et une \textit{variable propositionnelle} sont toutes les deux des formules propositionnelles. On peut donc combiner des formules propositionnelles pour en créer de \textcolor{blue}{nouvelle}.
+
+\subsection{Convention}
+On supprime les parenthèses les plus extérieures pour essayer de réduire le nombre de parenthèse.\\
+La \textcolor{red}{précédences des opérateurs} est importante et permet de supprimer des parenthèses: 1. $\neg$ 2. $\wedge$ 3. $\vee$ 4. $\Rightarrow$ 5. $\Leftrightarrow$\\
+On a un ordre d'\textcolor{red}{associativité} qui définisse l'ordre de deux connecteurs identiques successifs. $\wedge$ et $\vee$ sont associatifs à \textcolor{blue}{gauche} et $\Rightarrow$ et $\Leftrightarrow$ sont associatifs à \textcolor{red}{droite}.
+
+\subsubsection{Exemple}
+\begin{center}
+\begin{tabular}{|cc|cc|cc|}
+\hline
+$A \wedge B$ & $(A \wedge B)$ & $\neg A \wedge B$ & $((\neg A) \wedge B)$ & $A \wedge \neg B$ &  $(A \wedge (\neg B))$\\
+\hline
+$A \vee B \vee C$ & $((A \vee B) \vee C)$ & $A \Rightarrow B \vee C$ & $(A \Rightarrow ( B \vee C))$ & $A \Rightarrow B \Rightarrow C$ &  $(A \Rightarrow ( B \Rightarrow C))$\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Sémantique}
+Correspond à la signification d'une formule propositionnelles. Le sens d'une formule dépend d'un \textit{contexte} donc des valeurs propositionnelles.\\
+On appelle ce \textit{contexte} une \textcolor{red}{interprétation}. Une interprétation d'une formule est une \textit{assignation} d'une valeur de vérité (\textit{true ou false}) à chacune des variables propositionnelles de la formules.\\
+Donc si on a $n$ variables, il y a donc $2^n$ interprétations possibles.
+
+\subsection{Valeur de vérité}
+Selon une interprétation I, on dérive la \textit{valeur de vérité d'une formule} selon les règles suivantes:
+\begin{itemize}
+\item La valeur de vérité des constantes True et False sont respectivement \textit{true} et \textit{false}
+\item La valeur de vérité d'une variable propositionnelle A est la valeur de cette variable dans l'interprétation I.
+\end{itemize}
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|}
+\hline
+\cellcolor[gray]{0.8} \textcolor{blue}{$p$} & \cellcolor[gray]{0.8} \textcolor{blue}{$q$} & \cellcolor[gray]{0.8} \textcolor{red}{$\neg p$} & \cellcolor[gray]{0.8} \textcolor{red}{$p \wedge q$} & \cellcolor[gray]{0.8} \textcolor{red}{$p \vee q$} & \cellcolor[gray]{0.8} \textcolor{red}{$p \Rightarrow q$} &\cellcolor[gray]{0.8} \textcolor{red}{$p \Leftrightarrow q$}\\
+\hline
+true & true & false & true & true & true & true \\
+\hline
+true & false & false & false & true & false & false \\
+\hline
+false & true & true & false & true & true & false \\
+\hline
+false & false & true & false & false & true & true \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Modèle}
+C'est une interprétation dont la formule est vrai.\\
+Le sens d'une formule propositionnelle, donc sa sémantique, est défini par les différents modèles de cette formule.\\
+Donc elle est défini par \textbf{tous les modèles de cette formule}. La signification d'une formule propositionnelle est déterminée par l'ensemble de ses modèles.
+
+\subsection{Formules équivalentes}
+Deux formules (composés des mêmes variables propositionnelles) sont donc équivalentes si elles ont les mêmes modèles.\\
+Une \textit{sous-formule} peut toujours être remplacée par une \textit{sous-formule} \textcolor{blue}{équivalente} sans forcément changer sa \textit{sémantique}.
+\begin{center}
+\begin{tabular}{|cc|cc|cc|}
+\hline
+$\neg (\neq p)$ & $p$ & $p \wedge q$ & $q \wedge p$ & $p \vee q$ &  $q \vee p$\\
+\hline
+$p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (p \Rightarrow q)$ & $p \Rightarrow q$ & $\neg p \vee q$ & $p \Rightarrow q$ &  $\neg p \Rightarrow \neg p$\\
+\hline
+$\neg ( p \vee q) $ & $\neg p \wedge \neg q$ & $\neg ( p \wedge q )$ & $\neg p \vee \neg q$ & $p \vee (q \wedge r)$ &  $(p \vee q ) \wedge ( p \vee r)$\\
+\hline
+\end{tabular}
+\end{center}
+On va s'intéresser à \textcolor{blue}{l'équivalence de Morgan} qui $\neg(p \wedge q) \rightarrow \neg p \vee \neg q$
+
+\subsubsection{Démonstration de Morgan}
+On commence par dénombrer le nombre de possibilités: on a 2 variables donc $2^2 = 4$ possibilités
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+\cellcolor[gray]{0.8} p & \cellcolor[gray]{0.8} q & \cellcolor[gray]{0.8} $\neg( p \wedge q)$ &\cellcolor[gray]{0.8} $\neg p \vee \neg q$\\
+\hline
+true & true & false & false\\
+true & false & true & true \\
+false & true & true & true\\
+false & false & true & true\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Ensemble SAT}
+L'ensemble des formules \textbf{Satisfaisable}. On veut être en mesure d'effectuer des raisonnements sur différentes formules.\\
+Mais, on a le \textcolor{red}{problème de la satisfiabilité} comment savoir si une formule F a un modèle. Le modèle est une "\textit{solution}" qui rend cette formule F.\\
+
+Et en \textcolor{red}{conséquence logique}, si on a notre formule F, quelles sont les conséquences de F.\\
+Quelles formules sont-elles vraies si F l'est.
+
+\subsection{Satisfiabilité}
+Une formule propositionnelle est \textcolor{red}{satisfaisable} si elle possède au moins un modèle. Si elle n'en possède \textbf{aucun} alors elle est \textcolor{red}{non satisfaisable}, on appelle cela une contradiction.\\
+L'ensemble SAT est donc l'ensemble des formules propositionnelles satisfaisables
+\subsubsection{Valeur de vérité}
+Étant donné une interprétation et une formule propositionnelle, sa valeur de vérité peut être déterminée par un \textit{algorithme}.\\
+Pour une formule avec $n$ variables propositionnelles, il existe donc $2^n$ interprétations possibles.\\
+L'ensemble \textbf{SAT} est donc récursif.\\
+exemple de formules non satisfaisables: $(A \vee B) \wedge (A \vee \neg B) \wedge (\neg A \vee B) \wedge ( \neg A \vee \neg B \vee \neg C) \wedge ( \neg A \vee C)$
+
+\subsubsection{Tautologie}
+C'est une formule qui est toujours vraie dans toutes les interprétations. ex: $A \vee \neg A$.\\
+$p$ est donc une tautologie si et seulement si $\neg p$ est \textbf{non satisfaisables}.
+
+\subsection{Conséquence logique}
+La formule $q$ est une \textcolor{red}{conséquence logique} d'une formule $p$ si la formule $p \Rightarrow q$ est une \textit{tautologie}.\\
+\begin{enumerate}
+\item Donc tous les modèles de $p$ sont aussi des modèles de $q$.
+\item La formule $q$ est vraie dans tous les modèles de $p$.
+\end{enumerate}
+On note cela: $p \models q$
+
+\subsubsection{propriété}
+\noindent
+$p \models q$ ssi $(p \wedge \neg q)$ est \textit{non satisfaisable}\\
+Preuve: $p \models q$ ssi:
+\begin{itemize}
+\item $p \Rightarrow q$ est une tautologie
+\item $\neg( p \Rightarrow q)$ est non satisfaisable
+\item $\neg(\neg p \vee q)$ est non satisfaisable
+\item $(\neg \neg p \wedge q)$ est non satisfaisable
+\item $( p \wedge \neg q)$ est non satisfaisable
+\end{itemize}
+Attention: si q n'est pas une conséquence logique de p, on n'a pas nécessairement que $\neg q$ est une conséquence logique de p.\\
+On peut avoir $p \nvDash q$ et $p \nvDash \neg q$. Donc $p \Rightarrow q$ et $p \Rightarrow \neg q$ ne sont pas des tautologies. ex:$(A \vee B) \nvDash A$ et $(A \vee B)) \nvDash \neg A$
+
+\section{Modélisation}
+Problème: on veut colorier les noeuds d'un graphe de manière à ce que deux noeuds adjacents aient des couleurs différentes.
+\subsection{Formalisme}
+On un graphe $G=(V,E)$ où V est l'ensemble des noeuds et E les arrêtes. On a un ensemble $C$ de couleurs.\\
+On définit les variables propositionnelles suivantes:
+\begin{itemize}
+\item couleur $[v,c]$ (distinct) avec $v \in V$ et $c \in C$
+\item La variable de couleur $[v,c]$ est vraie si le noeud $v$ est de couleur $c$. Faux sinon.
+\item Il y a donc $\# V \times \# C$ variables propositionnelles distinctes.
+\end{itemize}
+
+\subsubsection{Représentation}
+Notre modèle est composée d'une \textbf{conjonction de formules}.
+\begin{itemize}
+\item Pour chaque arrête $(v,w) \in E$ on impose que les deux noeuds n'aient pas la même couleur via: $\neg(\text{couleur}[v,c]\wedge \text{couleur}[w,c])$
+\item Pour chaque noeuds $v \in V$, la disjonction des coleur $ [v,c] $ sur toutes les couleurs $c \in C$ nous assure que chaque noeud a au moins une couleur
+\item Pour chaque noeud $v \in V$ a conjonction va s'assurer que chaque noeud n'a pas plus d'une couleur: $\neg ( \text{couleur}[v, c_1] \wedge \text{couleur}[v, c_2]$ on utilise des paires de couleurs $ [c_1, c_2] $
+\end{itemize}
+
+\subsubsection{Affirmation}
+Si j'ai un modèle pour une conjonction de formule, j'ai donc une solution (le modèle) pour ce problème.\\
+Si la formule n'est pas satisfaisable alors il n'existe pas de solutions pour ce problème.\\
+Donc comment savoir si le problème est faisable ? Voir si notre formule est \textbf{satisfaisable}. Si elle l'est, on peut retourner le modèle.
+
+
+
 \chapter{Questions Test d'entrée}
 
 \section{TP1}
@@ -882,6 +1077,42 @@ P = return 1;
 
 \section{TP6}
 \textcolor{red}{pas présent}
+
+\section{TP7}
+Les 5 premières questions sont des applications \textit{calculatoires} de machine de Turing. Simplifiez vous la vie en utilisant ce \href{https://turingmachine.io}{site} et utilisez ce code.
+\begin{lstlisting}[escapechar=\%]
+input: 'bbba'
+blank: ' '
+start state: start
+table:
+  start:
+    'a'   : {write: 'x', R: seekB}
+    'b'   : {write: 'x', R: seekA}
+    'x'   : {write: ' ', R: start}
+    ' '   : {write: 1, L: done}
+  seekA:
+    'a'       : {write: 'x', L: restart}
+    ['b', 'x']: {R: seekA}
+    ' '       : {L: falseFun}
+  seekB:
+    'b'       : {write: 'x', L: restart}
+    ['a', 'x']: {R: seekB}
+    ' '       : {L: falseFun}
+  restart:
+    ['a', 'b', 'x'] : {L: restart}
+    ' '             : {R: start}
+  falseFun:
+    ['a', 'b', 'x'] : {write: ' ', L: falseFun}
+    ' '   	    : {write: 0, L: done}
+  done:
+\end{lstlisting}
+\begin{enumerate}
+\item \textcolor{green}{Vrai} c'est le principe même et le but d'une machine de Turing, montrer qu'un langage de programmation est récursif.
+\item \textcolor{red}{Faux}, on peut penser à un tableau simple de Turing qui bouge le ruban une fois à droite puis à gauche.
+\item \textcolor{red}{Faux}, non-déterministes donc plusieurs applications et "futures" possibles. Cependant, cela n'avantage en aucun sa puissance, juste sa rapidité et facilité d'implémentation.
+\item \textcolor{red}{Faux}, on n'a pas besoin d'un oracle qui \textit{voit une case devant} pour savoir si une entrée est paire. L'ensemble des nombres pairs est \textbf{récursifs} donc oracle inutile.
+\item \textcolor{green}{Vrai}, car on serait incapable sans oracle de savoir si un programme ne boucle pas donc on veut avoir \textbf{HALT}.
+\end{enumerate}
 
 \chapter{Question cours}
 \section{S1}

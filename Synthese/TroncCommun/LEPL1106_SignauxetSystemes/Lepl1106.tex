@@ -218,6 +218,18 @@ La méthode pour trouver le résultat d'une convolution de manière \textbf{grap
 \end{enumerate}
 Pour trouver de manière \textbf{calculatoire}, on applique simplement la formule \ref{eqn:convolution}.
 
+\subsubsection{Appliquer analytiquement}
+Pour résoudre facilement (mais de manière calculatoire) une convolution. On applique une méthode très simple:
+\begin{enumerate}
+\item On renverse un des signaux
+\item On décompose nos signaux $x[n]$ et $y[n]$ en $\delta$.
+\item On fait une sorte de distribution tel que:
+\end{enumerate}
+\begin{align*}
+x[n] &= \delta_1[n-a] + ... + \delta_n[n-x] & x[n] &= \delta_\alpha[n-a] + ... + \delta_\eta[n-y]\\
+\delta_1[n-a](\delta_\alpha[n-a] + ... + &\delta_\eta[n-y]) + ... + \delta_n[n-x](\delta_\alpha[n-a] + ... + \delta_\eta[n-y])
+\end{align*}
+
 \subsection{Propriétés}
 \begin{center}
 \begin{tabular}{c|c}

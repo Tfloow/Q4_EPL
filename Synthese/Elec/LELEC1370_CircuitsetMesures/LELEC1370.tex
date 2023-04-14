@@ -104,7 +104,7 @@ p(t) = vi(t) = \frac{v^2(t)}{R} = Ri^2(t)
 \end{equation}
 
 \subsubsection{Loi des noeuds de Kirchoff}
-La somme des courants de tous les noeuds a pour résultat 0. Autrement dit, tout courant qui apparait, disparait quelque part.
+La somme des courants dans un noeud a pour résultat 0. Autrement dit, tout courant qui apparait, disparait quelque part.
 
 \subsubsection{Loi des mailles de Kirchoff}
 Dans un circuit électrique, on peut dessiner des \textit{mailles} ou des sortes de carrés. En tournant dans un sens, on fait la somme des tensions (\textit{faire attention au sens des tensions}) on doit obtenir une somme nulle.
@@ -149,17 +149,17 @@ Lorsqu'on travaille avec des courants, on utilise la loi des \textit{noeuds} et 
 Dans un circuit électrique, on peut faire face à des arrangements de résistances en \textit{triangle} qui sont compliqués à transformer en \textit{résistance équivalente}. 
 \begin{figure}[H]
 \centering
-\includegraphics[width=7cm]{img/triangleEtoile.png}
+\includegraphics[width=9cm]{img/triangleEtoile.png}
 \caption{Passage d'une forme de triangle à une forme d'étoiles}
 \end{figure}
 Les équations sont pour passer de \textbf{triangles à étoiles}:
 \begin{align*}
-R_c &= \frac{R_1 * R_3}{R_1 + R_2 + R_3} & R_b &= \frac{R_2 * R_3}{R_1 + R_2 + R_3} & R_a &= \frac{R_1 * R_2}{R_1 + R_2 + R_3}
+R_c &= \frac{R_1  R_3}{R_1 + R_2 + R_3} & R_b &= \frac{R_2  R_3}{R_1 + R_2 + R_3} & R_a &= \frac{R_1  R_2}{R_1 + R_2 + R_3}
 \end{align*}
 Et pour convertir d'\textbf{étoiles à triangles}:
 \begin{align*}
-R_1 &= \frac{R_a*R_b + R_a*R_c + R_b*R_C}{R_b} & R_2 &= \frac{R_a*R_b + R_a*R_c + R_b*R_C}{R_c} \\
-R_3 &= \frac{R_a*R_b + R_a*R_c + R_b*R_C}{R_a}
+R_1 &= \frac{R_aR_b + R_aR_c + R_bR_C}{R_b} & R_2 &= \frac{R_aR_b + R_aR_c + R_bR_C}{R_c} \\
+R_3 &= \frac{R_aR_b + R_aR_c + R_bR_C}{R_a}
 \end{align*}
 
 
@@ -192,10 +192,10 @@ Le but de cette représentation est une simplification de circuit. De plus, mêm
 Ce type de quadripole peut être réalisé de 4 manières différentes détaillées ci-dessus.
 \begin{figure}[H]
 \centering
-\includegraphics[width=8cm]{img/YZGH.png}
+\includegraphics[width=10cm]{img/YZGH.png}
 \caption{Les 4 types de quadripoles}
 \end{figure}
-On peut facilement représenter ces différents systèmes via des matrices détaillants le système
+On peut facilement représenter ces différents systèmes via des matrices détaillant le système voir \ref{Quadri}.
 %insérer la matrice
 
 \subsection{L'amplificateur opérationnelle}
@@ -400,7 +400,7 @@ Et dans le second cas, on impose la tension au borne:
 \textbf{$I_{L}$} &= \frac{|\textbf{Z}|}{sin(\varphi)} \textbf{V} \rightarrow \textbf{Y} = \frac{1}{\omega L} 
 \end{align}
 Il faut bien se rendre compte que cet équivalent est uniquement valable pour une \textcolor{red}{même fréquence}. Car le $|\textbf{Z}|$ varie ainsi que le déphasage $\varphi$. \\
-Pour faire la différence quand on a des graphes comme ci-dessous, on peut voir que à basse fréquence (donc quasi DC) aucun courant ne passe dans la capacité pour un circuit en parallèle. Cela implique qu'on a pas de déphasage car tout le courant passe dans 	la résistance. De plus, l'impédance est quasi constante. (\textit{on peut prouver un équivalent la même chose pour le circuit en série})
+Pour faire la différence quand on a des graphes comme ci-dessous, on peut voir que à basse fréquence (donc quasi DC) aucun courant ne passe dans la capacité pour un circuit en parallèle. Cela implique qu'on n'a pas de déphasage car tout le courant passe dans 	la résistance. De plus, l'impédance est quasi constante. (\textit{on peut prouver un équivalent la même chose pour le circuit en série})
 
 \begin{figure}[H]
 \centering
@@ -446,7 +446,7 @@ L'axe \textbf{X} est d'une entrée $log(\omega)$. Donc si on descend en-dessous 
 
 \subsection{Calculer}
 \subsubsection{Amplitude} \label{AmplCalc}
-L'exemple montré en \ref{BodeEx} est un exemple classique qu'on rencontre en circuit AC.La formule pour transformer \textbf{A} en $log$ est:
+L'exemple montré en \ref{BodeEx} est un exemple classique qu'on rencontre en circuit AC. La formule pour transformer \textbf{A} en $log$ est:
 \begin{equation}
 20log(\textbf{A}) = 20 log\Bigl(A_0\frac{1}{1+\frac{j\omega}{\omega_0}}\Bigl) = 20log(A_0) - 20log\Bigl(1+ \frac{j\omega}{\omega_0}\Bigl)
 \end{equation}
@@ -531,12 +531,12 @@ Maintenant, voyons des cas concrets de circuit RLC implémentant des courants AC
 \subsection{Circuits résonants}
 
 \subsubsection{Circuits résonants en série}
-Avec un circuit en série d'inductance, capacité et résistance, on a un impédance comme:
+Avec un circuit en série d'inductance, capacité et résistance, on a une impédance comme:
 \begin{align*}
 \textbf{Z} = R + j\omega L + \frac{1}{j \omega C} &= R + j \Bigr(\omega L - \frac{1}{\omega C} \Bigr)\\
 \omega_0 &= \frac{1}{\sqrt{LC}}
 \end{align*}
-Pour être en résonance, il faut annuler la partie complexe.On nomme cette \textcolor{blue}{fréquence de résonance} $\omega_0$.\\
+Pour être en résonance, il faut annuler la partie complexe. On nomme cette \textcolor{blue}{fréquence de résonance} $\omega_0$.\\
 On établit aussi un \textcolor{blue}{facteur de qualité} d'un circuit qui indique si on possède une bonne bobine pour le circuit. De plus, on peut avoir un rapport du voltage de la résistance sur le voltage totale $V_R / V_1$:
 \begin{align*}
 Q &= \frac{\omega_0 L}{R}\\
@@ -682,7 +682,7 @@ G(j \omega) = G_0 \frac{1}{1 + \frac{j\omega}{\omega_0}}
 Et la rétroaction est:
 \begin{align*}
 H(s) &= \beta^{-1}\\
-\frac{V_{out}}{V_{in}} = \frac{G(j\omega}{1 + \beta^{-1} G(j \omega)} &= \frac{1}{\beta^{-1}} \frac{\beta^{-1}G(j\omega}{1 + \beta^{-1} G(j \omega)}\\
+\frac{V_{out}}{V_{in}} = \frac{G(j\omega)}{1 + \beta^{-1} G(j \omega)} &= \frac{1}{\beta^{-1}} \frac{\beta^{-1}G(j\omega)}{1 + \beta^{-1} G(j \omega)}\\
 \Rightarrow T_{bf}(j \omega) &= \frac{1}{H} \frac{T_{bo}(j \omega)}{1 + T_{bo} (j \omega)}
 \end{align*}
 Donc on a une fonction constante jusqu'à $\omega_0$ et qui décroit de 20 dB par décade et tombe à 0 à $\omega = GBW$. GBW correspond au \textbf{Gain BandWidth} qui est une caractéristique propre à l'ampli-op.\\
@@ -730,7 +730,7 @@ Il faut bien régler l'amortissement car on peut soit rendre le système \textit
 \caption{Système complet}
 \end{figure}
 
-\section{Quadripôles}
+\section{Quadripôles} \label{Quadri}
 \subsection{Rappels}
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
@@ -749,7 +749,7 @@ Les conditions:
 \end{itemize}
 
 \subsubsection{Équivalence}
-Entre les 4 représentations, on a une équivalence et on ignore la structure et les variables internes. IL existe également des relations transitives comme ci-dessous.
+Entre les 4 représentations, on a une équivalence et on ignore la structure et les variables internes. Il existe également des relations transitives comme ci-dessous.
 \begin{figure}[H]
 \centering
 \includegraphics[width=7cm]{img/Trans.png} \label{img:trans}
