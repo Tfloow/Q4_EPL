@@ -913,7 +913,7 @@ Donc elle est défini par \textbf{tous les modèles de cette formule}. La signif
 \subsection{Formules équivalentes}
 Deux formules (composés des mêmes variables propositionnelles) sont donc équivalentes si elles ont les mêmes modèles.\\
 Une \textit{sous-formule} peut toujours être remplacée par une \textit{sous-formule} \textcolor{blue}{équivalente} sans forcément changer sa \textit{sémantique}.
-\begin{center}
+\begin{center} \label{equi}
 \begin{tabular}{|cc|cc|cc|}
 \hline
 $\neg (\neq p)$ & $p$ & $p \wedge q$ & $q \wedge p$ & $p \vee q$ &  $q \vee p$\\
@@ -1007,6 +1007,115 @@ Si j'ai un modèle pour une conjonction de formule, j'ai donc une solution (le m
 Si la formule n'est pas satisfaisable alors il n'existe pas de solutions pour ce problème.\\
 Donc comment savoir si le problème est faisable ? Voir si notre formule est \textbf{satisfaisable}. Si elle l'est, on peut retourner le modèle.
 
+
+\section{Raisonnement}
+Lorsqu'on veut raisonner, il se pose à nous deux problèmes:
+\begin{enumerate}
+\item $p \models q$ Une formule $q$ est-elle une \textcolor{blue}{conséquence logique} d'une formule $p$
+\item $p \in SAT$ donc existe-t-il au moins 1 modèle pour cette formule $p$
+\end{enumerate}
+On peu réduire le 1. au 2. via: $p \models q ssi (p \wedge \neg q) \notin SAT$\\
+
+On peut utiliser des \textit{solveurs SAT} qui sont des algorithmes de décision pour SAT.\\
+Ou bien, on peut utiliser l'\textit{inférence} qui est une méthode formelle utilisant des règles d'inférences.
+
+\subsection{Solveur SAT}
+C'est un modèle élémentaire basé sur le \textbf{model checking}. Il prend en \textit{input} une formule $p$ qui a $n$ variables propositionnelles.\\
+L'algorithme consiste à énumérer parmi les $2^n$ interprétations possibles pour p.\\
+Si $p$ est vraie pour une interprétation, on retourne $<true,I> (p\in SAT)$(I étant l'interprétation)\\
+Si on ne trouve aucune interprétation correcte, on retourne $<false, \varnothing> (p \in SAT)$\\
+
+\subsubsection{Solveur efficace}
+Ce type de solveur travaille sur une forme simplifiée des formules propositionnelles: \textcolor{red}{les formules sous forme normale conjonctive} (CNF):
+\begin{itemize}
+\item Négation uniquement devant une \textit{variable propositionnelle}
+\item Que des disjonctions et des conjonctions
+\item La formule est une suite de conjonctions dont chaque élément est une disjonction de variables ou de négation de variables.
+\end{itemize}
+ex: $(\neg A \vee \neg C) \wedge ( \neg A \vee D) \wedge (\neg B \vee \neg C) \wedge (\neg B \vee D) \wedge (A \vee B \vee C \vee \neg D)$ Donc entre chaque conjonction, on a des disjonctions de variables.\\
+Nomenclature:
+\begin{itemize}
+\item \textit{Literal}: est une variable propositionnelle $A$ ou sa négation $\neg A$
+\item \textit{Clause}: est une disjcontion de littéraux
+\item \textit{CNF}: est une conjonction de \textit{clauses} $c_1 \wedge ... \wedge c_n$
+\item \textit{Formule CNF}: on représente une telle formule comme: $\{c_1, ..., c_n \}$
+\end{itemize}
+
+\subsubsection{Transformation en CNF}
+On peut toujours représenter une formule sous forme \textit{CNF}. il faut suivre ces étapes:
+\begin{enumerate}
+\item Éliminer les $\Leftrightarrow$ et $\Rightarrow$ en utilisant les équivalences (voir \ref{equi})
+\item Mettre les symboles de négation dans des littéraux en utilisant la double négation et les équivalences de Morgan
+\item Utiliser la distributivité sur $\wedge$ et $\vee$
+\end{enumerate}
+\begin{align*}
+\text{Exemple:} (A \vee B) &\Leftrightarrow (\neg C \wedge D) & (\neg(A \vee B) \vee ( \neg C \wedge D)) &\wedge (\neg (\neg C \wedge D) \vee ( A \vee B))\\
+((\neg A \wedge \neg B) \vee ( \neg C \wedge D )) &\wedge ( C \vee \neg D \vee A \vee B) & (\neg A \vee \neg C) \wedge ( \neg A \vee D ) \wedge ( \neg B \vee \neg C) &\wedge (\neg B \vee D) \wedge (A \vee B \vee C \vee \neg D)
+\end{align*}
+
+\subsection{Résolution}
+On transforme la formule propositionnelle en appliquant des règles de transformations successives.\\
+On réalise des règles d'inférence à chaque étape et on garantit que chaque formule résultante est équivalente à la formule initiale.
+
+\subsubsection{Exemple de règles}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Nom & prémices & prémices & conclusion\\
+\hline
+Équivalence & $p \Leftrightarrow q$ & $q \Leftrightarrow r$ & $p \Leftrightarrow r$\\
+\hline
+Modus ponens & $p \Rightarrow q$ & $p$ & $q$\\
+\hline
+\end{tabular}
+\end{center}
+Si on a un ensemble de formules propositionnelles $F$ qui représentante une Formules. Si on a des prémices qui appartiennent à cet ensemble, on peut ajouter des conclusions pour en faire $F'$ et dire que $F = F'$
+
+
+\subsubsection{Résolution}
+Les règles d'inférence unique généralisant le \textit{modus ponens}. Via cela, on peut décider si un ensemble F de clauses est satisfaisables ou non. Forme la plus simple:$p \vee q \qquad \neg p \vee r \rightarrow q \vee r$.\\
+Si on réalise une table de vérité, on peut voir que \textit{tout modèle des prémices est aussi un modèle de la conclusion}.
+
+\subsubsection{Règles}
+Si on a 2 clauses prémices $C_1$ et $C_2$, la première contenant $L_1=V$ et la seconde $L_2= \neg V$. On a une clause conclusion contenant tous les littéraux de $C_1$ et de $C_2$ sauf les littéraux $L_1$ et $L_2$
+Exemples:
+\begin{align*}
+A &\vee B & A \vee &B \vee \neg C & A &\vee B & &A\\
+\neg &A & \neg D \vee & \neg B \vee F & \neg A & \vee C & \neg & A \\
+ \cline{1-8}
+&B & A \vee \neg C & \vee \neg D \vee F & B &\vee C & &false 
+\end{align*}
+
+\subsubsection{Exécution}
+À partir d'une formule CNF sous la forme de clause. on va à chaque étape:
+\begin{enumerate}
+\item Appliquer la règle de résolution sur deux clauses pour lesquelles la règle est applicable et dont la conclusion n'est pas une clause existante
+\item Ajouteer la clause conclusion à la formule CNF
+\end{enumerate}
+Si à une certaine étape, on ajouter la clause \textit{false} alors la formule \textcolor{red}{n'est pas satisfaisable}.\\
+Si la règle de résolution ne peut plus s'appliquer alors la formule n'est pas satisfaisable.
+
+\subsubsection{Exactitude}
+On sait qu'à chaque étape, on a une formule \textit{CNF} qui est équivalente à la formule précédente.\\
+On a un nombre de clauses distinctes, la formule est fini et donc son exécution se termine toujours.\\
+Si une clause est \textit{false} alors la formule n'est pas satisfaisables.\\
+Si fin sans clause \textit{false} alors la formule est non satisfaisable.
+
+\subsubsection{Résultat}
+La résolution nous indique si une formule \textit{CNF} appartient ou n'appartient pas à SAT. Si elle appartient à SAT, la résolution \textcolor{red}{ne donne pas} de modèle comme résultat.\\
+On l'utilise pour prouver que $p \models q$ On transforme $(p \wedge \neg q)$ en \textit{CNF}:
+\begin{itemize}
+\item \textit{false}: alors $(p \wedge \neg q) \notin SAT$ donc $p \models q$
+\item \textit{se termine}: alors $(p \wedge \neg q) \in SAT$ donc $p \nvDash q$
+\end{itemize}
+Exemple: $p = \{A, \neg B, \neg A \vee \neg C \vee D, \neg E \vee C, B \vee C \}$ mais $p \models D$? On applique la résolution à $p \cup \{\neg D\}$:
+\begin{align*}
+\neg A &\vee \neg C \vee D & \neg A & \vee \neg C & \neg &C & \neg & B\\
+\neg & D & &A & B &\vee C & & B\\
+ \cline{1-8}
+\neg A & \vee \neg C & \neg & C & &B & &false 
+\end{align*}
+Donc $p \models D$
 
 
 \chapter{Questions Test d'entrée}
