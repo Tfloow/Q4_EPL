@@ -175,7 +175,7 @@ X = state(1 b 2)
 {Browse {Label X}}
 {Browse {Width X}}
 \end{lstlisting}
-La première ligne défini un tuple ayant pour \textit{label} "state". La seconde ligne imprime le label du tuple. La dernière affiche sa taille. (c'est donc un entier toujours positif ou $0$)\\
+La première ligne définit un tuple ayant pour \textit{label} "state". La seconde ligne imprime le label du tuple. La dernière affiche sa taille. (c'est donc un entier toujours positif ou $0$)\\
 Les champs dans les tuples sont numérotés de\textbf{ $1$ à width $X$}. On appelle aussi le champ (field) une "\textit{feature}". Un tuple possède toutes ces features de manière consécutives.\\
 
 On peut donc ainsi construire des structures de données plus compliqués comme des arbres:
@@ -213,7 +213,7 @@ Si on ne nomme pas un \textit{field} dans un \textit{record}, Oz va attribuer un
 \begin{itemize}
 \item Un \textit{atom} est un record de width $0$.
 \item Un tuple est un record avec des champs étant numéroté de manière consécutive de $1$ à width $X$. (consécutive, donc on skip pas. pas forcément dans l'ordre dans la déclaration)
-\item Une liste est réalisé avec des \textit{tuples} et des $(X \quad Y)$
+\item Une liste est réalisée avec des \textit{tuples} et des $(X \quad Y)$. $X$ étant une donnée et $Y$ étant une sous-liste de données.
 \item $\textbf{1}$ seule \textit{structure de donné} dans le kernel pour rester simple.
 \end{itemize}
 
@@ -248,9 +248,9 @@ Il est important de comprendre le fonctionnement même d'un programme car si on 
 La \textit{sémantique} d'un langage de programmation est une explication \textit{précise} de comment un programme s'exécute. Nous verrons la sémantique pour tous les paradigmes. Il en existe 4 types:
 \begin{enumerate}
 \item \textcolor{red}{Sémantique opérationnelle}: explique un programme sur base d'\textit{exécution} sur un PC simplifié appelé \textit{la machine abstraite}. $\rightarrow$ Fonctionne pour tous les paradigmes.
-\item \textcolor{red}{Sémantique axiomatique}: explique un programme sur base d'\textit{implication}. C'est-à-dire que certaines \textit{propriétés} présent avant l'exécution, et d'autres seront présentes après. $\rightarrow$ très utilisé pour la programmation orienté objet comme \textit{Java}.
+\item \textcolor{red}{Sémantique axiomatique}: explique un programme sur base d'\textit{implication}. C'est-à-dire que certaines \textit{propriétés} présentes avant l'exécution, et d'autres seront présentes après. $\rightarrow$ très utilisé pour la programmation orientée objet comme \textit{Java}.
 \item \textcolor{red}{Sémantique de notation}: explique un programme comme une \textit{fonction} sur un domaine abstrait. Donc simplifie l'analyse mathématique d'un programme. (utilisé dans \textit{Haskell} et \textit{Scheme})
-\item \textcolor{red}{Sémantique logique}: explique un programme comme étant un \textit{modèle logique} basé sur des \textit{axiomes logiques}. Le résultat est une propriété correcte dérivé des axiomes. (cela est implémenté par exemple dans \textit{Prologue} ou dans la \textit{programmation sous contrainte})
+\item \textcolor{red}{Sémantique logique}: explique un programme comme étant un \textit{modèle logique} basé sur des \textit{axiomes logiques}. Le résultat est une propriété correcte dérivée des axiomes. (cela est implémenté par exemple dans \textit{Prologue} ou dans la \textit{programmation sous contrainte})
 \end{enumerate}
 
 \subsection{Sémantique opérationnelle}
@@ -341,7 +341,7 @@ Instructions & entrée & sortie\\
 Il y a également d'autres types d'instructions dont on détaillera pas le langage en machine abstraite:
 
 \begin{itemize}
-\item \textcolor{blue}{<x>=<v> (crée et assigne une valeur)}: quand <v> est une procédure, on \textbf{doit} crée un environnement contextuel.
+\item \textcolor{blue}{<x>=<v> (crée et assigne une valeur)}: quand <v> est une procédure, on \textbf{doit} créer un environnement contextuel.
 \item \textcolor{blue}{if <x> then $<s>_1$ else $<s>_2$ end (condition)} : si <x> n'est pas attribué, l'instruction va attendre (“\textit{block}”) jusqu'à ce que <x> soit attribuer à une valeur.
 \item \textcolor{blue}{case <x> of <p> then $<s>_1$ else $<s>_2$ end} : Le system de "\textit{case}" se construit en combinant des structures de données Kernel.
 \item \textcolor{blue}{\{$<x> <y>_1, ..., <y>_n$\}} : ceci est la base de l'abstraction de donnée
@@ -459,7 +459,7 @@ Tout d'abord, en programmation nous avons différentes étapes qui reposent chac
 
 Rappel sur l'exécution d'un programme:
 \begin{lstlisting}[escapechar=\%]
-{Browse {Inc 10}}	#Langage pratique (classique)
+{Browse {Inc 10}}		#Langage pratique (classique)
 %\hrulefill%
 local M in		 	#Langage Kernel
 	local N in
@@ -639,7 +639,7 @@ On utilise une notation appelée \textcolor{red}{Church Numerals}:
 \item $2 \triangleq \lambda f.(\lambda x.(f (f \quad x))$
 \item $3 \triangleq \lambda f.(\lambda x.(f (f (f \quad x))$
 \end{itemize}
-On peut remarquer que ces fonctions dont d'ordre supérieur. En effet, elles prennent en argument une fonction et ressort une fonction. (d'un seul argument)\\
+On peut remarquer que ces fonctions sont d'ordre supérieur. En effet, elles prennent en argument une fonction et ressortent une fonction. (d'un seul argument)\\
 Le nombre $n$ retourne donc la fonction qui est une composition de $n$ fois de f. Donc on dit que \textbf{f est appliqué n fois}.
 
 \subsection{Opérations}
@@ -800,8 +800,8 @@ nil		10
 Mais cela n'est pas suffisant. En effet, on voudrait que le programme remarque \textit{lui-même} ses propres changements. Il faut faire une \textbf{extensions}, on rentre dans un nouveau \textbf{paradigme}.
 
 \section{État explicite}
-On va essayer de montrer les changements en rendant les états \textit{explicites}. On appelle l'extension une \textbf{cellule} ou \textit{cell}(c'est l'équivalent d'un \textit{pointeur} en C).\\
-Donc tout comme en C, on peut changer la référence en changeant le pointeur ou en remplaçant la variable par une autre valeur.
+On va essayer de montrer les changements en rendant les états \textit{explicites}. On appelle l'extension une \textbf{cellule} ou \textit{cell} (c'est l'équivalent d'un \textit{pointeur} en C).\\
+Donc tout comme en C, on peut changer la référence en changeant le pointeur ou en changeant la valeur pointée.
 
 \subsubsection{Cell}
 Une cellule à une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
@@ -889,7 +889,7 @@ On peut avoir le meilleur des 2 mondes, en simplifiant les mises à jour de comp
 C'est une des bases pour construire des logiciels complexes. L'abstraction des données est supportée par \textit{les fonctions d'ordre supérieur, static scoping et l'état explicite}. La première chose à réaliser est l'\textcolor{blue}{encapsulation}.
 
 \subsection{Encapsulation}
-C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandé via une télécommande ayant un nombre limitée de fonction. Son fonctionnement est \textit{encapsuler} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
+C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandé via une télécommande ayant un nombre limitée de fonction. Son fonctionnement est \textit{encapsulé} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
 
 \subsubsection{Définition}
 C'est donc une partie d'un programme qui a une partie \textit{extérieur} (au contact avec l'utilisateur) et une partie \textit{intérieur} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être donné à l'utilisateur.\\

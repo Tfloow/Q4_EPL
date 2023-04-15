@@ -170,7 +170,7 @@ Mais, on doit stocker notre valeur $d'$ dans la table. On la stock à $p$ ce qui
 \item L'ensemble des chaines infinies de caractères d'un alphabet fini.
 \item L'ensemble des \textit{fonctions} de $\mathbb{N}$ dans $\mathbb{N}$.
 \end{itemize}
-Chose intéressante à noter, comme on a une infinité non énumérable de fonctions $\mathbb{N}$ dans $\mathbb{N}$ et un nombre de programme informatique \textit{infini énumérable}. On ne peut résoudre tous les problèmes informatiques donc.
+Chose intéressante à noter, comme on a une infinité non énumérable de fonctions $\mathbb{N}$ dans $\mathbb{N}$ et un nombre de programme informatique \textit{infini énumérable}. On ne peut pas résoudre tous les problèmes informatiques donc.
 
 \chapter{Programmes calculables}
 \section{Les algorithmes}
@@ -213,18 +213,18 @@ Une fonction caractéristique de $A \subseteq N$ et:
 X_A : N \rightarrow N : X_A(x) &= 1 \text{ si } x \in A\\
 &= 0 \text{ si } x \in A
 \end{align} 
-C'est une autre manière de déterminer si un ensemble est récursift si $X_A$ est une fonction \textit{calculable}.\\
+C'est une autre manière de déterminer si un ensemble est récursif si $X_A$ est une fonction \textit{calculable}.\\
 On dit qu'une fonction est récursivement énumérable ssi il existe une fonction f calculable ayant pour domaine A. Ou bien, on dit que A est vide \textit{ou} l'image de f est A ayant une fonction f \textit{totale} calculable.\\
 Un \textcolor{red}{ensemble récursivement \textit{énumérable}} est un ensemble dont la bijection des $\mathbb{N}$ est énumérable et calculable.
 
 Propriétés:
 \begin{itemize}
 \item A récursif $\Rightarrow$ A récursivement énumérable 
-\item A récursif $\Rightarrow$ (N \ A) récursivement énumérable 
-\item A récursif $\Rightarrow$ (N \ A) récursif 
-\item A récursivement énumérable et (N \ A) récursivement énumérable $\Rightarrow$ A récursif 
+\item A récursif $\Rightarrow \mathbb{N}\vert_A$ récursivement énumérable 
+\item A récursif $\Rightarrow \mathbb{N}\vert_A$ récursif 
+\item A récursivement énumérable et $\mathbb{N}\vert_A$ récursivement énumérable $\Rightarrow$ A récursif 
 \item A fini $\Rightarrow$ A récursif
-\item (N \ A) fini $\Rightarrow$ A récursif
+\item $\mathbb{N}\vert_A$ fini $\Rightarrow$ A récursif
 \item A récursif $\Rightarrow$ $\bar{A}$ récursif
 \end{itemize}
 
@@ -247,7 +247,7 @@ On établit que Java à accès à une infinité de mémoire (donc physiquement p
 \item k et $P_k$ représente le même objet
 \end{itemize}
 
-donc on dit que $P_k$ donne le programme $k$ dans l'ensemble $P$. on dit que $\varphi_k$ est la fonction mathématique calculé par $P_k$. Donc on peut avoir $\varphi_m == \varphi_n$ car réalise le même travail mais sont issues de programmes \textit{différents}. $\varphi_k: N \rightarrow N$. 
+donc on dit que $P_k$ donne le programme $k$ dans l'ensemble $P$. on dit que $\varphi_k$ est la fonction mathématique calculé par $P_k$. Donc on peut avoir $\varphi_m = \varphi_n$ car réalise le même travail mais sont issues de programmes \textit{différents}. $\varphi_k: N \rightarrow N$. 
 
 \section{Non calculabilité}
 Pour rappel:
@@ -259,12 +259,12 @@ En programmation, on s'intéresse aux fonctions définies de manière finie, don
 
 \subsection{Problème de l'arrêt}
 Une fonction prends 2 paramètres: halt: P x N. P est le numéro du programme et N est son entrée.\\
-\begin{align}
+\begin{align*}
 \text{halt}(n,x) &= 1 \text{ si } \varphi_n(x) \neq \perp\\
 &= 0 \text{ sinon}\\
 \text{halt}(n,x) &= 1 \text{ si l'exécution du } P_n \text{ se termine}\\
 &= 0 \text{ sinon}
-\end{align}
+\end{align*}
 On a donc une table finie, mais décrite de manière finie donc bien définie. Peut-on la calculer ?
 
 \subsubsection{Preuve par l'absurde} 
@@ -295,7 +295,7 @@ En conclusion, la fonction "halt" \textbf{n'est pas} calculable.
 
 \subsubsection{Conclusion}
 \begin{itemize}
-\item  Aucun algorithme ne permet de déterminer pour tout programme Pn et donnée x si Pn(x) se termine ou non
+\item  Aucun algorithme ne permet de déterminer pour tout programme $P_n$ et donnée $x$ si $P_n(x)$ se termine ou non
 \item Seule possibilité serait d’avoir un langage de programmation dans lequel tous les programmes se terminent. La fonction halt est alors calculable pour les programmes de ce formalisme
 \item halt non calculable ne signifie pas que pour un programme k donné, halt(k,x) est
 non calculable
@@ -306,14 +306,14 @@ On dit que halt n'est pas calulable dans le sens où il n'existe pas d'algorithm
 
 \subsubsection{Exemple non-récursif}
 
-\begin{align}
+\begin{align*}
 Halt &= \{(n,x) | \text{ halt}(n,x) = 1\}\\
 &= \{(n,x) | P_n (x) \text{ se termine}\}\\
 K &= \{n | (n,n) \in \text{HALT}\}\\
 &= \{n | halt(n,n) = 1\}\\
 &= \{n | diag(n) = 1\}\\
 &= \{n | P_n(n) \text{ se termine}\}\\
-\end{align}
+\end{align*}
 Donc K et HALT \textbf{ne sont pas} récursifs mais sont récursivement énumérable car si un élément n'appartient pas à K ou HALT, il va boucler mais fournir la bonne solution s'il appartient à ces ensembles.\\
 De plus K est la diagonale de \textit{HALT}.
 
@@ -454,8 +454,8 @@ De plus, si un programme est récursif, on peut savoir de quel ensemble il est.
 \subsubsection{Compréhension}
 \begin{enumerate}
 \item \textcolor{red}{Si} une propriété de programmes, vérifiée par certains programmes mais pas tous, est décidable, \\
-\textcolor{red}{alors} il existe deux programmes équivalents (calculant la même fonction) dont un vérifie la propriété et l’autre pas
-\item \textcolor{red}{Si} une propriétéde la fonctioncalculée par un programme est vérifiée par certains programmes, mais pas par tous, \\
+\textcolor{red}{alors} il existe deux programmes équivalents (calculant la même fonction) dont un vérifie la propriété et l'autre pas
+\item \textcolor{red}{Si} une propriété de la fonction calculée par un programme est vérifiée par certains programmes, mais pas par tous, \\
 \textcolor{red}{alors} cette propriété ne peut être décidée par un algorithme
 \item \textcolor{red}{S'il} existe un algorithme permettant de déterminer si un programme quelconque calcule une fonction ayant cette propriété, \\
 \textcolor{red}{alors} toutes les fonctions calculables ont cette propriété ou aucune fonction
@@ -468,17 +468,17 @@ Voyons plus en détail ce que chacun veule dire:
 \item Autre façon d'énoncer le théorème de \textit{Rice}.
 \end{enumerate}
 
-\subsection{Exmple}
+\subsection{Exemple}
 Commençons avec: $ A_1 = \{i | \varphi_i \text{ est totale}\}$ ($P_i$ s'arrête toujours)\\
 Donc on sait que $A_1 \neq \varnothing$ car on a une fonction $P_k(x) \equiv print(1)$ et on sait ainsi que $k \in A_1$. Ce n'est pas $A_1 \neq \mathbb{N}$ car $P_l(x) \equiv while true$ n'est pas total ! De plus, notre ensemble $A$ a des fonctions totales et l'ensemble $\overline{A}$ des fonctions non-totales, par construction: $\forall i \in A \text{ et } \forall j \in \mathbb{N}: \varphi_i \neq \varphi_j$\\
 
-Via le théorème de \textit{Rice}, $A_1$ est un ensemble non-vide et non égale à $\mathbb{N}$. On a également prouvé que les fonctions ne sont pas égales entre les 2 \textit{ensembles}. On en \textit{conclut} que l'enseble \textbf{n'est pas récursif}.
+Via le théorème de \textit{Rice}, $A_1$ est un ensemble non-vide et non égale à $\mathbb{N}$. On a également prouvé que les fonctions ne sont pas égales entre les 2 \textit{ensembles}. On en \textit{conclut} que l'ensemble \textbf{n'est pas récursif}.
 
 \subsection{Analyse du théorème}
 Bonne nouvelle, on est pas remplaçable (ou presque).
 \begin{enumerate}
-\item Aucune question relative aux programmes, vus sous l’angle de la \textbf{fonction} qu’ils calculent, ne peut être décidée par l’application d’un algorithme
-\item Les propriétés intéressantes d’un programme concernent la fonctionqu’il calcule, nonpas la forme (syntaxe) du programme
+\item Aucune question relative aux programmes, vus sous l'angle de la \textbf{fonction} qu'ils calculent, ne peut être décidée par l'application d'un algorithme
+\item Les propriétés intéressantes d'un programme concernent la fonction qu'il calcule, non pas la forme (syntaxe) du programme
 \item La plupart des problèmes intéressants au sujet des programmes sont non
 calculables
 \end{enumerate}
@@ -491,11 +491,11 @@ Pour prouver cela on va utiliser une réduction à \textit{halt}. On fait les ch
 \begin{enumerate}
 \item On suppose que $A$ est récursif.
 \item Donc halt est calculable mais ce n'est pas le cas.
-\item Donc est n'est pas récursif.
+\item Donc $A$ est n'est pas récursif.
 \end{enumerate}
 On va donc séparer notre ensemble des Programmes et on effectue ces manipulations:
 \begin{enumerate}
-\item $\mathbb{N}$ en $A$ et $\overline{A}$. On dit que $P_k(x) \equiv while true$ et que $k \in \overline{A}$
+\item $\mathbb{N}$ en $A$ et $\overline{A}$. On dit que $P_k(x) \equiv while \quad true$ et que $k \in \overline{A}$
 \item On sait que $A \neq \varnothing, \exists m \in A$ (on sait que c'est différent du vide donc il existe au moins 1 programme quelconque)
 \item On peut affirmer que (par hypothèse de récursif) $\varphi_k \neq \varphi_m$
 \item On crée un programme pour \textit{halt}:
@@ -505,13 +505,13 @@ On va donc séparer notre ensemble des Programmes et on effectue ces manipulatio
 	\item on exécute un programme qui regarde si $d \in A$ il print $1$ qu'il appartient sinon il imprime $0$.
 	\end{itemize}
 \item On exécute le programme: si $P_n(x)$ se \textbf{termine} alors $\varphi_d = \varphi_m$. \textbf{Sinon} il boucle et est $\varphi_d = \varphi_k = \perp$
-\item Donc aucun programme dans $A$ et $overline{A}$ n'est équivalent. Donc tester que $\varphi_d = \varphi_m$ est la même chose que tester que $d \in A$ et inversement.
+\item Donc aucun programme dans $A$ et $\overline{A}$ n'est équivalent. Donc tester que $\varphi_d = \varphi_m$ est la même chose que tester que $d \in A$ et inversement.
 \item Donc, \textcolor{red}{Halt est non calculable} car il boucle, donc A est bien \textbf{non récursif}.
 \end{enumerate} 
 
 
 \section{Théorème de la paramétrisation}
-De manière générale, une fonction peut être vu comme $f: N \rightarrow N$ mais \textit{également} comme $f: P \rightarrow P$. Donc $f(a) = b$ et en combinant $P_a = P_B$ notre $f$ devient un \textbf{transformateur de programmes}. Pour être plus précis c'est le $P_k$ qui calcule $f$ qui est le \textit{transformateur de programmes}.
+De manière générale, une fonction peut être vu comme $f: \mathbb{N} \rightarrow \mathbb{N}$ mais \textit{également} comme $f: P \rightarrow P$. Donc $f(a) = b$ et en combinant $P_a = P_B$ notre $f$ devient un \textbf{transformateur de programmes}. Pour être plus précis c'est le $P_k$ qui calcule $f$ qui est le \textit{transformateur de programmes}.
 
 \subsection{Théorème S-m-n via S-1-1}
 On dit qu'il existe une fonction calculable qui prend 2 arguments tel que:
@@ -520,13 +520,13 @@ S_1^1 : N^2 &\rightarrow N \text{ et } \forall k\\
 \varphi_k^{(2)} (x_1, x_2) &= \varphi_{S_1^1 (k,x_2)} (x_1)
 \end{align*}
 \subsubsection{Compréhension}
-On dit qu'il existe un \textit{transformateur} ($S_1^1$) qui prend en arguments: - Un programme à 2 arguments et 1 valeur $v_2$\\
-Cela donne comme résultat un programme $P(x_1)$ qui calcule la même chose que $P_k(x_1,v_2)$.
+On dit qu'il existe un \textit{transformateur} ($S_1^1$) qui prend en arguments: - Un numéro de programme à 2 arguments - 1 valeur $v_2$\\
+Cela donne comme résultat un programme $P_l(x_1)$ qui calcule la même chose que $P_k(x_1,v_2)$.
 
 \subsection{Via S-m-n}
 On dit que:
 \begin{align*}
-\forall m, n \geq 0 &, \exists S_n^m : N^{m+1} \rightarrow N : \forall k\\
+\forall m, n &\geq 0, \exists S_n^m : N^{m+1} \rightarrow N : \forall k\\
 \varphi_k^{n+m} (x_1, ..., x_n, x_{n+1}, ..., x_{n+m}) &= \varphi_{S_n^m (k, x_{n+1}, ..., x_{n+m})}^{(n)} (x_1, ..., x_n)
 \end{align*}
 \subsubsection{Compréhension}
@@ -625,8 +625,8 @@ On doit définir la:
 \end{enumerate}
 
 \subsubsection{Équivalence des programmes}
-On sait que les langages de programmation sont \textcolor{blue}{équivalents} entre eux. Tous sont équivalents. Une fonction est calculable en \textit{Rust} alors il sera calculable en \textit{C}. On dit que les langages sont \textcolor{red}{Complets}.\\
-Bien évidemment, certains problèmes sont plus simples et/ou plus efficace dans un langage de programmation.\\
+On sait que les langages de programmation sont \textcolor{blue}{équivalents} entre eux.  Une fonction est calculable en \textit{Rust} alors elle le sera en \textit{C}. On dit que les langages sont \textcolor{red}{Complets}.\\
+Bien évidemment, certains problèmes sont plus simples et/ou plus efficace à résoudre dans un langage de programmation spécifique.\\
 
 \subsubsection{BLOOP}
 BLOOP ou \textit{Bounded loop} qui est Java sans les boucles while, on ne modifie pas la variable de \textit{compteur} dans le corps d'un \textit{for}. Pas de méthodes récursives ni mutuellement récursibles.\\
@@ -640,7 +640,7 @@ Il y aura des chemins où ce sera borné et des chemins où ça ne l'est pas.\\
 On dit qu'un programme nous produit une \textcolor{blue}{relation} plutôt qu'une fonction.
 
 \subsubsection{Récursif ND}
-On dit qu'un ensemble A ($A \in \mathbb{N}$) est \textcolor{red}{ND-récursif} si il existe un programme \textbf{ND-Java} tel que lorsqu'il reçoit comme donnée n'importe quel nombre nature $x$.
+On dit qu'un ensemble A ($A \in \mathbb{N}$) est \textcolor{red}{ND-récursif} si il existe un programme \textbf{ND-Java} tel que lorsqu'il reçoit comme donnée n'importe quel nombre naturel $x$.
 \begin{itemize}
 \item si $x \in A$, alors il existe un \textcolor{blue}{exécution} fournissant comme résultat 1 (peu importe le temps)
 \item si $x \notin A$ alors \textbf{toutes} les \textcolor{blue}{exécutions} possibles fournissent comme résultat 0.
@@ -650,7 +650,7 @@ On dit qu'un ensemble A ($A \in \mathbb{N}$) est \textcolor{red}{ND-récursif} s
 On dit que A est \textcolor{red}{ND-récursivement énumérable} si il existe un programme ND-Java tel que lorsqu'il reçoit comme donnée n'importe quel nombre naturel x, il existe une \textcolor{blue}{exécution} fournissant comme résultat 1 \textbf{ssi $x \in A$}. (Si $x \notin A$ alors la fonction retourne autre chose que $1$ ou est $\perp$)
 
 \subsubsection{Propriétés}
-Un ensemble est \textbf{ND-récursif} ssi il est \textbf{récursif}. Si nous avons un arbre d'exécutions possibles, il est toujours possible de parcourir tous les \textbf{étages} de notre arbre et donc parcourir toutes les exécutions \textcolor{blue}{possibles}.\\
+Un ensemble est \textbf{ND-récursif} ssi il est \textbf{récursif}. Si nous avons un arbre d'exécutions possibles, il est toujours possible de parcourir tous les \textbf{étages} de notre arbre et donc parcourir toutes les exécutions \textcolor{blue}{possibles} comme si on était en "\textit{déterministe}".\\
 Si la profondeur d'une branche est de taille $n$, alors mon parcours a une complexité exponentielle tel que $b^n$.
 
 \subsection{Basé sur le langage}
@@ -664,11 +664,11 @@ C'est une modélisation assez simple du concept de \textit{calcul}, il y a:
 \item Un nombre \textit{fini d'états}
 \item Une lecture d'une donnée: un mot
 \item Chaque symbole de la donnée est lu \textit{une et une seule} fois
-\item On transitionne d'état en étant en fonction du \textit{symbole lu}.
+\item On transitionne d'état en état en fonction du \textit{symbole lu}.
 \item L'état final est l'état après avoir \textit{lu tous les symboles} de la donnée
 \item On \textbf{ne peut pas} mémoriser quelque chose. 
 \end{itemize}
-Donc l'objectif d'un \textcolor{blue}{automate fini} est de \textbf{décider} si un mot appartient à un langage. Réponse binaire: Oui ou Non. Pas de boucle.
+Donc l'objectif d'un \textcolor{blue}{automate fini} est de \textbf{décider} si un mot appartient à un langage. Réponse binaire: Oui ou Non. \textbf{Pas de boucle}.
 \subsubsection{Modèle}
 \noindent
 On a un:
@@ -691,7 +691,7 @@ On peut étendre les automates aux \textcolor{blue}{automates finis non détermi
 Un mot m est accepté par \textit{NFDA} si il existe \textbf{une} exécution de NFDA, on finit dans un état acceptant.\\
 Pour toute exécution de NFDA, un mot \textbf{n'est pas accepté} s'il ne tombe jamais sur un état acceptant.\\
 
-On peut voir comme si on rassemblait des exécutions ensemble et des ensemble d'états. \\
+On peut voir comme si on rassemblait des exécutions ensemble et des ensemble d'états.
 
 \subsubsection{Avec transitions vides}
 On peut faire des transitions sans \textbf{rien} consommer via le symbole $+-\varepsilon$. N'apporte pas de puissances en plus juste un passage sans consommer.
@@ -709,7 +709,7 @@ On dispose d'un \textcolor{blue}{ruban} qui est infini à \textit{droite} et à 
 Il y a également un mécanisme de \textit{contrôle} qui gère les actions à l'exécution.
 
 \subsubsection{Contrôle}
-On à un ensemble fini d'états: soit en \textit{état initial} ou un \textit{état d'arrêt}. Le contrôle contient un programme et un \textit{mécanisme} qui exécute les instructions.\\
+On a un ensemble fini d'états: soit en \textit{état initial} ou un \textit{état d'arrêt}. Le contrôle contient un programme et un \textit{mécanisme} qui exécute les instructions.\\
 Les formes d'instructions sont comme:
 \begin{align*}
 <q, c> \rightarrow <q_{new}, Mouv, c_{new}>
@@ -829,7 +829,7 @@ Son but premier est de:
 \end{itemize}
 Il existe la logique de \textbf{propositions}, des \textbf{prédicats}, \textbf{temporelle}, \textbf{floue}, \textbf{modale}, ...
 
-\subsection{Composition de la logique}
+\subsection{Composition de la logique de propositions}
 \begin{center}
 \begin{tabular}{|m {3cm}| m {5cm}| m{5cm}|}
 \hline
@@ -855,7 +855,7 @@ On lie ces variables via des \textcolor{blue}{connecteur logique} (ET, OU, ...)
 \begin{itemize}
 \item \textit{Constante}: True et False.
 \item \textit{Variables propositionnelles}: nos chaines de caractères.
-\item \textit{Connecteur logique}: ne pas $\neg$, conjonction $\wedge$, disjunction $\vee$, implication $\Rightarrow$ et équivalence $\Leftrightarrow$
+\item \textit{Connecteur logique}: ne pas $\neg$, conjonction $\wedge$, disjonction $\vee$, implication $\Rightarrow$ et équivalence $\Leftrightarrow$
 \item \textit{Parenthèses}
 \end{itemize}
 
@@ -916,7 +916,7 @@ Une \textit{sous-formule} peut toujours être remplacée par une \textit{sous-fo
 \begin{center} \label{equi}
 \begin{tabular}{|cc|cc|cc|}
 \hline
-$\neg (\neq p)$ & $p$ & $p \wedge q$ & $q \wedge p$ & $p \vee q$ &  $q \vee p$\\
+$\neg (\neg p)$ & $p$ & $p \wedge q$ & $q \wedge p$ & $p \vee q$ &  $q \vee p$\\
 \hline
 $p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (p \Rightarrow q)$ & $p \Rightarrow q$ & $\neg p \vee q$ & $p \Rightarrow q$ &  $\neg p \Rightarrow \neg p$\\
 \hline
@@ -943,7 +943,7 @@ false & false & true & true\\
 
 \section{Ensemble SAT}
 L'ensemble des formules \textbf{Satisfaisable}. On veut être en mesure d'effectuer des raisonnements sur différentes formules.\\
-Mais, on a le \textcolor{red}{problème de la satisfiabilité} comment savoir si une formule F a un modèle. Le modèle est une "\textit{solution}" qui rend cette formule F.\\
+Mais, on a le \textcolor{red}{problème de la satisfiabilité} comment savoir si une formule F a un modèle. Le modèle est une "\textit{solution}" qui rend cette formule F vraie.\\
 
 Et en \textcolor{red}{conséquence logique}, si on a notre formule F, quelles sont les conséquences de F.\\
 Quelles formules sont-elles vraies si F l'est.
@@ -998,8 +998,8 @@ On définit les variables propositionnelles suivantes:
 Notre modèle est composée d'une \textbf{conjonction de formules}.
 \begin{itemize}
 \item Pour chaque arrête $(v,w) \in E$ on impose que les deux noeuds n'aient pas la même couleur via: $\neg(\text{couleur}[v,c]\wedge \text{couleur}[w,c])$
-\item Pour chaque noeuds $v \in V$, la disjonction des coleur $ [v,c] $ sur toutes les couleurs $c \in C$ nous assure que chaque noeud a au moins une couleur
-\item Pour chaque noeud $v \in V$ a conjonction va s'assurer que chaque noeud n'a pas plus d'une couleur: $\neg ( \text{couleur}[v, c_1] \wedge \text{couleur}[v, c_2]$ on utilise des paires de couleurs $ [c_1, c_2] $
+\item Pour chaque noeuds $v \in V$, la disjonction des couleurs $ [v,c] $ sur toutes les couleurs $c \in C$ nous assure que chaque noeud a au moins une couleur
+\item Pour chaque noeud $v \in V$ la conjonction va s'assurer que chaque noeud n'a pas plus d'une couleur: $\neg ( \text{couleur}[v, c_1] \wedge \text{couleur}[v, c_2])$ on utilise des paires de couleurs $ [c_1, c_2] $
 \end{itemize}
 
 \subsubsection{Affirmation}
@@ -1014,7 +1014,7 @@ Lorsqu'on veut raisonner, il se pose à nous deux problèmes:
 \item $p \models q$ Une formule $q$ est-elle une \textcolor{blue}{conséquence logique} d'une formule $p$
 \item $p \in SAT$ donc existe-t-il au moins 1 modèle pour cette formule $p$
 \end{enumerate}
-On peu réduire le 1. au 2. via: $p \models q ssi (p \wedge \neg q) \notin SAT$\\
+On peut réduire le 1. au 2. via: $p \models q \text{ ssi } (p \wedge \neg q) \notin SAT$\\
 
 On peut utiliser des \textit{solveurs SAT} qui sont des algorithmes de décision pour SAT.\\
 Ou bien, on peut utiliser l'\textit{inférence} qui est une méthode formelle utilisant des règles d'inférences.
@@ -1090,7 +1090,7 @@ A &\vee B & A \vee &B \vee \neg C & A &\vee B & &A\\
 À partir d'une formule CNF sous la forme de clause. on va à chaque étape:
 \begin{enumerate}
 \item Appliquer la règle de résolution sur deux clauses pour lesquelles la règle est applicable et dont la conclusion n'est pas une clause existante
-\item Ajouteer la clause conclusion à la formule CNF
+\item Ajouter la clause conclusion à la formule CNF
 \end{enumerate}
 Si à une certaine étape, on ajouter la clause \textit{false} alors la formule \textcolor{red}{n'est pas satisfaisable}.\\
 Si la règle de résolution ne peut plus s'appliquer alors la formule n'est pas satisfaisable.
