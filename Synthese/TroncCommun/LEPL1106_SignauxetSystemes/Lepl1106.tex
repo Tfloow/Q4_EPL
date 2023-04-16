@@ -137,6 +137,7 @@ On peut réaliser des impulsions décaler en écrivant $\delta [n-x]$ avec $x$ r
 \subsection{L'échelon (temps discret)}
 Ce type de signal élémentaire est encore plus trivial puisqu'il se résume à:
 \begin{equation}\label{eq:1}
+u[n]=
 \begin{cases}
 1 \rightarrow n \geq 0 \\
 0 \rightarrow n < 0
@@ -414,10 +415,10 @@ sinc(u) &= \frac{sin( u)}{ u}
 \section{Propriétés de Fourier} \label{proprF}
 
 \subsection{Dualité} \label{Dua}
-\begin{align}
+\begin{align*}
 x(t) & \longleftrightarrow X(j\omega)\\
 X(jt) & \longleftrightarrow 2\pi x(-\omega)
-\end{align}
+\end{align*}
 Donc on échange $t \rightarrow -\omega$ et $\omega \rightarrow t$ et on échange les fonctions.
 \subsubsection{Démonstration}
 \begin{align*}
@@ -455,7 +456,7 @@ Cette modulation va elle modifier l'amplitude du signal car déplace son "espace
 x(t) & \longleftrightarrow X(j\omega)\\
 cos(\omega_0 t)x(t) &\longleftrightarrow \frac{1}{2}(X(j(\omega - \omega_0)) + X(j(\omega + \omega_0))) 
 \end{align*}
-On reconnait clairement les formules d'Euleur.
+On reconnait clairement les formules d'Euler.
 
 \subsection{Différentiation}
 Dériver un signal à \textbf{énergie finie} revient à \textcolor{blue}{amplifier} ses \textcolor{blue}{hautes} fréquences.
@@ -479,7 +480,7 @@ t^nx(t) &\longleftrightarrow j^n \frac{d^nX}{d\omega^n} (j\omega)
 Donc intégrer, augmente les \textcolor{blue}{basses} fréquences:
 \begin{align*}
 x(t) &\longleftrightarrow X(j\omega)\\
-\sum_{-\infty}^t	x(t)dt &\longleftrightarrow \frac{X(j\omega}{j\omega} + \textcolor{red}{\pi X(0) \delta(\omega)}
+\sum_{-\infty}^t	x(t)dt &\longleftrightarrow \frac{X(j\omega)}{j\omega} + \textcolor{red}{\pi X(0) \delta(\omega)}
 \end{align*}
 La partie en rouge est dû au fait qu'un résultat d'une intégration à toujours une \textcolor{red}{constante d'intégration} (le fameux $+C$)
 
@@ -707,7 +708,7 @@ On retrouve également ce phénomène de \textit{répétition} pouvant mener à 
 \end{figure}
 
 \section{Repli spectral} \label{spec}
-Comme notre transformé de Fourier se répète tous les $\omega_e$, cela indique que le pas de temps \textit{d'échantillonnage} est primordial. Un pas trop \textit{petit} et les répétitions se \textcolor{red}{superposent}. On appelle cela le \textcolor{blue}{repli spectral}(\textit{aliasing}).\\
+Comme notre transformé de Fourier se répète tous les $\omega_e$, cela indique que le pas de temps \textit{d'échantillonnage} est primordial. Un pas trop \textit{petit} et les répétitions se \textcolor{red}{superposent}. On appelle cela le \textcolor{blue}{repli spectral} (\textit{aliasing}).\\
 On peut penser aux roues d'un voiture, qui si le nombre de \textit{FPS} n'est pas assez élevé pour le nombre de rotation par seconde, nous donnera l'impression qu'elle tourne à l'envers.
 
 \subsection{Bien échantillonner}
@@ -716,7 +717,7 @@ Avec l'idée de la \textit{voiture}, on peut déjà poser le fait qu'un bon éch
 \subsubsection{Théorème de Shannon} \label{Sha}
 Une fonction (à bande limitée) qui ne contient pas de fréquences supérieures à $f_{max}$ est complètement déterminée par ses échantillons pour autant que:
 \begin{align*}
-f_e \geq 2 f_{max} \longleftrightarrow \omega_e \geq 2 \omega_{max}
+f_e > 2 f_{max} \longleftrightarrow \omega_e > 2 \omega_{max}
 \end{align*}	
 
 \subsection{Reconstruire un signal}
@@ -753,7 +754,7 @@ Donc de manière plus général, on peut reconstruire tous signaux tant qu'il n'
 \end{tabular}
 
 \chapter{Discrete Fourier Transform (DFT)} 
-On est motivé à trouver la \textit{DFT} car sur les PC, on manipule que des signaux discrets. Donc on veut passer de signal continu à un signal discret, le manipuler et pouvoir le restituer en continu. De plus, un signal ne peut être infini.\\
+On est motivé à trouver la \textit{DFT} car sur les PC, on manipule que des signaux discrets. Donc on veut passer d'un signal continu à un signal discret, le manipuler et pouvoir le restituer en continu. De plus, un signal ne peut être infini.\\
 Candidat:
 \begin{enumerate}
 \item Transformé de Fourier: signal x est \textcolor{blue}{continu} et sur un support \textcolor{blue}{infini}.
@@ -789,6 +790,8 @@ x[1]\\
 x[M-1]
 \end{bmatrix}
 \end{equation}
+
+Notre matrice de \textit{Vandermonde} est utilisée pour comparer les signaux. La \textbf{DFT} compare des signaux sous forme de vecteur entre eux\footnote{Bonne \href{https://youtu.be/yYEMxqreA10?t=1294}{vidéo} pour mieux comprendre cette idée}. Vandermonde possède toutes les fréquences possibles (définit par la M-périodicité) et compare avec notre signal de base. On aura une valeur \textbf{non-nulle} seulement pour des signaux qui sont en "\textbf{résonances}". 
 
 \subsubsection{non-périodique}
 Si $x[n]$ est \textbf{non-périodique} on va définir sa version périodisé.
@@ -1033,10 +1036,10 @@ Les désavantages:
 \begin{itemize}
 	\item Lien moins clair avec la solution.
 \end{itemize}
-De plus, on peut voir comme un \textit{avantage} ou \textit{inconvénient} le fait de pouvoir voir l'évolution des signaux entre chaque bloc plutôt qu'une sorte de boite noire "\textit{entrée-sortie}". De plus, on peut réaliser de bien des manières des circuits.
+De plus, on peut voir comme un \textit{avantage} ou \textit{inconvénient} le fait de pouvoir voir l'évolution des signaux entre chaque bloc plutôt qu'une sorte de boite noire "\textit{entrée-sortie}".On peut également réaliser de bien des manières des circuits.
 
 \subsection{Représentation d'état}
-Dans ce type de représenation, on a \textcolor{red}{état $x$} qui est un \textit{vecteur} comportant toutes les infos internes de notre système. On \textcolor{red}{entrée $u$} qui est un \textit{signal} extérieur affectant le système. Finalement on a une \textcolor{red}{sortie $y$} qui est un signal qu'on peut accéder depuis l'extérieur.\\
+Dans ce type de représentation, on a un \textcolor{red}{état $x$} qui est un \textit{vecteur} comportant toutes les infos internes de notre système. On a une  \textcolor{red}{entrée $u$} qui est un \textit{signal} extérieur affectant le système. Finalement on a une \textcolor{red}{sortie $y$} qui est un signal qu'on peut accéder depuis l'extérieur.\\
 \begin{equation}
 \begin{cases}
 \text{évolution: }\frac{d}{dt}x(t) =  Ax(t) + Bu(t)\\
@@ -1108,7 +1111,7 @@ Une forme usuelle des systèmes LIT dans la vraie vie est de type $\dot{x}(t) = 
 \chapter{Filtrage et Bode}
 
 \section{Filtre}
-On se souvient, que convoluer 2 signaux revient à multiplier leur spectre. De plus, dans un système \textbf{LIT} le résultat d'un signal x est: $y = h\ast x$. Donc, la plupart du temps quand un programme informatique fait un système LIT, il va faire la \textit{transformée de Fourier} pour simplement multiplier et pas avoir des sommes de multiplications.\\
+On se souvient, que convoluer 2 signaux en temporel revient à multiplier leur spectre. De plus, dans un système \textbf{LIT} le résultat d'un signal x est: $y = h\ast x$. Donc, la plupart du temps quand un programme informatique fait un système LIT, il va faire la \textit{transformée de Fourier} pour simplement multiplier et ne pas avoir des sommes de multiplications.\\
 Donc en Résumé:
 \begin{align*}
 Y(t) = H(t) \ast X(t) &\longleftrightarrow Y(j\omega) = H(j \omega) X(j \omega)\\
@@ -1133,7 +1136,7 @@ C'est grâce à cela que la radio fonctionne ou que les filtres photo fonctionne
 \newpage % à enlever si écart 
 
 \subsubsection{Les circuits RC}
-Parmi les exemples typiques, on peut s'intéresser au circuit RC (cf: \href{https://github.com/Tfloow/Q4_EPL/blob/main/SynthèseCompilée/LELEC1370.pdf}{LELEC1370}). 
+Parmi les exemples typiques, on peut s'intéresser au circuit RC (cf: \href{https://github.com/Tfloow/Q4_EPL/blob/main/SyntheseCompilee/LELEC1370.pdf}{LELEC1370}). 
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
 \includegraphics[width=5cm]{img/RC.png}
