@@ -452,6 +452,7 @@ x(t) & \longleftrightarrow X(j\omega)\\
 e^{j\omega_0 t}x(t) & \longleftrightarrow X(j(\omega - \omega_0))
 \end{align*}
 Cette modulation va elle modifier l'amplitude du signal car déplace son "espace" phasoriel revient à déplacer ses fréquences et en ajoute.
+
 \begin{align*}
 x(t) & \longleftrightarrow X(j\omega)\\
 cos(\omega_0 t)x(t) &\longleftrightarrow \frac{1}{2}(X(j(\omega - \omega_0)) + X(j(\omega + \omega_0))) 
@@ -846,10 +847,190 @@ Perseval & $\sum_{n=0}^{M-1} |x[n]|^2$ & $\frac{1}{M}\sum_{m=0}^{M-1}|X_{DFT}[k]
 \end{tabular}
 \end{center}
 
+
 \section{Transformée Rapide}
 On doit en moyenne réaliser $8M^2$ opérations (avec $M$ la portée finie du signal)\\
 En 1965, Cooley et Tukey ont proposé FFT ou \textit{Fast Fourier Transform} qui est basé sur la \textcolor{blue}{décimation temporelle}\\
 Pour simplifier, on factorise $M$ et on divise la somme de la \textit{DFT} en sous-sommes qui correspondent à des DFT de plus petites tailles.
+
+
+\chapter{Transformée de Laplace}
+C'est une extension de la transformée de Fourier et permet de l'appliquer à plus de signaux (surtout des signaux courants dans le mone réel).
+
+\subsection{Limitation}
+On se souvient donc des transformées de Fourier (\ref{Fourier}). On peut ainsi réaliser des convolutions pour des systèmes via des multiplications en milieu fréquentiel. Cependant, on s'intéresse à des signaux ayant un début, un $0$
+\subsubsection{Existence}
+\begin{align*}
+x(t) &= x 1(t)\\
+\mathcal{F} (x) \longleftrightarrow \int_{-\infty}^{\infty} x(t) e^{-i \omega t} dt &= \int_0^{\infty} t e^{-i \omega t} dt = \left[ \frac{1 + i \omega t}{\omega^2} e^{-i \omega t} \right]_0^{\infty}
+\end{align*}
+On a un signal qui ne converge pas et oscille.
+
+\subsection{Généralisation}
+On peut utiliser un signal atténué ce qui permettrait de converger vers nul en l'infini et de même retrouver son résultat inverse:
+\begin{align*}
+x(t)e^{- \sigma t } &= t 1(t) e^{- \sigma t}\\
+\mathcal{F} (x e^{- \sigma t}) \longleftrightarrow \int_{-\infty}^{\infty} x(t) e^{- \sigma t} e^{-i \omega t} dt &= \int_0^{\infty} t e^{-i \omega t} dt = \left[- \frac{1 + (\sigma + i \omega) t}{(\sigma + i \omega)^2} e^{-(\sigma + i \omega )t} \right]_0^{\infty}\\
+X_{\sigma} (i \omega) &= \frac{1}{(\sigma + i \omega)^2}
+\end{align*}
+Pour retrouver le signal $x(t)$ sans la pré-multiplication, il faut réaliser cette opération
+\begin{align*}
+x(t) &= e^{\sigma t} \mathcal{F}-1 (X_{\sigma}\\
+&= \frac{1}{2 \pi }\int_{-\infty}^{\infty} X_{\sigma} (i \omega) e^{\sigma t} e^{i \omega t} d\omega
+\end{align*}
+Ainsi, on peut s'assurer d'avoir une réponse pour nos systèmes. En effet, on va appliquer cette atténuation ainsi:
+\begin{align*}
+H\{e^{\sigma t} e^{i \omega t} \} &= h(t) \ast (e^{\sigma t} e^{i \omega t}) = H_{\sigma} (i \omega) e^{\sigma t} e^{i \omega t}
+\end{align*}
+
+\subsubsection{Simplification}
+La notation courante de la \textit{transformée de Laplace} est $s = \sigma + i \omega$.
+\begin{align*}
+\int_{-\infty}^{\infty} x(t) e^{- \sigma t} e^{-i \omega t} dt = \int_{-\infty}^{\infty} x(t) e^{-( \sigma + i \omega) t} dt &= \int_{-\infty}^{\infty} x(t) e^{-( s) t} dt
+\end{align*}
+
+\section{Transformée}
+La transformée de Laplace d'un signal $x$ est une généralisation de $s \in C$ de la transformée de \textit{Fourier}
+\begin{align*}
+X(s) = \mathcal{L}(x) := \int_{-\infty}^{\infty} x(t) e^{- s t} dt 
+\end{align*}
+$s$ est définie que sur la région où l'intégrale existe. On appelle cette région le \textbf{ROC} (\textit{Region of Convergence}).\\
+La transformée inverse est définit ainsi:
+\begin{align*}
+x(t) = \mathcal{L}^{-1}(X) := \frac{1}{2 \pi} \int_{-\infty}^{\infty} X( \sigma + i \omega ) e^{(\sigma + i \omega)t } d \omega
+\end{align*}
+Et cela est valable pour tout $\sigma$ tel que $X$ est défini sur $\sigma + i \mathbb{R}$
+
+\subsection{Région de Convergence et égalité}
+Si $\mathcal{L}(x) = \mathcal{L}(y)$ sur $\sigma + i \mathbb{R}$ pour un $\sigma$ quelconque, alors $x=y$. Cependant, cela ne nous indique pas si $\mathcal{L}(x)$ et $\mathcal{L}(y)$ ont le même ROC.
+\subsubsection{Exemple}
+\begin{align*}
+\mathcal{L}(1(t) e^t) &= \frac{1}{s-1} & \mathcal{L}(-1(-t) e^t) &= \frac{1}{s-1}\\
+\mathfrak{R}(s) &> 1 & \mathfrak{R}(s) &< 1 
+\end{align*}
+Laplace est donc une fonction et un domaine de définition.
+
+\subsubsection{Déterminer le ROC}
+\begin{enumerate}
+\item Si support fini $\rightarrow$ $ROC = \mathbb{C}$
+\item Support fini à gauche et $|x(t)| < a e^{k_1 t}$ $\rightarrow$ $\mathfrak{R}(s) > k_1$
+\item Support infini à droite, et $|x(t)| < a e^{k_2 t}$ $\rightarrow$ $\mathfrak{R}(s) < k_2$
+\item support infini et borné à droite $|x(t)|< a e^{k_1 t}$ et à gauche $|x(t)| < a e^{k_2 t}$ $\rightarrow$ $k_1 < \mathfrak{R}(s) < k_2$
+\end{enumerate}
+
+\subsection{Propriétés}
+
+\begin{center}
+\begin{tabular}{|m{3cm}|m{7cm}|}
+\hline
+\textbf{Linéarité} & $\mathcal{L}(a_1 x_1 + a_2 x_2) = a_1 \mathcal{L}(x_1) + a_2 \mathcal{L}(x_2)$ \newline  ROC R: $R \supseteq R_1 \cap R_2$ \\
+\hline
+\textbf{Décalage temporel} & $\mathcal{L}(x(t-t_0)) = e^{-s t_0} \mathcal{L}(x(t))$ \newline même ROC\\
+\hline
+\textbf{Décalage fréquentiel} & $\mathcal{L}(e^{s_0 t}x(t)) = X(s-s_0)$ \newline ROC $= R + \mathfrak{R}(s_0)$\\
+\hline
+\textbf{Convolution} & $\mathcal{L}(x \ast y) = \mathcal{L}(x) \mathcal{L}(y) = XY$ \newline ROC $R$: $R \supseteq R_1 \cap R_2$\\
+\hline
+\textbf{Différentiation} & $\mathcal{L} \left( \frac{dx}{dt} \right) = s \mathcal{L}(x)$\\
+\hline
+\textbf{Intégration} & $\mathcal{L} \left( \int_{-\infty}^t x( \tau ) d \tau \right) = \frac{1}{s} \mathcal{L}(x)$\\
+\hline
+\textbf{Différentiation fréquentielle} & $\mathcal{L}(-tx(t)) = \frac{d}{ds} X(s)$\\
+\hline
+\end{tabular}
+\end{center}
+\subsection{En pratique}
+Pour utiliser les transformées de Laplace, on utilise des logiciels, des tables ou les propriétés de linéarité.\\
+On utilise à fond les décomposition en fraction simple et on utilise la linéarité sur des fonctions simplifier.
+
+\section{Systèmes LTI: fonctions de transfert}
+Si nous avons un système LTI $\mathcal{H}$ qui est entièrement caractérisé par une réponse impulsionnelle $h$. Sa réponse à une entrée $u$ est $y = h \ast u$. On réalise $Y(s) = \mathcal{L}(h \ast u) = H(s) U(s)$. La fonction de transfert est donc: \textbf{$H(s) = \mathcal{L}(h)$}. (cela est équivalent à la réponse impulsionnelle et caractérise entièrement le système)
+
+\subsection{Passage à d'autres représentations}
+\subsubsection{Équation différentielle}
+\begin{align*}
+\sum_{k=0}^N a_k \left( \frac{d^k}{dt} \right) y(t) &= \sum_{k=0}^M b_k \left( \frac{d^k}{dt} \right) u(t) & &\Leftrightarrow & \sum_{k=0}^N a_k s^k Y &= \sum_{k=0}^M b_k s^k U & &\Leftrightarrow & Y &= \frac{\sum_{k=0}^M b_k s^k}{\sum_{k=0}^N a_k s^k} U
+\end{align*}
+On voit que la partie à gauche de $U$ à la dernière équation équation correspond à $H$
+
+\subsubsection{Représentation d'état}
+\begin{align*}
+\frac{d}{dt}x(t) &= A x(t) + B u(t) & sX &= AX + BU\\
+y &= C x(t) + D u(t) & Y &= (C (sI - A)^{-1} B + D) U\\
+\end{align*}
+On a donc une fonction de transfert \textcolor{red}{unidimensionnel} si on a 1 entrée et 1 sortie. Le problème devient algébrique et peut être vu comme un problème statique / constant.\\
+La réponse impulsionnelle est:
+\begin{align*}
+H(s) &= C(sI - A)^{-1} B + D\\
+(sI - A) & \text{ Diagonale: } s - a_ii \text{ hors diagonale } - a_ij\\
+(sI - A)^{-1} & \text{ Transposée des co-facteurs déterminants de matrice } (n-1) \times (n-1) \text{ pour polynômes } \leqslant n-1 \\
+& \text{ou pour les polynômes d'ordre n } det(sI-A)\\
+C(SI-A)^{-1} B + D & \text{ Fonctoin rationnelle plus un facteur } D
+\end{align*}
+Si un système admet une représentation d'état, alors $H(s)$ est rationnelle. Le dénominateur vaut $det(sI -A)$ d'ordre n et le numérateur est inférieur à $n$ si pas de $D$ sinon $n$.\par
+Si le système est causal et $H$ est rationnel, on peut prouver que:
+\begin{itemize}
+\item L'ordre du dénominateur $\geqslant$ ordre numérateur
+\item Égalité $\Leftrightarrow h(0) \neq 0$
+\item Les zéros du dénominateur $det(sI - A) = $ valeurs propres de A.
+\end{itemize} 
+
+\subsubsection{Schéma bloc}
+Ainsi, les blocs intégrateurs $\int$ devient simplement $\times \frac{1}{s}$. Les blocs différenciateurs $\frac{d}{dt}$ deviennent $\times s$
+
+\section{Transformée de Laplace unilatérale}
+Cela répond à 2 questions critiques:
+\begin{enumerate}
+\item Comment le signal doit-il être en $- \infty$ et sans condition initiale
+\item Certaines fonctions n'ont pas de transformée de Laplace comme: $e^{at}$
+\end{enumerate}
+Le problème c'est $-\infty$, on va réaliser la transformée de \textcolor{blue}{Laplace unilatérale}:
+\begin{equation}
+X_+ (s) = \mathcal{L}_+ (x) := \mathcal{L}(1(t) x(t)) = \int_{0^-}^{\infty} x(t) e^{st} dt
+\end{equation}
+Donc bien depuis $0^-$ (surtout quand on a $\delta (t)$). On a beaucoup de propriété hérité de $\mathcal{L}$.\\
+Faire son inverse permet de \textit{seulement} retrouver \textbf{$1(t) x(t)$} (on perd de l'information).
+
+\subsection{propriétés}
+\subsubsection{Convolution} 
+\begin{equation}
+\mathcal{L}_+ (x \ast y) \neq \mathcal{L}_+ (x) \mathcal{L}_+ (y)
+\end{equation} 
+Dans \textit{la plupart du temps}, mais on peut simplifier en \textbf{système causal} ($h(t) = 0 $ pour $t < 0$ ou bien le système est au repos)
+\begin{equation}
+\mathcal{L}_+ (y) = \mathcal{L}_+ (h) \mathcal{L}_+ (u) = H_+ \mathcal{L}_+ (u)
+\end{equation}
+Donc on va assumer, en \textcolor{red}{causal}, $H = H_+$
+
+\subsubsection{Dérivation} \label{Dérivation}
+\begin{equation}
+\mathcal{L}_+ (x'(t)) = \int_0^{\infty} x'(t) e^{-st}dt = -x(0) + s X_+ (s)
+\end{equation}
+On remarque qu'on inclut bien les \textbf{conditions initiales} du système.
+
+\subsubsection{Intégration}
+\begin{equation}
+\mathcal{L}_+ \left( \int_0^t x(\tau ) d \tau \right) = \frac{1}{s} \mathcal{L}_+ (x)
+\end{equation}
+Pour le prouver, on utilise le résultat de la dérivation vu en \ref{Dérivation}. De plus, $\int_0^0 x(\tau ) d \tau = 0$
+
+\subsubsection{Limite de $X_+(s)$}
+\begin{align}
+\lim_{s \rightarrow 0} s X_+ (s) &= x(\infty) & \lim_{s \rightarrow + \infty} s X_+ (s) &= x(0^+)
+\end{align}
+Preuve \textit{informelle}:
+\begin{align*}
+\mathcal{L}_+ (x') &= s \mathcal{L}_+ (x) - x(0)\\
+\lim_{s \rightarrow 0} sX_+ (s) &= x(0) + \lim_{s \rightarrow 0} \mathcal{L}_+ (x')(s)
+& \approx x(0) + \int_0^{\infty} x'(t) e^{0.t} dt = x(\infty)
+\end{align*}
+Donc dans un système \textbf{stable} et \textbf{causal}, $H(0)$ représente le rapport entre la sortie et l'entrée à l'\textit{infini} ou après stabilisation.\\
+On parle de gain à fréquence nulle ou \textit{steady-state}
+
+
+\subsection{Résolution d'EDO}
+\textcolor{red}{Finir les 3 dernières slides}
+
 
 
 \part{Systèmes}

@@ -1211,7 +1211,45 @@ Il y a donc 2 façons que les Threads se lancent: ligne 2 $\rightarrow$ ligne 3 
 \subsubsection{Le Browser}
 Le \textit{Browser} en Oz s'exécute avec son propre Thread.\\
 Pour chaque variable non-liée qui est affiché, on crée un thread dans le \textit{Browser} qui attend jusqu'à ce qu'on lui attribue une valeur.\\
-Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme  "\textit{functional dataflow}" et il ne regarde donc pas l'intérieur de la cellule.
+Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme  "\textit{functional dataflow}" et <il ne regarde donc pas l'intérieur de la cellule.
+
+\subsection{Streams et Agents}
+Un stream est une \textcolor{blue}{liste} qui se finit par une variable non défini. On peut étendre la liste au tant que l'on veut. \\
+On peut les utiliser comme une façon de communiquer entre des Threads. (ex: \textit{producteur consommateur})
+
+\subsubsection{Producteur Consommateur}
+\begin{itemize}
+\item \textcolor{red}{Producteur}: génère un stream de données.
+\item \textcolor{red}{Consommateur}: lis un stream et réalise une action dessus.
+\item \textcolor{red}{Filtre}: lis et génère un stream.
+\end{itemize} 
+
+\subsubsection{Agent}
+C'est une activité \textit{concurrente} qui lis et écris dans un stream. C'est une raison principale de la \textbf{single assignement} car ainsi on peut faire de la récursion terminale qui fait que le \textit{dataflow deterministic} en un paradigme pratique.\\
+Toutes les listes de fonctions peuvent utiliser comme un agent. (on peut aussi faire la \textit{higher order programming})
+
+\subsection{Sémantique des Threads}
+On étend la machine abstraite. Chaque Threads possèdent son propre stack sémantique mais partagent la même mémoire.\\
+On exécute une étape du stack sémantique à la fois et à tour de rôle.\\
+Le \textcolor{red}{Scheduler} décide sur quelle thread s'exécute via une technique d'\textit{entrelacement}.
+
+\subsubsection{Entrelacements}
+C'est une manière d'aborder des threads plus simples que de la \textit{vraie concurrence}. En entrelacement un processeur ne peut pas écrire en même sur une zone de mémoire. (on a quand même une \textcolor{blue}{cache coherence protocol} qui s'assure qu'on n'écrit pas en même temps)
+
+\section{Exécution de programmes concurrents}
+
+\subsubsection{Séquentiel}
+Une exécution d'un programme séquentiel est son exécution sur un \textcolor{blue}{thread}. Les exécutions séquentielles sont d'\textcolor{red}{ordres totals} donc un \textit{ordre définit entre toutes les pairs d'états}.
+
+\subsubsection{Ordre partiel}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/ordrePartiel.png}
+\end{wrapfigure}
+Donc un programme concurrent est un programme avec plus qu'un Thread. Donc on dit qu'on a un ordre \textcolor{red}{partiel}. On n'a pas de pair d'exécution définit.\\
+Mais on a toujours qu'une seule exécution par étape
+
+
 
 
 
