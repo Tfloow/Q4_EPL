@@ -1029,7 +1029,36 @@ On parle de gain à fréquence nulle ou \textit{steady-state}
 
 
 \subsection{Résolution d'EDO}
-\textcolor{red}{Finir les 3 dernières slides}
+\subsubsection{Exemple}
+\begin{align*}
+y'' + 3y' + 2y &= a1(t) & (s^2 + 3 s + 2)Y &= \frac{a}{s}
+\end{align*}
+La partie à droite correspond à l'EDO dans le domaine de Laplace. Nos conditions initiales sont: $y(0) = 0$ et $y'(0) = 0$
+\begin{align*}
+Y = \frac{a}{s(s^2 + 3s +2)} &= \frac{a}{2s} - \frac{a}{s+1} + \frac{a}{2(s+2)}\\
+y(t) &= 1(t) a (\frac{1}{2} - e^{-t} + \frac{1}{2} e^{-2t}
+\end{align*}
+On remarque que:
+\begin{enumerate}
+\item Les exposants des exponentielles correspondent aux racines du polynômes au dénominateur
+\item Nous avons un "\textit{taux}" 0 de u
+\item Ce sont les racines du polynômes caractéristiques
+\end{enumerate}
+Via Laplace:
+\begin{align*}
+(s^2 Y - sy_0 -y_0') + (3 sY -3 y_0) + (2Y) &= \frac{a}{s} & (s^2 + 3s + 2)Y &= \frac{a}{s} + (3-s) y_0 + y_0'\\
+\end{align*}
+\begin{equation}
+Y = \textcolor{blue}{\frac{a}{s(s^2 + 3s + 2)}} + \frac{y_0 (3-s)}{s(s^2 + 3s + 2)} + \frac{y_0'}{s(s^2 + 3s +2)}
+\end{equation}
+En bleu, on a la réponse \textbf{forcée} (comme si on imposait que $y_0 = y_0' = 0$). Le reste de l'équation correspond à la réponse \textbf{libre} qui dépend des racines du polynômes caractéristiques et est linéaire en $y_0$ et $y_0'$.\par
+On finit par réaliser la transformée inverse:
+\begin{equation}
+y(t) = 1(t) (\frac{a}{2} + (2 y_0 + y_0' -a ) e^{-t} + (\frac{a}{2} -y_0 -y_0') e^{-2t})
+\end{equation}
+Long mais programmable en calculant les racines du polynôme et en réduisant en fractions simples.
+
+
 
 
 
