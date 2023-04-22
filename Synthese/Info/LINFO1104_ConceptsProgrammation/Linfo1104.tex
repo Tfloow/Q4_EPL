@@ -1249,6 +1249,43 @@ Une exécution d'un programme séquentiel est son exécution sur un \textcolor{b
 Donc un programme concurrent est un programme avec plus qu'un Thread. Donc on dit qu'on a un ordre \textcolor{red}{partiel}. On n'a pas de pair d'exécution définit.\\
 Mais on a toujours qu'une seule exécution par étape
 
+\section{Le non-déterminisme}
+Le non-déterminisme d'un système est la possibilité d'un système à réaliser des décisions indépendamment du développeur.\par
+Dans cette partie du système, le \textcolor{red}{planificateur} (\textit{scheduler}) y est présente. Il décide quel thread s'exécute à quel moment.\par
+Ce principe de non-déterminisme est toujours présent dans un système concurrents. En effet, les activités sont toutes indépendantes et le système doit générer cela de manière non-déterministe.
+\subsubsection{Exemple}
+On peut penser au fait qu'on ne sait pas qui du thread A ou B s'exécutera en premier. Ce choix varie à l'exécution et est fait par le système.\\
+Pareil pour l'écriture dans une cellule qui à un résultat qui varie.\par
+
+\subsubsection{Piège}
+\textcolor{red}{Attention}, ce n'est pas parce que 2 threads résultent à un même résultat \textit{tout le temps} qu'ils ne sont pas non-déterministes. Le non-déterminisme est le fait qu'on ne sait pas quel thread se lance en premier.
+
+\subsection{Gestion}
+On doit toujours gérer le non-déterminisme et il ne devrait jamais influencer le fait qu'un programme est correct. C'est pour cela qu'on évite d'utiliser des threads \textbf{et} des cellules
+
+\subsubsection{Deterministic dataflow}
+Avec ce paradigme, le résultat d'un programme est toujours le même. Il n'y a aucun non-déterminisme \textcolor{red}{\textit{visible}}.
+
+\subsection{Fonctionnement d'un planificateur}
+Le planificateur laisse un thread s'exécuter environ toutes les $10$ ms. On appelle ce temps un \textit{time slice}. (Sur des PC multi-cœurs on peut avoir plusieurs exécution simultanée)\par
+Un thread est soit en mode \textcolor{red}{runnable} si l'instruction en haut de son stack \textit{n'attend pas} de variable de \textit{dataflow}. Sinon, il est en état \textcolor{red}{suspended}.
+
+\subsubsection{Équitable}
+Il est équitable si:
+\begin{itemize}
+\item N'importe quel thread \textit{runnable} va se lancer dans un temps \textit{fini}.
+\item On accorde une priorité à chaque threads mais cela leur accorde juste plus ou moins de pourcentage de \textit{temps} d'exécution.
+\end{itemize}
+Si un \textit{planificateur} est équitable, on peut s'assurer que notre programme est correcte. Sinon, certains programmes ne se lanceraient pas et pourraient produire des réponses érronés.
+
+\section{Concurrency for dummies}
+\noindent
+\textit{sobrement intitulé par Peter van Roy}\par
+En programmation mulit-agent, la concurrence n'influence pas le résultat. La concurrence change juste l'ordre d'exécution. On peut ajouter des threads à la volée sans changer le résultat.\par
+Cela fonctionne seulement en programmation \textcolor{blue}{fonctionnelle}\par
+Quand on veut \textit{browse} un thread, on aura une sortie sous forme de "$\_$" quand un thread se finit et attend quelque chose.
+
+
 
 
 
