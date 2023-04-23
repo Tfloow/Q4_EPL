@@ -1018,8 +1018,122 @@ S &= P
 \subsection{Inductance pure}
 \textcolor{red}{TODO}
 
+\chapter{Triphasé}
+\section{Introduction}
+
+\subsection{Source}
+Triphasé indique qu'on n'a pas une source mais \textbf{3 sources} de tensions ou de courants. Elles sont de:
+\begin{itemize}
+\item Même amplitude $V_{max}$ et $I_{max}$
+\item Même fréquence $\omega$
+\item Déphasé l'une de l'autre de $\frac{2\pi}{3}$
+\end{itemize}
+Ci-dessous, un système \textbf{direct} de tension:
+\begin{align*}
+&\begin{cases}
+e_1 = V_{max} cos(\omega t + \varphi_v)\\
+e_2 = V_{max} cos(\omega t + \varphi_v - \frac{2\pi}{3})\\
+e_3 = V_{max} cos(\omega t + \varphi_v - \frac{4 \pi}{3})
+\end{cases} & &\begin{cases}
+\overline{E_1} = V_{max}e^{j \varphi_v}\\
+\overline{E_2} = V_{max}e^{j \varphi_v - 2 \pi /3}\\
+\overline{E_3} = V_{max}e^{j \varphi_v - 2 \Pi /3}
+\end{cases}
+\end{align*}
+Ci-dessous, un système \textbf{inverse} de tension:
+\begin{align*}
+&\begin{cases}
+e_1 = V_{max} cos(\omega t + \varphi_v)\\
+e_2 = V_{max} cos(\omega t + \varphi_v + \frac{2\pi}{3})\\
+e_3 = V_{max} cos(\omega t + \varphi_v + \frac{4 \pi}{3})
+\end{cases} & &\begin{cases}
+\overline{E_1} = V_{max}e^{j \varphi_v}\\
+\overline{E_2} = V_{max}e^{j \varphi_v + 2 \pi /3}\\
+\overline{E_3} = V_{max}e^{j \varphi_v + 2 \Pi /3}
+\end{cases}
+\end{align*}
+Les signaux s'annulent entre eux.
+
+\subsection{Connections}
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/etoile.png}
+\includegraphics[width=5cm]{img/triangle.png}
+\caption{à gauche: connection en étoile à droite: connection en triangle}
+\end{figure}
+On a l'apparition d'un point \textcolor{red}{neutre} $N$. Les tensions entre les points R,S et T sont les mêmes pour les deux formes.\\
+
+Quand on y ajoute des charges, les tensions ne sont pas les mêmes pour les charges dans la formation triangles et étoiles.
+
+\subsubsection{Intérêt}
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/utilite.png}
+\end{figure}
+On peut supprimer le fil $i_1 + i_2 + i_3$ qui peut être supprimé car via les propriétés du \textit{triphasé} le courant s'annulent.
+
+\subsection{Grandeurs de ligne}
+Ce sont les grandeurs mesurées au niveau de la liaison source/charge:
+\begin{itemize}
+\item Courants de ligne: courants $i_R, i_S, i_T$ circulant dans les trois fils de liaison
+\item Tensions de ligne: tensions $v_{RS}, v_{ST}, v_{TR}$ mesurées en prenant deux à deux les trois fils de liaison 
+\end{itemize}
+
+\subsection{Grandeurs de phase}
+Ce sont les grandeurs mesurées sur les éléments qui constituent la source et/ou la charge:
+\begin{itemize}
+\item Courants de phase: courant $i_1, i_2, i_3$ circulant dans les sources ou les impédances constituant la source ou la charge triphasée.
+\item Tensions de phase: tensions $v_1, v_2, v_3$ mesurées sur les sources ou les impédances constituant la source ou la charge triphasée.
+\end{itemize}
+
+\subsubsection{Cas particulier}
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/etoilesetoiles.png}
+\end{figure}
+Dans le cas ci-dessus, le courant de ligne et de phase est le même. La tension de ligne est tel que $V_l = \sqrt{3}V_{ph}$ et sa phase $\phi_l = \phi_{ph} + \frac{\pi}{6}$\par
+Si on a une formation en \textit{triangle}, alors les courants de ligne et de phase sont différents entre eux.
 
 
+\subsection{Circuit équivalent monphasé}
+Puisque si nous possédons un circuit alimenté en \textbf{triphasé équilibré} en régime sinusoïdal, nous pouvons déterminé le courant et la tension dans toutes les broches si nous connaissons ceux-ci pour \textbf{une seule phase}.\par
+Donc on peut étudier un tel circuit sur base de son équivalent \textbf{monophasé}.
+
+\subsubsection{Mélange étoiles et triangles}
+Selon les conventions, le circuit en \textcolor{red}{monophasé} est le circuit équivalent \textcolor{blue}{triphasé} obtenu en prenant \textit{une phase} du circuit triphasée et on remplace les \textbf{charges} et \textbf{sources} en leur \underline{équivalent étoile}.\par
+L'avantage est que les grandeurs de phase et de ligne sont les mêmes.
+
+\section{Transformation étoiles triangles}
+On peut toujours passer de l'un à l'autre.
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{img/transfoEtoilesTriangles.png}
+\caption{Transformation et équivalent monphasé}
+\end{figure}
+
+\subsection{Puissance}
+\subsubsection{Puissance instantanée}
+Pour un circuit équivalent monophasé:
+\begin{align*}
+p = ei &= P + S cos(2 \omega t + \varphi_v + \varphi_i) & &\begin{cases}
+P = V_{eff}I_{eff} cos(\phi) = \frac{1}{2} V_{max} I_{max} cos(\phi) \text{     Puissance active}\\
+S = V_{eff}I_{eff} = \frac{1}{2} V_{max} I_{max} \text{      Puissance apparente}
+\end{cases}
+\end{align*}
+En triphasé:
+\begin{equation}
+p = e_1 i_1 + e_2 i_2 + e_3 i_3 = 3 V_{eff} I_{eff} cos(\phi) = \frac{3}{2} V_{max} I_{max} cos(\phi) = P
+\end{equation}
+
+\subsubsection{Puissance réactive}
+\begin{equation}
+Q = 3 V_{eff} I_{eff} sin(\phi)
+\end{equation}
+
+\subsubsection{Puissance apparente}
+\begin{equation}
+S = 3 V_{eff} I_{eff}
+\end{equation}
 
 
 \end{document}
