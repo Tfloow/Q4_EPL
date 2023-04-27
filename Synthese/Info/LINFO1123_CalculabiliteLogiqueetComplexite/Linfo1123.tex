@@ -922,6 +922,8 @@ $p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (p \Rightarrow q)$ & $p \Right
 \hline
 $\neg ( p \vee q) $ & $\neg p \wedge \neg q$ & $\neg ( p \wedge q )$ & $\neg p \vee \neg q$ & $p \vee (q \wedge r)$ &  $(p \vee q ) \wedge ( p \vee r)$\\
 \hline
+ & & $p \wedge ( q \vee r)$ & $(p \wedge q) \vee ( q \wedge r)$ & & \\
+\hline
 \end{tabular}
 \end{center}
 On va s'intéresser à \textcolor{blue}{l'équivalence de Morgan} qui $\neg(p \wedge q) \rightarrow \neg p \vee \neg q$
@@ -1118,6 +1120,235 @@ Exemple: $p = \{A, \neg B, \neg A \vee \neg C \vee D, \neg E \vee C, B \vee C \}
 Donc $p \models D$
 
 
+\chapter{Complexité algorithmique}
+\section{Notions}
+On peut demander qu'un programme est juste ou encore qu'il soit \textbf{efficace}. C'est la calculabilité et complexité respectivement. On regarde de manière pratique.
+
+\subsection{Mesure}
+On a deux types de complexité
+\begin{enumerate}
+\item Complexité spatiale, l'espace mémoire.
+\item Complexité temporelle, le temps d'exécution.
+\end{enumerate}
+La complexité spatiale est \textit{toujours} inférieur à la complexité temporelle.
+
+\subsubsection{Définition}
+La complexité d'un problème est la complexité de l'\textcolor{red}{algorithme le plus efficace} résolvant ce problème.
+
+\subsection{Comment mesurer ?}
+La complexité dépend de la taille des données, de la représentation des données et du modèle de calcul utilisé \par
+On a 3 grandes mesures:
+\begin{enumerate}
+\item Meilleur cas
+\item Cas moyen
+\item Pire cas
+\end{enumerate}
+
+\subsection{Calcul de complexité}
+Pour la \textit{complexité d'un algorithme}, on peut soit utiliser des \textit{benchmarks} soit des analyses d'algorithmes.\par
+Pour la \textit{complexité d'un problème} est la complexité d'un algorithme le résolvant ou par \textit{induction}.
+
+\subsubsection{Benchmark}
+On mesure le \textit{temps d'exécution} d'un certains programmes avec des certaines données sur une même machine. Ainsi, on peut comparer les machines et programmes entre eux
+
+\subsubsection{Analyse mathématique}
+On compare la complexité du programme à une fonction mathématique. On trouve une fonction $T(n)$ exprimant la complexité. $T(n)$ correspond au temps d'exécution du programme et est obtenu en analysant le texte du programme.
+
+\subsubsection{Réduction}
+On peut résoudre des problèmes en ayant un algorithme qui en résout un autre.
+
+\section{Notation Grand O}
+Tout temps d'exécution peut être résumé à une fonction polynomial. On regarde le meilleur et pire cas ainsi que le cas moyen.\par
+On se contente souvent que de la complexité dans le pire des cas. Cela nous donne une borne supérieure.
+\subsection{grand O}
+Cela nous permet une caractérisation concise de classes de complexité. Cette notation est indépendante des évolutions technologiques.\\
+On peut négliger les termes étant différent du terme à l'exposant le plus élevé. On ignore également le coefficient devant l'inconnu.
+
+\subsection{Définition}
+$O(g(n))$: le nombre d'étapes exécutés par le programme pour une donnée de taille $n$ n'est pas plus élevé que $cg(n)$ pour des tailles suffisamment grande.
+\begin{equation}
+T(n) \text{ est } O(g(n)) ssi \exists c,n_0 \forall n \geqslant n_0 : |T(n)| \leqslant c |g(n)|
+\end{equation}
+
+\subsection{Problèmes}
+La notation grand O n'est pas très précise. $O(n^3)$ n'indique pas si on peut borner par $O(n^2)$ par exemple.
+
+\subsubsection{Borne Inférieure}
+La borne inférieure est $\Omega(g(n))$. Si $f(n) = O(g(n))$ alors $g(n) = \Omega(f(n))$
+
+\subsubsection{Borne Exacte}
+La borne exacte est $\Theta(g(n))$. Si $f(n) = O(g(n))$ et $f(n) = \Omega(g(n))$ alors $g(n) = \Theta(g(n))$
+
+\section{Hiérarchie de complexités}
+\begin{figure}[H]
+\centering
+\includegraphics[width=9cm]{img/BigO.jpeg}
+\caption{Graphe de notation grand O}
+\end{figure}
+Algorithmes quadratiques:
+\begin{enumerate}
+\item Tri par échange
+\item Bubble sort
+\item Addition de matrices $n\times n$
+\end{enumerate}
+Algorithmes cubiques:
+\begin{enumerate}
+\item Multiplication de matrices $n \times n$
+\item Perspective d'une image 3D
+\end{enumerate}
+
+Algorithmes exponentiels
+\begin{enumerate}
+\item Voyageur de commerce
+\item Coloration de graphes
+\item Problèmes de planification
+\item Problèmes d'ordonnancement 
+\end{enumerate}
+
+\section{Problème intrinsèquement complexe}
+Ce sont les problèmes, qui étant calculables, ne peuvent être résolu à part pour des entrées très petites.\par
+Si un problème n'a pas de complexité \textit{polynomiale}, alors il est \textcolor{red}{pratiquement infaisable}. Sinon il est \textcolor{blue}{pratiquement faisable}.\\
+
+Un problème est intrinsèquement complexe \textit{ssi} il \textbf{n'existe pas} d'algorithme de \textcolor{blue}{complexité polynomiale}. Un problème intrinsèquement complexe est donc pratiquement infaisable.
+
+\subsection{Influence du modèle de calcul}
+Si un algorithme, exprimé dans un modèle de calcul particulier, est de complexité polynomiale, alors il sera également de complexité polynomiale dans un autre modèle de calcul (spatiale et temporelle).\par
+Hypothèse de modèle de calcul réaliste (pas de non déterminisme).\par 
+La classe de problème \textcolor{red}{intrinsèquement complexes} sont indépendants du modèle de calcul !
+
+\subsection{Influence de la représentation des données}
+Elle n'influence en aucun cas avec la propriété de \textcolor{red}{problèmes intrinsèquement complexes}. 
+
+
+\chapter{Classes de complexité}
+\section{Réduction et ensemble complet}
+\subsection{Réduction}
+Le but est de déduire un algorithme pour un problème $P$ à partir d'un algorithme résolvant $P'$.\par
+Ici, on se limite au problème de décision pour un ensemble $E$ à partir d'un algorithme de décision pour $E'$.\\
+Via cette définition, on va pouvoir:
+\begin{enumerate}
+\item Retourner des informations sur la calculabilité:
+	\begin{enumerate}
+	\item Permet de prouver la calculabilité
+	\item Permet de prouver la non calculabilité
+	\item Permet d'analyser le degré de non calculabilité
+	\end{enumerate}
+\item Retourner des informations sur la complexité:
+	\begin{enumerate}
+	\item Permet de déduire la complexité
+	\item Permet d'analyser le degré de complexité
+	\end{enumerate}
+\end{enumerate}
+Ainsi, on va utiliser 3 méthodes de réduction:
+\begin{enumerate}
+\item La réduction algorithmique: permet de déduire des propriétés sur la calculabilité
+\item La réduction formelle:  permet de déduire des propriétés sur la complexité
+\item La réduction polynomiale:  permet de déduire des propriétés sur la complexité
+\end{enumerate}
+
+\subsection{Algorithmique}
+Un ensemble A est algorithmiquement réductible à un ensemble B si à partir d'un \textit{algorithme} permettant de reconnaitre B, on peut construire un algorithme permettant de reconnaitre A.\par
+Un ensemble A est \textcolor{red}{algorithmiquement réductible} à un ensemble B ($A \leqslant_a B$) si en supposant B récursif, alors A est récursif.\par
+$\leqslant_a$ est une relation réflexive et transitive. Cela induit des classes d'équivalence.
+
+\subsection{Ensemble complet}
+Un ensemble complet d'une classe d'ensembles est l'ensemble le "\textit{plus difficile}" à décider parmi tous les ensembles de la classe. Si on trouve un algorithme pour cet ensemble, alors on peut reconnaitre tous les autres ensembles de la classe. C'est le problème \textcolor{red}{point rouge}.
+
+\subsubsection{Définition}
+Ce \textcolor{red}{point rouge} d'une classe A est un problème E qui est \textbf{A-complet} par rapport à une relation de réduction:
+\begin{enumerate}
+\item $E \in A$
+\item $\forall B \in A : B \leqslant E$ 
+\end{enumerate}
+Un problème E est \textbf{A-difficile} par rapport à une relation de réduction: $\forall B \in A : B \leqslant E$ il peut être en dehors de l'ensemble A.
+
+\section{Propriétés}
+\begin{itemize}
+\item Si $A \leqslant_a B$ et $B$ récursif, alors A récursif
+\item Si $A \leqslant_a B$ et $A$ non récursif, alors B non récursif
+\item $A \leqslant_a \overline{A}$
+\item $A \leqslant_a B \Leftrightarrow \overline{A} \leqslant_a \overline{B}$
+\item Si A récursif alors pour tout B, $A \leqslant_a B$
+\item Si $A \leqslant_a B$ et B récursivement énumérable, alors A pas nécessairement récursivement énumérable.
+\end{itemize} 
+
+\subsubsection{Exemples}
+\begin{align*}
+DIAG &\leqslant_a HALT & HALT &\leqslant_a DIAG
+\end{align*}
+
+\section{Fonctionnelle}
+\subsection{Définition}
+Un ensemble A est \textcolor{red}{fonctionnellement réductible} à un ensemble B ($A \leqslant_f B$) ssi il existe une fonction totale calculable $f$ tq:
+\begin{equation}
+a \in A \Leftrightarrow f(a) \in B
+\end{equation}
+Pour savoir si un élément appartient à A il suffit de calculer $f(a)$ et tester si $f(a) \in B$.
+
+\subsection{Propriétés}
+\begin{itemize}
+\item Si $A \leqslant_f B$ et B récursif alors A récursif
+\item Si $A \leqslant_f B$ et A non récursif alors B non récursif
+\item Si $A \leqslant_f B$ récursivement énumérable, alors A récursivement énumérable
+\item $A \leqslant_f B \Leftrightarrow \overline{A} \leqslant_f \overline{B}$
+\item Si A récursif, alors pour tout $B,A \leqslant_f B$
+\item Pas nécessairement $A \leqslant_f \overline{A}$
+\item Si $A \leqslant_f B$ alors $A \leqslant_a B$
+\item $A \leqslant_a B$ n'implique pas nécessairement $A \leqslant_f B$
+\end{itemize}
+Cela est plus restrictif car on doit voir s'il y a une appartenance à $B$ tel que $f(a) \leftarrow B$ et on doit l'exécuter.
+
+\subsection{Exemples}
+\begin{align*}
+DIAG & \leqslant_f HALT & HALT &\leqslant_f DIAG
+\end{align*}
+
+\subsection{Différences entre algorithmique et fonctionnelle}
+En $\leqslant_a$ on a un point de vue calculabilité et pour $\leqslant_f$ est un point de vue complexité. On doit donc appliquer un schéma d'algorithme suivant pour la \textit{complexité}. On a un input a, $a' := f(a)$ et si $a' \in B$ alors l'output est $a \in A$. On utilise en dernier lieu et une seule fois le test $f(a) \in B$. On ne fait rien après ce test.
+
+\section{Modèle de calcul}
+On théorie "\textit{classique}" la complexité se mesure via le modèle de machine de Turing. On regarde le nombre de \textit{transitions} nécessaires pour la complexité temporelle et le nombre de cases utilisées pour la complexité spatiale. La notion de \textit{transition} n'est pas très adapté pour les langages modernes.\par
+On va utiliser le modèle des programmes Java. Donc déterministes et non déterministes. (on peut parfois des écarts pour utiliser le modèle le plus adapté)
+\subsubsection{Thèse}
+Tous les modèles de complexité ont entre eux des complexités spatiales et temporelles reliées de façon polynomiale.\par
+Si un problème est \textit{pratiquement faisable} dans un modèle alors il l'est aussi dans un autre.
+
+\section{Classes de complexité}
+\subsection{Modèle déterministe}
+On va déterminer des \textit{ensembles} de \textcolor{blue}{classe de problèmes} qu'on regroupe par leur $O$.\par
+\textbf{DTIME(f)}: la famille des ensembles récursifs pouvant être décidés par un programme Java de complexité temporelle $O(f)$.\par 
+\textbf{DSPACE(f)}: la famille des ensembles récursifs pouvant être décidés par un programme Java de complexité spatiale $O(f)$.\par
+En complexité, on \textbf{n'a pas} de programme qui boucle.\par
+\textcolor{red}{Attention}: $DTIME_{Java}(n^2) \neq DTIME_{Turing}(n^2)$ on sait juste qu'un complexité polynomiale en Java \textbf{sera} polynomiale en Turing mais pas égale !
+
+\subsection{Modèle non-déterministe}
+\textbf{NTIME(f)}: la famille des ensembles ND-récursifs pouvant être décidés par un programme Java non déterministe de complexité temporelle $O(f)$. On considère la complexité de la branche d'exécution \textbf{la plus longue}. Donc toutes les branches sont \textcolor{blue}{finies} et de complexité $O(f)$.\par
+\textbf{NSPACE(f)}: la famille des ensembles ND-récursifs pouvant être décidés par un programme Java non déterministe de complexité spatiale $O(f)$.
+
+\subsection{Classe}
+\textbf{Classe P}: $P = \cup_{i \geqslant 0} DTIME(n^i)$ qui regroupe donc tous les programmes récursifs pouvant être décidé par une complexité temporelle \textcolor{red}{polynomiale}. Le fait que ce soit Java ou Turing ne change pas la classe.\par 
+\textbf{Classe NP}: $NP = \cup_{i \geqslant 0} NTIME(n^i)$ qui est la famille des ensembles \textbf{ND-récursifs} pouvant être décidés par un programme Java \textit{non-déterministe} de complexité temporelle \textcolor{red}{polynomiale}.
+
+\section{Relation entre les classes}
+\subsection{Rapport déterminisme et non-déterminisme}
+Si $A \in NTIME(f)$ alors $A \in DTIME(c^f)$. Il faut s'imaginer la façon dont on parcours l'arbre, de gauche à droite et de haut en bas. C'est une perte exponentielle d'efficacité.\\
+Si $A \in NSPACE(f)$ alors $A \in DSPACE(f^2)$.
+
+\subsection{Rapport temps et espace}
+\begin{align*}
+si A \in NTIME(f) &\text{ alors } A \in NSPACE(f) & si A \in DTIME(f) &\text{ alors } A \in DSPACE(f)\\
+si A \in NSPACE(f) &\text{ alors } A \in NTIME(c^f) & si A \in DSPACE(f) &\text{ alors } A \in DTIME(c^f)
+\end{align*}
+
+\subsection{Hiérarchie de complexités}
+Pour toute fonction totale calculable f, il existe un ensemble A récursif tel que $A \notin DTIME(f)$. On prouve cela par diagonalisation et même résultat pour NTIME, DSPACE et NSPACE.\par
+Il existe toujours des problèmes plus complexes qu'une complexité donnée.
+
+
+
+
+
+
 \chapter{Questions Test d'entrée}
 
 \section{TP1}
@@ -1222,6 +1453,9 @@ table:
 \item \textcolor{red}{Faux}, on n'a pas besoin d'un oracle qui \textit{voit une case devant} pour savoir si une entrée est paire. L'ensemble des nombres pairs est \textbf{récursifs} donc oracle inutile.
 \item \textcolor{green}{Vrai}, car on serait incapable sans oracle de savoir si un programme ne boucle pas donc on veut avoir \textbf{HALT}.
 \end{enumerate}
+
+\section{TP8}
+\textcolor{red}{pas fait oopss}
 
 \chapter{Question cours}
 \section{S1}
