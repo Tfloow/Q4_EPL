@@ -1059,6 +1059,105 @@ y(t) = 1(t) (\frac{a}{2} + (2 y_0 + y_0' -a ) e^{-t} + (\frac{a}{2} -y_0 -y_0') 
 Long mais programmable en calculant les racines du polynôme et en réduisant en fractions simples.
 
 
+\chapter{Transformée en Z}
+C'est l'équivalent en \textit{temps discret} de la \textit{transformée de Laplace}.
+\section{Transformée en Z}
+On fait face aux mêmes problèmes qu'avant mais ici pour la DTFT. On va donc partir de celle-ci et de l'\textit{atténuer}. On ne fait plus la DTFT pour $x[n]$ mais pour $x[n]r^{-n}$
+\begin{align*}
+X_r(e^{i \omega} &= \sum_{k = - \infty}^{\infty} x[k] r^{-k} e^{-i \omega k}\\
+& = \sum_{k = - \infty}^{\infty} x[k] z^{-k}\\
+DTFT^{-1} & \rightarrow x[n] r^{-n}
+\end{align*}
+
+\subsection{Convergence}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/ROCLaurent.png}
+\end{wrapfigure}
+En simplifiant $z = r e^{i \omega}$ on peut réaliser ceci:
+\begin{align*}
+\mathcal{Z}\{x\} := X(z) &= \sum_{k = - \infty}^{\infty} x[k] z^{-k} \\
+& = \sum_{k' = - \infty}^{\infty} x[-k'] z^{k'}
+\end{align*}
+Donc on transforme la transformé en Z en une \textbf{série de Laurent} avec $a_k = x[-k]$. On va séparer le tout en un anneau avec une partie intérieure et extérieure.
+\begin{equation}
+f(z) = \sum_{k \geqslant 0} a_k z^k + \sum_{k \leqslant -1} a_k z^k
+\end{equation}
+Il existe donc une convergence sur $A(0,r,s)$ comme ci-contre. $r$ est le rayon de convergence des $a_k$ tel que $r = sup\{\rho : \exists M: a_k \rho^k < M, \forall k > 0 \}$. On a également $1/s$ qui est le rayon de convergence de $a_{-k}$ comme $\frac{1}{s} = sup\{\rho : \exists M : a_{-k} \rho^k < M, \forall k > 0 \}$.\par
+En particulier si $|a_k| < A \rho^{-k}$ et $|a_{-k}| < A' \sigma^{-k}$ pour $k > 0$ assez grand. On a donc une convergence pour tout $z \in A \left( 0, \rho, \frac{1}{\sigma} \right)$. Il existe donc un nombre \textit{fini} de $a_{-k} : \sigma = \infty$ et $A(0, \rho, 0)$. On a un nombre fini de $a_k : \rho = \infty$ et $A\left( 0, \infty , \frac{1}{\sigma} \right)$\\
+
+Pour obtenir une sorte de série de Laurent, on doit réaliser cela:
+\begin{equation}
+X(z) = \sum_{k \geqslant 0} x[-k]z^k + \sum_{k \leqslant -1} x[-k] z^k
+\end{equation}
+Cela converge sur un anneau $A(0, r, s)$. $a_k$ devient $x[-k]$ et $a_{-k}$ devient $x[k]$. Le $\sigma$ indique un \textit{support fini dans le \textbf{futur}} et le $\rho$ est un \textit{support fini dans le \textbf{passé}}.
+
+\subsubsection{Coefficient de la série}
+Dans une série de Laurent et en transformée inverse:
+\begin{align*}
+a_k &= \frac{1}{2 \pi i} \int_{\partial B(0, \rho)} \frac{f(z)}{z^{k+1}} dz & x[-k] &= \frac{1}{2 \pi i} \int_{\partial B(0, \rho)} \frac{X(z)}{z^{k+1}} dz
+\end{align*}
+On a que pour n'importe quel $\rho \in (r,s)$
+\begin{equation}
+x[k] = \frac{1}{2 \pi i} \int_{\partial B(0, \rho)}X(z)z^{k-1} dz 
+\end{equation}
+On développe le tout:
+\begin{align*}
+& = \frac{1}{2 \pi i} \int_{- \pi}^{\pi} X(\rho e^{i \omega})(\rho e^{i \omega})^{k-1} i \rho e^{i \omega} d\omega\\
+x[k] &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} X(\rho e^{i \omega})\rho^k e^{i \omega k} d\omega
+\end{align*}
+On se rend compte que le signal $x[k]$ est un combinaison linéaire de $z^k = \rho^k e^{i \omega k} : \rho$ fixe et $\omega \in [-\pi, pi]$. \par
+$X(z)$ est le coefficient de développement en signaux $z^k$ pour un $|z| = \rho$ fixé.
+
+\subsubsection{Série de Laurent inverse} 
+Si on a une fonction \textit{analytique} sur $\mathbb{C}$ sauf pour quelques points $c_1, c_2, ...$ Alors, il faut prendre l'anneau le plus grand.
+\textcolor{red}{Rajouter plus de précisions}
+
+\subsection{Propriétés}
+\subsubsection{Linéarité}
+\begin{align*}
+\mathcal{Z}\{\alpha x + \beta y \} &= \alpha \mathcal{Z}\{x\} + \beta \mathcal{Z}\{y\} & ROC R: R \supseteq R_x &\cap R_y
+\end{align*}
+
+\subsubsection{Décalage temporel} \label{Ztemp}
+\begin{align*}
+\mathcal{Z}\{x[n -n_0]\} &= \sum_n x[n-n_0]z^{-n} \text{ changement de variable: } l = n - n_0\\
+&= \sum_l x[l]z^{-(l+n_0)}\\
+&= z^{-n_0} \sum_l x[l]z^{-l}\\
+&= z^{-n_0} \mathcal{Z}\{x[n]\} \text{ même ROC}
+\end{align*}
+
+\subsubsection{Mises à l'échelle \textit{fréquentielle}}
+\begin{align*}
+X(az) &= \sum_n x[n](az)^{-n} \text{  ROC: sclaing par } \frac{1}{|a|}\\
+&= \sum_n (x[n] a^{-n}) z^{-n} = \mathcal{Z}\{a{^-n}x\}
+\end{align*}
+
+\subsubsection{Convolution}
+\begin{align*}
+\mathcal{Z}\{x \ast y \} &= \sum_k ( x \ast y)[k] z^{-k} = \sum_k \sum_l x[l] y[k-l]z^{-k}\\
+&= \sum_k \sum_l x[l]z^{-l} y[k-l]z^{-k-l} \text{ Changement de variable: } k' = k-l\\
+&= \sum_k \sum_l x[l]z^{-l} \sum_{k'} y[k']z^{-k'} = \mathcal{Z}\{x\} \mathcal{Z}\{y\}
+\end{align*}
+
+\subsubsection{"dérivée"}
+Pas trop de sens, mais on réalise l'opération $\mathcal{Z}\{x[n+1]\}$ pour faire la "\textit{dérivé}". (\ref{Ztemp})
+
+\subsubsection{Intégrale}
+On réalise une sorte d'accumulation $y[n] = \sum_{k=-\infty}^n x[k]$, cela donne:
+\begin{align*}
+x[n] &= y[n] - y[n-1] & X &= (1- z^{-1})Y & Y &= \frac{1}{1 -z^{-1}} X 
+\end{align*}
+
+\subsubsection{Dérivée "fréquentielle"}
+\begin{align*}
+X'(z) &= - \mathcal{Z}\{x[n-1](n-1\} & \mathcal{Z}(nx[n]) &= -z X'(z)
+\end{align*}
+
+\subsection{Calcul pratique}
+On utilise des logiciels, tables de transformés et on exploite la \textit{linéarité}. Ne pas oublier de décomposer en \textit{fraction simple}.
+
+
 
 
 
@@ -1487,6 +1586,13 @@ Après cela, on additionne/soustrait simplement nos courbes ensembles et on obti
 \subsection{Argument}
 Pour l'argument, le processus est le même si ce n'est qu'on ne met pas l'argument dans un logarithme mais est représenté sur une échelle logarithmique.\\
 On trace nos différents arguments et on les somme.
+
+\chapter{Transformée en Z}
+\section{Transformée}
+\subsection{Fonction de transfert}
+La réponse $y$ à une entrée $u$ tel que $y = h \ast u $
+
+
 
 
 
