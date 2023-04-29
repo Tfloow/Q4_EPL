@@ -1158,6 +1158,59 @@ X'(z) &= - \mathcal{Z}\{x[n-1](n-1\} & \mathcal{Z}(nx[n]) &= -z X'(z)
 On utilise des logiciels, tables de transformés et on exploite la \textit{linéarité}. Ne pas oublier de décomposer en \textit{fraction simple}.
 
 
+\section{Transformée en Z unilatérale}
+\subsection{Motivation et Définition}
+\begin{equation}
+X_+ (z) = \mathcal{Z}_+ \{x\} := \mathcal{Z}_+ \{1x\} = \sum_{n=0}^{\infty} x[n] z^{-n}
+\end{equation}
+On réalise cela car pour des signaux de type $a^n$, on n'a généralement pas de convergence. (pour se convaincre on peut réaliser la transformée en Z)
+
+\subsection{Propriétés}
+\subsubsection{Convolution}
+\begin{equation}
+\mathcal{Z}_+ \{x \ast y\} \neq \mathcal{Z}_+ \{x\} \mathcal{Z}_+ \{y\}
+\end{equation}
+Si notre système est causal: $h[k] = 0$ pour $k < 0 \rightarrow \mathcal{Z}_+ (h) = \mathcal{Z}(h) = H$.\par
+Si notre système est au repos en $k=0$ et l'entrée est nulle pour $k<0$ alors:
+\begin{align*}
+u[k] &= 1[k] u[k] & y[k] &= 1[k]y[k] & \mathcal{Z}_+ (y) &= \mathcal{Z}(y) & \mathcal{Z}_+ (u) &= \mathcal{Z}(u)
+\end{align*}
+Ce qui nous donne:
+\begin{equation}
+\mathcal{Z}_+ (y) = \mathcal{Z}_+ (h) \mathcal{Z}_+ (u) = H_+ U_+
+\end{equation}
+Si un système est supposé causal, $H = H_+$
+
+\subsubsection{Décalage arrière}
+\begin{equation}
+\mathcal{Z}_+ \{x[n-1]\} = z^{-1} \mathcal{Z}_+ \{x[n]\} + x[-1]
+\end{equation}
+
+\subsubsection{Décalage avant}
+\begin{equation}
+\mathcal{Z}_+ \{x[n+1]\} = z \mathcal{Z}_+ \{x[n]\} - zx[0]
+\end{equation}
+
+\subsubsection{Limites}
+\begin{align*}
+\lim_{|z| \rightarrow \infty} X_+(z) &= x[0] & \lim_{z\rightarrow 1}(z-1) X_+(z) &= \lim_{n \rightarrow \infty} x[n]
+\end{align*}
+
+\subsubsection{Gain DC et steady-state}
+Comme $Y_+ = HU_+$
+\begin{equation}
+\frac{y[\infty]}{u[\infty]} = \frac{\lim_{z\rightarrow 1}(z-1) Y_+(z)}{\lim_{z\rightarrow 1}(z-1) U_+(z)} = \lim_{z \rightarrow 1} \frac{(z-1) Y_+(z)}{(z-1) U_+(z)} = H(1)
+\end{equation}
+On réalise un décomposition du signal:
+\begin{equation}
+x[k] = \frac{1}{2 \pi i} \int_{\partial B(0, \rho)} X(z) z^{k-1} dz
+\end{equation}
+Si $\rho = 1$ donne une partie constante du signal. Donc $H(1)$ à un effet sur la partie constante du signal.
+\par En temps continu:
+\begin{equation}
+x(t) = \frac{1}{2 \pi} \int_{\infty}^{\infty} X( \sigma + i \omega) e^{(\sigma + i \omega) t} d \omega
+\end{equation}
+Même conclusion qu'en discret.
 
 
 
@@ -1590,10 +1643,80 @@ On trace nos différents arguments et on les somme.
 \chapter{Transformée en Z}
 \section{Transformée}
 \subsection{Fonction de transfert}
-La réponse $y$ à une entrée $u$ tel que $y = h \ast u $
+La réponse $y$ à une entrée $u$ tel que $y = h \ast u $. Dans le domaine de $z$ on a $Y(z) = \mathcal{Z}\{h \ast u \} = H(z) U(z)$. Notre fonction de transfert est donc:
+\begin{equation}
+H(z) := \mathcal{Z}\{h\}
+\end{equation}
+Cela nous donne des informations sur la réponse \textit{impulsionnelle} et caractérise \textcolor{blue}{entièrement} le système LTI $\mathcal{H}$ (avec ROC).
 
+\subsection{Semblant de vecteur propre}
+Si on a un signal $z^n$ avec $|z| = \rho$, on peut établir les effets d'un système LTI sur ce signal:
+\begin{align*}
+\mathcal{H}\{z^n\} &= \sum_{k=-\infty}^{\infty} h[k]z^{n-k} = z^n \sum_{k=-\infty}^{\infty} h[k] z^{-k}\\
+&= z^n \mathcal{Z}\{H(z)\} = z^n H(z)
+\end{align*}
+Donc $z^n$ est un \textbf{vecteur propre} de tout système LTI. $H(z)$ est un scalaire qui n'est autre qu'une valeur propre. $z^n \rightarrow H(z) z^n$.\par
+Cela nous permet de traiter indépendamment un signal si celui est une \textit{combinaison linéaire} de $z^n$. (ex: $x[n] = X_1 z_1^n + X_2 z_2^n + X_3 z_3^n$)
 
+\subsubsection{Valeur propre} 
+Si $x$ est une combinaison linéaire de $z^k = \rho^k e^{i \omega k}$ on trouve les scalaires ainsi
+\begin{align*}
+\mathcal{H}\{x[k]\} &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} X( \rho e^{i \omega}) \rho^k e^{i \omega k} d \omega\\
+&= \frac{1}{2 \pi} \int_{- \pi}^{\pi} H(\rho e^{i \omega}) X(\rho e^{i \omega}) \rho^k e^{i \omega k} d\omega
+\end{align*}
+On peut remarquer que la \textbf{Transformée en Z} diagonalise le système linéaire.
 
+\subsection{Passage depuis/vers autres représentations}
+\begin{align*}
+\sum_{k=0}^N a_k y[n-k] &= \sum_{k=0}^M b_k u[n-k]\\
+\sum_{k=0}^N a_k \textbf{$z^{-k}$} Y &= \sum_{k=0}^M b_k \textbf{$z^{-k}$} U\\
+Y &= \frac{\sum_{k=0}^M b_k \textbf{$z^{-k}$}}{\sum_{k=0}^N a_k \textbf{$z^{-k}$}} U
+\end{align*}
+On a les \textbf{zéros} de H comme étant les z pour lesquels $H = 0$ et les pôles de H sont les z pour lesquels $H \rightarrow \infty$.
+
+\subsubsection{Représentation d'état}
+\begin{align*}
+x[n+1] &= Ax[n] + Bu[n]\\
+y[n] &= Cx[n] + Du[n]\\
+Y &= (C(zI - A)^{-1} B + D)U
+\end{align*}
+Le calcul de l'inverse montre que:
+\begin{align*}
+C(zI -A)^{-1} B & \text{ Fonction rationnelle avec } \frac{ordre \leqslant n-1}{ordre n}\\
+C(zI -A)^{-1} B + D & \frac{ordre \leqslant n-1}{ordre n} + D = \frac{ordre n}{ordre n}
+\end{align*}
+Si un système admet une représentation d'état, alors $H(z)$ rationnelle. On a un \textit{dénominateur} qui est $det(zI - A)$ d'ordre n et un numérateur ordre $< n$ si pas de $D$, ordre $n$ sinon.\par
+En général, si $H$ est rationnel et système est \textbf{causal}. L'ordre du dénominateur $\geqslant$ ordre numérateur et $h(0) \neq 0$.
+
+\subsubsection{Passage}
+Si on a:
+\begin{align*}
+Y &= HU = C(zI - A)^{-1} BU & H &= \frac{\sum_{k=0}^M b_k z^k}{\sum_{k=0}^{N} a_k z^k} \text{ avec } M \leqslant N\\
+H &= \frac{z^{-N}}{z^{-N}}\frac{\sum_{k=0}^M b_k z^k}{\sum_{k=0}^{N} a_k z^k} & &= \frac{\sum_{k=0}^M b_k z^{k-N}}{\sum_{k=0}^{N} a_k z^{k-N}}
+\end{align*}
+On obtient ainsi l'équation:
+\begin{equation}
+\sum_{k=0}^N \tilde{a} y[n-k] = \sum_{k=0}^N \tilde{b}_k u[n-k]
+\end{equation}
+
+\subsection{Importance des pôles}
+Si nous avons une fonction de \textit{transfert} $H(z) = q(z)/p(z)$ pour un système LTI.
+\begin{align*}
+Y(z) &= H(z) U(z) = \frac{q(z)}{p(z)} \frac{\tilde{q}(z)}{\tilde{p}(z)}\\
+&= \frac{\Pi (z-b_i)}{\Pi (z-a_i)} \frac{\Pi (z- \tilde{b}_i)}{\Pi (z - \tilde{a}_i)}
+\end{align*}
+En réalisant une \textcolor{red}{décomposition simple}:
+\begin{equation}
+y[k] = \sum_i \gamma_i a_i^k + \sum_i \tilde{\gamma}_i \tilde{a}_i^k
+\end{equation}
+La partie à gauche est l'ensemble des \textcolor{blue}{pôles de la fonction de transfert} et à droite l'ensemble des \textcolor{red}{pôles de l'entrée}.\par
+Notre réponse finale est une \textit{combinaison} d'exponentielles de taux:
+\begin{itemize}
+\item pôles de la fonction de transfert $a_i$
+\item pôles de l'entrée $\tilde{a}_i$
+\end{itemize}
+
+\textcolor{red}{rajouter explication causalité après tp}
 
 
 \end{document}
