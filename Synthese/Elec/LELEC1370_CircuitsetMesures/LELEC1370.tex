@@ -1135,6 +1135,153 @@ Q = 3 V_{eff} I_{eff} sin(\phi)
 S = 3 V_{eff} I_{eff}
 \end{equation}
 
+\chapter{Circuits couplés magnétiquement}
+\section{Introduction}
+\subsection{Inductance}
+\begin{wrapfigure}{r}{.4\textwidth}
+\centering
+\includegraphics[width=5cm]{img/bobinage.png}
+\end{wrapfigure}
+Si on a un bobinage, comme ci-contre, qui est formé de $N$ spires et qu'on alimente d'une source de courant $i$. On génère ainsi un champ magnétique $\overrightarrow{B}$. Un certain flux $\phi$ traverse une spire. Ceci s'écrit $\phi = \int_S \overrightarrow{B} \overrightarrow{dS}$. Le flux $\Phi$ sur le \textit{bobinage} est $\Phi = N \phi$.\par
+Si l'on considère le système sans \textbf{saturation magnétique}, on peut établir que $\Phi \propto i$. Ce facteur qui définit la \textcolor{red}{proportionnalité} est l'\textit{inductance} $L$. $\Phi = L i$.
+
+\subsubsection{Loi de Faraday} 
+La relation \textit{tension-courant} aux bornes du bobinage est donnée par la loi de \textbf{Faraday}:
+\begin{align*}
+v &= Ri + \frac{d\Phi}{dt} \text{ Loi de faraday} & e &= - \frac{d \Phi}{dt} \text{ Loi de Lenz}
+\end{align*}
+On peut négliger la \textit{résistance} et simplifier la relation à juste $v = L \frac{di}{dt}$.
+
+\subsection{Inductances propre et mutuelle}
+\begin{wrapfigure}{r}{.4\textwidth}
+\centering
+\includegraphics[width=6cm]{img/fluxMagnetique.png} 
+\label{fig:mutuelle}
+\end{wrapfigure}
+Si nous avons $2$ bobinages, on peut faire apparaitre des courants \textit{induits}. On va voir apparaitre un courant et un champ magnétique opposé dans la deuxième partie. \par 
+Ces deux champs et flux magnétiques vont essayer de se "\textit{tuer}". Cependant, les deux flux sont tels que $\Phi_1, \Phi_2 \propto i_1$.
+\begin{align*}
+\text{L'inductance propre: } L_1 &= \frac{\Phi_1}{i_1} & \text{L'inductance mutuelle: }  L_{21} &= \frac{\Phi_2}{i_1}\\
+\text{Faraday : } v_1 &= L_1 \frac{di_1}{dt} & \text{Faraday : } v_2 &= L_{21} \frac{di_1}{dt}
+\end{align*}
+
+\subsubsection{Double alimentation}
+Si maintenant, on alimente le circuit de droite et de gauche, on va obtenir un champ $\overrightarrow{B}$ qui est le résultat de deux champs créer par les deux circuits dépendant de l'inductance propre et mutuelle.\par
+Ces facteurs de proportionnalité se définissent comme les inductances \textbf{propres} et \textbf{mutuelles}.
+\begin{align*}
+L_1 &=  \frac{\Phi_1}{i_1} \bigg|_{i_2 = 0} & L_{12} &=  \frac{\Phi_1}{i_2} \bigg|_{i_1 = 0} \\
+L_2 &=  \frac{\Phi_2}{i_2} \bigg|_{i_1 = 0} & L_{21} &=  \frac{\Phi_2}{i_1} \bigg|_{i_2 = 0}
+\end{align*}
+On peut établir que $L_{12} = L_{21} = M$. Via loi de Faraday:
+\begin{align*}
+v_1 &= L_1 \frac{di_1}{dt} + M \frac{di_2}{dt} & v_2 &= M \frac{di_1}{dt} + L_2 \frac{di_2}{dt}
+\end{align*}
+
+Si nous inversons le courant dans l'un des circuits, on aura donc deux flux en \textit{parallèle}. Cela va créer une inversion de \textbf{norme} et donc rajouter des "$-$" devant les $M$.
+
+\subsection{Bornes homologues}
+On les repère par un \textit{point} au niveau d'une borne d'un bobinage. Quand on alimente ces bobinages par cette borne, on génère un flux de même sens dans les différents bobinages. On a donc des tensions positives.
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/bornesHomologues.png}
+\end{figure}
+\subsubsection{En sinusoïdale}
+Si on utilise des générateurs de courants/tensions sinusoïdaux, la définition devient:
+\begin{align*}
+\overline{V}_1 &= j \omega L_1 \overline{I}_1 + j \omega M \overline{I}_2 & \overline{V}_2 &= j \omega M \overline{I}_1 + j \omega L_2 \overline{I}_2
+\end{align*}
+La réactance est $X = \omega L$.
+
+\section{Efficacité}
+\subsection{Analyse énergétique}
+On stocke l'énergie sous forme \textcolor{blue}{magnétique dans un bobinage}. Si on reprend le schéma \ref{fig:mutuelle}, on peut réaliser une analyse de l'énergie. On imagine que le bobinage de droite est en \textcolor{red}{circuit ouvert}.
+\begin{align*}
+E = \int_0^{t_1} (p_1(t) + p_2(t)) dt &= \int_0^{t1}v_1 (t) i_1 (t) dt\\
+&= \int_0^{t_1} L_1 \frac{di_1 (t)}{dt} i_1 (t) dt\\
+&= \int_0^{i_1 (t_1)} L_1 i_1(t) di_1(t)\\
+E &= \frac{1}{2} L_1 I_1^2
+\end{align*}
+Si maintenant, on ferme le circuit à droite avec une source de courant $I_2$. On a maintenant une énergie:
+\begin{align*}
+E = \int_{t_1}^{t_2} (p_1(t) + p_2(t)) dt &= \int_{t_1}^{t_2} (v_1 (t) I_1 (t) + v_2(t) I_2 (t)) dt\\
+&= \int_{t_1}^{t_2} \left( M \frac{di_2 (t)}{dt} + L_2 \frac{di_2 (t)}{dt} i_2 (t) \right) dt\\
+&= \int_{0}^{i_2(t_2)} (M I_1 + L_2 i_2(t)) di_2(t)\\
+E &= \frac{1}{2} L_2 I_2^2 + MI_1 I_2
+\end{align*}
+Ainsi, l'énergie magnétique totale stockée dans un tel système vaut:
+\begin{equation}
+E = \frac{1}{2} L_1 I_1^2 + \frac{1}{2} L_2 I_2^2 + MI_1 I_2
+\end{equation}
+Cette équation est valable uniquement si le courant est \textbf{entrant} ou \textbf{sortant} par les \textcolor{red}{bornes homologues} sinon:
+\begin{equation}
+E = \frac{1}{2} L_1 I_1^2 + \frac{1}{2} L_2 I_2^2 - MI_1 I_2
+\end{equation}
+
+\subsubsection{Analyse}
+L'énergie dans le système \textbf{ne peut pas} être négative. Donc:
+\begin{align*}
+E &= \frac{1}{2} L_1 I_1^2 + \frac{1}{2} L_2 I_2^2 - M I_1 I_2 \geqslant 0 & L_1 L_2 &\geqslant M^2
+\end{align*}
+
+\subsection{Facteur de dispersion et coefficient de couplage}
+\subsubsection{Cas idéal}
+Il n'y a pas de flux de fuite et les flux sont \textit{intégralement} captés par les deux bobinages. On parle d'un \textbf{couplage magnétique parfait}.
+\begin{equation}
+M^2 = L_1 L_2
+\end{equation}
+
+\subsubsection{En réalité}
+On a toujours un flux de fuite entre les deux bobinages donc $M \neq L_1 L_2$.
+\begin{align*}
+\text{Facteur de dispersion: } \sigma &= 1 - \frac{M^2}{L_1 L_2} & \text{Coefficient de couplage: } k &= \frac{M}{\sqrt{L_1 L_2}}
+\end{align*}
+Ici, $0 \leqslant \sigma \leqslant 1$ et $0 \leqslant k \leqslant 1$. Au plus $\sigma$ est faible au mieux c'est. Au plus $k$ est grand au mieux c'est.
+
+\section{Transformateur idéal}
+\begin{wrapfigure}{r}{.45\textwidth}
+\centering
+\includegraphics[width=6cm]{img/transfoBobinages.png}
+\end{wrapfigure}
+On couple deux bobinages à l'aide d'un entrefer pour ainsi rendre le transfert d'énergie optimale comme ci-contre.\par
+On pose que la résistance électrique des bobinages null, pas de flux de fuite et perméabilité magnétique du circuit magnétique infinie. Via Faraday:
+\begin{equation}
+\frac{v_1}{v_2} = \frac{N_1}{N_2}
+\end{equation}
+On va maintenant réaliser la \textbf{loi d'Ampère} et on rajoute un parcours $\Gamma$ qui passe dans l'entrefer et les deux bobinages.
+\begin{align*}
+\int_{\Gamma} \overrightarrow{H} \overrightarrow{dl} &= N i & \int_{\Gamma} \overrightarrow{H} \overrightarrow{dl} &= N_1 i_1 + N_2 i_2\\
+0 &= N_1 i_1 + N_2 i_2 & \frac{i_1}{i_2} &= - \frac{N_2}{N_1}
+\end{align*}
+On peut supposer que l'énergie est finie et donc que $N_1 i_1 + N_2 = 0$
+
+\subsection{Analyse énergétique}
+Donc on a que:
+\begin{align*}
+\frac{i_1}{i_2} &= - \frac{N_2}{N_1} &  \frac{v_1}{v_2} &=  \frac{N_1}{N_2} & \text{Puissance équivalente : } p_1 &= -p_2
+\end{align*}
+La puissance entrante est la même que la puissance sortante.
+
+\subsection{Excitation sinusoïdale}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/transSinus.png}
+\end{figure}
+On peut ainsi travailler avec des \textit{phaseurs}. On indique le nombre de spire comme sur le schéma ci-dessus $N_1 : N_2$. Un transformateur idéal est indique via c'est barres en parallèle devant les bobinages. Relation tensions, courants:
+\begin{align*}
+\frac{\overline{V_1}}{\overline{V_2}} &= \frac{1}{n} & \frac{\overline{I_1}}{\overline{I_2}} &= n & n &= \frac{N_2}{N_1}
+\label{formulesSinus}
+\end{align*}
+
+\subsubsection{Manipulation}
+Quand on a ce type de circuit, on peut le transformer dans un modèle plus simple comme indiqué ci-dessous.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/manipTrans.png}
+\end{figure}
+On peut réaliser ce type de changement car on suppose le transfert d'énergie comme idéal.\par
+La manipulation de ce type de circuit se repose sur l'utilisation des formules vu en \ref{formulesSinus}
+
+
 
 \end{document}
 

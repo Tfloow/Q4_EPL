@@ -1286,6 +1286,93 @@ Cela fonctionne seulement en programmation \textcolor{blue}{fonctionnelle}\par
 Quand on veut \textit{browse} un thread, on aura une sortie sous forme de "$\_$" quand un thread se finit et attend quelque chose.
 
 
+\section{Programmation multi-agent}
+Par exemple, on fait le crible d'Eratosthène, on va créer une méthode producer consomer un peu plus évolué qui relance un thread à chaque exécution. 
+\begin{lstlisting}[escapechar=\%]
+fun {Sieve Xs}
+	case Xs
+	of nil then nil
+	[] X|Xr then X|{Sieve thread {Filter Xr X} end} 
+	end
+end 
+declare Xs Ys in
+thread Xs={Prod 2} end 
+thread Ys={Sieve Xs} end
+{Browse Ys}
+\end{lstlisting}
+
+\section{Digital logic simulation}
+Grâce au \textit{deterministic dataflow paradigm} cela est facile à implémenter. Ainsi, on peut implémenter des circuits sans mémoire et avec mémoire qu'on appelle les circuits à logique séquentielle.\par
+On représente les \textit{signaux} comme des \textbf{threads} et les \textit{portes logiques} comme des \textbf{agents}.
+
+\subsection{Modélisation}
+On sait qu'un signal \textit{digital} est une tension qui évolue en fonction du temps. Les signaux digitaux sont soit $0$ et $1$ mais peuvent avoir du bruits, glitches, résonance, ...\par
+Une \textit{porte logique} a une entrée et sortie digitale. Ici, on va simplifier les circuits en supposant qu'ils sont parfaits.
+
+\subsubsection{Signaux comme stream}
+On modélise un signal comme un stream avec des $0$ et $1$ tel que $S=a_0 | a_1 | a_2 | ... | a_i | ...$.
+
+\subsubsection{Porte digitale comme agent}
+C'est une fonction booléenne qui est une entité active. Par exemple:
+\begin{lstlisting}[escapechar=\%]
+fun {And A B} if A==1 andthen B==1 then 1 else 0 end end 
+fun {Loop S1 S2} 
+	case S1#S2 of (A|T1)#(B|T2) then {And A B}|{Loop T1 T2} end
+end
+thread Sc={Loop Sa Sb} end
+\end{lstlisting}
+
+\subsubsection{Création multiple}
+On va implémenter une \textcolor{red}{abstraction} pour construire plusieurs logic gate. On va nommer cela "\{GateMaker Fun\}". Cela nous crée des gates se basant sur la fonction \textit{Fun}.\par
+On a ainsi \textcolor{red}{3} niveaux d'abstraction qu'on peut voir comme de la \textit{programmation orienté objet}.
+\begin{enumerate}
+\item GateMaker est comme une classe générique, qui fabrique.
+\item FunG est comme une classe.
+\item La \textit{gate logique} est une sorte d'objet.
+\end{enumerate}
+\begin{lstlisting}[escapechar=\%]
+fun {GateMaker F} 
+	fun {$ Xs Ys} 
+		fun {GateLoop Xs Ys} 
+			case Xs#Ys of (X|Xr)#(Y|Yr) then
+				{F X Y}|{GateLoop Xr Yr}
+			end 
+		end 
+	in 
+		thread {GateLoop Xs Ys} end 
+	end
+end
+\end{lstlisting}
+
+\subsection{Logique combinatoire}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/fullAdder.png}
+\caption{Un Full Adder}
+\end{wrapfigure}
+La lgoqiue combinatoire \textbf{n'a pas} de mémoire et tous les calculs sont fait en même temps. Donc une gate est une combinaison de fonction et chaque gate peut être inter-connecté.\\
+Ceci nous permet d'additionner des nombres et $C_{in}$  permet de prendre en compte une retenu d'un full adder précédent et un $C_{out}$ permet de transmettre une retenu de chiffre.
+
+\subsection{Logique séquentielle}
+On a une mémoire des valeurs passées et cela influence. On réalise cela via une gate de délai ou "\textit{Delay gate}". $S=a_0 | a_1 | a_2 | ... | a_i | ...$ et $T=b_0 | b_1 | b_2 | ... | b_i | ...$. On a que $b_i = a_{i-1} \Rightarrow T=0|S$
+
+\subsubsection{Latch}
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/latch.png}
+\end{figure}
+Le but est de créer une sorte de bouton pressoir qui une fois pressé reste pressé jusqu'au moment où on represse dessus. Autrement dit, un verrou (\textit{latch}).
+
+\subsection{Résumé}
+On construit un programme multi-agent utilise des streams (liste avec un \textit{tail} non lié) et des agents (des listes fonctionnant sur un thread).\par
+On se base sur 2 idées:
+\begin{enumerate}
+\item \textcolor{blue}{Single-assignement variables} qui synchronise à la liaison
+\item \textcolor{blue}{Threads} qui définit une séquence d'instructions exécutés.
+\end{enumerate}
+Cela n'a pas de déterminisme \textcolor{red}{non observable} (pas de "\textit{race conditions}"). Le deterministic dataflow est une forme de programmation fonctionnelle.
+
+
 
 
 
