@@ -1812,6 +1812,117 @@ x = 0 &, f'(x) = -1 \text{ système linéarisé } \dot{\tilde{x}} = - \tilde{x} 
 \end{align*}
 
 \subsection{Interne vs BIBO}
+Avec une représentation d'état continu, la fonction de transfert est: $H(s) = C(sI - A)^{-1} B + D$ et:
+\begin{align*}
+&(sI-A)= & &\text{Diagonale } s-a_{ii} \text{ hors diagonale } -a_{ij}\\
+&(sI-A)^{-1}= & & (\text{transposée des co-facteurs (déterminants de matrices }(n-1)\times (n-1))/ det(sI-A)
+\end{align*}
+Donc les pôles de la fonction de transfert $\mathcal{H}$ sont les valeurs propres de $A$. Via la stabilité des $vep$ de $A$ on peut savoir si les pôles sont stables.\par 
+Stabilité interne $\Longrightarrow$ stabilité BIBO. Instabilité BIBO $\Longrightarrow$ instabilité interne stricte. Le contraire n'est pas vrai.\par
+
+\section{Intermède algébrique} 
+On peut remarquer que le polynôme caractéristique d'une matrice $A$ évalué en $A$ est la matrice \textcolor{red}{nulle}.
+\subsection{Théorème de Cayley-Hamilton}
+$p_A (A) = 0$ pour toute matrice \textit{carrée}. On sait que le $p_a$ se trouve via $det(xI - A)$. Si on évalue un polynôme à une matrice. \par 
+On va transformer la matrice via $A^{k} = V \Lambda^k V^{-1}$ où $\Lambda$ est la matrice de ses valeurs propres.
+\begin{align*}
+p(A) &= \sum_{k=0}^n a_k A^k = \sum_{k=0}^n a_k V \Lambda^k V^{-1}
+= V \left( \sum_{k=0}^n a_k \Lambda^k \right) V^{-1}\\
+&= V \left(  \sum_{k=0}^n a_k \begin{pmatrix}
+\lambda_1^k & & \\
+ & \lambda_2^k & \\
+& & \ddots
+\end{pmatrix} \right) V^{-1} = V \begin{pmatrix}
+p(\lambda_1) & & \\
+ & p(\lambda_2) & \\
+ & & \ddots
+\end{pmatrix} V^{-1}
+\end{align*}
+Donc maintenant, si on remplace $p$ un polynôme quelconque par $p_a$ le polynôme caractéristique, on a des $p_a(\lambda_i)$. Le propre d'un valeur propre sur son polynôme propre est qu'il \textbf{annule} celui-ci. Donc notre matrice devient \textcolor{red}{nulle}.\par \noindent
+\underline{Corollaire 1:} Si $A$ est $n \times n$, $A^n$ est une combinaison linéaire de $A^0, A^1, ... , A^{n-1}$.
+\begin{align}
+p_A (A) = 0 & \Leftrightarrow A^n + a_{n-1}A^{n-1} + ... + a_0 A^0 = 0\\
+& \Leftrightarrow A^n = -a_{n-1} A^{n-1} - a_{n-2} A^{n-2} - ... - a_0 A^0 \label{eq:cor1}
+\end{align}
+\underline{Corollaire 2:} Si $A$ est $n \times n$ $A^{n+1}$ est une combinaison linéaire de $A^0, ..., A^{n-1}$. On reprend \ref{eq:cor1} et on multiple par A. \par  \noindent
+\underline{Corollaire 3:} Si $A$ est $n \times n$ alors $A^k$ avec $k \geqslant n$ peut être exprimé en fonction de $A^0, ..., A^{n-1}$. (Ré-appliquer corollaire 2).
+
+\section{Commandabilité}
+\noindent 
+\underline{Définition:} Un état $x^{\ast}$ est \textit{atteignable} si il peut être atteint au départ de 0 en un temps \textbf{fini}. C'est-à-dire que dans un temps T et une entrée $u$, $x[k+1] = Ax[k] + bu[k]$ et $x[0] = 0$. Au final $x[T] = x^{\ast}$.\par
+L'espace d'atteignabilité est l'ensemble des états atteignables. On dit qu'un système est \textbf{commandable} si tout état est \textit{atteignable}.
+
+\subsection{Analyse en temps discret}
+On a un système de type $x[k+1] = A x[k] + bu[k]$ et $x[0] = 0$. Pour $x[1] = A 0 + bu[0] = bu[0]$, $x[2] = Ax[1] + bu[1] = Abu[0] +bu[1] = (Ab \quad b) \tilde{u}_{0 \rightarrow 1} $. Où $\tilde{u}_{0 \rightarrow 1} = \begin{pmatrix}
+u[0]\\
+u[1]
+\end{pmatrix}
+$. De manière générale:
+\begin{equation}
+x[T] = \begin{pmatrix}
+A^{T-1} b & A^{T-2} b & \hdots & Ab & b
+\end{pmatrix} \tilde{u}_{0 \rightarrow T-1}
+\end{equation}
+$x^{\ast}$ est atteignable en un temps T si il est dans l'espace des colonnes de $\begin{pmatrix}
+A^{T-1} b & A^{T-2} b & \hdots & Ab & b
+\end{pmatrix}$\par \noindent
+\underline{Via corollaire 3:} pour $T \geqslant d-1$ alors on reste dans le même espace colonne.
+
+\subsubsection{Matrice de commandabilité}
+Soit un système $x[k+1] = Ax[k] + bu[k]$ où l'état $x$ est de dimension $d$, la matrice de \textcolor{red}{commandabilité} est:
+\begin{equation}
+\mathcal{C} := \begin{pmatrix}
+A^{d-1} b & A^{d-2} b & \hdots & Ab & b
+\end{pmatrix}
+\end{equation}
+\noindent \underline{Théorème:} l'état $x^{\ast}$ est atteignable ssi il est dans l'\textit{image} de $\mathcal{C}$ (son espace \textcolor{red}{colonnes}). L'espace d'\textit{atteignabilité} est l'espace \textit{colonnes} de $\mathcal{C}$.\par 
+\noindent Le système est dit \textcolor{red}{commandables} si $\mathcal{C}$ est de \textbf{plein rang}. Donc l'espace \textit{colonne} est $\mathbb{R}^d$
+
+\subsubsection{Commandabilité vs Controlabilité}
+La \textbf{commandabilité}, on peut atteindre n'importe quel état depuis 0 en un temps \textit{fini}. \par 
+La \textbf{controlabilité}, on peut atteindre 0 depuis n'importe quel état en un temps \textit{fini}
+
+\subsection{Calculer $\mathcal{C}$}
+On calcule $b$ et $Ab$ et après on itère pour avoir $A^k b = A(A^{k-1} b)$.\par \noindent
+Si une matrice est de plein rang, son déterminant est non-nul. Pour des matrices \textbf{rectangulaires}, elle est de plein rang si elle a une \textit{sous}-matrice $d \times d$ de plein rang.
+
+\section{Observabilité}
+On peut distinguer les conditions initiales en se basant sur la trajectoire libre.\par \noindent
+\underline{Définition:} un état/condition initiale $x_0 \neq 0$ n'est pas observable si il mène à une sortie $y$ identiquement nulle (pour tout temps) si l'entrée $u$ est nulle.\par \noindent
+\underline{Définition:} un état/condition initiale $x_0 \neq 0$ est \textbf{non-observable} si il mène à une sortie $y$ identiquement nulle (pour tout temps) si l'entrée $u$ est nulle.\par \noindent
+Donc un système est \textbf{observable} si il n'existe \textbf{aucun} état non-observable. L'espace \textbf{non-observable} est l'ensemble des $x_0$ non-observable.
+
+\subsection{Analyse en temps discret}
+Si on a des conditions initiales $x_0$ et qu'on se souvient de la corollaire 3 on a:
+\begin{align*}
+x[n] &= A^{n-1} x_0 & y[n] &= C A^{n-1} x_0
+\end{align*}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\begin{equation}
+\begin{pmatrix}
+C\\
+CA\\
+CA^2\\
+\vdots\\
+CA^{n-1}
+\end{pmatrix} x_0 = 0
+\end{equation}
+\end{wrapfigure}
+Pour les $y[n] = 0$ pour tout $n$ et $x_0$ non observables si et seulement si l'équation ci-contre est respectée.\par 
+Cette matrice s'appelle la matrice d'\textbf{observabilité} $\mathcal{O}$ et via la corollaire 3, on peut passer de $n-1$ à $d-1$.\par 
+L'état $x_0$ est non-observable si $\mathcal{O}x_0 = 0$. L'espace des \textbf{états non observables} est $ker \{\mathcal{O}\}$. Si le système est entièrement observable, $\mathcal{O}$ est de plein rang.
+
+\subsection{Exploitation de la linéarité}
+Système observable $\rightarrow$ conditions initiales différentes mènent à réponses différentes.\par 
+Système \textbf{pas} observable $\rightarrow$ si $\Delta x$ est dans l'espace non-observable, alors $x_0$ et $x_0 + \Delta$ mène à la \textcolor{red}{même} réponse.
+
+\subsection{Résumé}
+Observabilité: le fait de pouvoir distinguer la réponse \textcolor{red}{libre} de différentes conditions initiales. On se base sur la matrice d'\textbf{observabilité}.\par 
+Cela ne dit pas si il est facile de \textit{retrouver} $x_0$ ni comment on le calcule en pratique. \textbf{Non-observable}: impossible de distinguer certains états, pas de solution si système existe \textit{déjà}. (on doit prendre en compte cela quand on design un système).
+
+
+
 
 
 \end{document}
