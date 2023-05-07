@@ -1204,10 +1204,11 @@ E &= \frac{1}{2} L_1 I_1^2
 Si maintenant, on ferme le circuit à droite avec une source de courant $I_2$. On a maintenant une énergie:
 \begin{align*}
 E = \int_{t_1}^{t_2} (p_1(t) + p_2(t)) dt &= \int_{t_1}^{t_2} (v_1 (t) I_1 (t) + v_2(t) I_2 (t)) dt\\
-&= \int_{t_1}^{t_2} \left( M \frac{di_2 (t)}{dt} + L_2 \frac{di_2 (t)}{dt} i_2 (t) \right) dt\\
+&= \int_{t_1}^{t_2} \left( M \frac{di_1 (t)}{dt} + L_2 \frac{di_2 (t)}{dt} i_2 (t) \right) dt\\
 &= \int_{0}^{i_2(t_2)} (M I_1 + L_2 i_2(t)) di_2(t)\\
-E &= \frac{1}{2} L_2 I_2^2 + MI_1 I_2
+E &= \frac{1}{2} L_2 I_2^2 + MI_1 I_1
 \end{align*}
+\textcolor{red}{Revoir les coefs au-dessus}
 Ainsi, l'énergie magnétique totale stockée dans un tel système vaut:
 \begin{equation}
 E = \frac{1}{2} L_1 I_1^2 + \frac{1}{2} L_2 I_2^2 + MI_1 I_2

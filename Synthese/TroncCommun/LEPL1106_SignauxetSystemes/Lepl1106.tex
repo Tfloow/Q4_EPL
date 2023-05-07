@@ -1719,4 +1719,99 @@ Notre réponse finale est une \textit{combinaison} d'exponentielles de taux:
 \textcolor{red}{rajouter explication causalité après tp}
 
 
+\chapter{Stabilité, Commandabilité \& Observabilité}
+En général, les systèmes réels sont causaux tel que $h[n] = 0$ pour $n<0$.
+\section{Stabilité}
+Il faut que: $\parallel h \parallel_1$ existe, que la \textbf{ROC} soit autour du cercle unité ou l'axe imaginaire, que les \textbf{pôles} soient dans le cercle unité ou à gauche du plan.
+\subsection{BIBO}
+Un système est \textbf{BIBO-stable} si pour toute entrée bornée, la sortie est bornée. Si un signal $x$ est borné  si $\exists B$ tel que $|x[k]| < B$ pour tout $k$. On note cela $\parallel x \parallel_{\infty} := sup_k |x[k]|$ \par 
+Un système LTI de réponse impulsionnelle $h$ est BIBO-stable si et seulement si $\parallel h \parallel_1$ existe. $\parallel x \parallel_1 := \sum_k |x[k]|$ et $\parallel x \parallel_1 := \sum_{\tau = -\infty}^{\infty} |x[\tau]| d \tau$.
+\begin{align*}
+|y[n]| &= \left| \sum_{k \geqslant 0} u[n-k]h[k] \right| \leqslant \sum_{k \geqslant 0} |u[n-k]||h[k]| & & \text{ En utilisant l'inégalité triangulaire}\\
+|y[n]| &= \parallel u \parallel_{\infty}  \sum_{k \geqslant 0} |h[k]| = \parallel h \parallel_1 \parallel u \parallel_{\infty} & & \text{ En supposant que notre signal d'entrée u est borné}\\
+&\parallel y \parallel_{\infty} \leqslant \parallel h \parallel_1 \parallel u \parallel_{\infty} & & \blacksquare
+\end{align*}
+Cela est une nécessité sinon, notre système renvoie un signal qui diverge si sa fonction de transfert n'est pas bornée.
+
+\subsubsection{Impact sur erreur de commande}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\begin{equation}
+\mathcal{H}\{u\} = \mathcal{H} \{u_{nominal}\} + \mathcal{H}\{\Delta u\}
+\end{equation}
+\end{wrapfigure}
+Si nous avons une entrée avec une erreur tel que $u = u_{nominal} + \Delta u$ et que $\parallel u \parallel_{\infty} \leqslant \epsilon$. Voir équation ci-contre.\par
+L'erreur peut être borné par $\parallel h \parallel_1 \epsilon$ qui est un seuil qu'on impose.
+
+\subsubsection{Vision fonction de transfert}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\begin{equation}
+\sum_{k=0}^{\infty} |h[k] z^{-k}| \leqslant \sum_{k=0}^{\infty} |h[k]| = \parallel h \parallel_1
+\end{equation}
+\end{wrapfigure}
+Si $h$ est causal et que $\parallel h \parallel_1$ existe, alors pour tout $z \notin B(0,1)$ on voit que:\par 
+La convergence de $\mathcal{H}(z) = \sum_k h[k] z^{-k}$. On a un \textbf{ROC} qui contient $\mathcal{C}\setminus B(0,1)$ et tous les \textbf{pôles} sont dans $B(0,1)$.\par 
+Si notre \textbf{ROC} est $\mathcal{C}\setminus B(0,r)$ pour $r< 1$ alors notre système est \textbf{BIBO-stable}. Si $\mathcal{H}$ est rationnelle et tous ses pôles sont dans $B(0,1)$ alors $h[n]$ est une somme d'exponentielle décroissante.
+
+\subsubsection{Stabilité d'une fonction de transfert DT}
+Système LTI en \textit{temps discret} de fonction de transfert $\mathcal{H}$
+\begin{align}
+\text{Bibo stabilité } &\Rightarrow \text{ ROC contient } \mathcal{C}\setminus B(0,1) &  \text{ ROC contient } \mathcal{C}\setminus B(0,r) \text{ pour } r<1 & \Rightarrow \text{ BIBO stabilité}
+\end{align}
+
+\subsubsection{Stabilité d'une fonction de transfert CT}
+Système LTI en \textit{temps continu} de fonction de transfert $\mathcal{H}$. Si on est \textbf{BIBO-stable} les \textit{pôles} sont à \textbf{gauche} de l'axe imaginaire:
+\begin{align}
+&\text{BIBO stabilité } \Rightarrow \text{ ROC contient } \{x+iy: x \geqslant 0\} & &\text{ Roc contient } \{x + iy : x \geqslant - \epsilon\} \Rightarrow \text{ BIBO stabilité}
+\end{align}
+
+\subsection{Stabilité interne}
+On veut qu'un système partant d'un point \textit{initial} ($u=0$) doit revenir à un équilibre ou ne pas diverger.\par
+\underline{Définition:} Un équilibré $(x^{\ast},u^{\ast})$ \textbf{stable} si pour tout $\epsilon > 0$ il existe un $\delta > 0$ tel que $x(0) \in B(x^{\ast}, \delta) \Rightarrow x \in B(x^{\ast}, \epsilon)$ pour tout temps futur (si l'entrée reste $u^{\ast}$)\par 
+\underline{Définition:} Un équilibré $(x^{\ast},u^{\ast})$ \textbf{attractif} si il existe un $\delta > 0$ tel que $x(0) \in B(x^{\ast}, \delta) \Rightarrow \lim_{t \rightarrow \infty} x(t) =  x_0$ (si l'entrée reste $u^{\ast}$) (\textit{asymptotiquement stable})\par 
+Il ne faut pas confondre stabilité et attractivité car  stabilité est l'idée de ne pas diverger et attractif c'est l'idée de tendre vers un endroit. Et vice-versa.
+
+\subsubsection{LTI}
+Donc pour un système qui est du type $\frac{d}{dt}x(t) = Ax(t) + Bu(t)$ on va ramenée l'équilibre à $(0,0)$ car plus simple (\textit{changement de variable si besoin}).\par 
+Si $(x^{\ast}, u^{\ast})$ est un équilibre alors $0 = Ax^{\ast} + Bu^{\ast}$:
+\begin{align*}
+\Delta x &= x - x^{\ast} & \Delta y &= u - u^{\ast} & &\text{ Changement de variable}\\
+\frac{d}{dt}(x^{\ast} + \Delta x) &= A(x^{\ast} + \Delta x) + (B(u^{\ast} + \Delta u) & \frac{d}{dt} \Delta x &= A \Delta x + B \Delta u & &\Delta x = 0, \Delta u= 0
+\end{align*}
+
+\subsubsection{temps continu}
+Si on a $x(t) = v_1 e^{\lambda_1 t} +v_2 e^{\lambda_2 t} + ... + v_m e^{\lambda_m t} + v'_m t e^{\lambda_m t}$ Où on retrouve des multiplicités simples et multiples. \par 
+\underline{Théorème:} Un système LTI en \textbf{temps discret} matrice $A$ et ses valeurs propres:
+\begin{itemize}
+\item $\mathbb{R}(\lambda_i) < 0$ pour tout i, alors \textbf{stable et attractif}
+\item $\mathbb{R} (\lambda_i) > 0$ pour un i, alors \textbf{instable et non-attractif}
+\item $\mathbb{R}(\lambda_i) \leqslant 0$ et $\mathbb{R}(\lambda_i)=0$ pour un i:
+\begin{itemize}
+\item Si multiplicité 1, alors \textbf{stable et non-attractif} 
+\item Si multiplicité $>1$, alors \textbf{instable et non-attractif}.
+\end{itemize}
+\end{itemize}
+On applique la même idée en \textcolor{red}{temps discret}.
+\subsubsection{Oublie des conditions initiales LTI}
+Si $x_0$ et entrée $u$ alors $x(t) = x_{libre}(t) + x_{forcée}(t)$. Le $x_{forcée}(t)$ dépend uniquement de $u$ comme si $x(0) = 0$.\par 
+Si on a un système LTI attractif, $x_{libre} \rightarrow 0$ et une modification de $x_{forcée}$ a un petit impact sur la trajectoire.
+
+\subsubsection{Non-linéaire}
+En linéaire, un système est soit \textit{stable} ou \textit{instable} dans son ensemble. En \textbf{non}-linéaire, chaque équilibre est \textit{différent}.\par 
+On peut linéariser autour d'un équilibre tel que $f(x^{\ast}, u^{\ast}) = 0$ ensuite on analyse graphiquement ou sur base de la linéarisation.\par
+\underline{\textbf{Démarche}}: On linéarise autour d'un équilibre $(x^{\ast}, u^{\ast})$ tel que $f(x^{\ast}, u^{\ast}) =0$
+\begin{align*}
+f(x,u) &= \frac{\partial f}{\partial x} (x-x^{\ast}) +\frac{\partial f}{\partial u} (u - u^{\ast}) + O(...) & \frac{d}{dt} \tilde{x} &= A \tilde{x} + B \tilde{u} \text{ où } \tilde{x} = x - x^{\ast}
+\end{align*}
+
+
+\underline{\textbf{Exemple:}} $\dot{x} = f(x) = -x +x^3$ qui nous donne 3 équilibres $\{-1, 0, 1\}$. On peut voir \textit{graphiquement} que seul 0 est un équilibre attractif.
+\begin{align*}
+x = 0 &, f'(x) = -1 \text{ système linéarisé } \dot{\tilde{x}} = - \tilde{x} & x = 1 &, f'(x) = 2 \text{ système linéarisé } \dot{\tilde{x}} = 2 \tilde{x} 
+\end{align*}
+
+\subsection{Interne vs BIBO}
+
+
 \end{document}

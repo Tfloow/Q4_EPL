@@ -918,7 +918,7 @@ Une \textit{sous-formule} peut toujours être remplacée par une \textit{sous-fo
 \hline
 $\neg (\neg p)$ & $p$ & $p \wedge q$ & $q \wedge p$ & $p \vee q$ &  $q \vee p$\\
 \hline
-$p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (p \Rightarrow q)$ & $p \Rightarrow q$ & $\neg p \vee q$ & $p \Rightarrow q$ &  $\neg p \Rightarrow \neg p$\\
+$p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (q \Rightarrow p)$ & $p \Rightarrow q$ & $\neg p \vee q$ & $p \Rightarrow q$ &  $\neg p \Rightarrow \neg p$\\
 \hline
 $\neg ( p \vee q) $ & $\neg p \wedge \neg q$ & $\neg ( p \wedge q )$ & $\neg p \vee \neg q$ & $p \vee (q \wedge r)$ &  $(p \vee q ) \wedge ( p \vee r)$\\
 \hline
@@ -1344,6 +1344,186 @@ si A \in NSPACE(f) &\text{ alors } A \in NTIME(c^f) & si A \in DSPACE(f) &\text{
 Pour toute fonction totale calculable f, il existe un ensemble A récursif tel que $A \notin DTIME(f)$. On prouve cela par diagonalisation et même résultat pour NTIME, DSPACE et NSPACE.\par
 Il existe toujours des problèmes plus complexes qu'une complexité donnée.
 
+\chapter{NP-complétude}
+Un problème intrinsèquement complexes ont une complexité \textit{non polynomiale}.\par 
+On veut savoir si il existe un algorithme \textcolor{red}{non déterministe polynomiale}, existe-t-il alors un algorithme \textcolor{red}{déterministe polynomial} résolvant ce même problème?\par 
+Si un ensemble A appartient à NP, A appartient-il alors à P ?
+\begin{equation}
+\textcolor{red}{P = NP}
+\end{equation}
+
+\section{NP-complétude}
+On sait que $P \subseteq NP$. Mais comment démontrer que $NP \subseteq P$ ou pas. On peut prendre un élément \textbf{E} qui "\textit{représentatif}" de NP et essayer de démontrer tel que:
+\begin{itemize}
+\item $E \in P$ alors on démontre que $P = NP$
+\item Ou $E \notin P$ alors $P \neq NP$
+\end{itemize}
+Il faut choisir un élément qui soit NP-complet par rapport à une relation de réduction $\leq$
+\begin{itemize}
+\item $E \in NP$
+\item $\forall B \in NP: B \leq E$
+\end{itemize}
+
+\subsection{Réduction algorithmique}
+Si on réalise $\leq_a$. Si $A \leq_a B$ en supposant que A et B sont récursifs.\par 
+Si on arrive à montrer que $E \in P$ on ne sait pas si $P = NP$. Car pour les autres éléments de NP, la réduction ne permet pas d'affirmer que ceux-ci sont dans P.
+
+\subsection{Réduction fonctionnelle}
+Si $A \leq_f B$ si il existe une fonction totale calculable $f$ telle que $a \in A \Leftrightarrow f(a) \in B$. Si on arrive à montrer que $E \in P$ on ne sait pas si $P = NP$. Car pour les autres éléments de NP, la réduction ne permet pas d'affirmer que ceux-ci sont dans $P$ . (le calcul de $f(a)$ peut prendre un temps non polynomial). On doit raffiner la réduction fonctionnelle.
+
+\subsection{Réduction polynomiale}
+Un ensemble $A$ est \textcolor{red}{polynomialement réductible} à un ensemble $B ( A \leq_p B)$. Si il existe une fonction totale calculable $f$ de \textcolor{blue}{complexité temporelle polynomiale} telle que:
+\begin{equation}
+a \in A \Leftrightarrow f(a) \in B
+\end{equation}
+
+\subsubsection{Propriétés}
+\begin{enumerate}
+\item $\leq_p$ est une relation réflexive et transitive
+\item Si $A \leq_p B$ et $B \in P$ alors $A \in P$
+\item Si $A \leq_p B$ et $B \in NP$ alors $A \in NP$
+\end{enumerate}
+
+\subsection{NP-complétude}
+Un problème $E$ est NP-\textbf{complet} (par rapport $\leq_p$) si
+\begin{enumerate}
+\item $E \in NP$
+\item $\forall B \in NP: B \leq_p E$ 
+\end{enumerate}
+Un problème $E$ est NP-\textbf{difficile} (par rapport $\leq_p$) si 
+\begin{enumerate}
+\item $\forall B \in NP: B \leq_p E$
+\end{enumerate}
+
+\subsection{Propriétés}
+Soit $E$ est un ensemble NP-complet.
+\begin{itemize}
+\item $E \in P$ ssi $P = NP$
+\item $E \notin P$ ssi $P \neq NP$
+\item Si $E \leq_p B$ et $B \in NP$ alors est NP-complet.
+\end{itemize}
+
+\section{Théorème de Cook}
+SAT: satisfaction des formules propositionnelles\par
+Soit $W(A_1, ..., A_n)$ une formule propositionnelle dont les variables sont $A_1, ... A_n$. \par 
+Si on a la formule $(\neg A \vee B ) \Rightarrow (A \wedge B)$ cette formule est satisfaisable avec A = B = true.
+\subsection{Formalisation}
+On utilise les connecteurs logiques, on a des variables $A_i$. On réalise des formules qui s'écrivent $W(A_1, ... , A_m)$ qui sont satisfaisables si il existe des valeurs logiques qui permettent que cette formule soit vrai.\par 
+Si on a une longueur d'une formule $W$, on a $n$ occurrence de variables, alors la taille de $W = O(n log n)$.
+
+\subsection{Théorème SAT NP-complet}
+Donc $SAT \in NP$. Il existe un programme \textit{non déterministe} de complexité \textcolor{red}{polynomiale} capable de reconnaitre si une formule $W(A_1, ... , A_m)$ est satisfaisable.
+\begin{enumerate}
+\item On générer une séquence de $m$ valeurs logiques. $O(m)$ tel que $m \leqslant n$.
+\item On substitue les occurrences des variables $A_i$ par leur valeur. $O( n log n)$
+\item On évalue l'expression via la méthode de \textit{réduction}. Complexité \textit{polynomiale}.
+\end{enumerate}
+
+\subsubsection{$\forall B \in NP : B \leqslant_p SAT$}
+Soit $B \in NP$. Il existe une \textbf{machine de Turing} non déterministe M qui reconnait en un temps polynomial $p(n)$ si un élément $x$ appartient à B:
+\begin{itemize}
+\item $p$ est un polynôme 
+\item $n$ est la longueur de la donnée $x$
+\end{itemize}
+Donc la machine M dans toutes les branches d'exécutions possibles, s'arrêtent avant $p(n)$ mouvements.\\
+La donnée $x$ est transformée en une formule \textit{propositionnelle} $W_x$:
+\begin{itemize}
+\item La taille de $W_x$ : $O(p(n))$ symboles
+\item Transformation polynomiale: la construction de $W_x$ peut se faire en un temps \textit{polynomial} par rapport à $n$.
+\item $x \in B \Leftrightarrow W_x \in SAT$
+\end{itemize}
+
+On va construite la formule $W_x$. À partir d'une donnée x et d'une machine de Turing non déterministe $M$, d'une formule $W_x$ dont les variables caractérisent le fonctionnement de la machine M sur la donnée x.
+
+\section{Problèmes NP-complets}
+Comment \textbf{prouver} qu'un problème est NP-complet. On peut soit
+\begin{enumerate}
+\item Réaliser une preuve comme à celle pour SAT (assez complexe) (il faut montrer que tous les problèmes peuvent s'y réduire)
+\item Utiliser la propriété: $si E \leqslant_p B$ avec $E$ NP-complet et $B \in NP$ alors $B$ est \textbf{NP-complet}. (méthode la plus utilisée)
+\end{enumerate}
+Tous les problèmes considérés dans cette classe sont des problèmes de \textit{décision}.\par 
+En pratique, on est intéressé par des \textit{algorithmes} qui construisent des solutions.\par 
+
+\subsubsection{Problème du circuit Hamiltonien HC} 
+$HC =$ ensemble des \textit{graphes} possédant un circuit hamiltonien (parcourant une seule fois tous les sommets).\par 
+Le problème d'un circuit eulérien est lui dans P.
+
+\subsubsection{Problème du voyageur de commerce TS}
+Si nous avons $n$ noeuds et qu'on les relies via des arcs pondérés, Existe-t-il un circuit reliant les $n$ noeuds (villes) qui soit de longueur inférieur ou égal à un entier.\par 
+$HC \leqslant_p TS$.
+
+\subsubsection{Chemin le plus long entre deux sommets}
+Si on a un graphe avec dans les noeuds $a$ et $b$. On veut savoir s'il existe un chemin reliant $a$ et $b$ qui est supérieur ou égal à un entier. (\textit{l'inverse aurait été P})
+
+\subsubsection{3SAT}
+Problème de la satisfaisabilité de formules de la forme $C_1 \wedge C_2 \wedge ... \wedge C_n$ avec:
+\begin{align*}
+C_i &= L_{i1} \wedge L_{i2} \wedge L_{i3} &  L_{i1} &= A_k \text{ ou }  L_{i1} = \neg A_k & A_k &= \text{ variable propositionnelle}
+\end{align*}
+Forme normale conjonctive avec $3$ variables par clause.
+
+\subsubsection{Couverture de sommets VC}
+Si on a un graphe et un entier positif $B$. Existe-t-il un sous-ensemble de sommets de taille $\leqslant B$ qui couvre tous les arcs du graphe.\par 
+Le problème de la couverture des arcs est dans P.
+
+\subsubsection{Problèmes de la clique}
+Si on a un graphe et un entier positif $B$. Existe-t-il un sous-ensemble des sommets de taille $\geqslant B$ qui soit une clique (chaque paire de noeuds de ce sous-ensemble est reliée par un arc)
+
+\subsubsection{Autres}
+\begin{enumerate}
+\item Nombre chromatique d'un graphe
+\item Problème de partition
+\end{enumerate}
+
+
+\section{P = NP}
+On a énormément chercher à prouver qu'il existe des algorithmes polynomiaux pour les problèmes NP-complets. Donc on pense que la solution est $P \neq NP$.
+
+\subsection{En pratique}
+Si un problème est \textit{NP-complet}. On sait que le problème n'a pas de solution algorithmique polynomiale. Mais il s'agit de la complexité dans le \textit{pire des cas}. On pourrait avoir une solution polynomiale pour certaines données.
+
+\subsubsection{Résoudre}
+\begin{itemize}
+\item Changer le problème en un problème plus simple. Particulariser le problème
+pour certaines instances
+\item  Utiliser un algorithme exponentiel si la plupart des instances à résoudre sont
+de complexité polynomiale
+\item  Utiliser la technique d'exploration, mais en se limitant à un nombre polynomial
+de cas (heuristique). Algorithme incomplet.
+\item  Si problème d'optimisation, calculer une solution approximative.
+\end{itemize}
+
+\subsubsection{Transition de phase}
+Beaucoup de problèmes NP-complets sont caractérisés par un \textit{paramètre} de contrôle. Cela induit 3 zones
+\begin{enumerate}
+\item Instances où presque tout est solution (quasi toujours \textit{oui})
+\item Transition entre les deux régions
+\item Instances où presque tout est solution \textit{non}.
+\end{enumerate}
+Le \textbf{pic de difficulté} se trouve dans la \textit{transition} et est \textbf{indépendant} de l'algorithme qui est choisi.
+
+\subsection{Autres classes de complexité}
+
+\subsubsection{Classe EXPTIME}
+Famille des ensembles \textit{récursifs} pouvant être décidées par un programme de complexité \textcolor{red}{temporelle} $O(2^p)$ où $p$ est un polynôme.
+
+\subsubsection{Classe LOGSPACE}
+Famille des ensembles \textit{récursifs} pouvant être décidées par un programme de complexité \textcolor{blue}{spatiale} $O(log)$.
+
+\subsubsection{Classe PSPACE}
+Famille des ensembles \textit{récursifs} pouvant être décidées par un programme de complexité \textcolor{blue}{spatialle} $O(p)$ où $p$ est un polynôme.
+
+\subsubsection{Classe NPSPACE}
+Famille des ensembles \textit{ND-récursifs} pouvant être décidées par un programme de complexité \textcolor{red}{spatialle} $O(p)$ où $p$ est un polynôme.\par 
+Mais: $PSPACE = NPSPACE$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/classe.png}
+\caption{relation entre classe}
+\end{figure}
+
+On a une classe intéressante qui est $NPI = NP \ NPC \P$ qui est une sorte de \textit{no man's land}.
+
 
 
 
@@ -1470,6 +1650,21 @@ table:
 \item \textcolor{red}{Faux}. En effet, pour de faibles tailles de données on peut facilement trouver le résultat.
 \item \textcolor{red}{Faux}. C'est l'utilité de cette notation. Un pc 100 fois plus puissant nous permettrait que d'augmenter la taille de l'entrée de $2$ ou $3$.
 \end{enumerate}
+
+\section{TP10}
+\begin{enumerate}
+\item \textcolor{red}{Faux}, pas forcément !
+\item \textcolor{green}{Vrai}, une réduction $\leqslant_a$ peut permettre de prouver qu'un ensemble est récursif
+\item \textcolor{red}{Faux}, mais ne peut pas prouver que ce n'est pas récursif
+\item \textcolor{green}{Vrai}, on peut prouver qu'un ensemble est récursif via $\leqslant_f$
+\item \textcolor{green}{Vrai}
+\item \textcolor{red}{Faux}, car on ne sait pas si $C$ n'est pas le problème le plus compliqué de l'ensemble.
+\item \textcolor{red}{Faux}, non on ne sait pas obtenir une borne exacte
+\item \textcolor{green}{Vrai}
+\item \textcolor{red}{Faux}, car la complexité est plus élevé sur une machine de Turing
+\item \textcolor{red}{Faux}, Non il y a d'autres problèmes qui ne peuvent pas être résolu par des algorithmes non polynomiaux qui ne sont pas dans les \textbf{NP}.
+\end{enumerate}
+
 
 \chapter{Question cours}
 \section{S1}
