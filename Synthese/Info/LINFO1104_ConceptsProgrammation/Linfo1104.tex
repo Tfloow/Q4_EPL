@@ -1372,6 +1372,144 @@ On se base sur 2 idées:
 \end{enumerate}
 Cela n'a pas de déterminisme \textcolor{red}{non observable} (pas de "\textit{race conditions}"). Le deterministic dataflow est une forme de programmation fonctionnelle.
 
+\section{Limitations du dataflow deterministique}
+Le plus gros soucis est qu'on ne peut pas réaliser des programmes où le \textcolor{red}{non-déterminisme } doit être \textit{visible}. Ceci est important pour les interactions \textit{clients/serveurs}.
+
+\subsection{Client serveur}
+On a un ensemble de client communiquant à un serveur. Les clients sont donc des agents \textit{concurrents}. \par 
+On peut essayer via un simple code qui prends 2 streams (pour 2 clients) et performe des actions quand on a besoin. \textcolor{red}{Problème} pas \textit{scalable} et quand le client 1 envoie un message cela bloque pour le client 2.\par 
+Notre souci est que nous attendons sur des paternes seuls. Avec un \textcolor{blue}{case} on attend sur un seul pattern. Ici, on veut attendre sur de \textbf{multiple} pattern.
+\subsubsection{Comprendre le non-déterminisme} 
+Le non-déterminisme est un choix fait en dehors du controle du programme. C'est ce qu'on recherche avec le client/serveur car on ne veut pas être retardé car le serveur attend le message d'un autre.
+
+\subsection{Dépasser les limitations}
+On va étendre le \textbf{langage kernel} avec nouveau concept. On pourrait faire cela avec une fonction de wait mais cela n'est pas du tout \textit{scalable} car on devrait attendre et gérer de plus en plus de cas.
+
+\section{Ports}
+On va créer des \textcolor{blue}{Ports} qui sont des \textit{streams nommés}. On peut faire:
+\begin{lstlisting}[escapechar=\%]
+P = {NewPort S} 	// Cree un port P avec son stream S
+{Send P X}	 	// Envoie X a la fin du port P 
+\end{lstlisting}
+Ainsi tous les clients envoient leur requête dans ce stream et le serveur se charge de les gérer. Et ainsi cela crée un ordre aléatoire grâce aux \textit{Threads} donc \textit{non-déterministique}.
+
+\subsection{Sémantique}
+On a maintenant dans notre langage \textbf{kernel} que $\sigma_1$ stocke les valeurs à assignation unique. $\sigma_2$ stocke les cellules et $\sigma_3$ stocke des ports qui sont des \textbf{paires de variables}.
+
+\subsubsection{Langage kernel}
+\begin{lstlisting}[escapechar=\%]
+P={NewPort S}, {P %$\rightarrow$%p, S %$\rightarrow$% s} //%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
+{Send P S}, {P %$\rightarrow$%p, X %$\rightarrow$% x}	//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
+\end{lstlisting}
+L'opération d'ajout à la fin du stream d'un port est \textcolor{red}{atomique} donc cela se fait en \textbf{une seule étape}.
+
+\section{Message-passing concurrency}
+C'est un nouveau \textit{paradigme} pour la programmation concurrente. C'est du \textbf{deterministic dataflow } avec des \textbf{ports}. On l'appelle aussi le \textcolor{red}{multi-agent actor programming}.\par 
+On a des objets \textit{ports} et des objets \textit{actifs}.
+
+\subsection{Stateless port objects} \label{spo}
+Un tel objet est une \textit{combinaison} d'un port, d'un thread et d'une fonction de liste récursive. On appelle aussi cela un \textit{stateless agent}. \par 
+Un agent est définit de comment il répond à un message. Chaque agent à son \textbf{propre thread}.
+
+\subsection{Stateful port objects}
+\begin{wrapfigure}{r}{.4\textwidth}
+\centering
+\includegraphics[width=6cm]{img/statefulPortObject.png}
+\end{wrapfigure}
+C'est donc la même chose qu'au \ref{spo} mais ici, les agents ont une mémoire.\par 
+On appelle sa \textit{mémoire interne} un "\textcolor{blue}{state}" qui est défini comme ci-contre.\par 
+On a des fonctions de \textit{transition} qui passe d'état en état. Cette fonction est de type $F	: State \times Msg \longrightarrow State$.
+\begin{lstlisting}[escapechar=\%]
+fun {NewPortObject Init F} 
+	proc {Loop S State} 
+		case S of M|T then {Loop T {F State M}} end
+	end 
+	P
+in
+	thread S in P={NewPort S} {Loop S Init} end 
+	P
+end
+\end{lstlisting}
+La fonction $F$ dans notre \textit{loop} est une fonction binaire qui part d'un état initial et effectue différentes opérations. Ce n'est rien d'autre qu'un \textit{Fold}.
+
+\subsection{Exemples}
+\subsubsection{Updated NewPortObject}
+\begin{lstlisting}[escapechar=\%]
+fun {NewPortObject Init F} 
+	P Out
+in
+	thread S in P={NewPort S} Out={FoldL S F Init} end 	P
+end
+\end{lstlisting}
+$Out$ est l'état final qui termine les agents.
+
+\subsubsection{Cell Agent}
+\begin{lstlisting}[escapechar=\%]
+fun {CellProcess S M} 
+	case M 
+	of assign(New) then New 
+	[] access(Old) then Old=S S 
+	end
+end
+\end{lstlisting}
+Notre agent se comporte comme une \textit{cellule}. Les cellules et les ports sont équivalents en terme d'expression.
+
+\subsubsection{Uniform Interface}
+\begin{lstlisting}[escapechar=\%]
+// %On crée et utilise un \textit{cell agent}%
+declare Cell 
+Cell={NewPortObject CellProcess 0} 
+{Send Cell assign(1)}
+local X in {Send Cell access(X)} {Browse X} end
+
+// %On veut avoir les mêmes interfaces en tant qu'objet%
+{Cell assign(1)} 
+local X in {Cell access(X)} {Browse X} end
+
+// %On change la sortie pour être une procédure%
+fun {NewPortObject Init F} 
+	P Out
+in
+	thread S in P={NewPort S} Out={FoldL S F Init} end 
+	proc {$ M} {Send P M} end
+end
+\end{lstlisting}
+
+\section{Active objects}
+C'est un object qui est une sorte de "\textit{port object}" et qui a des comportements comme une classe. Donc on a le \textit{polymorphisme} et l'\textit{héritance} de classe tout en ayant du "\textit{message passing}".
+
+\subsection{Définition Classe et Objet}
+\begin{figure}[H]
+\centering
+\includegraphics[width=9cm]{img/objet.png}
+\caption{Création et appelle d'un objet}
+\end{figure}
+Pour initialiser un objet, on réalise l'opération $CTR=$ \textit{\{New Counter init(0)\}}.
+
+\subsubsection{Active Object}
+\begin{figure}
+\centering
+\includegraphics[width=6cm]{img/activeObj.png}
+\end{figure}
+On combine donc les classes et les ports mais on utilise l'interface \textit{uniforme} de Oz pour leur donner l'apparence d'un objet standard en Oz.
+
+\subsection{Différence entre passif et actif}
+On appelle passif, les objets en Oz qui s'exécute \textbf{pas dans leur propre thread}. Les actifs eux ont leur propre thread d'exécution.
+
+\subsubsection{Avantage}
+On peut sans aucun risque appeler un objet actif car ses données sont dans son propre thread à l'inverse des passifs. \par 
+Dans un objet passif, ses méthodes peuvent s'exécuter de manière \textbf{concurrente} à l'inverse des actifs qui seront toujours \textbf{séquentielle}.\par 
+Les objets passifs ne sont pas \textit{concurrency-safe}.
+
+\section{Message protocol}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/message.png}
+\end{wrapfigure}
+Ce sont des \textit{séquences} de messages entre plusieurs parties qui peuvent être compris à des niveaux d'abstractions plus élevés que les messages \textit{individuels}.\par 
+On commence avec un RMI simple et puis on fait des appelles asynchrones et on y en rajoute. \par 
+Le protocol le plus compliqué est le \textbf{RMI asynchrone avec callbacks}.
+
 
 
 
