@@ -1283,6 +1283,29 @@ On peut réaliser ce type de changement car on suppose le transfert d'énergie c
 La manipulation de ce type de circuit se repose sur l'utilisation des formules vu en \ref{formulesSinus}
 
 
+\chapter{Transformée de Laplace}
+On va utiliser la transformée de Laplace \textit{bilatérale} qui n'est rien d'autre que la transformé de Fourier en complexe et qui est plus général.
+
+\section{Équation différentielle avec Fourrier}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\begin{align*}
+\frac{\partial^2 A(t)}{\partial t^2} + k^2 A(t) &= \delta (t)\\
+A(\omega ) &= \frac{1}{k^2 - \omega^2}\\
+A(t) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} \frac{-e^{j \omega t}}{\omega^2 - k^2} d\omega \\
+A(t) &= \frac{-2 \pi j}{2\pi} \left( \frac{e^{jkt}}{2k} - \frac{e^{-jkt}}{2k} \right)\\
+A(t) &= \frac{sin(kt)}{k}
+\end{align*}
+\end{wrapfigure}
+Si nous avons l'équation différentielle comme ci-contre, on va la transformer en équation dans le domaine \textbf{fréquentielle}.\par 
+On passe d'une équation différentielle à une équation algébrique plus simple à résoudre. Sa solution en fréquentielle est $A(\omega)$. \par 
+Donc on des \textit{pôles} en $\pm k$.\par 
+On va appliquer le théorème des résidus pour intégrer sur $- \infty$ à $\infty$ en évitant les pôles. On fait une droite puis une demi arc de cercle.\par 
+Une propriété extrêmement utile est \textcolor{red}{$df(t)/dt \rightarrow sF(s) -f(0)$}.\par 
+Il faut aussi bien réduire en fraction simple.
+
+
+
 
 \end{document}
 
