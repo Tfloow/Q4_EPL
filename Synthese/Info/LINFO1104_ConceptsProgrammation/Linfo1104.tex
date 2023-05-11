@@ -1504,14 +1504,30 @@ Les objets passifs ne sont pas \textit{concurrency-safe}.
 \section{Message protocol}
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
-\includegraphics[width=5cm]{img/message.png}
+\includegraphics[width=6cm]{img/message.png}
 \end{wrapfigure}
 Ce sont des \textit{séquences} de messages entre plusieurs parties qui peuvent être compris à des niveaux d'abstractions plus élevés que les messages \textit{individuels}.\par 
 On commence avec un RMI simple et puis on fait des appelles asynchrones et on y en rajoute. \par 
-Le protocol le plus compliqué est le \textbf{RMI asynchrone avec callbacks}.
+Le protocole le plus compliqué est le \textbf{RMI asynchrone avec callbacks}.\par
+En gros, \textbf{RMI} c'est le fait d'envoyer des messages et recevoir des messages. \textbf{Asynchrone}, on n'attend pas le message de retour d'un serveur. \textbf{Callback}, on envoie un message à un serveur et on lui envoie un port où il peut envoyer son message.
 
+\section{Memory Management \& Garbage Collection}
 
+Si jamais on réalise un programme qui boucle et possède une variable qu'on incrémente à chaque fois, on va se retrouver avec $n$ variables alors que nous n'avons besoin que d'une seule.\par 
+Notre stack d'instruction est constant via la \textcolor{red}{last call optimization} mais notre mémoire ne fait que grandir.
 
+\subsection{La représentation des données dans la mémoire}
+On utilise des \textit{memory words} qui prennent \textit{64-bit}. Au démarrage d'un programme, le système attribue un certain nombre de \textit{memory words} pour son exécution. Ce nombre peut varier et est gérer par le programme.
+
+\subsubsection{Cycle de vie}
+Il y a \textbf{3 états} distincts: - \textit{actif}, \textit{inactif} et \textit{libre}. Au début, tout est libre. Un mot devient actif quand on \textit{alloue} et devient inactif si on ne l'utilise plus. Un mot redevient libre si on le \textit{libère} quand il est actif ou s'il est manuellement ou automatiquement (\textit{garbage collector}) retourné en mode libre depuis l'état inactif.\par 
+Bien évidemment on voudrait qu'un mot plus utilisé et inactif redevienne libre pour qu'il puisse libérer de la place et être utilisée plus tard.
+
+\subsubsection{Soucis}
+Quand on veut rappeler des mots supposés \textit{inactifs}, on peut avoir du \textcolor{red}{dangling reference}. C'est quand on veut reprendre un mot mais qu'il va être utilisée par le programme (\textit{segfault}). On a aussi des \textcolor{red}{memory leak} où des mots ne sont jamais rappelés et causent des ralentissements et des utilisations de la mémoire inutile.
+
+\subsubsection{Rappel}
+On peut soit le faire manuellement (avec des free et malloc en \textit{C}) mais pas facile. Ou bien, on utilise un \textit{garabge collector} (ramasse-miette) qui est plus pratique et robuste si bien implémenter.
 
 
 

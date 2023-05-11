@@ -870,12 +870,12 @@ On a un signal qui ne converge pas et oscille.
 On peut utiliser un signal atténué ce qui permettrait de converger vers nul en l'infini et de même retrouver son résultat inverse:
 \begin{align*}
 x(t)e^{- \sigma t } &= t 1(t) e^{- \sigma t}\\
-\mathcal{F} (x e^{- \sigma t}) \longleftrightarrow \int_{-\infty}^{\infty} x(t) e^{- \sigma t} e^{-i \omega t} dt &= \int_0^{\infty} t e^{-i \omega t} dt = \left[- \frac{1 + (\sigma + i \omega) t}{(\sigma + i \omega)^2} e^{-(\sigma + i \omega )t} \right]_0^{\infty}\\
+\mathcal{F} (x e^{- \sigma t}) \longleftrightarrow \int_{-\infty}^{\infty} x(t) e^{- \sigma t} e^{-i \omega t} dt &= \int_0^{\infty} t e^{-(\sigma + i \omega ) t} dt = \left[- \frac{1 + (\sigma + i \omega) t}{(\sigma + i \omega)^2} e^{-(\sigma + i \omega )t} \right]_0^{\infty}\\
 X_{\sigma} (i \omega) &= \frac{1}{(\sigma + i \omega)^2}
 \end{align*}
 Pour retrouver le signal $x(t)$ sans la pré-multiplication, il faut réaliser cette opération
 \begin{align*}
-x(t) &= e^{\sigma t} \mathcal{F}-1 (X_{\sigma}\\
+x(t) &= e^{\sigma t} \mathcal{F}-1 (X_{\sigma})\\
 &= \frac{1}{2 \pi }\int_{-\infty}^{\infty} X_{\sigma} (i \omega) e^{\sigma t} e^{i \omega t} d\omega
 \end{align*}
 Ainsi, on peut s'assurer d'avoir une réponse pour nos systèmes. En effet, on va appliquer cette atténuation ainsi:
@@ -921,7 +921,7 @@ Laplace est donc une fonction et un domaine de définition.
 \subsection{Propriétés}
 
 \begin{center}
-\begin{tabular}{|m{3cm}|m{7cm}|}
+\begin{tabular}{|m{2.5cm}|m{7cm}|}
 \hline
 \textbf{Linéarité} & $\mathcal{L}(a_1 x_1 + a_2 x_2) = a_1 \mathcal{L}(x_1) + a_2 \mathcal{L}(x_2)$ \newline  ROC R: $R \supseteq R_1 \cap R_2$ \\
 \hline
@@ -962,10 +962,10 @@ On a donc une fonction de transfert \textcolor{red}{unidimensionnel} si on a 1 e
 La réponse impulsionnelle est:
 \begin{align*}
 H(s) &= C(sI - A)^{-1} B + D\\
-(sI - A) & \text{ Diagonale: } s - a_ii \text{ hors diagonale } - a_ij\\
+(sI - A) & \text{ Diagonale: } s - a_{ii} \text{ hors diagonale } - a_{ij}\\
 (sI - A)^{-1} & \text{ Transposée des co-facteurs déterminants de matrice } (n-1) \times (n-1) \text{ pour polynômes } \leqslant n-1 \\
 & \text{ou pour les polynômes d'ordre n } det(sI-A)\\
-C(SI-A)^{-1} B + D & \text{ Fonctoin rationnelle plus un facteur } D
+C(SI-A)^{-1} B + D & \text{ Fonction rationnelle plus un facteur } D
 \end{align*}
 Si un système admet une représentation d'état, alors $H(s)$ est rationnelle. Le dénominateur vaut $det(sI -A)$ d'ordre n et le numérateur est inférieur à $n$ si pas de $D$ sinon $n$.\par
 Si le système est causal et $H$ est rationnel, on peut prouver que:
@@ -988,7 +988,7 @@ Le problème c'est $-\infty$, on va réaliser la transformée de \textcolor{blue
 \begin{equation}
 X_+ (s) = \mathcal{L}_+ (x) := \mathcal{L}(1(t) x(t)) = \int_{0^-}^{\infty} x(t) e^{st} dt
 \end{equation}
-Donc bien depuis $0^-$ (surtout quand on a $\delta (t)$). On a beaucoup de propriété hérité de $\mathcal{L}$.\\
+Donc bien depuis $0^-$ (surtout quand on a $\delta (t)$). On a beaucoup de propriétés héritées de $\mathcal{L}$.\\
 Faire son inverse permet de \textit{seulement} retrouver \textbf{$1(t) x(t)$} (on perd de l'information).
 
 \subsection{propriétés}
@@ -1062,9 +1062,9 @@ Long mais programmable en calculant les racines du polynôme et en réduisant en
 \chapter{Transformée en Z}
 C'est l'équivalent en \textit{temps discret} de la \textit{transformée de Laplace}.
 \section{Transformée en Z}
-On fait face aux mêmes problèmes qu'avant mais ici pour la DTFT. On va donc partir de celle-ci et de l'\textit{atténuer}. On ne fait plus la DTFT pour $x[n]$ mais pour $x[n]r^{-n}$
+On fait face aux mêmes problèmes qu'avant mais ici pour la DTFT. On va donc partir de celle-ci et l'\textit{atténuer}. On ne fait plus la DTFT pour $x[n]$ mais pour $x[n]r^{-n}$
 \begin{align*}
-X_r(e^{i \omega} &= \sum_{k = - \infty}^{\infty} x[k] r^{-k} e^{-i \omega k}\\
+X_r(e^{i \omega}) &= \sum_{k = - \infty}^{\infty} x[k] r^{-k} e^{-i \omega k}\\
 & = \sum_{k = - \infty}^{\infty} x[k] z^{-k}\\
 DTFT^{-1} & \rightarrow x[n] r^{-n}
 \end{align*}
@@ -1920,8 +1920,6 @@ Système \textbf{pas} observable $\rightarrow$ si $\Delta x$ est dans l'espace n
 \subsection{Résumé}
 Observabilité: le fait de pouvoir distinguer la réponse \textcolor{red}{libre} de différentes conditions initiales. On se base sur la matrice d'\textbf{observabilité}.\par 
 Cela ne dit pas si il est facile de \textit{retrouver} $x_0$ ni comment on le calcule en pratique. \textbf{Non-observable}: impossible de distinguer certains états, pas de solution si système existe \textit{déjà}. (on doit prendre en compte cela quand on design un système).
-
-
 
 
 

@@ -1524,8 +1524,137 @@ Mais: $PSPACE = NPSPACE$.
 
 On a une classe intéressante qui est $NPI = NP \ NPC \P$ qui est une sorte de \textit{no man's land}.
 
+\chapter{Analyse et perspectives}
+\section{Thèse de Church Turing}
+Rappel: toute fonction calculable par une machine de Turing est donc calculable (logique). Toute fonction effectivement \textit{calculable} est calculable par une machine de Turing.\par 
+La deuxième partie est considérée vraie par de nombreuses évidences.
+
+\subsection{Évidences heuristiques}
+La définition des machines de Turing s'approche de la notion intuitive de procédé effectif. On sait que toutes fonctions particulières s'avérant effectivement calculables ont été montrées être calculables par une machine de Turing.\par 
+Il y a énormément de démonstration pour tout plein de classe de problème. On a toujours échoué à prouver qu'une fonction \textit{intuitivement calculable} ne soit pas calculable sur une machine de Turing.
+
+\subsection{Équivalences des formalismes}
+Les différentes définitions des mêmes formalismes de calculabilité ont conduit à la définition de la \textbf{même classe} de fonction calculables.
+
+\subsection{Mécanisme de Calcul}
+On a montré que tous les mécanismes de toutes les machines constructibles par la mécanique \textbf{newtonienne} ne peuvent calculer que des fonctions programmables.
+
+\section{Formalismes de Calculabilité}
+Qu'est-ce qu'un \textbf{bon} formalisme ?
+Il doit être:
+\begin{enumerate}
+	\item \textbf{SD: Soundness des défintions:} \textcolor{red}{toute fonction D-calculable est calculable}. Si il existe une description $d \in D$ calculant une fonction $f$ alors cette fonction est calculable. (\textit{première partie de C-T})
+	\item \textbf{CD: Complétude des définitions:}\textcolor{red}{ toute fonction calculable est D-calculable}. Si une fonction $f$ est calculable, alors il existe une description $d \in D$ calculant cette fonction $f$. (\textit{deuxième partie de C-T})
+	\item \textbf{SA: Soundness algorithmique:} \textcolor{red}{L'interpréteur de D est calculable}. Toute description $d \in D$ peut être effectivement exxécutée sur des données. Le formalisme $D$ est algorithmique. Cette caractéristique assure que $D$ décrit bien des procédés effectifs.
+	\item \textbf{CA: Complétude algorithmique:} Si P est SA, alors il existe un compilateur (\textit{calculable}) tel que étant donné $p \in P$, ce compilateur appliqué à $P$ produit une description $d \in D$ avec $p$ équivalent à $d$. Cela assure une équivalence des formalismes.
+	\item \textbf{U: description universelle:} \textcolor{red}{L'interpréteur de D est D-calculable}. Le formalisme doit permettre de décrire son propre interpréteur. (\textit{Hoare-Allison})
+	\item \textbf{S: propriété S-m-n affaiblie:} $\forall d \in D \quad \exists S : d(x,y) = [S(x)](y)$. Il existe un \textcolor{blue}{transformateur de programme} (\textit{total calculable}), qui recevant comme données un programme $d$ à $2$ arguments et une valeur $x$, fournit comme résultat une programme à \textcolor{red}{$1$} argument tel que les deux fonctions calculent la même chose.
+\end{enumerate}
+
+\subsection{Propriétés}
+\begin{align*}
+SA & \Rightarrow SD & &\text{Il existe un interpréteur de D qui est calculable SA.\linebreak Donc calculable via SD}\\
+CA & \Rightarrow CD & &\\
+SD \text{ et } U &\Rightarrow SA & &\text{propriétés U rajoutées}\\
+CD \text{ et } S &\Rightarrow CA & & \\
+SA \text{ et } CD &\Rightarrow U & & \\
+CA \text{ et } SD &\Rightarrow S & & \\
+S \text{ et } U &\Rightarrow S-m-n & & \\
+SA \text{ et } CA &\Rightarrow SD \text{ et } CD \text{ et } U \text{ et } S & & \\ 
+SA \text{ et } CD \text{ et } S &\Rightarrow CA \text{ et } SD \text{ et } U & &    
+\end{align*}
+
+On peut avoir une partie des formalismes mais cela rend notre formalisme \textcolor{red}{mauvais}. Bloop était SD, SA et S mais pas le reste.
+
+\section{Techniques de raisonnement}
+Comment démontrer la \textbf{non calculabilité} d'une fonction. Voici un schéma de raisonnement:
+\begin{enumerate}
+	\item Essayer de trouver un algorithme qui résout le problème 
+	\item Se demander si suspicion possible de non \textit{calculabilité} du problème. (aucun algorithme)
+	\item Essayer de prouver la non calculabilité
+	\item Si c'est le cas, essayer de définir une version du problème approchée qui est calculable.
+\end{enumerate}
+
+\subsection{Techniques de preuve}
+On va utiliser Rice: s'intéresser à la fonction du programme conduit souvent à la non calculabilité.\par 
+Démonstration directe par la non calculabilité via une diagonalisation ou une preuve par l'absurde.\par 
+Méthode de réduction:
+\begin{enumerate}
+	\item Réduire la solution d'un problème $A$ à celle d'un autre problème $A'$ ($A$ est un cas particulier de $A'$)
+	\item À partir d'un algorithme pour $A'$ construire un algorithme pour $A$.
+	\item Conclusion, si $A'$ est calculable alors $A$ l'est aussi. Si $A$ est non calculable alors $A'$ est non calculable.
+\end{enumerate}
+
+\subsection{Problème intrinsèquement complexe}
+Une complexité exponentielle est juste une borne supérieure et peut avoir des algorithmes polynomiaux.\par 
+On peut essayer de faire une réduction d'un problème NP à notre problème.\par 
+Existe-t-il un algorithme ND polynomial. Si oui, le problème est dans NP.
+
+\subsubsection{Résoudre}
+On utilise un algorithme exponentiel si la plupart des instances à résoudre sont de complexité polynomiale.\par 
+Changer le problème en un problème plus simple (polynomial) qui est porche du problème initial.\par 
+Utiliser une technique d'exploration, mais en se limitant à un nombre polynomial de cas (\textit{heuristique}). L'algorithme est incomplet. Il peut donner une réponse erronée ou approximative. Mais c'est parfois mieux que pas de réponse du tout.\par 
+Si problème d'optimisation, calculer une solution approximative.
+
+\section{Aspects non couverts par la calculabilité}
+Une grande parties des programmes \textbf{ne peuvent pas} être résumées au calcul de fonction: IoT, OS, app, ...\par
+La définition de la \textcolor{red}{calculabilité} cherche si il existe un programme qui calcule cette fonction. On veut voir les \textbf{conséquences} de la non calculabilité.
+
+\subsection{Ressources}
+Une fonction calculable en \textit{théorie} peut être non calculable en \textit{pratique} (trop de ressources, ...). La calculabilité ne détermine pas ça.
+
+\section{Au delà de la calculabilité}
+\subsection{Calculabilité et intelligence humaine}
+Si un être humain particulier est capable de calculer une fonction particulière (\textit{en un temps fini}). Alors on dit que la fonction est \textit{H-calculable}. Cela est-il équivalent à la calculabilité d'un ordinateur ?
+
+\subsection{Thèse: version procédés publics}
+Si une fonction est H-calculable et que l'être humain calculant cette fonction
+est capable de décrire (à l'aide du langage) à un autre être humain sa
+méthode de calcul de telle sorte que cet autre personne soit capable de
+calculer cette fonction,
+alors la fonction est T-calculable
+Cette version n'exclut pas l'existence de fonctions H-calculables, mais non
+calculables
+
+\subsection{Thèse CT: version réductionniste}
+Si une fonction est H-calculable, alors elle est T-calculable. Le comportement des éléments constitutifs d'un être vivant peut être simulé
+par une machine de Turing. Tous les processus cérébraux dérivent d’un substrat calculable
+
+\subsection{Thèse CT:  version anti-réductionniste}
+Certains types d'opérations effectuées par le cerveau, mais pas la majorité d'entre elles, et certainement pas celles qui sont intéressantes, peuvent être exécutées de façon approximative par les ordinateurs Certains aspects seront cependant toujours hors de portée des ordinateurs.
+\begin{equation}
+H-calculable \neq T-calulable
+\end{equation}
 
 
+\subsection{Calculabilité et intelligence artificielle}
+Il y a 2 types:
+\begin{itemize}
+	\item \textbf{IA forte:} simulation du cerveau humain à l'aide d'un ordinateur en copiant le fonctionnement. On veut des résultats similaires.
+	\item \textbf{IA faible:} programmation de méthodes et techniques de raisonnement en exploitant les caractéristiques propres des ordinateurs.
+\end{itemize}
+IA forte $\approx$ version réductionniste de CT.
+
+\subsubsection{Puissance cerveau humain}
+Un cerveau humain fait $10^{18}$ instructions par seconde. Le plus puissant fait $442$ PFlops ($10^15$). Qui correspond à environ $10^{18}$.
+
+\subsubsection{Machine et la pensée}
+On peut réaliser le \textcolor{red}{test de Turing}. On pose des questions au pc et à l'être humain par écrit. Si la personne qui pose les questions ne peut déterminer la différence entre les deux alors on atteint la singularité et l'ordinateur réussie le \textbf{test de Turing}. (perdre 1 fois sur 2) et donc les machines peuvent penser.
+
+\section{Au delà des modèles de calculs}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=6cm]{img/quantum.png}
+\caption{Espace \textit{supposée} des relations BQP et NP}
+\end{wrapfigure}
+La frontière entre calculabilité et non calculabilité est indépendante du progrès technologiques.\par 
+Mais si on a des nouvelles technologies, peut on dépasser ces limitations ?
+
+\subsection{Ordinateur quantique}
+
+Il ne donne pas un seul résultat mais une \textbf{superposition de résultat} avec un probabilité.\par 
+Une nouvelle classe est \textbf{BQP} ou Bounded-error Quantum Computing. Si il existe un algorithme \textit{quantique} polynomial qui donne la réponse au moins 2 fois sur 3.\par 
+L'espace BQP ne comprend pas les problèmes NP-Complet mais dépasse dans les problèmes PSPACE et NP.
 
 
 
