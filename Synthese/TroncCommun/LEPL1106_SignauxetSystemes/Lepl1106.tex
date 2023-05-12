@@ -1921,6 +1921,57 @@ Système \textbf{pas} observable $\rightarrow$ si $\Delta x$ est dans l'espace n
 Observabilité: le fait de pouvoir distinguer la réponse \textcolor{red}{libre} de différentes conditions initiales. On se base sur la matrice d'\textbf{observabilité}.\par 
 Cela ne dit pas si il est facile de \textit{retrouver} $x_0$ ni comment on le calcule en pratique. \textbf{Non-observable}: impossible de distinguer certains états, pas de solution si système existe \textit{déjà}. (on doit prendre en compte cela quand on design un système).
 
+\chapter{Feedback}
+\section{Introduction}
+On veut pouvoir adapter les transformations du système en se basant sur les effets actuels.
+
+\subsection{Solution naïve}
+Si nous avons un équilibre en $x^*$ et $u^*$ tel que $0 = Ax^* + Bu^*$ et on y applique le changement de variable $\Delta x = x - x^*$ et $\Delta u = u - u^*$. En ayant un système attractif, $\lim_{t \rightarrow \infty} \Delta x (t) = 0$.\par
+Dans le cadre d'un four à une équation $\dot{T} = Ku -\alpha (T-T_{ext})$ il faut que $u^* = a/K (T^* - T_{ext})$.\par 
+Le problème est que notre système est \textbf{très susceptible} aux erreurs et peu efficace.
+
+\subsubsection{L'inverse}
+On pourrait être tenté d'inverser les effets d'un filtre pour pouvoir mieux appréhender le résultat $Y = GG^{-1}R = R$. Si on est en RC, la fonction serait $Cs + 1/R$ et $H = p/q$ avec $p$ et $q$ des polynômes:
+\begin{equation}
+deg(q) \geqslant deg(p) \text{ système non causal}
+\end{equation}
+Ce type e système est \textcolor{red}{impossible} en temps réel.\par 
+
+\subsubsection{Erreur}
+Si nous avons une petite erreur en entrée, ceci pourrait perdre son point d'équilibre et avoir des conséquences catastrophique. Ne pourrait marcher que dans des cas bien particuliers. 
+
+\subsection{Solution par feedback}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/feedbeck.png}
+\end{figure}
+On va s'adapter à la sortie pour prendre en compte les erreurs qu'on pourrait avoir.
+\begin{equation}
+Y = \frac{CG}{1 + CG} R + \frac{1}{1 + CG}V
+\end{equation}
+On peut voir aussi comme $Y := TR + (1-T) V$ où $T \approx 1$ idéalement. Ceci n'est pas possible en général à toutes les fréquences. Donc on va souvent designer que $T \approx 1$ aux alentours de la solution en régime. Si $GC = \frac{p}{q}$
+\begin{align*}
+T &= \frac{\frac{p}{q}}{1+ \frac{p}{q}} = \frac{p}{q + p} & (1-T) &= \frac{q + p}{q + p} - \frac{p}{q + p} = \frac{q}{q + p}
+\end{align*}
+
+\subsection{Régulateur proportionnel}
+Il faut bien régler le facteur $P$ dans l'équation $u = P(T_r -T)$. Si on prend une trop petite valeur, le système ne tend pas vers la solution idéale et trop élevé on consomme trop et converge rapidement. Souvent, l'idéal est $P = 1$.
+
+\subsection{Régulateur proportionnel intégral}
+Parfois, on peut faire face à des erreurs "\textit{statiques}". Ce sont des erreurs qui apparaissent quand la solution ne converge pas assez vite et semble converger vers la mauvaise valeur. On va donc ajouter un caractère \textbf{intégrateur} à l'équation pour qu'on force le système à se rapprocher du point de convergence.
+\begin{equation}
+u = P(T_r - T) + \int_{\tau  = 0}^{t} (T_r (t) - T(\tau)) d\tau
+\end{equation}
+Le problème est qu'on a souvent de l'overshoot et des oscillations qui peut s'avérer très ennuyant. On gagne en robustesse face à l'incertitude du modèle, à la variation des conditions et aux perturbations.
+
+\subsubsection{Conclusions}
+Si on a un système RC, on doit pas connaitre le R et C, fonctionne peu importe les paramètres. Si on connait, on peut \textbf{choisir} les pôles et le comportement.\par 
+Cela stabilise si $k$ assez grand $(k>a)$. Si on connait $a$ on peut choisir les pôles.\par 
+Cela est utilisé en industrie (surtout les modèles \textbf{PID} avec donc une dérivation). Fonctionne pas mal avec n'importe quel paramètre.
+
+\subsection{Conclusions}
+La régulation par \textbf{feedback} est plus \textit{robuste} et \textit{flexible} que la régulation en boucle \textbf{ouverte}. On peut commander ce système sans \textbf{aucune connaissance} plutôt correctement. On atténue les perturbations et on peut plus facilement stabiliser un système \textit{instable}.\par 
+Il existe encore d'autres régulateurs. On peut bien adapter, de manière plus complexe, le comportement du système commandé. (choix des pôles, ...)
 
 
 \end{document}
