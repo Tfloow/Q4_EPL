@@ -1529,6 +1529,65 @@ Quand on veut rappeler des mots supposés \textit{inactifs}, on peut avoir du \t
 \subsubsection{Rappel}
 On peut soit le faire manuellement (avec des free et malloc en \textit{C}) mais pas facile. Ou bien, on utilise un \textit{garabge collector} (ramasse-miette) qui est plus pratique et robuste si bien implémenter.
 
+\subsection{Active memory versus memory consumption}
+\begin{itemize}
+\item La mémoire active: combien de mots le programme a besoin à un certain temps. Une \textbf{in-memory database} a une grande quantité de mémoire active mais une petite consommation (car on n'utilise qu'une partie de la database).
+\item La consommation de la mémoire: est la quantité de mots alloués par unité de temps. Donc une \textbf{simulation du mouvement des molécules dans une boite} a une grand consommation de mémoire mais peu de mémoire active.
+\end{itemize}
+
+\section{Deterministic dataflow with ports}
+Simplifie l'utilisation de programme concurrent. On y ajoute des ports si nécessaire.
+
+\subsection{Composition concurrente (nombre fixe de Thread)}
+Si on a plusieurs thread, parfois on doit revenir au principal. Donc le thread original attend que les autres s'arrêtent. C'est ce qu'on appelle la composition concurrente.
+\begin{lstlisting}[escapechar=\%]
+%$(<s>_1 \parallel <s>_2)$%	// %Crée deux threads et attends que les deux se terminent%
+%$<s>_3$%		// %S'exécute que quand les deux se terminent%
+\end{lstlisting}
+
+\subsubsection{Implémentation}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=5cm]{img/deterministicDataflowUnit.png}
+\end{wrapfigure}
+On implémente cela en utilisant des variables \textit{dataflow}. On va utiliser la constante \textcolor{blue}{unit} quand la valeur n'importe pas.\par 
+Cela n'a pas d'importance l'ordre dans lequel on attend.
+
+\subsubsection{Higher-order abstraction}
+On va définir une fonction \textit{\{Barrier Ps\}} avec une liste d'instruction $Ps$.
+\begin{lstlisting}[escapechar=\%]
+proc {Barrier Ps} 
+	Xs={Map Ps fun {$ P} X in thread {P} X=unit end X end}
+in 
+	for X in Xs do 
+		{Wait X} 
+	end
+end
+\end{lstlisting}
+Cette fonction \textit{Barrier} ne peut qu'être réalisé grâce au \textit{deterministic dataflow}.\par 
+Donc on peut créer une abstraction pour cela de types $\textcolor{blue}{conc} <s>_1 \parallel <s>_2 \parallel ... \parallel <s>_n \textcolor{blue}{end}$ qui la même chose que $\{Barrier [\textcolor{blue}{proc} \{\$\} <s>_1 \textcolor{blue}{end} \quad \textcolor{blue}{proc} \{\$\} <s>_2 \textcolor{blue}{end} \quad ... \quad \textcolor{blue}{proc} \{\$\} <s>_n \textcolor{blue}{end} ]\}$
+
+\subsection{Composition concurrente (nombre variable de Thread)}
+On doit arriver à créer de nouveau thread qui se synchronise avec les threads actuels. Cette abstraction \textcolor{red}{ne peut pas} être écrite en deterministic dataflow. Effectivement, l'ordre de création est inconnu donc \textbf{non-déterministique}. On va définir cela avec un port.
+
+\subsubsection{Spécification de l'abstraction}
+Le Thread principal attend que les autres se terminent. 
+\begin{lstlisting}[escapechar=\%]
+{NewThread proc {$} <s> end SubThread} 
+{SubThread proc {$} <s> end}
+\end{lstlisting}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=8cm]{img/newThread.png}
+\end{wrapfigure}
+La fonction \textit{NewThread} crée un nouveau calcul $<s>$ dans le thread \textit{principal} et ressort dans la procédure \textit{SubThread}.\par 
+Donc le \textit{NewThread} se termine qu'après que tous les \textit{SubThread} se terminent. \textit{SubThread} crée un second thread avec $<s>$. Les deux $<s>$ peuvent appeler le \textit{SubThread} et ainsi de suite récursivement. On a ainsi une profondeur d'arbre arbitraire.\par 
+On utilise un \textbf{port} pour compter le nombre de \textit{Threads} actifs. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/newThreadImplementation.png}
+\end{figure} 
+
 
 
 \chapter{Conseils pour la syntaxe d'Oz}
@@ -1546,6 +1605,7 @@ Voici une liste d'astuces et de choses importantes à savoir sur Oz:
 \item Si notre code est le même que celui du voisin mais que vous avez des résultats différents, \textit{relancez emacs ou VScode}. Nettoyer le buffer et feed tout le code dedans.
 \item Pour être plus \textit{productif}, télécharger "Powertoys" sur Windows et activer l'option "\textbf{toujours afficher}" (\textbf{always on top}).
 \end{itemize}
+
 
 \end{document}
 
