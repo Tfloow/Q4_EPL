@@ -1587,6 +1587,140 @@ On utilise un \textbf{port} pour compter le nombre de \textit{Threads} actifs.
 \centering
 \includegraphics[width=8cm]{img/newThreadImplementation.png}
 \end{figure} 
+Pour que cela soit correct, on doit bien incrémenter avant de créer un thread et dé-incrémenter juste avant de le finir sinon on pourrait parfois tomber à 0 threads en cours alors que ce n'est pas vraiment le cas.
+\subsubsection{Usage de l'invariant}
+On pose que la somme des éléments $S$ doit être supérieur ou égal au nombre de threads actifs. Si on tombe à $0$ on a donc tout fini.\par 
+On a 4 actions à une exécution:
+\begin{enumerate}
+\item On envoie 1: donc notre invariant est vrai
+\item On commence un thread: cela se base sur la véracité du premier point. Cela est donc vrai aussi.
+\item On retire 1: le thread ne fait plus rien d'utile et on le fait juste avant de le supprimer. Donc toujours vrai.
+\item On arrête le Thread: rien de spécial, toujours vrai.
+\end{enumerate}
+On va créer une procédure \textit{\{ZeroExit N S\}} qui voit si on tombe à 0:
+\begin{lstlisting}[escapechar=\%]
+proc {ZeroExit N S}
+	case S of X|S2 then
+		if N+X==0 then skip 
+		else {ZeroExit N+X S2} end
+	end
+end
+\end{lstlisting}
+
+\subsection{Conclusion}
+3 grands paradigmes pour la programmation concurrente:
+\begin{enumerate}
+\item \textcolor{red}{Deterministic Dataflow}: le meilleur mais ne peut pas exprimer le \textit{non-déterminisme}. (utile dans le cloud)
+\item \textcolor{red}{Message Passing}: très général mais plus compliqué. On a des "\textit{stateful agents}" qui communiquent entre eux avec des messages \textbf{asynchrones}. (Erlang)
+\item \textcolor{red}{Deterministic Dataflow with Ports}: meilleur approche. On écrit un programme en grande partie comme en \textit{deterministic dataflow}. On y ajoute des ports quand on en a besoin.
+\end{enumerate}
+
+\chapter{Erlang}
+\section{Introduction}
+
+\subsection{Force d'Erlang}
+On a des agents (processus) qui sont légers et s'envoient des \textbf{messages} entre eux. Via cela, on peut avoir de la concurrence et avoir de nombreux processus qui fonctionnent ensemble et parallèlement. On peut ainsi faire des programmes sur plusieurs pc. Il y a une vision de "\textit{Let it fail}" car le langage est robuste et sait intercepter et traiter des erreurs. Si une composante ne fonctionne pas, tout le programme ne s'arrête pas nécessairement. On a des arbres \textbf{superviseurs} qui regardent s'il y a des erreurs.
+
+\subsection{Les bases}
+Erlang est composé de processus qui sont des "\textit{active agents}" qui communiquent de manière asynchrone via du "\textcolor{red}{asynchronous FIFO message passing}". Erlang ne partage rien, toutes les données sont copiées. En erlang, chaque processus à une sorte de boite au lettre qui est accessible via \textbf{pattern matching} et ne dépend pas de l'ordre.
+
+\section{Les performances}
+Pour créer de nouveaux processus et pour envoyer des messages entre, Erlang est extrêmement rapide. Cela est très utile pour des sites web. Là où Apache crash à 4000 requêtes et une bande passante qui se dégrade, Erlang peut en avoir 40000.
+\subsection{Switch AXD301}
+C'est un switch pour la télécommunication qui est basé sur Erlang et agrémenté via du Java et C. On a une perte linéaire quand on a une surcharge. Quand on demande $1000\%$ des capacités du switch, on a $40\%$ d'efficacité. AXD 301 version 3.2 a 1MLOC Erlang, 900KLOC C/C++, 13KLOC Java.
+
+\section{Concept de Base}
+\subsection{Pure Fonctional Core}
+Dans chaque processus, Erlang fonctionne comme un langage purement fonctionnel. Chaque variable à une assignation unique. Les fonctions sont des valeurs avec du "\textit{lexically scoped higher-order programming}. Le pattern matching est utilisable dans les \textit{case}, \textit{if} et \textit{receive}.\par 
+Toutes les données sont symboliques. Les types de données sont similaires à Oz mais on a également les \textcolor{red}{binary vectors} (utilisé pour les calculs de protocoles). 
+
+\subsection{Organisation}
+Un programme en Erlang est composé de \textit{module}	 donc chaque fichier s'écrit comme suit: (dans un fichier \textit{math.erl})
+\begin{lstlisting}[escapechar=\%]
+-module(math).
+-export([areas/1]).
+-import(lists, [map/2]). 
+
+areas(L) -> lists:sum(map(fun(I) -> area(I) end, L)).
+
+area({square,X}) -> X*X;
+area({rectangle,X,Y}) -> X*Y.
+\end{lstlisting}
+L'export montre les fonctions exporter et indique le nombre d'arguments. On importe des modules et fonctions. On a ainsi une dépendance de modules.
+
+\section{Message Passing}
+\subsection{Création et envoi}
+On va créer un nouveau process via la fonction "\textit{spawn}". \textcolor{red}{Pid = spawn(Fun)}. Cela nous renvoie un identifiant de processus. La fonction peut être anonyme ou non. Le Pid est unique et constant. \par 
+On envoie un message via \textcolor{red}{Pid ! Message}. Cela s'envoie de manière asynchrone et toutes les données sont copiées.
+
+\subsection{Réception}
+ On intercepte un message via un \textcolor{blue}{receive}. La boite au lettre est une liste trié de message. On les récupère via le receive puis on fait du pattern matching.\\
+Si la boite au lettre est vide, le processus attend. Sinon, il essaye de match avec un des cas possibles et l'exécute. Si rien ne match, alors le receive se bloque et attend le prochain message. Il reste dans la boite au lettre. Il faut éviter que cela reste indéfiniment dans la boite sinon \textit{memory leak}. \par
+Patterns est une structure de donnée symbolique contenant des identificateurs de variable et des gardes qui sont de simples tests.
+
+\section{Process Linking}
+On relie \textcolor{blue}{Pid1} à \textcolor{red}{Pid2} et il appelle \textbf{lin(\textcolor{red}{Pid2}} pour faire une liaison. Et vice versa pour faire bidirectionnelle.
+
+\subsection{Exit}
+Un processus s'arrête et envoie un \textbf{signal d'exit}. Il envoie la raison de son arrêt aux processus qui sont reliés. Si le processus s'arrête normalement, il renvoie l'atome "\textit{normal}". Si il rencontre une erreur à l'exécution il renvoie quelque chose comme \textcolor{red}{\{Reason, Stack\}}. Le comportement classique est que tous les processus s'arrêtent à cause de l'erreur. On peut aussi le faire capturer des erreurs via "\textit{process\_flag(trap\_exit, true)}. Ainsi, cela est envoyé comme un message sous forme \textcolor{red}{\{‘EXIT’, FromPid, Reason\}}. On peut également tuer un processus via la fonction exit.
+
+\section{Changement dynamique}
+On peut en Erlang modifié le code qui est en cours d'exécution. On a ainsi \textcolor{red}{2} versions des modules qui sont présentes. Les processus peuvent choisir de continuer avec l'ancien ou le nouveau. Si on utilise \textcolor{red}{m:Fun} cela force à utiliser la nouvelle version. 
+
+\section{Abstraction pour des programmes robustes}
+Les erreurs ne peuvent être évités et donc on les manipule. Les fonctions sont \textcolor{red}{fail-fast} pour éviter les problèmes. Les erreurs sont détectables et les programmes ne partagent pas d'états entre eux.
+
+\subsection{Slogan}
+\begin{itemize}
+\item \textbf{Let it fail}: On ne peut pas toujours éviter les erreurs et on doit faire avec. On simplifie les erreurs et on s'y attend.
+\item \textbf{Let some other process do error recovery}: On va utiliser des processus superviseur pour s'occuper des erreurs et relancer le programme. 
+\item \textbf{Do not program defensively}: On ne fait pas de "check" d'erreur. Cela n'enlève pas toutes les erreurs et alourdit le programme.
+\end{itemize}
+
+\subsection{Erlang et OTP système}
+
+\subsubsection{Systèmes}
+On a une certaine hiérarchie dans les \textbf{systèmes}:
+\begin{enumerate}
+\item \textcolor{red}{Release}: Contient toutes les informations pour construire et exécuter un système
+\item \textcolor{red}{Application}: Contient tout le logiciel nécessaire pour faire fonctionner une application. 
+\item \textcolor{red}{Behavior}: Un ensemble de processus qui ensemble implémente un pattern concurrent. Donc contient un superviseur.
+\item \textcolor{red}{Worker}: Un processus qui est une instance d'un comportement. (typiquement: \textit{gen\_server, gen\_event ou gen\_fsm}
+\end{enumerate}
+
+\subsubsection{Comportement}
+On a 5 comportements:
+\begin{enumerate}
+\item \textcolor{red}{Generic server (gen\_server)}: pour construire une architecture client/serveur. On a des registres, timeout, start/stop, state management, appel (a)synchrone, erreur.
+\item \textcolor{red}{Generic event handler/manager (get\_event)}: event handlers, comme des logs, qui répondent à des streams d'évènements et envoie et reçoit des notifications.
+\item \textcolor{red}{Generic finite state machine (gen\_fsm)}: Applications (ex: protocol stack) peuvent être représenter comme des machines d'états finis. On a un ensemble d'état et d'évènement qui donnent des actions et états.
+\item \textcolor{red}{Application}: composant qui peut être initier et arrêter. Il est réutilisable.
+\item \textcolor{red}{Supervisor}: arbre superviseur.
+\end{enumerate}
+
+
+\section{arbre superviseur}
+Les arbres superviseurs prennent l'avantage que des erreurs sont souvent temporaires, donc si on échoue, on relance le processus.
+
+\subsection{Structure et principe}
+On a donc un arbre où la root est le noeud qui supervise ses branches. Elle arrête et relance des nodes enfants.\\
+On a différente méthode de redémarrage comme: \textcolor{red}{one\_for\_one (redémarre un seul), one\_for\_all (redémarre tous les enfants), rest\_for\_one}. On est limité par le nombre de restart possible par interval. Si on excède cela, un superviseur plus élevé prend le relais. Cela est construit ainsi pour éviter les crash en continu.
+
+\section{Conclusions}
+La plateforme \textcolor{red}{Erlang/OTP} est une combinaison de Erlang et de librairie standard OTP:
+\begin{itemize}
+\item Erlang: processus (agent actif) qui s'envoie des messages asynchrones et ne partagent pas d'état.
+	\begin{itemize}
+	\item Tous les processus sont définis en programmation fonctionnelle et supporte des mises à jour dynamiques.
+	\item On détecte les erreurs
+	\end{itemize}
+\item OTP: permet d'avoir des programmes robustes en utilisant les comportements, test et arbres superviseurs.
+	\begin{itemize}
+	\item Un comportement est un pattern générique de concurrence. 
+	\item Un arbre superviseur contrôle comment gérer les erreurs.
+	\item Les tests sont faits pour la concurrence et la distribution. On peut y injecter des erreurs.
+	\end{itemize}
+\end{itemize}
 
 
 
