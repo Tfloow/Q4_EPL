@@ -1304,8 +1304,160 @@ On va appliquer le théorème des résidus pour intégrer sur $- \infty$ à $\in
 Une propriété extrêmement utile est \textcolor{red}{$df(t)/dt \rightarrow sF(s) -f(0)$}.\par 
 Il faut aussi bien réduire en fraction simple.
 
+\subsection{Résolution}
+Les calculs sont longs et méthodiques, au début, il faut ré-écrire toutes les équations différentielles. Une fois qu'on qu'une seule variable dans cette équation, on remplace les dérivées par leur équivalent en Fourier unilatéral. Si on a un signal qui passe de 2 à 1 Volts, il faut noter \textcolor{red}{$1 u(t)$} avec $u(t)$ la fonction échellon. Cela est important puisque qu'on passe d'une équation différentielle à une analyse en continue.
+
+\chapter{Mesure}
+\section{Erreurs et incertitudes}
+\subsection{Erreurs vs. incertitudes}
+\subsubsection{Erreur}
+On nomme l'erreur comme $e$ qui est observé quand on mesure une valeur $x$ et son résultat réelle $\xi$.\\
+L'erreur relative $e_r$ est le rapport entre l'erreur absolue $e$ et la valeur vraie $\xi$.\\ 
+L'erreur $e$ peut avoir une composante \textbf{systématique} $\delta$ et une composante \textbf{aléatoire} $\epsilon$.
+\begin{align*}
+e &\triangleq  x - \xi & e_r &\triangleq \frac{e}{\xi} & e &= \delta + \epsilon 
+\end{align*}
+
+\subsubsection{Incertitudes}
+C'est une \textit{estimation} de l'erreur \textbf{maximale} commise lors de la mesure. C'est donc un intervalle autour de la mesure avec une certaines probabilités où la valeur vraie se trouve. 
 
 
+\subsection{Origine des erreurs}
+Elles proviennent des instruments de mesures, de RLC cachés. Pour contrer les RLC cachés, on peut les inclure de manière explicite à notre circuit ou les annuler.\\
+Le bruit électrique est aussi un facteur. On peut changer de composants qui génèrent moins de bruit. On peut aussi faire une moyenne sur différentes mesures.\\
+L'interférence électrique est aussi un souci. On peut le diminuer via un blindage, filtrage ou un calcul des valeurs moyennes.\\
+On observer aussi une variation de l'efficacité en fonction de la température des composants. Et certains composants peuvent différer des valeurs promises.
+\subsubsection{Puissance prélevé par la mesure}
+On va toujours essayer d'éviter les résistances en série. On probe toujours aux bornes de la résistances et non plus loin pour éviter de prendre en compte la résistivité des fils.
+
+\subsubsection{Haute fréquence}
+On utilise des câbles coaxials qui est composé d'une âme qui n'est autre que le câble transportant le courant et d'une gaine. La gaine est une sorte de capacité mise en parallèle. Cela nous évite un pôles à $160 Hz$.\\
+
+On utilise des câbles triaxials qui ont aussi une âme et une gaine mais possède une \textbf{garde} en plus. Cette garde est couplé à un suiveur pour obtenir un signal plus idéal.
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/triaxial.png}
+\caption{Représentation d'un câble triaxial}
+\end{figure}
+
+\subsection{Éléments de statistique}
+Via nos équations précédentes (\ref{eq:erreur}) on peut établir que la valeur mesurée vaut $x = \xi + \delta + \epsilon$. Ceci suit une loi \textcolor{red}{normal} de $N(\mu , \sigma^2)$ où $\mu = \xi + \delta $.\par 
+On dit qu'une mesure est reproductible si on a un écart type $\sigma$ faible donc un erreur aléatoire $\epsilon $ faible.\par 
+La mesure exacte est la valeur moyenne $\mu$ proche de la valeur vraie $\epsilon$, donc une erreur systématique $\delta$ faible.
+
+\subsubsection{Étalonnage}
+On va essayer de supprimer l'erreur \textit{systématique} $\delta$. La valeur $2 \sigma$ correspond à l'incertitude absolue.
+
+
+\subsection{Opérations arithmétiques sur les incertitudes}
+Si on a deux mesures $A$ et $B$ qui n'ont aucune erreur systématique. De plus, $\epsilon_A$ et $\epsilon_B$ sont purement aléatoires et indépendantes.
+\begin{equation}
+\begin{cases}
+x_A = \epsilon_A + \xi_A \quad \text{suivant la loi normal }N(0, \sigma_A^2)\\
+x_B = \epsilon_B + \xi_B \quad \text{suivant la loi normal }N(0, \sigma_B^2)
+\end{cases}
+\end{equation}
+La grandeur $Y = A \pm B$ à une caractéristique:
+\begin{equation}
+x_Y = \xi_A \pm \xi_B + \epsilon_Y \quad \text{suivant la loi normal }N(0, \sigma_Y^2)
+\end{equation}
+Et donc $\sigma_Y = \sqrt{\sigma_A^2 + \sigma_B^2}$.\\
+La grandeur $Y = A * B$ à une caractéristique:
+\begin{align*}
+x_Y & \approx \xi_A * \xi_B * \left( 1 + \frac{\epsilon_A}{\xi_A} + \frac{\epsilon_B}{\xi_B}  \right) \\
+& \approx \xi_A * \xi_B + \epsilon_Y \text{suivant la loi normal }N(0, \sigma_Y^2)\\
+\sigma_Y &= \xi_A * \xi_B \sqrt{\left( \frac{\sigma_A}{\xi_A}\right)^2 + \left( \frac{\sigma_B}{\xi_B}\right)^2}
+\end{align*}
+La grandeur $Y = A / B$ à les caractéristiques suivantes:
+\begin{align*}
+x_Y &\approx \frac{\xi_A}{\xi_B} * \left( 1 + \frac{\epsilon_A}{\xi_A} - \frac{\epsilon_B}{\xi_B} \right)\\
+& \approx \frac{\xi_A}{\xi_B} + \epsilon_Y  \text{suivant la loi normal }N(0, \sigma_Y^2)\\
+\sigma_Y &= \frac{\xi_A}{\xi_B} \sqrt{\left( \frac{\sigma_A}{\xi_A}\right)^2 + \left( \frac{\sigma_B}{\xi_B}\right)^2}
+\end{align*}
+
+\section{Ponts pour la mesure d'impédance}
+\subsection{Principe}
+Les comparaisons sont beaucoup plus précises que des mesures absolues. Cela est utile pour les voltmètre numérique.
+
+\subsection{Utilisation}
+Mesure absolue de résistances par rapport à un standard. Cela est exacte à moins de $100$ ppm près. On peut mesurer de faible variations de résistance. On peut même mesurer des impédances.
+
+\subsection{Pont de Wheatstone}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=7cm]{img/Wheatstone.png}
+\end{wrapfigure}
+On mesure des petite variations de résistances et on
+ réalise des mesures absolues de résistance. On peut ainsi établir la fonction de transfert $H_W$:
+\begin{align*}
+H_W &= \frac{V_{AB}}{V_S} = \frac{R_{AY}}{R_{AX} + R_{AY}} - \frac{R_{BY}}{R_{BX} + R_{BY}}
+\end{align*}
+Ainsi, on peut réaliser 2 modes bien spécifiques, observer des faibles modifications:
+\begin{align*}
+R_{AX} &= (1 + \alpha) R\\
+R_{AY} &= R_{BX} = R_{BY} = R\\
+H_W &= \frac{\alpha}{2(2+\alpha)}
+\end{align*}
+Ou bien de faire des mesures absolues:
+\begin{align*}
+H_W &= V_{AB} = 0\\
+R_{BX} &= R_{BY}\\
+R_{AX} &= R_{AY}
+\end{align*}
+
+\subsection{Pont de Wien}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics[width=7cm]{img/Wien.png}
+\end{wrapfigure}
+Ressemble très fort au pont de Wheatstone. Il faut bien remarquer le courant \textbf{AC} en entrée et pas DC. On a ces équations pour la fonction de transfert.
+\begin{align*}
+H_W &= \frac{V_{AB}}{V_S} = \frac{Z_{AY}}{Z_{AY} + Z_{AX}} - \frac{R_{BY}}{R_{BX} + R_{BY}}\\
+& \begin{cases}
+\frac{1}{Z_{AX}} = \frac{1}{R_{AX}} + j \omega_0 C_{AX}\\
+Z_{AY} = R_{AY} - j \frac{1}{\omega_0 C_{AY}}
+\end{cases}
+\end{align*}
+Pour mesurer, on veut que \textcolor{red}{$H_W = V_{AB} = 0$}:
+\begin{align*}
+\frac{Z_{AY}}{Z_{AX}} = \frac{R_{BY}}{R_{BX}} & \Longrightarrow \frac{R_{AY}}{R_{AX}} + \frac{C_{AX}}{C_{AY}} + j \left( \omega_0 R_{AY} C_{AX} - \frac{1}{\omega_0 R_AX C_AY} \right) = \frac{R_{BY}}{R_{BX}}\\
+& \Longrightarrow \begin{cases}
+R_{AX} = \frac{R_{BX}}{R_{BY}} \left( R_{AY} + \frac{1}{(\omega_0 C_{AY})^2 R_{AY}} \right)\\
+C_{AX} = \frac{1}{\omega_0^2 C_{AY} R_{AY} R_{AX}}
+\end{cases}
+\end{align*}
+\newpage
+
+\subsection{Pont de Maxwell}
+\begin{wrapfigure}{r}{.5\textwidth}
+\centering
+\includegraphics{img/Maxwell.png}
+\end{wrapfigure}
+Même idée que le pont de Wien mais pour les inductances, on va placer l'inductance sur l'autre coté.
+\begin{align*}
+H_W &= \frac{V_{AB}}{V_S} = \frac{Z_{AY}}{Z_{AY} + R_{AX}} - \frac{R_{BY}}{R_{BY} + Z_{BX}}\\
+& \begin{cases}
+Z_{BX} = R_{BX} + j \omega_0 L_{BX}\\
+\frac{1}{Z_{AY}} = \frac{1}{R_{AY}} - j \omega_0 C_{AY}
+\end{cases}
+\end{align*}
+Et pour mesurer l'inductance on veut que $H_W = V_{AB} = 0$ donc:
+\begin{align*}
+\frac{R_{AX}}{Z_{AY}} = \frac{Z_{BX}}{R_{BY}} & \Longrightarrow \frac{R_{AX}}{R_{AY}} + j \omega_0 R_{AX} C_{AY} = \frac{R_{BX}}{R_{BY}} + j \frac{\omega_0 L_{BX}}{R_{BY}}\\
+& \Longrightarrow \begin{cases}
+R_{BX} = R_{BY}\frac{R_{AX}}{R_{AY}}\\
+L_{BX} = R_{BY}C_{AY}R_{AX}
+\end{cases}
+\end{align*}
+
+\subsection{Impédances parasites en parallèle}
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{img/Wagner.png}
+\caption{Protection de Wagner}
+\end{figure}
+On fait face à un problème, on a un courant de fuite vers le blindage. On va donc annuler la tension aux bornes des éléments parasites les plus \textit{critiques}.\\
+Ici, on annuler l'effet des courants de fuite des nœuds $A$ et $B$ vers la garde afin que l'équilibre soit \textit{correct}.
 
 \end{document}
 
