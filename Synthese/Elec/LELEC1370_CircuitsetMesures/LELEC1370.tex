@@ -386,12 +386,12 @@ Attention à bien remarquer l'utilisation d'une impédance au lieu d'une admitta
 \end{figure}
 
 \subsection{Admittance équivalente à une impédance}
-A une \textcolor{red}{fréquence précise}, tout dipôle en série peut être remplacé par un dipôle en parallèle.\\
+À une \textcolor{red}{fréquence précise}, tout dipôle en série peut être remplacé par un dipôle en parallèle.\\
 
 En effet, il suffit de recréer le même vecteur. Dans le cas en \textbf{série}, on impose le courant donc:
 \begin{align}
 \textbf{$V_{R}$} &= |\textbf{Z}|cos(\varphi) \textbf{I} \rightarrow \textbf{Z} = R\\
-\textbf{$V_{L}$} &= |\textbf{Z}|sin(\varphi) \textbf{I} \rightarrow \textbf{Z} = \omega L \\
+\textbf{$V_{L}$} &= |\textbf{Z}|sin(\varphi) \textbf{I} \rightarrow \textbf{Z} = \omega L&
 \end{align}
 Et dans le second cas, on impose la tension au borne:
 \begin{align}
@@ -644,7 +644,7 @@ Et donc le gain est $\frac{1}{24+1}$
 
 \subsubsection{Fonction de transfert}
 On a en entrée $E(j\omega)$ et le bloc de transfert $T(j\omega)$ nous donne $S(j\omega) = T(j\omega) . E(j\omega)$.\\
-On peut remplacer les $j \omega$ par $s$ (\textcolor{red}{ajouter chapitre ultérieurement})\\
+On peut remplacer les $j \omega$ par $s$ (voir chapitre \ref{Laplace})\\
 On retrouve ce genre de bloc dans les \textit{amplificateurs, filtres, intégrateurs, ...}
 
 \subsubsection{Soustracteur} 
@@ -663,9 +663,9 @@ Il n'y a pas qu'une seule configuration qui produit un résultat. On peut interv
 \end{figure}
 On peut voir ce système comme:
 \begin{align*}
-T_{bf}(s) = \frac{1}{H(s)}.\frac{G(s) . H(s)}{1 + G(s). H(s)} = T_{idéal} (s) . \frac{T_{bo}(s)}{1+T_{bo}(s)} = T_{idéal} (s) . \frac{1}{1 + \frac{1}{T_{bo}(s)}}
+T_{bf}(s) = \frac{1}{H(s)}.\frac{G(s) . H(s)}{1 + G(s). H(s)} = T_{ideal} (s) . \frac{T_{bo}(s)}{1+T_{bo}(s)} = T_{ideal} (s) . \frac{1}{1 + \frac{1}{T_{bo}(s)}}(
 \end{align*}
-Dans un monde idéal, le gain $G(s)$ tend vers $\infty$. Ainsi la fonction de transfert \textit{idéal} vaut donc $T_{idéal}(s) = 1/H(s)$
+Dans un monde idéal, le gain $G(s)$ tend vers $\infty$. Ainsi la fonction de transfert \textit{idéal} vaut donc $T_{ideal}(s) = 1/H(s)$
 
 
 \subsection{Bode}
@@ -734,7 +734,7 @@ Il faut bien régler l'amortissement car on peut soit rendre le système \textit
 \subsection{Rappels}
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
-\includegraphics[width=6cm]{img/QuadriAmp.png}
+\includegraphics[width=8cm]{img/QuadriAmp.png}
 \end{wrapfigure}
 On peut simplifier des montages avec des ampli-ops en quadripôles. On remplace donc le montage en rouge ci-contre par le quadripôle en bleu.\\
 Donc on les utilise lorsqu'on fait des opérations sur des signaux avec une idée de \textit{input} et \textit{output}.\\
@@ -1283,7 +1283,7 @@ On peut réaliser ce type de changement car on suppose le transfert d'énergie c
 La manipulation de ce type de circuit se repose sur l'utilisation des formules vu en \ref{formulesSinus}
 
 
-\chapter{Transformée de Laplace}
+\chapter{Transformée de Laplace} \label{Laplace}
 On va utiliser la transformée de Laplace \textit{bilatérale} qui n'est rien d'autre que la transformé de Fourier en complexe et qui est plus général.
 
 \section{Équation différentielle avec Fourrier}
@@ -1325,7 +1325,7 @@ C'est une \textit{estimation} de l'erreur \textbf{maximale} commise lors de la m
 \subsection{Origine des erreurs}
 Elles proviennent des instruments de mesures, de RLC cachés. Pour contrer les RLC cachés, on peut les inclure de manière explicite à notre circuit ou les annuler.\\
 Le bruit électrique est aussi un facteur. On peut changer de composants qui génèrent moins de bruit. On peut aussi faire une moyenne sur différentes mesures.\\
-L'interférence électrique est aussi un souci. On peut le diminuer via un blindage, filtrage ou un calcul des valeurs moyennes.\\
+L'interférence électrique est aussi un souci. On peut la diminuer via un blindage, filtrage ou un calcul des valeurs moyennes.\\
 On observer aussi une variation de l'efficacité en fonction de la température des composants. Et certains composants peuvent différer des valeurs promises.
 \subsubsection{Puissance prélevé par la mesure}
 On va toujours essayer d'éviter les résistances en série. On probe toujours aux bornes de la résistances et non plus loin pour éviter de prendre en compte la résistivité des fils.

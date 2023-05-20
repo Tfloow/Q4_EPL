@@ -78,7 +78,7 @@ Dans ce chapitre, on s'intéresse aux ensembles, cardinalité et équipotences d
 Un ensemble est un \textit{collection} d'objets, \textit{sans répétition}, ces derniers sont appelés \textit{éléments} de l'ensemble.
 Donc un ensemble peut être des chiffres, des lettres, il peut être vide symbolisé par $void$ %à ajouter
 On peut réaliser des opérations dessus, on peut déterminer des \textit{sous-ensembles d'ensemble} donc des ensembles issus d'ensemble.
-On a également une notion s'appelant le \textit{complément} d'un ensemble dénoté $\tilde{A}$\\%trouver le bon charactère
+On a également une notion s'appelant le \textit{complément} d'un ensemble dénoté $\overline{A}$\\%trouver le bon charactère
 
 \subsubsection{Langage}
 Un \textit{langage} n'est autre qu'un mot ou bien un ensemble de caractères d'une taille fixée. Une chaine vide est écrite via le caractère "$\epsilon$".\\
@@ -99,10 +99,10 @@ Il n'existe pas plus d'un b pour un a. Si pour un a il n'existe pas de b, on dit
 \subsubsection{Propriétés des fonctions}
 \begin{itemize}
 \item un \textcolor{brown}{domaine de fonction} ou dom(f) $= {a \in A | f(a) \neq \perp}$
-\item une \textcolor{brown}{image de fonciton} ou image(f) $= b \in B | \exists a \in A: b = f(a)$
+\item une \textcolor{brown}{image de fonction} ou image(f) $= b \in B | \exists a \in A: b = f(a)$
 \item f est dit \textcolor{brown}{fonction totale} si dom(f) $= A$
 \item f est dit \textcolor{brown}{fonction partielle} si dom(f) $\in A$ % trouver le symbole pour include
-\item f est \textcolor{brown}{surjectif} ssi image(f) = B autrement dit, tout élement est associé à minimum 1 élément dans B.
+\item f est \textcolor{brown}{surjectif} ssi image(f) = B autrement dit, tout élément est associé à minimum 1 élément dans B.
 \item f est \textcolor{brown}{injectif} ssi $\forall a, a' \in A: a \neq a' \Rightarrow f(a)\neq f(a')$ autrement dit on ne fait correspondre qu'au plus un élément de A dans B.
 \item f est \textcolor{brown}{bijectif} s'il combine \textit{surjectif} et \textit{injectif}
 \end{itemize}
@@ -209,10 +209,10 @@ On dit qu'un ensemble d'algorithme est \textcolor{red}{récursivement énumérab
 
 \subsubsection{Fonctions caractéristiques} \label{caract}
 Une fonction caractéristique de $A \subseteq N$ et:
-\begin{align}
+\begin{align*}
 X_A : N \rightarrow N : X_A(x) &= 1 \text{ si } x \in A\\
 &= 0 \text{ si } x \in A
-\end{align} 
+\end{align*} 
 C'est une autre manière de déterminer si un ensemble est récursif si $X_A$ est une fonction \textit{calculable}.\\
 On dit qu'une fonction est récursivement énumérable ssi il existe une fonction f calculable ayant pour domaine A. Ou bien, on dit que A est vide \textit{ou} l'image de f est A ayant une fonction f \textit{totale} calculable.\\
 Un \textcolor{red}{ensemble récursivement \textit{énumérable}} est un ensemble dont la bijection des $\mathbb{N}$ est énumérable et calculable.
@@ -317,11 +317,11 @@ K &= \{n | (n,n) \in \text{HALT}\}\\
 Donc K et HALT \textbf{ne sont pas} récursifs mais sont récursivement énumérable car si un élément n'appartient pas à K ou HALT, il va boucler mais fournir la bonne solution s'il appartient à ces ensembles.\\
 De plus K est la diagonale de \textit{HALT}.
 
-$\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de prouver qu'un probable n'appartient pas à cet ensemble. pareil pour $\overline{K}$
+$\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de prouver qu'un élément probable n'appartient pas à cet ensemble. pareil pour $\overline{K}$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5cm]{img/ensembleFonction.png}
+\includegraphics[width=7cm]{img/ensembleFonction.png}
 \caption{Schématisation des fonctions et ensembles de fonctions}
 \end{figure}
 
@@ -365,11 +365,11 @@ $Q_k$ & interpret(k,0) & interpret(k,1) & ... & \textcolor{red}{interpret(k,k)} 
 La colonne \textit{Q} correspond à l'ensemble des programmes et la ligne de nombre correspond aux entrées de chaque programme.
 
 Tous les programmes se terminent donc \textit{jamais} $\perp$. On sélectionne la diagonale:
-\begin{align}
+\begin{align*}
 diag(n) &= interpret(n,n)\\
 diag_{mod}(n) &= interpret(n,n) + 1\\
 Q_l &= diag_{mod}
-\end{align}
+\end{align*}
 Et donc, on voit facilement que à la ligne $l$ il y aura un souci avec $diag$ et notre entrée à $Q_l$ qui n'est autre que $diag_{mod}$. en effet $diag_{mod}(l) \neq diag(l)$. Donc la fonction \textit{interpret} n'est \textbf{pas} calculable en \textit{Q}.\\
 
 Le \textit{théorème} nous dit donc que: Si un langage de programmation (non trivial) ne permet que le calcul de fonctions totales, alors: 
@@ -422,9 +422,9 @@ On suppose que $f(n)$ est calculable et on veut montrer que halt est calculable.
 \item On regarde si le résultat de cette fonction calculable pour créer halt:
 \begin{lstlisting}[escapechar=\%]
 if F(d) = 1 then
-	print(0) %//\textit{car on est bottom et cela boucle}%
+	print(0) %//\textit{car le programme se termine}%
 else
-	print(1) %//\textit{car le programme se termine}%
+	print(1) %//\textit{car on est bottom et cela boucle}%
 \end{lstlisting}
 \item Donc on en conclue que cette fonction halt est non-calculable
 \end{enumerate}
@@ -461,7 +461,7 @@ De plus, si un programme est récursif, on peut savoir de quel ensemble il est.
 \textcolor{red}{alors} toutes les fonctions calculables ont cette propriété ou aucune fonction
 calculable n’a cette propriété
 \end{enumerate}
-Voyons plus en détail ce que chacun veule dire:
+Voyons plus en détail ce que chacun veut dire:
 \begin{enumerate}
 \item C'est une simple traduction du théorème en français.
 \item Cela signifie qu'on ne peut pas vérifier si 2 programmes sont équivalents !
@@ -533,18 +533,106 @@ On dit que:
 Comme nous avons $m,n \geq 0$, il existe un transformateur de programmes appelés $S_n^m$ qui reçoit: - $P_k$ avec $m+n$ arguments, $m$ valeurs $v_1, ..., v_m$\\
 Cela renvoi comme résultat un programme P à $n$ arguments. Donc $P(x_1, ..., x_n)$ calcule la \textit{même} fonction que $P_k(x1, ..., x_n, x_{n+1}, ..., x_{n+m})$
 
+\section{Théorème du point fixe}
+C'est un résultat qui montre que quelque chose est possible.
+\subsection{Définition}
+Si on a une fonction $f$ qui est \textbf{totale calculable}, je sais qu'il existe $k$ tel que:
+\begin{equation}
+\varphi_k^{(n)} = \varphi_{f(k)}^{(n)}
+\end{equation}
+Pour tout transformateur (notre fonction totale calculable) de programme T, il existe deux programmes $P_k$ et $P_j$ tels que:
+\begin{enumerate}
+\item $P_j$ est la transformation de $P_k$ via $T$
+\item $P_k$ et $P_j$ calculent la même fonction (qui n'est pas nécessairement totale)
+\end{enumerate}
 
+\subsection{Applications}
+\begin{itemize}
+\item Il existe un programme $P_n$ tel que $P_n$ ne s'arrête que pour la donnée $n$.
+\item Il existe un programme $P_n$ tel que $P_n$ donne toujours $n$ comme résultat.
+\item $K = \{n | \varphi_n (n) \neq \perp \}$ n'est pas récursif.
+\item Transformateur de programmes qui remplaces les $+$ en $-$.
+\end{itemize}
 
-\textcolor{red}{TODO section 10 et 11}
+\subsubsection{Démonstration pour K}
+Si on a un programme $\varphi_n (x) = \perp$ $\forall x$ (boucle tout le temps) et un autre $\varphi_m (x) = x)$ $ \forall x$. On définit une fonction:
+\begin{align*}
+f(x) &= n \text{ si } x \in K\\
+&= m \text{ si } x \notin K
+\end{align*}
+Donc $f$ est totale et calculable si $K$ est \textbf{récursif}. On va appliquer le \textcolor{blue}{point fixe}: $\exists k: \varphi_k = \varphi_{f(k)}$. Mais $k \in K$ ?\\
+\underline{Si c'est le cas}: alors $f(k) = n$ par définition de $f$. Donc $\varphi_k (k) = \varphi_n (k)$ via le point fixe. Mais $\varphi_k (k) \neq \perp$ car appartient à $K$ mais $\varphi_n (k) = \perp$. Contradiction.\\ 
+\underline{Si ce n'est pas le cas}: alors $f(k) = m$. Donc $\varphi_k (k) = \varphi_m (k)$. $\varphi_k (k) = \perp$ car n'appartient pas à l'ensemble et $\varphi_m (k)$ est constant $k$. Contradiction.
 
-\section{Autre problèmes non calculables}
+\subsection{Théorème de Rice via théorème du point fixe}
+Si $A \neq \varnothing$ et $A \neq \mathbb{N}$ et $\forall i \in A$, $\forall j \in \overline{A}$ qui $\varphi_i \neq \varphi_j$ donc $A$ est non récursif.
+
+\subsubsection{Démonstration}
+Comme on a $A \neq \varnothing : n \in A$ et $A \neq \mathbb{N}: m \in \overline{A}$. On définit:
+\begin{align*}
+f(x) &= m \text{ si } x \in A\\
+&= n \text{ si } x \in \overline{A}
+\end{align*}
+Cette fonction $f$ est totale calculable si $A$ est récursif !\\
+En appliquant le point fixe: $\exists k : \varphi_k = \varphi_{f(k)}$. Mais $k \in A$ ?\\
+\underline{Si c'est le cas}: alors $f(k) = m$ alors $\varphi_k = \varphi_m$ donc $k \in \overline{A}$ par définition. En effet $m \in \overline{A}$ et grâce à l'hypothèse du théorème de \textbf{Rice}. \\
+\underline{Si ce n'est pas le cas}: alors $f(k) = n$ alors $\varphi_k = \varphi_n$ donc $k \in A$ par définition. En effet $n \in A$ et grâce au théorème de \textbf{Rice}.\\
+Donc $A$ est \textbf{non récursif} !
+
+\subsection{Analyse}
+C'est un théorème important et central. Il utilise \textbf{uniquement} la propriété $S$ des langages de programmation. Il implique:
+\begin{enumerate}
+\item Théorème de Rice.
+\item La non récursivité de $K$.
+\item Implie la non calculabilité de fonction $HALT$.
+\end{enumerate}
+
+\section{Démonstration du théorème du point fixe}
+On va faire la technique des $3$ lapins. Si on a une fonction $f$ qui est totale calculable, on veut montrer que $\exists k: \varphi_k = \varphi_{f(k)}$.
+\subsubsection{Lapin 1}
+\begin{equation}
+h(u,x) = \begin{cases}
+\varphi_{\varphi_u (u)}(x) \text{ si } \varphi_u (u) \neq \perp \\
+\perp \text{ sinon}
+\end{cases}
+\label{Lapin1}
+\end{equation}
+Cette fonction $h$ est calculable. On va d'abord exécuter $\varphi_u (u)$ puis on essaye de faire l'autre $\varphi$ sinon $\perp$.
+
+\subsubsection{Lapin 2}
+\begin{equation}
+h(u,x) = \varphi_{g(u)} (x)
+\label{Lapin2}
+\end{equation}
+On va appliquer la propriété S. $g$ existe et est totale calculable.
+
+\subsubsection{Lapin 3}
+\begin{equation}
+t(x) = f(g(x))
+\end{equation}
+$t$ est totale calculable car $g$ l'est et $f$ de mon hypothèse l'est. Ainsi, on a un \textbf{numéro de programme} $k'$.
+\begin{equation}
+\exists k' : t(x) = \varphi_{k'}(x) = f(g(x))
+\label{Lapin3}
+\end{equation} 
+
+\subsubsection{Fin du tour de magie}
+\begin{align*}
+\forall x : h(k',x) &= \varphi_{g(k')} (x) \text{ via Lapin 2 (\ref{Lapin2})}\\
+\cline{1-2}
+\forall x h(k', x) &= \varphi_{\varphi_{k'} (k')} (x) \text{ via Lapin 1 (\ref{Lapin1})}\\
+&= \varphi_{f(g(k'))} (x) \text{ via Lapin 3  (\ref{Lapin3})}
+\end{align*}
+Si je pose que $k = g(k')$ alors $\forall x : \varphi_k (x) =  \varphi_{f(k)} (x)$.
+
+\section{Autres problèmes non calculables}
 \subsubsection{Liste équivalente de mot}
 Si on a 2 listes comme ci-dessous, il n'existe \textbf{aucun} algorithme qui nous permettent de trouver une suite d'indice qui produit 2 mots équivalents depuis deux listes. C'est donc un problème \textbf{non calculable}.
 \begin{lstlisting}[escapechar=\%]
 %$\Sigma$% = {a,b} 
 U = {u1=b, u2=babbb, u3=ba}
 V = { v1=bbb, v2=ba, v3=a}
-Res = {2 1 1 3} //%car U: babb, b, b, ba et V: ba, bbb,bbb, a%
+Res = {2 1 1 3} //%car U: babbb, b, b, ba et V: ba, bbb,bbb, a%
 \end{lstlisting}
 
 \subsubsection{Équations diophantiennes}
@@ -683,8 +771,9 @@ C'est donc un modèle de calcul. On parcourt le mot symbole par symbole et on te
 
 Un état acceptant est représenté par un \textbf{double cercle} et un état non-acceptant est représenté par un \textbf{simple cercle}. Les flèches ou les \textit{arcs} sont les \textcolor{blue}{fonction de transition}.\\
 
-Un mot est accepté si l'état finale de ce mot est dans l'état \textit{acceptant}. (et vice-versa)\\
-Dans un automate fini, son exécution se finit \textbf{toujours}! Donc cela ne détermine que des ensembles \textcolor{blue}{récursifs} (mais pas tous les ensembles récursifs (\ref{HA}))
+Un mot est accepté si l'état final de ce mot est dans l'état \textit{acceptant}. (et vice-versa)\\
+Dans un automate fini, son exécution se finit \textbf{toujours}! Donc cela ne détermine que des ensembles \textcolor{blue}{récursifs} (mais pas tous les ensembles récursifs (\ref{HA}))\\
+Il est aussi important de remarquer que si on ne possède pas de transition à un état, on échoue et l'automate échoue !
 
 \subsection{Extension}
 On peut étendre les automates aux \textcolor{blue}{automates finis non déterministes}. On a donc plusieurs transitions possibles pour une paire. Plusieurs exécutions pour une même donnée.\\
@@ -766,13 +855,13 @@ On peut également étendre cela aux fonctions $\mathbb{N}^n \rightarrow n$. Ce 
 Le but de ces machines de \textit{Turing} est d'être à l'essentielle. On est à l'essence même des principes de calculabilité. De plus, la complexité est plutôt simple via le concept de transition.
 
 \subsection{Extensions des Machines de Turing}
-On va donc modifier le modèle de base des machines de Turing. Mais est-ce plus \textit{puissant}(peut calculer plus de fonctions) et plus \textit{efficace}(moins d'étape à réaliser).
+On va donc modifier le modèle de base des machines de Turing. Mais est-ce plus \textit{puissant} (peut calculer plus de fonctions) et plus \textit{efficace} (moins d'étape à réaliser).
 
 \subsubsection{Changement de convention}
 On peut maintenant faire bouger la tête de \textcolor{blue}{plusieurs} cases et on a plusieurs états \textcolor{blue}{stop}. On a donc la même puissance mais une accélération du processus.\\
 On peut aussi limiter l'alphabet en ayant un alphabet \textcolor{blue}{binaire}. Toujours même puissance et efficacité. Mais cela va \textit{limiter} le nombre d'état possible donc va enfaite limiter la machine.\\
 
-On peut aussi imaginer un ruban \textcolor{blue}{uni-directionnel} donc aller que vers la gauche. Toute machine de Turing peut être ré-exprimer dans ce type de machine. Même puissance mais ralentissement linéaire.\\
+On peut aussi imaginer un ruban \textcolor{blue}{uni-directionnel} donc aller que vers la gauche. Toute machine de Turing peut être ré-exprimer dans ce type de machine. On perd en puissance et ralentissement linéaire.\\
 On peut avoir un ruban multi case. Donc même puissance et même efficacité.\\
 
 On peut avoir plusieurs rubans avec chacun ayant sa propre tête de lecture. Donc chaque tête est indépendante (\textit{thread}). On aura toujours la même puissance mais une accélération quasi quadratique.\\
@@ -1146,7 +1235,7 @@ On a 3 grandes mesures:
 
 \subsection{Calcul de complexité}
 Pour la \textit{complexité d'un algorithme}, on peut soit utiliser des \textit{benchmarks} soit des analyses d'algorithmes.\par
-Pour la \textit{complexité d'un problème} est la complexité d'un algorithme le résolvant ou par \textit{induction}.
+Pour la \textit{complexité d'un problème} on utilise la complexité d'un algorithme le résolvant ou l'\textit{induction}.
 
 \subsubsection{Benchmark}
 On mesure le \textit{temps d'exécution} d'un certains programmes avec des certaines données sur une même machine. Ainsi, on peut comparer les machines et programmes entre eux
@@ -1242,7 +1331,7 @@ Via cette définition, on va pouvoir:
 Ainsi, on va utiliser 3 méthodes de réduction:
 \begin{enumerate}
 \item La réduction algorithmique: permet de déduire des propriétés sur la calculabilité
-\item La réduction formelle:  permet de déduire des propriétés sur la complexité
+\item La réduction fonctionnelle:  permet de déduire des propriétés sur la complexité
 \item La réduction polynomiale:  permet de déduire des propriétés sur la complexité
 \end{enumerate}
 
@@ -1345,7 +1434,7 @@ Pour toute fonction totale calculable f, il existe un ensemble A récursif tel q
 Il existe toujours des problèmes plus complexes qu'une complexité donnée.
 
 \chapter{NP-complétude}
-Un problème intrinsèquement complexes ont une complexité \textit{non polynomiale}.\par 
+Les problèmes intrinsèquement complexes ont une complexité \textit{non polynomiale}.\par 
 On veut savoir si il existe un algorithme \textcolor{red}{non déterministe polynomiale}, existe-t-il alors un algorithme \textcolor{red}{déterministe polynomial} résolvant ce même problème?\par 
 Si un ensemble A appartient à NP, A appartient-il alors à P ?
 \begin{equation}
@@ -1353,7 +1442,7 @@ Si un ensemble A appartient à NP, A appartient-il alors à P ?
 \end{equation}
 
 \section{NP-complétude}
-On sait que $P \subseteq NP$. Mais comment démontrer que $NP \subseteq P$ ou pas. On peut prendre un élément \textbf{E} qui "\textit{représentatif}" de NP et essayer de démontrer tel que:
+On sait que $P \subseteq NP$. Mais comment démontrer que $NP \subseteq P$ ou pas. On peut prendre un élément \textbf{E} qui est "\textit{représentatif}" de NP et essayer de démontrer tel que:
 \begin{itemize}
 \item $E \in P$ alors on démontre que $P = NP$
 \item Ou $E \notin P$ alors $P \neq NP$
@@ -1543,9 +1632,9 @@ On a montré que tous les mécanismes de toutes les machines constructibles par 
 Qu'est-ce qu'un \textbf{bon} formalisme ?
 Il doit être:
 \begin{enumerate}
-	\item \textbf{SD: Soundness des défintions:} \textcolor{red}{toute fonction D-calculable est calculable}. Si il existe une description $d \in D$ calculant une fonction $f$ alors cette fonction est calculable. (\textit{première partie de C-T})
-	\item \textbf{CD: Complétude des définitions:}\textcolor{red}{ toute fonction calculable est D-calculable}. Si une fonction $f$ est calculable, alors il existe une description $d \in D$ calculant cette fonction $f$. (\textit{deuxième partie de C-T})
-	\item \textbf{SA: Soundness algorithmique:} \textcolor{red}{L'interpréteur de D est calculable}. Toute description $d \in D$ peut être effectivement exxécutée sur des données. Le formalisme $D$ est algorithmique. Cette caractéristique assure que $D$ décrit bien des procédés effectifs.
+	\item \textbf{SD: Soundness des défintions:} \textcolor{red}{Toute fonction D-calculable est calculable}. Si il existe une description $d \in D$ calculant une fonction $f$ alors cette fonction est calculable. (\textit{première partie de C-T})
+	\item \textbf{CD: Complétude des définitions:}  \textcolor{red}{Toute fonction calculable est D-calculable}. Si une fonction $f$ est calculable, alors il existe une description $d \in D$ calculant cette fonction $f$. (\textit{deuxième partie de C-T})
+	\item \textbf{SA: Soundness algorithmique:} \textcolor{red}{L'interpréteur de D est calculable}. Toute description $d \in D$ peut être effectivement exécutée sur des données. Le formalisme $D$ est algorithmique. Cette caractéristique assure que $D$ décrit bien des procédés effectifs.
 	\item \textbf{CA: Complétude algorithmique:} Si P est SA, alors il existe un compilateur (\textit{calculable}) tel que étant donné $p \in P$, ce compilateur appliqué à $P$ produit une description $d \in D$ avec $p$ équivalent à $d$. Cela assure une équivalence des formalismes.
 	\item \textbf{U: description universelle:} \textcolor{red}{L'interpréteur de D est D-calculable}. Le formalisme doit permettre de décrire son propre interpréteur. (\textit{Hoare-Allison})
 	\item \textbf{S: propriété S-m-n affaiblie:} $\forall d \in D \quad \exists S : d(x,y) = [S(x)](y)$. Il existe un \textcolor{blue}{transformateur de programme} (\textit{total calculable}), qui recevant comme données un programme $d$ à $2$ arguments et une valeur $x$, fournit comme résultat une programme à \textcolor{red}{$1$} argument tel que les deux fonctions calculent la même chose.
@@ -1636,10 +1725,10 @@ Il y a 2 types:
 IA forte $\approx$ version réductionniste de CT.
 
 \subsubsection{Puissance cerveau humain}
-Un cerveau humain fait $10^{18}$ instructions par seconde. Le plus puissant fait $442$ PFlops ($10^15$). Qui correspond à environ $10^{18}$.
+Un cerveau humain fait $10^{18}$ instructions par seconde. Le plus puissant fait $442$ PFlops ($10^{15}$). Qui correspond à environ $10^{18}$.
 
 \subsubsection{Machine et la pensée}
-On peut réaliser le \textcolor{red}{test de Turing}. On pose des questions au pc et à l'être humain par écrit. Si la personne qui pose les questions ne peut déterminer la différence entre les deux alors on atteint la singularité et l'ordinateur réussie le \textbf{test de Turing}. (perdre 1 fois sur 2) et donc les machines peuvent penser.
+On peut réaliser le \textcolor{red}{test de Turing}. On pose des questions au pc et à l'être humain par écrit. Si la personne qui pose les questions ne peut déterminer la différence entre les deux alors on atteint la singularité et l'ordinateur réussie le \textbf{test de Turing} (perdre 1 fois sur 2) et donc les machines peuvent penser.
 
 \section{Au delà des modèles de calculs}
 \begin{wrapfigure}{r}{.5\textwidth}
@@ -1648,12 +1737,12 @@ On peut réaliser le \textcolor{red}{test de Turing}. On pose des questions au p
 \caption{Espace \textit{supposée} des relations BQP et NP}
 \end{wrapfigure}
 La frontière entre calculabilité et non calculabilité est indépendante du progrès technologiques.\par 
-Mais si on a des nouvelles technologies, peut on dépasser ces limitations ?
+Mais si on a des nouvelles technologies, peut-on dépasser ces limitations ?
 
 \subsection{Ordinateur quantique}
 
 Il ne donne pas un seul résultat mais une \textbf{superposition de résultat} avec un probabilité.\par 
-Une nouvelle classe est \textbf{BQP} ou Bounded-error Quantum Computing. Si il existe un algorithme \textit{quantique} polynomial qui donne la réponse au moins 2 fois sur 3.\par 
+Une nouvelle classe est \textbf{BQP} ou Bounded-error Quantum Computing. Si il existe un algorithme \textit{quantique} polynomial qui donne la bonne réponse au moins 2 fois sur 3.\par 
 L'espace BQP ne comprend pas les problèmes NP-Complet mais dépasse dans les problèmes PSPACE et NP.
 
 
