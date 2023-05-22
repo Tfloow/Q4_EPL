@@ -75,7 +75,7 @@ Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bon
 \chapter{Les signaux}
 \section{Définition}
 \subsubsection{Définition}
-Un signal est une fonction de une ou plusieurs variables (continues ou discrètes) qui correspondent à de l'information ou a un phénomène physique.
+Un signal est une fonction de une ou plusieurs variables (continues ou discrètes) qui correspondent à de l'information ou à un phénomène physique.
 
 \subsubsection{Continues ou discrets ?}
 Un signal est dit continu si il est définit sur un espace de temps continu. On note ce signal $x(t)$. Et il est dit discret si il est définit sur un espace discret de temps. On note ce signal $x[t]$.
@@ -112,7 +112,10 @@ Et pour les signaux discrets nous avons:
 \begin{equation}
 x[n] = A cos(\Omega n + \Phi)
 \end{equation}
-Il a une période de $\Omega N = 2 \pi m$
+On a donc que les fréquences sont:
+\begin{align}
+T &= \frac{2 \pi}{\omega} & N &= \frac{2 \pi}{\Omega}
+\end{align}
 
 \subsection{Signaux amortis}
 Pour les signaux continus et avec $\alpha > 0$:
@@ -150,7 +153,7 @@ On peut aussi voir l'échelon comme une somme infinie d'impulsion comme $\sum_{k
 \begin{cases}
 \delta (t) = 0 \text{ si } t \neq 0\\
 \delta (0) = (+\infty)\\
-\int_{-a}^a \delta (s) ds = 1 \rightarrow \forall a > 0
+\int_{-a}^a \delta (t) dt = 1 \rightarrow \forall a > 0
 \end{cases}
 \end{equation}
 A noter que la dernière ligne nous crée une propriété bien spécifique. En effet, la valeur de l'impulsion est limité par les bornes $a$ puisqu'on impose une intégrale égale à 1.
@@ -158,11 +161,11 @@ A noter que la dernière ligne nous crée une propriété bien spécifique. En e
 \subsubsection{Lien entre impulsion et échelon}
 $\delta (t) = u'(t)$ donc l'impulsion est une sorte de dérivé de l'échelon. ceci nous permet également d'obtenir cette formule:
 \begin{equation}
-\int_{-\infty}^{\infty} x(s) \delta(s)ds = x(0)
+\int_{-\infty}^{\infty} x(t) \delta(t)dt = x(0)
 \end{equation}
-On prouve cela de manière \textit{peu rigoureuse} en remarquant que: pour $s \neq 0$, on a $\delta(s) = 0$ donc $x(s)\delta(s) = 0 = x(0)\delta(s)$ finalement on a:
+On prouve cela de manière \textit{peu rigoureuse} en remarquant que: pour $t \neq 0$, on a $\delta(t) = 0$ donc $x(t)\delta(t) = 0 = x(0)\delta(t)$ finalement on a:
 \begin{equation}
-\int_{-\infty}^{\infty} x(s) \delta(s)ds = \int_{-\infty}^{\infty} x(0) \delta(s)ds = x(0) \int_{-\infty}^{\infty} \delta(s)ds = x(0)
+\int_{-\infty}^{\infty} x(t) \delta(t)dt = \int_{-\infty}^{\infty} x(0) \delta(t)dt = x(0) \int_{-\infty}^{\infty} \delta(t)dt = x(0)
 \end{equation} 
 
 \subsubsection{Décomposition en impulsions}
@@ -174,7 +177,8 @@ On peut décomposer tout signal en impulsion comme ci-dessous:
 \end{cases}
 \end{equation}
 
-
+\subsection{Rampe}
+C'est le résultat d'un produit de entre un signal linéaire et un signal échelon. On le nomme généralement $r(t)$ ou $[n]$
 
 
 \section{Opération sur les signaux}
@@ -227,7 +231,7 @@ Pour résoudre facilement (mais de manière calculatoire) une convolution. On ap
 \item On fait une sorte de distribution tel que:
 \end{enumerate}
 \begin{align*}
-x[n] &= \delta_1[n-a] + ... + \delta_n[n-x] & x[n] &= \delta_\alpha[n-a] + ... + \delta_\eta[n-y]\\
+x[n] &= \delta_1[n-a] + ... + \delta_n[n-x] & y[n] &= \delta_\alpha[n-a] + ... + \delta_\eta[n-y]\\
 \delta_1[n-a](\delta_\alpha[n-a] + ... + &\delta_\eta[n-y]) + ... + \delta_n[n-x](\delta_\alpha[n-a] + ... + \delta_\eta[n-y])
 \end{align*}
 
@@ -369,7 +373,7 @@ On a seulement besoin de $N$ coefficient grâce à la \textbf{périodicité}. En
 
 
 
-\section{La transformée de Fourier}
+\section{La transformée de Fourier} \label{Fourier}
 Cela s'applique sur les signaux \textit{non-périodiques} et \textit{continus}.\\
 Il faut donc voir le signal comme ayant un $\omega = 0 = \frac{1}{T_0} = \frac{1}{\infty}$ et y appliquer la série de Fourier!
 
@@ -410,6 +414,13 @@ Ne jamais oublier la forme complexe des fonctions sinus et cosinus et repasser e
 Une fonction qui revient souvent est le sinus \textit{cardinal} qui peut être transformé comme suit:
 \begin{align*}
 sinc(u) &= \frac{sin( u)}{ u}
+\end{align*}
+
+\subsection{Lien entre les domaines fréquentiels et temporels}
+Nous avons pu observer 4 type de représentation de Fourier, dépendantes de la périodicité et de la continuité du domaine temporel. De plus, on sait que si le domaine temporel était périodique, le domaine spectral\footnote{Le domaine spectral est un synonyme de domaine fréquentiel.} sera discret. Inversement, un domaine discret temporel implique un domaine temporel périodique. On peut résumer les liens entre domaine temporel et spectral comme ceci\footnote{Tiré de la synthèse de T. Schoenauen disponible \href{https://www.overleaf.com/read/syckbmcpbscn}{ici}}
+\begin{align*}
+    \text{Domaine spectral/temporel périodique}  &\Leftrightarrow \text{Domaine temporel/spectral discret}\\
+    \text{Domaine spectral/temporel apériodique} &\Leftrightarrow \text{Domaine temporel/spectral continu}\\
 \end{align*}
 
 \section{Propriétés de Fourier} \label{proprF}
@@ -663,20 +674,20 @@ Cela se prouve avec la dilatation et la translation de la fonction échelon.
 \chapter{L'échantillonnage}
 L'échantillonnage est quelque chose qui est partout autour de nous. C'est le fait de transformer un signal continu (\textit{son, vidéo, ...}) en un signal discret. (afin de le stocker sur un pc, ...) C'est donc un processus vital à l'ère de l'informatique.
 \section{Lien entre le continu et le discret}
-Donc, pour sauvegarder un signal en discret, il faut \textit{ponctuellement} le sauvegarder.On appelle cela \textcolor{blue}{l'échantillonnage}
+Donc, pour sauvegarder un signal en discret, il faut \textit{ponctuellement} le sauvegarder. On appelle cela \textcolor{blue}{l'échantillonnage}
 
 \subsection{L'échantillonnage}
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
 \begin{align*}
 \text{Pas d'échantillonnage: } &T_e\\
-\text{Fréquence d'échnatillonnage: }  f_e &= \frac{1}{T_e}\\
+\text{Fréquence d'échantillonnage: }  f_e &= \frac{1}{T_e}\\
 x[n] &= x(nT_e)\\
 x_e(t)=x(t) \sum_{n \in \mathbb{Z}} \delta(t-nT_e)&= \sum_{n \in \mathbb{Z}} x(nT_e)\delta(t-nT_e)
 \end{align*}
 \end{wrapfigure}
 On relève le signal discret toutes les $T_e$ secondes. Notre signal discret correspond à $x[n]$. Donc la transformation continu $\rightarrow$ est \textit{trivial}.\\
-Une fois qu'on a notre signal \textit{discret}, on peu le retransformer en un signal discret ! En effet, on peut lier $x(t)$ à un peigne/train de Dirac.\\
+Une fois qu'on a notre signal \textit{discret}, on peu le retransformer en un signal discret ! En effet, on peut lier $x(t)$ à un peigne / train de Dirac.\\
 On remarque que $x(nT_e) = x[n]$.
 
 \subsubsection{Transformé de Fourier via continu}
@@ -725,7 +736,7 @@ f_e > 2 f_{max} \longleftrightarrow \omega_e > 2 \omega_{max}
 Si le théorème de Shanon (\ref{Sha}) est bien respecté, on peut donc reconstituer un signal en \textit{continu} en filtrant son \textit{spectre discret}.
 
 \begin{align*}
-X(j\omega) = X_e(j\omega) T_e \sqcap \Bigr( \frac{\omega}{\omega_c} \Bigr) \qquad (\omega_max \leq \omega_c \leq \omega_e - \omega_max)
+X(j\omega) = X_e(j\omega) T_e \sqcap \Bigr( \frac{\omega}{\omega_c} \Bigr) \qquad (\omega_{max} \leq \omega_c \leq \omega_e - \omega_{max})
 \end{align*}
 
 Il existe également une formule s'intitulant la \textcolor{blue}{formule de Shanon}. On rappelle que $x[n]$ correspond au signal échantillonné à un interval $T_e$:
@@ -861,7 +872,7 @@ C'est une extension de la transformée de Fourier et permet de l'appliquer à pl
 On se souvient donc des transformées de Fourier (\ref{Fourier}). On peut ainsi réaliser des convolutions pour des systèmes via des multiplications en milieu fréquentiel. Cependant, on s'intéresse à des signaux ayant un début, un $0$
 \subsubsection{Existence}
 \begin{align*}
-x(t) &= x 1(t)\\
+x(t) &= t 1(t)\\
 \mathcal{F} (x) \longleftrightarrow \int_{-\infty}^{\infty} x(t) e^{-i \omega t} dt &= \int_0^{\infty} t e^{-i \omega t} dt = \left[ \frac{1 + i \omega t}{\omega^2} e^{-i \omega t} \right]_0^{\infty}
 \end{align*}
 On a un signal qui ne converge pas et oscille.
@@ -897,7 +908,8 @@ X(s) = \mathcal{L}(x) := \int_{-\infty}^{\infty} x(t) e^{- s t} dt
 $s$ est définie que sur la région où l'intégrale existe. On appelle cette région le \textbf{ROC} (\textit{Region of Convergence}).\\
 La transformée inverse est définit ainsi:
 \begin{align*}
-x(t) = \mathcal{L}^{-1}(X) := \frac{1}{2 \pi} \int_{-\infty}^{\infty} X( \sigma + i \omega ) e^{(\sigma + i \omega)t } d \omega
+x(t) = \mathcal{L}^{-1}(X) &:= \frac{1}{2 \pi} \int_{-\infty}^{\infty} X( \sigma + i \omega ) e^{(\sigma + i \omega)t } d \omega\\
+&:= \frac{1}{2\pi} \int_{- \infty}^{\infty} X(s) e^{st} d\omega
 \end{align*}
 Et cela est valable pour tout $\sigma$ tel que $X$ est défini sur $\sigma + i \mathbb{R}$
 
@@ -1036,7 +1048,7 @@ y'' + 3y' + 2y &= a1(t) & (s^2 + 3 s + 2)Y &= \frac{a}{s}
 La partie à droite correspond à l'EDO dans le domaine de Laplace. Nos conditions initiales sont: $y(0) = 0$ et $y'(0) = 0$
 \begin{align*}
 Y = \frac{a}{s(s^2 + 3s +2)} &= \frac{a}{2s} - \frac{a}{s+1} + \frac{a}{2(s+2)}\\
-y(t) &= 1(t) a (\frac{1}{2} - e^{-t} + \frac{1}{2} e^{-2t}
+y(t) &= 1(t) a \left(\frac{1}{2} - e^{-t} + \frac{1}{2} e^{-2t} \right)
 \end{align*}
 On remarque que:
 \begin{enumerate}
@@ -1044,7 +1056,7 @@ On remarque que:
 \item Nous avons un "\textit{taux}" 0 de u
 \item Ce sont les racines du polynômes caractéristiques
 \end{enumerate}
-Via Laplace:
+\underline{Via Laplace unilatérale :}
 \begin{align*}
 (s^2 Y - sy_0 -y_0') + (3 sY -3 y_0) + (2Y) &= \frac{a}{s} & (s^2 + 3s + 2)Y &= \frac{a}{s} + (3-s) y_0 + y_0'\\
 \end{align*}
@@ -1129,7 +1141,7 @@ Si on a une fonction \textit{analytique} sur $\mathbb{C}$ sauf pour quelques poi
 
 \subsubsection{Mises à l'échelle \textit{fréquentielle}}
 \begin{align*}
-X(az) &= \sum_n x[n](az)^{-n} \text{  ROC: sclaing par } \frac{1}{|a|}\\
+X(az) &= \sum_n x[n](az)^{-n} \text{  ROC: scaling par } \frac{1}{|a|}\\
 &= \sum_n (x[n] a^{-n}) z^{-n} = \mathcal{Z}\{a{^-n}x\}
 \end{align*}
 
@@ -1338,7 +1350,7 @@ La forme générale de ces équations est de ce type:
 \begin{equation}\label{eqn:difes}
 \sum_{k = 0}^{N} a_k (\frac{d^k}{dt^k}) y(t) = \sum_{k = 0}^M b_k (\frac{d^k}{dt^k}) u(t)
 \end{equation}
-Quelque chose à bien remarquer est que ces équations ne modélise \textit{qu'une partie} d'un système \textit{LIT}. Par exemple, on ne peut pas représenter un \textit{délai} ce qui également rare dans la réalité.\\
+Quelque chose à bien remarquer est que ces équations ne modélisent \textit{qu'une partie} d'un système \textit{LIT}. Par exemple, on ne peut pas représenter un \textit{délai} ce qui est également rare dans la réalité.\\
 
 Une chose à remarquer est que l'opérateur \textit{dérivé} peut se "\textit{démultiplier}" et possède une \textit{associativité} et \textit{commutativité}. Ainsi, on peut avoir une représentation dite "\textit{polynomiale}" comme ci-dessus qui est une autre écriture de l'équation \ref{eqn:difes}.
 \begin{equation}\label{eqn:poly}
@@ -1398,7 +1410,7 @@ Les désavantages:
 \begin{itemize}
 	\item Lien moins clair avec la solution.
 \end{itemize}
-De plus, on peut voir comme un \textit{avantage} ou \textit{inconvénient} le fait de pouvoir voir l'évolution des signaux entre chaque bloc plutôt qu'une sorte de boite noire "\textit{entrée-sortie}".On peut également réaliser de bien des manières des circuits.
+De plus, on peut voir comme un \textit{avantage} ou \textit{inconvénient} le fait de pouvoir voir l'évolution des signaux entre chaque bloc plutôt qu'une sorte de boite noire "\textit{entrée-sortie}". On peut également réaliser de bien des manières des circuits.
 
 \subsection{Représentation d'état}
 Dans ce type de représentation, on a un \textcolor{red}{état $x$} qui est un \textit{vecteur} comportant toutes les infos internes de notre système. On a une  \textcolor{red}{entrée $u$} qui est un \textit{signal} extérieur affectant le système. Finalement on a une \textcolor{red}{sortie $y$} qui est un signal qu'on peut accéder depuis l'extérieur.\\
@@ -1720,6 +1732,9 @@ Notre réponse finale est une \textit{combinaison} d'exponentielles de taux:
 
 
 \chapter{Stabilité, Commandabilité \& Observabilité}
+
+\textcolor{red}{Routh-Hurwitz ?}
+
 En général, les systèmes réels sont causaux tel que $h[n] = 0$ pour $n<0$.
 \section{Stabilité}
 Il faut que: $\parallel h \parallel_1$ existe, que la \textbf{ROC} soit autour du cercle unité ou l'axe imaginaire, que les \textbf{pôles} soient dans le cercle unité ou à gauche du plan.
@@ -1770,10 +1785,10 @@ Système LTI en \textit{temps continu} de fonction de transfert $\mathcal{H}$. S
 On veut qu'un système partant d'un point \textit{initial} ($u=0$) doit revenir à un équilibre ou ne pas diverger.\par
 \underline{Définition:} Un équilibré $(x^{\ast},u^{\ast})$ \textbf{stable} si pour tout $\epsilon > 0$ il existe un $\delta > 0$ tel que $x(0) \in B(x^{\ast}, \delta) \Rightarrow x \in B(x^{\ast}, \epsilon)$ pour tout temps futur (si l'entrée reste $u^{\ast}$)\par 
 \underline{Définition:} Un équilibré $(x^{\ast},u^{\ast})$ \textbf{attractif} si il existe un $\delta > 0$ tel que $x(0) \in B(x^{\ast}, \delta) \Rightarrow \lim_{t \rightarrow \infty} x(t) =  x_0$ (si l'entrée reste $u^{\ast}$) (\textit{asymptotiquement stable})\par 
-Il ne faut pas confondre stabilité et attractivité car  stabilité est l'idée de ne pas diverger et attractif c'est l'idée de tendre vers un endroit. Et vice-versa.
+Il ne faut pas confondre stabilité et attractivité car  stabilité est l'idée de ne pas diverger et attractif c'est l'idée de tendre vers un endroit.
 
 \subsubsection{LTI}
-Donc pour un système qui est du type $\frac{d}{dt}x(t) = Ax(t) + Bu(t)$ on va ramenée l'équilibre à $(0,0)$ car plus simple (\textit{changement de variable si besoin}).\par 
+Donc pour un système qui est du type $\frac{d}{dt}x(t) = Ax(t) + Bu(t)$ on va ramener l'équilibre à $(0,0)$ car plus simple (\textit{changement de variable si besoin}).\par 
 Si $(x^{\ast}, u^{\ast})$ est un équilibre alors $0 = Ax^{\ast} + Bu^{\ast}$:
 \begin{align*}
 \Delta x &= x - x^{\ast} & \Delta y &= u - u^{\ast} & &\text{ Changement de variable}\\
@@ -1800,7 +1815,7 @@ Si on a un système LTI attractif, $x_{libre} \rightarrow 0$ et une modification
 \subsubsection{Non-linéaire}
 En linéaire, un système est soit \textit{stable} ou \textit{instable} dans son ensemble. En \textbf{non}-linéaire, chaque équilibre est \textit{différent}.\par 
 On peut linéariser autour d'un équilibre tel que $f(x^{\ast}, u^{\ast}) = 0$ ensuite on analyse graphiquement ou sur base de la linéarisation.\par
-\underline{\textbf{Démarche}}: On linéarise autour d'un équilibre $(x^{\ast}, u^{\ast})$ tel que $f(x^{\ast}, u^{\ast}) =0$
+\underline{\textbf{Démarche :}} On linéarise autour d'un équilibre $(x^{\ast}, u^{\ast})$ tel que $f(x^{\ast}, u^{\ast}) =0$
 \begin{align*}
 f(x,u) &= \frac{\partial f}{\partial x} (x-x^{\ast}) +\frac{\partial f}{\partial u} (u - u^{\ast}) + O(...) & \frac{d}{dt} \tilde{x} &= A \tilde{x} + B \tilde{u} \text{ où } \tilde{x} = x - x^{\ast}
 \end{align*}
