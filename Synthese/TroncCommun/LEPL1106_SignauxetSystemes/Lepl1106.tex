@@ -886,7 +886,7 @@ X_{\sigma} (i \omega) &= \frac{1}{(\sigma + i \omega)^2}
 \end{align*}
 Pour retrouver le signal $x(t)$ sans la pré-multiplication, il faut réaliser cette opération
 \begin{align*}
-x(t) &= e^{\sigma t} \mathcal{F}-1 (X_{\sigma})\\
+x(t) &= e^{\sigma t} \mathcal{F}^{-1} (X_{\sigma})\\
 &= \frac{1}{2 \pi }\int_{-\infty}^{\infty} X_{\sigma} (i \omega) e^{\sigma t} e^{i \omega t} d\omega
 \end{align*}
 Ainsi, on peut s'assurer d'avoir une réponse pour nos systèmes. En effet, on va appliquer cette atténuation ainsi:
@@ -1118,7 +1118,7 @@ On développe le tout:
 & = \frac{1}{2 \pi i} \int_{- \pi}^{\pi} X(\rho e^{i \omega})(\rho e^{i \omega})^{k-1} i \rho e^{i \omega} d\omega\\
 x[k] &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} X(\rho e^{i \omega})\rho^k e^{i \omega k} d\omega
 \end{align*}
-On se rend compte que le signal $x[k]$ est un combinaison linéaire de $z^k = \rho^k e^{i \omega k} : \rho$ fixe et $\omega \in [-\pi, pi]$. \par
+On se rend compte que le signal $x[k]$ est un combinaison linéaire de $z^k = \rho^k e^{i \omega k} : \rho$ fixe et $\omega \in [-\pi, \pi]$. \par
 $X(z)$ est le coefficient de développement en signaux $z^k$ pour un $|z| = \rho$ fixé.
 
 \subsubsection{Série de Laurent inverse} 

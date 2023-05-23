@@ -169,13 +169,14 @@ R_3 &= \frac{R_aR_b + R_aR_c + R_bR_C}{R_a}
 Pour trouver $R_{Th}$ on va rajouter au borne connectant l'autre circuit une source de tension. Puis on détermine les tensions à borne ouverte et le courant en \textit{court-circuit}.
 
 \subsubsection{Transfert maximal de puissance}
-Pour trouver la puissance maximale dans une résistance, on peut faire varier le courant et donc le voltage. Ici, on a réalisé un diviseur résistif très simple pour démontrer la formule de puissance de résistance donné par \ref{eqn:pr}, on obtient donc ceci dans notre circuit:
+Pour trouver la puissance maximale dans une résistance, on peut faire varier le courant et donc le voltage. Ici, on a réalisé un diviseur résistif très simple pour démontrer la formule de puissance de résistance donné par \ref{eqn:pr}, on obtient donc ceci dans notre circuit: (plus d'informations en section \ref{Quadri})
 \begin{equation}
 \frac{\partial}{\partial R_2} \biggl(\frac{V^2 R_2}{(R_1 + R_2)^2}\biggl) = 0
 \end{equation}
 
 \begin{figure}[H]
 \centering
+\includegraphics[width=4cm]{img/puisCircuit.png}
 \includegraphics[width=6.5cm]{img/maxPuissance.png}
 \caption{Graphique montrant l'évolution de la puissance dans une résistance}
 \end{figure}
@@ -199,7 +200,57 @@ On peut facilement représenter ces différents systèmes via des matrices déta
 %insérer la matrice
 
 \subsection{L'amplificateur opérationnelle}
-L'amplificateur opérationnelle ou \textit{ampli op} est un composant qu'on retrouve abondamment en électronique. 
+L'amplificateur opérationnelle ou \textit{ampli op} est un composant qu'on retrouve abondamment en électronique.\\
+On va éviter la saturation et contrôler l'ampli-op en réalisant une boucle de rétroaction négative à la borne $-$. Nous n'avons aucun courant qui rentre dans l'ampli-op dû à son impédance élevée. Il se peut qu'à la sortie de celle-ci, un faible courant puisse rentrer car l'impédance est plus faible.
+
+\subsubsection{Buffer}
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/buffer.png}
+\end{figure}
+Permet de trier un maximum de courant sans changer la tension.
+\begin{equation}
+\frac{V_0}{V_S} = \frac{1}{1 + \frac{R_i}{R_o + A_o R_i}} \approx 1
+\end{equation}
+Et avec une ampli-op idéale, $A_0 \rightarrow \infty$, $R_i \rightarrow \infty$ et $R_o \rightarrow 0$.
+
+\subsubsection{Inverseur}
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/Aopinverting.svg.png}
+\end{figure}
+où $\frac{v_o}{v_s} \approx - \frac{R_2}{R_1}$.
+
+\subsubsection{Non-inverseur}
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/nonInv2.png}
+\end{figure}
+Où $\frac{v_o}{v_{in}} = 1 + \frac{R_F}{R_l}$.
+
+\subsubsection{Différence}
+\begin{figure}[H]
+\centering
+\includegraphics[width=6cm]{img/dif.png}
+\end{figure}
+Le but est de faire la différence entre deux tensions. 
+\begin{equation}
+v_o = \frac{R_1 + R_2}{R_1} \frac{R_4}{R_3 + R_4} v_2 - \frac{R_2}{R_1} v_1
+\end{equation}
+
+\subsubsection{Intégrateur}
+\begin{figure}[H]
+\centering
+\includegraphics[width=5cm]{img/800px-Aopintegrating.svg.png}
+\end{figure}
+On doit parfois rajouter une résistance en parallèle de la capacité pour en faire un intégrateur à perte. On l'ajoute quand on n'a rien en aval du bloc.
+\begin{equation}
+V_{out} = - \frac{1}{RC} \int_{t = 0}^{t} V_{in} dt + V_{out} (0)
+\end{equation}
+
+
+
+
 
 \subsubsection{Montage inverseur}
 \begin{equation}
@@ -239,7 +290,7 @@ GL \frac{dI_L(t)}{dt} &= -(I_L(t)-I_S(t))\label{eq:LCsinus}
 \caption{Circuit LC en régime sinusoïdal}
 \end{figure}
 
-Il est à noter que l'équation \ref{eq:LCsinus} est une équation propre au circuit de la figure \ref{img:LCsinus}. La \textit{constante de temps} est $\tau = GL$
+Il est à noter que l'équation \ref{eq:LCsinus} est une équation propre au circuit de la figure \ref{img:LCsinus}. La \textit{constante de temps} est $\tau = \frac{L}{R}$
 
 \subsection{Régime sinusoïdal}
 Quelques notions à bien comprendre:
@@ -427,6 +478,12 @@ Cette \textit{dualité} impédance-admittance est très utile et simplifie de no
 \subsection{Thévenin et Norton}
 On fait les mêmes démarches qu'en \textit{DC}, il faut faire attention aux impédances complexes et les sources de courants et tension qui sont des \textit{phaseurs}.
 
+\subsection{Conseil}
+La valeur efficace $= V_{RMS}$ et notre valeur de crête en sinusoïdale $= \sqrt{2}V_{RMS}$.\\
+On calcule notre puissance en valeurs efficaces. La puissance active est la partie réelle et la puissance réactive est la partie complexe. La puissance complexe se calcule depuis les valeurs \textit{efficaces}.
+
+
+
 \chapter{Comportement des circuits en domaine fréquentielle}
 Nous avons déjà vu que la \textit{fréquence} influence notre \textit{impédance} et \textit{phase}.
 
@@ -495,7 +552,7 @@ A_V = \textcolor{red}{A_{V0}(j\omega)^{\pm N}}\frac{\textcolor{blue}{\Bigl(1 + \
 	\item Amplitude: au \textbf{dénominateur}, on est face à un filtre \textit{passe-bas}. Au \textbf{numérateur} on est face à un "amplificateur" \textbf{passe-haut}.
 	\item Phase: au \textbf{dénominateur}, déphasage de $-\frac{\pi}{2}$ et déphasage de $\frac{\pi}{2}$ au \textbf{numérateur}.
 	\end{itemize}
-\item $\textcolor{orange}{\frac{\textcolor{orange}{\Bigl( 1 + 2 j \xi_a \frac{\omega}{\omega_a} - \Bigl[ \frac{\omega}{\omega_a}\Bigl]^2 \Bigl)}}{\textcolor{orange}{\Bigl( 1 + 2 j \xi_b \frac{\omega}{\omega_b} - \Bigl[ \frac{\omega}{\omega_b}\Bigl]^2 \Bigl)}}}$ cette partie est plus subtile et on doit s'intéresser au $\xi$:
+\item $\textcolor{orange}{\frac{\textcolor{orange}{\Bigl( 1 + 2 j \xi_a \frac{\omega}{\omega_a} - \Bigl[ \frac{\omega}{\omega_a}\Bigl]^2 \Bigl)}}{\textcolor{orange}{\Bigl( 1 + 2 j \xi_b \frac{\omega}{\omega_b} - \Bigl[ \frac{\omega}{\omega_b}\Bigl]^2 \Bigl)}}}$ cette partie est plus subtile et on doit s'intéresser au $\xi$, pour trouver les fréquences de coupure, on fait simplement un $\Delta$:
 	\begin{enumerate}
 		\item $\xi >  1$ (on suppose que $\omega_a < \omega_b$)
 		\begin{itemize}
@@ -612,7 +669,6 @@ n &= 3; s^3 + 6 s^2 + 15s + 15
 \includegraphics[width=7cm]{img/Bessel.png}
 \caption{Filtre de Bessel}
 \end{figure}
-\textcolor{red}{TODO transformations ?} hors matière
 
 \section{Rétroaction et circuits en boucle fermée}
 
@@ -729,6 +785,13 @@ Il faut bien régler l'amortissement car on peut soit rendre le système \textit
 \includegraphics[width=10cm]{img/amortissement.png}
 \caption{Système complet}
 \end{figure}
+
+\subsection{Conseils}
+On ne peut plus considérer que $V_{i+} = V_{i-}$, on a que $\frac{V_o}{V_{i+} - V_{i-}}$ ce qui revient à:
+\begin{equation}
+V_o = G(j \omega ) ( V_{in} - V_{-}
+\end{equation}
+
 
 \section{Quadripôles} \label{Quadri}
 \subsection{Rappels}
@@ -877,13 +940,41 @@ Z &= Y^{-1} & Y&= Z^{-1} & G &= H^{-1} & H &= G^{-1}
 
 
 \subsection{Quadripôle chargé}
-\textcolor{red}{TODO}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/quadriCharge.png}
+\end{figure}
+C'est un quadripôle qui est entre une source $v_s$ avec $Z_s$ et une charge $Z_L$. De plus, on connait une des ses représentations.\\
+De plus, on a doit avoir une relation entre les variables externes en présence de $Z_s$ et $Z_L$. Il en existe 4:
+\begin{enumerate}
+\item \underline{Impédance d'entrée $Z_{in}$:} coefficient de $i_i$ dans l'expression de $v_i$, $Z_{in} = \frac{v_i}{i_i}$, dépend de $Z_L$.
+\item \underline{Impédance de sortie $Z_{out}$:} coefficient de $i_o$ dans l'expression de $v_o$, $Z_{out} = \frac{v_o}{i_o}$, dépend de $Z_S$.
+\item \underline{Gain en tension direct $A_{vf}$:} coefficient de $v_i$ dans l'expression de $v_o$, $A_{vf} = \frac{v_o}{v_i}$, dépend de $Z_L$.
+\item \underline{Gain en courant direct $A_{if}$:} coefficient de $i_i$ dans l'expression de $v_o$, $A_{if} = \frac{i_o}{i_i}$, dépend de $Z_L$.
+\end{enumerate}
+
+On peut voir que $A_{vf}$, $A_{if}$ et $Z_{in}$ dépendent de $Z_L$, on a une répétition.\\
+Pour déterminer les \textbf{caractéristiques externes} on va:
+\begin{itemize}
+\item On met une source de test pour la variable indépendante à l'un des accès
+\item On charge l'autre accès par l'impédance correspondante ($Z_S$ ou $Z_L$)
+\item On détermine la variable \textit{dépendante}
+\item On calcule le coefficient
+\end{itemize}
+Pour trouver $Z_{out}$ on impose que $v_s = 0$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=14cm]{img/quadriTable.png}
+\caption{Table des caractéristiques externes}
+\end{figure}
+
 
 \chapter{Puissance}
 \section{Instantanée, moyenne et effective}
 
 \subsection{Instantanée}
-Une puissance est généré par le déplacement d'une charge $dq$ d'un point A vers B. On voit cela comme une énergie \textit{potentielle}. Donc au point X cela vaut $dq V_X$. Le déplacement crée un \textcolor{blue}{Travail} (\textit{Work}): $dW = dq (V_A - V_B)$. On fait un \textit{échange} de puissance avec le monde extérieur:
+Une puissance est générée par le déplacement d'une charge $dq$ d'un point A vers B. On voit cela comme une énergie \textit{potentielle}. Donc au point X cela vaut $dq V_X$. Le déplacement crée un \textcolor{blue}{Travail} (\textit{Work}): $dW = dq (V_A - V_B)$. On fait un \textit{échange} de puissance avec le monde extérieur:
 \begin{align*}
 p &= \frac{dW}{dt} = \frac{dq}{dt}(V_A - V_B) = iv\\
 p(t) &= v(t) i(t) \quad \text{Peut dépendre du temps}
@@ -896,7 +987,7 @@ On stocke cette énergie sous 2 forme.
 \end{enumerate}
 Et on dissipe la puissance sous forme de chaleur pour une résistance ou en énergie mécanique pour un moteur électrique.\\
 
-On dit qu'on fournit de la puissance si la tension est négative et le courant positif ou inversement. Donc on doit générer une puissance depuis une autre source (\textit{générateur de tension, capacité se vidant, ...})
+On dit qu'on \textbf{fournit} de la puissance si la tension est négative et le courant positif ou inversement. Donc on doit \textbf{générer} une puissance depuis une autre source (\textit{générateur de tension, capacité se vidant, ...})
 
 \subsection{Moyenne}
 Dans une résistance, la puissance est \textbf{toujours positive}. En effet, une résistance ne peut fournir de la puissance donc sa puissance moyenne est toujours positive.\\
@@ -987,36 +1078,149 @@ Q &\triangleq V_{eff} I_{eff} sin(\varphi) = XI_{eff}^2
 S &= \sqrt{P^2 + Q^2}
 \end{align*}
 
-\subsection{Résistance pure}
+\subsection{Résistance pure - Courant imposé}
 Ainsi, notre tension en régime permanent est parallèle au courant comme suit:
 \begin{align*}
 \overline{V} &= R \overline{I} & \overline{V} &= V_{max}e^{j \varphi_v} \qquad (V_{max} = R I_{max}, \quad \varphi_v = \varphi_i)\\
 v(t) &= R i(t) & v(t) &= R I_{max} cos(\omega t + \varphi_i)
 \end{align*} 
 
-\subsubsection{Puissance instantanée}
+\begin{center}
+\begin{tabular}{|m {3.5cm}| m {3.5cm}| m {3.5cm}| m {3.5cm}|}
+\hline
+Puissance active & Puissance apparente & Puissance réactive & Propriété\\
+\hline
+$P = RI_{eff}^2$ & $S = RI_{eff}^2$ & $Q = 0$ & $S = P$\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Inductance pure - Courant imposé}
+Comme notre phase de la tension est en avance de $\frac{\pi}{2}$ par rapport à la tension, notre tension instantanée va valoir:
+\begin{equation}
+p(t) = \omega L I_{eff}^2 cos \left(2 \omega t + 2 \psi_i + \frac{\pi}{2} \right)
+\end{equation}
+
+\begin{center}
+\begin{tabular}{|m {3.5cm}| m {3.5cm}| m {3.5cm}| m {3.5cm}|}
+\hline
+Puissance active & Puissance apparente & Puissance réactive & Propriété\\
+\hline
+$P = 0$ & $S = \omega L I_{eff}^2 $ & $Q = \omega LI_{eff}^2$ & $S = Q$\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Capacité pure - Courant imposé}
+Comme notre phase de la tension est en retard de $\frac{\pi}{2}$ par rapport à la tension, notre tension instantanée va valoir:
+\begin{equation}
+p(t) =\frac{I_{eff}^2}{\omega C} cos \left( 2 \omega t + 2 \psi_i - \frac{\pi}{2} \right)
+\end{equation}
+\begin{center}
+\begin{tabular}{|m {3.5cm}| m {3.5cm}| m {3.5cm}| m {3.5cm}|}
+\hline
+Puissance active & Puissance apparente & Puissance réactive & Propriété\\
+\hline
+$P = 0$ & $S = \frac{I_{eff}^2}{\omega C}$ & $Q = - \frac{I_{eff}^2}{\omega C}$ & $S = |Q|$\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Admittance quelconque - Tension Imposée}
+Ici, on va imposé la tension et donc seulement valable en sinusoïdal:
+\begin{equation}
+p(t) = YV_{eff}^2(cos \varphi + cos(2 \omega t + 2 \psi_i + \varphi))
+\end{equation}
+\begin{center}
+\begin{tabular}{|m {3.5cm}| m {3.5cm}| m {3.5cm}| m {3.5cm}|}
+\hline
+Puissance active & Puissance apparente & Puissance réactive & Propriété\\
+\hline
+$P = V_{eff}I_{eff} cos(\varphi)$ & $S = V_{eff} I_{eff}$ & $Q = V_{eff} I_{eff} sin(\varphi)$ & $S = \sqrt{P^2 + Q^2}$\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Capacité Pure - Tension imposée}
+Ainsi notre puissance est:
+\begin{equation}
+p(t) = \omega C V_{eff}^2 cos \left( 2 \omega t + 2 \psi_i - \frac{\pi}{2} \right)
+\end{equation}
+\begin{center}
+\begin{tabular}{|m {3.5cm}| m {3.5cm}| m {3.5cm}| m {3.5cm}|}
+\hline
+Puissance active & Puissance apparente & Puissance réactive & Propriété\\
+\hline
+$P = 0$ & $S = \omega C V_{eff}^2$ & $Q = - \omega CV_{eff}^2$ & $S = |Q|$\\
+\hline
+\end{tabular}
+\end{center}
+\section{Puissance complexe et bilan de puissance}
+\subsection{Puissance complexe}
+On définit la puissance complexe comme $\overline{S}$.
+\begin{equation}
+\overline{S} \triangleq P + j Q = \frac{1}{2} \overline{V}\overline{I}^*
+\end{equation}
+On réalise cela à partir d'une \textbf{impédance} $\overline{Z}$ tel que
+\begin{equation}
+\overline{S} = \overline{Z} I_{eff}^2 \quad
+\text{ et } \quad \overline{S} = (Z cos(\varphi) + j Z sin(\varphi )) I_{eff}^2
+\end{equation}
+Ou à partir d'une \textbf{admittance} $\overline{Y}$:
+\begin{equation}
+\overline{S} = \overline{Y} V_{eff}^2 \quad \text{ et } \quad \overline{S} = (Y cos(\varphi) + j Y sin( - \varphi)) V_{eff}^2
+\end{equation}
+Ainsi, la puissance active et réactive sont tels que:
 \begin{align*}
-p(t) = RI_{eff}^2 (1 + cos(2 \omega t + 2 \varphi_i))
+P &= \mathfrak{R}\{\overline{S}\} = \frac{1}{2} \mathfrak{R} \{\overline{V} \overline{I}^*\} & Q &= \mathfrak{I}\{\overline{S}\} = \frac{1}{2} \mathfrak{I} \{\overline{V} \overline{I}^*\}
 \end{align*}
 
-\subsubsection{Puissance active}
+\subsection{Bilan de puissance}
+En principe, le bilan de puissance à un noeud doit être nul. Ainsi, on a une \textbf{conservation} de la puissance \textcolor{red}{active} et \textcolor{red}{réactive}:
 \begin{align*}
-P = R I_{eff}^2
+\mathfrak{R} \left\lbrace \sum \overline{S} \right\rbrace &= 0 & \sum \mathfrak{R}\{\overline{S}\} &= 0 & \sum P &= 0\\
+\mathfrak{I} \left\lbrace \sum \overline{S} \right\rbrace &= 0 & \sum \mathfrak{I}\{\overline{S}\} &= 0 & \sum Q &= 0
 \end{align*}
 
-\subsubsection{Puissance apparente}
-\begin{align*}
-S = R I_{eff}^2
-\end{align*}
+\section{Facturation de la puissance consommée}
+\subsubsection{Résidentiel}
+On paye à l'année l'\textbf{énergie} consommée:
+\begin{equation}
+E = \int_0^{h_{annee}} p(t) dt \quad [kWh]
+\end{equation}
+On ne tient compte de de la puissance \textbf{moyenne} donc seulement de l'\textit{active}
 
-\subsubsection{Puissance réactive}
-\begin{align*}
-Q &= 0\\
-S &= P
-\end{align*}
+\subsubsection{Industriel}
+On tient compte de la puissance active \textbf{et} réactive.
 
-\subsection{Inductance pure}
-\textcolor{red}{TODO}
+\section{Compensation de la puissance réactive et Adaptation d'impédance}
+\subsection{Compensation de la puissance}
+On va essayer d'annuler le déphasage $\varphi$ car c'est lui qui cause une puissance réactive. On va utiliser des inductances et capacité qui s'annulent mutuellement. C'est une sorte de circuit \textit{résonant}:
+\begin{equation}
+\omega C V_{ch_{eff}}^2 = \frac{V_{ch_{eff}}^2}{\omega L_{ch}}
+\end{equation}
+
+\subsection{Adaptation d'impédance}
+On va essayer de maximiser la puissance \textit{active} transmise de la source à la charge. On va donc modifier la charge $\overline{Z}$.
+\subsubsection{Résistance - Cas particulier}
+On sait que $\overline{Z} = R + j X$ et $X = 0$. On a notre tension à la source $\overline{V_{th}}$ et la résistance de la source $R_{th}$. 
+\begin{align*}
+P &= R \frac{V_{th}^2}{(R + R_{th})^2 + X^2} & dP &= \frac{\partial P}{\partial R} dR + \frac{\partial P}{\partial X} dX = 0\\
+\frac{\partial P}{\partial R} &= V_{th}^2 \left( \frac{(R + R_{th})^2 + X^2 - 2 R(R + R_{th})}{\left( (R + R_{th})^2 + X^2 \right)^2} \right) = 0 & \frac{\partial P}{\partial X} &= V_{th}^2 \left( \frac{2 X}{((R + R_{th})^2 + X^2)^2} \right) = 0\\
+&= V_{th}^2 \left( \frac{R_{th}^2 - R^2 + X^2}{((R + R_{th})^2 + X^2)^2} \right) = 0 \quad \rightarrow R =R_{th} & X &= 0\\
+\overline{Z} &= R_{th} & P &= \frac{V_{th}^2}{4 R_{th}} = \frac{P_{source}}{2}
+\end{align*}
+Donc pour être le plus optimal on devrait avoir le rendement suivant:
+\begin{equation}
+\eta = \frac{P}{P_{source}} = 50 \%
+\end{equation}
+
+\subsubsection{Cas général}
+Le même rendement $\eta$ est présent tel que
+\begin{equation}
+\overline{Z} = \overline{Z_{th}}^*
+\end{equation}
+
 
 \chapter{Triphasé}
 \section{Introduction}
@@ -1086,16 +1290,25 @@ Ce sont les grandeurs mesurées sur les éléments qui constituent la source et/
 \item Tensions de phase: tensions $v_1, v_2, v_3$ mesurées sur les sources ou les impédances constituant la source ou la charge triphasée.
 \end{itemize}
 
-\subsubsection{Cas particulier}
+\subsubsection{Cas particulier - étoile}
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{img/etoilesetoiles.png}
 \end{figure}
 Dans le cas ci-dessus, le courant de ligne et de phase est le même. La tension de ligne est tel que $V_l = \sqrt{3}V_{ph}$ et sa phase $\phi_l = \phi_{ph} + \frac{\pi}{6}$\par
 Si on a une formation en \textit{triangle}, alors les courants de ligne et de phase sont différents entre eux.
+\begin{align*}
+V_l &= \sqrt{3} V_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6} & I_l &= I_{ph} & \varphi_l &= \varphi_{ph}
+\end{align*}
+
+\subsubsection{Cas particulier -triangle}
+Ressemble au cas en étoile mais cette fois-ci:
+\begin{align*}
+V_l &= V_{ph} & \varphi_l &= \varphi_{ph}& I_l &= \sqrt{3} I_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6}
+\end{align*}
 
 
-\subsection{Circuit équivalent monphasé}
+\subsection{Circuit équivalent monophasé}
 Puisque si nous possédons un circuit alimenté en \textbf{triphasé équilibré} en régime sinusoïdal, nous pouvons déterminé le courant et la tension dans toutes les broches si nous connaissons ceux-ci pour \textbf{une seule phase}.\par
 Donc on peut étudier un tel circuit sur base de son équivalent \textbf{monophasé}.
 
@@ -1105,6 +1318,9 @@ L'avantage est que les grandeurs de phase et de ligne sont les mêmes.
 
 \section{Transformation étoiles triangles}
 On peut toujours passer de l'un à l'autre.
+\begin{align*}
+Z_{etoile} &= \frac{Z_{triangle}}{3} & V_{etoile} &= \frac{V_{triangle}}{\sqrt{3}} - \frac{\pi}{6}
+\end{align*}
 \begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{img/transfoEtoilesTriangles.png}
@@ -1306,6 +1522,63 @@ Il faut aussi bien réduire en fraction simple.
 
 \subsection{Résolution}
 Les calculs sont longs et méthodiques, au début, il faut ré-écrire toutes les équations différentielles. Une fois qu'on qu'une seule variable dans cette équation, on remplace les dérivées par leur équivalent en Fourier unilatéral. Si on a un signal qui passe de 2 à 1 Volts, il faut noter \textcolor{red}{$1 u(t)$} avec $u(t)$ la fonction échellon. Cela est important puisque qu'on passe d'une équation différentielle à une analyse en continue.
+
+\chapter{Stabilité et systèmes}
+On sait que la transformée de Laplace bilatérale est une transformée de Fourier pour $s = j \omega$ si la ROC contient $\sigma = 0$. On fait souvent référence à la transformée de Laplace unilatérale.
+
+\section{Transformée inverse de Laplace}
+On a une fonction $x(t) = e^{at} u(t)$ qui donne $X(s) = \frac{1}{s-a}$ sur $\mathfrak{R}(s) >a$. La transformée inverse est:
+\begin{equation}
+f(t) = \frac{1}{2 \pi j} \lim_{T\rightarrow \infty} \int_{k - j T}^{k + j T} F(s) e^{st} ds
+\end{equation}
+
+\subsection{Stabilité}
+Un système est stable si \textbf{tous les pôles} de la fonction de \textcolor{red}{transfert} ont une partie réelle négative.
+Ainsi, quand on repasse en temporel, nos exponentielles sont bornés et n'exploseront pas.
+
+\section{Systèmes}
+\subsection{Boucle fermée}
+On va créer un chemin de retour pour minimiser l'erreur. Ainsi on peut comparer la valeur effective à la valeur recherchée. On a 3 types de régulateur:
+\begin{enumerate}
+\item \underline{P :} proportionnel donc simplement $H(s) = K_1$
+\item \underline{PD :} proportionnel dérivé $H(s) = K_1 + K_3 s$
+\item \underline{PID :} proportionnel intégrale dérivé $H(s) = K_1 + \frac{K_2}{s} + K_3 s$
+\end{enumerate}
+Les pôles en proportionnel dérivée sont tous sur l'axe des réelles et les PID sont en partie proche de l'origine.
+
+\subsubsection{Soucis}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/regu.png}
+\end{figure}
+On peut voir sur le schéma:
+\begin{itemize}
+\item \underline{$y_0$ :} la réponse du système en boucle ouverte.
+\item \underline{$y_p$ :} la réponse du système avec un régulateur de type proportionnel. On constate un overshoot très important et une convergence vers une valeur qui n’est pas la valeur désirée (avec une stabilisation très oscillatoire, qui n’est pas en soi problématique en elle-même mais l’overshoot l’est).
+\item \underline{$y_{pd}$ :} la réponse du système avec un régulateur de type proportionnel dérivé. On constate un \textit{overshoot} pratiquement nul, une stabilisation rapide mais pas vers la bonne valeur.
+\item \underline{$y_{pid}$ :} la réponse du système avec un régulateur de type proportionnel intégral dérivé. On constate qu’il n’y a pas d’overshoot, ça se stabilise très vite (plus vite que le système en boucle ouverte) vers la bonne valeur et c’est très stable. Un système PID est donc à
+privilégier de manière générale
+\end{itemize}
+
+\subsection{Réponse à une harmonique infinie}
+Très proche d'un phaseur quand on fait le calcul:
+\begin{equation}
+g(t) = \mathfrak{R}\{H(s = j \omega_o) e^{j \omega_o t}\}
+\end{equation}
+
+\subsection{Réponse à une harmonique causale}
+Les pôles de la fonction de transfert sont responsable du transitoire et on a
+\begin{equation}
+g^h (t) = \mathfrak{R} \{H(s = j \omega_o) e^{j \omega_o t}\}
+\end{equation}
+
+\subsection{Décomposition en Harmonique}
+On peut séparer notre fonction en série de sinus et cosinus (série de Fourier):
+\begin{align*}
+f_p (t) &= \sum_{n = - \infty}^{\infty} c_n e^{j n \omega_0 t} & c_n &= \frac{1}{T_0} \int_{- T_0 / 2}^{T_0 / 2} f(t) e^{-j n \omega_0 t} dt
+\end{align*}
+Ensuite, on peut voir le tout comme une sorte de convolution entre nos facteurs et un train de Dirac.
+
 
 \chapter{Mesure}
 \section{Erreurs et incertitudes}
