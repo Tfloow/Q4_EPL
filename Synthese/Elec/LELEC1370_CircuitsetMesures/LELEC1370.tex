@@ -249,15 +249,7 @@ V_{out} = - \frac{1}{RC} \int_{t = 0}^{t} V_{in} dt + V_{out} (0)
 \end{equation}
 
 
-
-
-
-\subsubsection{Montage inverseur}
-\begin{equation}
-\frac{v_o}{v_s} ~= -\frac{R_2}{R_1}
-\end{equation}
-
-\chapter{Signaux sinusoïdales et phaseurs}
+\chapter{Signaux sinusoïdaux et phaseurs}
 \section{Circuits en régime sinusoïdal}
 
 \subsection{Circuit RC: rappel}
@@ -277,7 +269,7 @@ RC \frac{dV_C(t)}{dt} &= -(V_C(t)-V_S(t))\label{eq:RCsinus}
 Il est à noter que l'équation \ref{eq:RCsinus} est une équation propre au circuit de la figure \ref{img:RCsinus}. Il est bon de remarquer que \textit{maintenant}, les courants et tension sont \textit{dépendantes du temps}. La \textit{constante de temps} est $\tau = RC$ et apparait dans la résolution de \textit{l'équation différentielle}.
 
 \subsection{Circuit LC}
-Voici les formules pou les circuits LC. (\textit{note}: on dirait que notre source de courant est une source de courant \textit{commandé} mais c'est bien une source de courant \textbf{non-commandé})
+Voici les formules pou les circuits LC. (\textit{note}: on dirait que notre source de courant est une source de courant \textit{commandée} mais c'est bien une source de courant \textbf{non-commandée})
 \begin{align}
 V_L(t) &= L \frac{dI_L(t)}{dt}\\
 V_L(t) &= GI_G(t)\\
@@ -719,7 +711,7 @@ Il n'y a pas qu'une seule configuration qui produit un résultat. On peut interv
 \end{figure}
 On peut voir ce système comme:
 \begin{align*}
-T_{bf}(s) = \frac{1}{H(s)}.\frac{G(s) . H(s)}{1 + G(s). H(s)} = T_{ideal} (s) . \frac{T_{bo}(s)}{1+T_{bo}(s)} = T_{ideal} (s) . \frac{1}{1 + \frac{1}{T_{bo}(s)}}(
+T_{bf}(s) = \frac{1}{H(s)}.\frac{G(s) . H(s)}{1 + G(s). H(s)} = T_{ideal} (s) . \frac{T_{bo}(s)}{1+T_{bo}(s)} = T_{ideal} (s) . \frac{1}{1 + \frac{1}{T_{bo}(s)}}
 \end{align*}
 Dans un monde idéal, le gain $G(s)$ tend vers $\infty$. Ainsi la fonction de transfert \textit{idéal} vaut donc $T_{ideal}(s) = 1/H(s)$
 
@@ -789,7 +781,7 @@ Il faut bien régler l'amortissement car on peut soit rendre le système \textit
 \subsection{Conseils}
 On ne peut plus considérer que $V_{i+} = V_{i-}$, on a que $\frac{V_o}{V_{i+} - V_{i-}}$ ce qui revient à:
 \begin{equation}
-V_o = G(j \omega ) ( V_{in} - V_{-}
+V_o = G(j \omega ) ( V_{in} - V_{-})
 \end{equation}
 
 
@@ -945,7 +937,7 @@ Z &= Y^{-1} & Y&= Z^{-1} & G &= H^{-1} & H &= G^{-1}
 \includegraphics[width=7cm]{img/quadriCharge.png}
 \end{figure}
 C'est un quadripôle qui est entre une source $v_s$ avec $Z_s$ et une charge $Z_L$. De plus, on connait une des ses représentations.\\
-De plus, on a doit avoir une relation entre les variables externes en présence de $Z_s$ et $Z_L$. Il en existe 4:
+On doit avoir une relation entre les variables externes en présence de $Z_s$ et $Z_L$. Il en existe 4:
 \begin{enumerate}
 \item \underline{Impédance d'entrée $Z_{in}$:} coefficient de $i_i$ dans l'expression de $v_i$, $Z_{in} = \frac{v_i}{i_i}$, dépend de $Z_L$.
 \item \underline{Impédance de sortie $Z_{out}$:} coefficient de $i_o$ dans l'expression de $v_o$, $Z_{out} = \frac{v_o}{i_o}$, dépend de $Z_S$.
@@ -1127,7 +1119,7 @@ $P = 0$ & $S = \frac{I_{eff}^2}{\omega C}$ & $Q = - \frac{I_{eff}^2}{\omega C}$ 
 \end{center}
 
 \subsection{Admittance quelconque - Tension Imposée}
-Ici, on va imposé la tension et donc seulement valable en sinusoïdal:
+Ici, on va imposer la tension et donc seulement valable en sinusoïdal:
 \begin{equation}
 p(t) = YV_{eff}^2(cos \varphi + cos(2 \omega t + 2 \psi_i + \varphi))
 \end{equation}
@@ -1188,7 +1180,7 @@ On paye à l'année l'\textbf{énergie} consommée:
 \begin{equation}
 E = \int_0^{h_{annee}} p(t) dt \quad [kWh]
 \end{equation}
-On ne tient compte de de la puissance \textbf{moyenne} donc seulement de l'\textit{active}
+On ne tient compte de de la puissance \textbf{moyenne} donc seulement de l'\textit{active}.
 
 \subsubsection{Industriel}
 On tient compte de la puissance active \textbf{et} réactive.
@@ -1301,7 +1293,7 @@ Si on a une formation en \textit{triangle}, alors les courants de ligne et de ph
 V_l &= \sqrt{3} V_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6} & I_l &= I_{ph} & \varphi_l &= \varphi_{ph}
 \end{align*}
 
-\subsubsection{Cas particulier -triangle}
+\subsubsection{Cas particulier - triangle}
 Ressemble au cas en étoile mais cette fois-ci:
 \begin{align*}
 V_l &= V_{ph} & \varphi_l &= \varphi_{ph}& I_l &= \sqrt{3} I_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6}
@@ -1484,10 +1476,10 @@ La puissance entrante est la même que la puissance sortante.
 \includegraphics[width=7cm]{img/transSinus.png}
 \end{figure}
 On peut ainsi travailler avec des \textit{phaseurs}. On indique le nombre de spire comme sur le schéma ci-dessus $N_1 : N_2$. Un transformateur idéal est indique via c'est barres en parallèle devant les bobinages. Relation tensions, courants:
-\begin{align*}
+\begin{align}
 \frac{\overline{V_1}}{\overline{V_2}} &= \frac{1}{n} & \frac{\overline{I_1}}{\overline{I_2}} &= n & n &= \frac{N_2}{N_1}
 \label{formulesSinus}
-\end{align*}
+\end{align}
 
 \subsubsection{Manipulation}
 Quand on a ce type de circuit, on peut le transformer dans un modèle plus simple comme indiqué ci-dessous.
@@ -1496,7 +1488,7 @@ Quand on a ce type de circuit, on peut le transformer dans un modèle plus simpl
 \includegraphics[width=8cm]{img/manipTrans.png}
 \end{figure}
 On peut réaliser ce type de changement car on suppose le transfert d'énergie comme idéal.\par
-La manipulation de ce type de circuit se repose sur l'utilisation des formules vu en \ref{formulesSinus}
+La manipulation de ce type de circuit se repose sur l'utilisation des formules vu à l'équation \ref{formulesSinus}.
 
 
 \chapter{Transformée de Laplace} \label{Laplace}
@@ -1521,7 +1513,7 @@ Une propriété extrêmement utile est \textcolor{red}{$df(t)/dt \rightarrow sF(
 Il faut aussi bien réduire en fraction simple.
 
 \subsection{Résolution}
-Les calculs sont longs et méthodiques, au début, il faut ré-écrire toutes les équations différentielles. Une fois qu'on qu'une seule variable dans cette équation, on remplace les dérivées par leur équivalent en Fourier unilatéral. Si on a un signal qui passe de 2 à 1 Volts, il faut noter \textcolor{red}{$1 u(t)$} avec $u(t)$ la fonction échellon. Cela est important puisque qu'on passe d'une équation différentielle à une analyse en continue.
+Les calculs sont longs et méthodiques, au début, il faut ré-écrire toutes les équations différentielles. Une fois qu'on a qu'une seule variable dans cette équation, on remplace les dérivées par leur équivalent en Fourier unilatéral. Si on a un signal qui passe de 2 à 1 Volts, il faut noter \textcolor{red}{$1 u(t)$} avec $u(t)$ la fonction échellon. Cela est important puisque qu'on passe d'une équation différentielle à une analyse en continue.
 
 \chapter{Stabilité et systèmes}
 On sait que la transformée de Laplace bilatérale est une transformée de Fourier pour $s = j \omega$ si la ROC contient $\sigma = 0$. On fait souvent référence à la transformée de Laplace unilatérale.
@@ -1534,7 +1526,7 @@ f(t) = \frac{1}{2 \pi j} \lim_{T\rightarrow \infty} \int_{k - j T}^{k + j T} F(s
 
 \subsection{Stabilité}
 Un système est stable si \textbf{tous les pôles} de la fonction de \textcolor{red}{transfert} ont une partie réelle négative.
-Ainsi, quand on repasse en temporel, nos exponentielles sont bornés et n'exploseront pas.
+Ainsi, quand on repasse en temporel, nos exponentielles sont bornées et n'exploseront pas.
 
 \section{Systèmes}
 \subsection{Boucle fermée}
@@ -1587,9 +1579,9 @@ Ensuite, on peut voir le tout comme une sorte de convolution entre nos facteurs 
 On nomme l'erreur comme $e$ qui est observé quand on mesure une valeur $x$ et son résultat réelle $\xi$.\\
 L'erreur relative $e_r$ est le rapport entre l'erreur absolue $e$ et la valeur vraie $\xi$.\\ 
 L'erreur $e$ peut avoir une composante \textbf{systématique} $\delta$ et une composante \textbf{aléatoire} $\epsilon$.
-\begin{align*}
+\begin{align} \label{eq:erreur}
 e &\triangleq  x - \xi & e_r &\triangleq \frac{e}{\xi} & e &= \delta + \epsilon 
-\end{align*}
+\end{align}
 
 \subsubsection{Incertitudes}
 C'est une \textit{estimation} de l'erreur \textbf{maximale} commise lors de la mesure. C'est donc un intervalle autour de la mesure avec une certaines probabilités où la valeur vraie se trouve. 
@@ -1604,9 +1596,9 @@ On observer aussi une variation de l'efficacité en fonction de la température 
 On va toujours essayer d'éviter les résistances en série. On probe toujours aux bornes de la résistances et non plus loin pour éviter de prendre en compte la résistivité des fils.
 
 \subsubsection{Haute fréquence}
-On utilise des câbles coaxials qui est composé d'une âme qui n'est autre que le câble transportant le courant et d'une gaine. La gaine est une sorte de capacité mise en parallèle. Cela nous évite un pôles à $160 Hz$.\\
+On utilise des câbles coaxiaux qui sont composés d'une âme qui n'est autre que le câble transportant le courant et d'une gaine. La gaine est une sorte de capacité mise en parallèle. Cela nous évite un pôle à $160 Hz$.\\
 
-On utilise des câbles triaxials qui ont aussi une âme et une gaine mais possède une \textbf{garde} en plus. Cette garde est couplé à un suiveur pour obtenir un signal plus idéal.
+On utilise des câbles triaxiaux qui ont aussi une âme et une gaine mais possède une \textbf{garde} en plus. Cette garde est couplé à un suiveur pour obtenir un signal plus idéal.
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{img/triaxial.png}
@@ -1616,7 +1608,7 @@ On utilise des câbles triaxials qui ont aussi une âme et une gaine mais possè
 \subsection{Éléments de statistique}
 Via nos équations précédentes (\ref{eq:erreur}) on peut établir que la valeur mesurée vaut $x = \xi + \delta + \epsilon$. Ceci suit une loi \textcolor{red}{normal} de $N(\mu , \sigma^2)$ où $\mu = \xi + \delta $.\par 
 On dit qu'une mesure est reproductible si on a un écart type $\sigma$ faible donc un erreur aléatoire $\epsilon $ faible.\par 
-La mesure exacte est la valeur moyenne $\mu$ proche de la valeur vraie $\epsilon$, donc une erreur systématique $\delta$ faible.
+La mesure exacte est la valeur moyenne $\mu$ proche de la valeur vraie $\xi$, donc une erreur systématique $\delta$ faible.
 
 \subsubsection{Étalonnage}
 On va essayer de supprimer l'erreur \textit{systématique} $\delta$. La valeur $2 \sigma$ correspond à l'incertitude absolue.
@@ -1693,7 +1685,7 @@ Z_{AY} = R_{AY} - j \frac{1}{\omega_0 C_{AY}}
 \end{align*}
 Pour mesurer, on veut que \textcolor{red}{$H_W = V_{AB} = 0$}:
 \begin{align*}
-\frac{Z_{AY}}{Z_{AX}} = \frac{R_{BY}}{R_{BX}} & \Longrightarrow \frac{R_{AY}}{R_{AX}} + \frac{C_{AX}}{C_{AY}} + j \left( \omega_0 R_{AY} C_{AX} - \frac{1}{\omega_0 R_AX C_AY} \right) = \frac{R_{BY}}{R_{BX}}\\
+\frac{Z_{AY}}{Z_{AX}} = \frac{R_{BY}}{R_{BX}} & \Longrightarrow \frac{R_{AY}}{R_{AX}} + \frac{C_{AX}}{C_{AY}} + j \left( \omega_0 R_{AY} C_{AX} - \frac{1}{\omega_0 R_{AX} C_{AY}} \right) = \frac{R_{BY}}{R_{BX}}\\
 & \Longrightarrow \begin{cases}
 R_{AX} = \frac{R_{BX}}{R_{BY}} \left( R_{AY} + \frac{1}{(\omega_0 C_{AY})^2 R_{AY}} \right)\\
 C_{AX} = \frac{1}{\omega_0^2 C_{AY} R_{AY} R_{AX}}
@@ -1702,10 +1694,10 @@ C_{AX} = \frac{1}{\omega_0^2 C_{AY} R_{AY} R_{AX}}
 \newpage
 
 \subsection{Pont de Maxwell}
-\begin{wrapfigure}{r}{.5\textwidth}
+\begin{figure}[H]
 \centering
-\includegraphics{img/Maxwell.png}
-\end{wrapfigure}
+\includegraphics[width=7cm]{img/Maxwell.png}
+\end{figure}
 Même idée que le pont de Wien mais pour les inductances, on va placer l'inductance sur l'autre coté.
 \begin{align*}
 H_W &= \frac{V_{AB}}{V_S} = \frac{Z_{AY}}{Z_{AY} + R_{AX}} - \frac{R_{BY}}{R_{BY} + Z_{BX}}\\
