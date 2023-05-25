@@ -25,7 +25,7 @@
     linkcolor=black,
     filecolor=magenta,
     urlcolor=cyan,
-    pdftitle={Overleaf Example},
+    pdftitle={LELEC1370},
     pdfpagemode=FullScreen,
     }
 \begin{document}
@@ -380,7 +380,7 @@ Pour des \textbf{dipôles}:
 \hline
 $\textbf{V} = \textbf{ZI}$ & $\textbf{I} = \textbf{YV}$\\
 \hline
-$\textbf{Z} = \frac{\textbf{V}}{\textbf{I}} = \frac{|\textbf{V}|}{|\textbf{I}|}e^{j(arg(\textbf{V})-arg(\textbf{I})} = \frac{V}{I} e^{j{(\psi_V-\psi_I)}}$ & $\textbf{Y} = \frac{\textbf{I}}{\textbf{V}} = |\textbf{Y}|e^{j(arg(\textbf{Y}))} = Y e^{j{(\varphi)}}$\\
+$\textbf{Z} = \frac{\textbf{V}}{\textbf{I}} = \frac{|\textbf{V}|}{|\textbf{I}|}e^{j(arg(\textbf{V})-arg(\textbf{I}))} = \frac{V}{I} e^{j{(\psi_V-\psi_I)}}$ & $\textbf{Y} = \frac{\textbf{I}}{\textbf{V}} = |\textbf{Y}|e^{j(arg(\textbf{Y}))} = Y e^{j{(\varphi)}}$\\
 \hline
 \end{tabular}
 \end{center}
@@ -1311,8 +1311,9 @@ L'avantage est que les grandeurs de phase et de ligne sont les mêmes.
 \section{Transformation étoiles triangles}
 On peut toujours passer de l'un à l'autre.
 \begin{align*}
-Z_{etoile} &= \frac{Z_{triangle}}{3} & V_{etoile} &= \frac{V_{triangle}}{\sqrt{3}} - \frac{\pi}{6}
+Z_{etoile} &= \frac{Z_{triangle}}{3} & V_{etoile} &= \frac{V_{triangle}}{\sqrt{3}}e^{- \frac{\pi}{6}i}
 \end{align*}
+\textcolor{red}{attention}: on utilise un retard de tension si on a un système \textbf{direct} de tension donc avec $0, - \frac{2 \pi}{3}, - \frac{4 \pi}{3}$. Sinon on fait le signe opposé.
 \begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{img/transfoEtoilesTriangles.png}
@@ -1411,12 +1412,15 @@ E &= \frac{1}{2} L_1 I_1^2
 \end{align*}
 Si maintenant, on ferme le circuit à droite avec une source de courant $I_2$. On a maintenant une énergie:
 \begin{align*}
-E = \int_{t_1}^{t_2} (p_1(t) + p_2(t)) dt &= \int_{t_1}^{t_2} (v_1 (t) I_1 (t) + v_2(t) I_2 (t)) dt\\
-&= \int_{t_1}^{t_2} \left( M \frac{di_1 (t)}{dt} + L_2 \frac{di_2 (t)}{dt} i_2 (t) \right) dt\\
+E = \int_{t_1}^{t_2} (p_1(t) + p_2(t)) dt &= \int_{t_1}^{t_2} (v_1 (t) I_1 + v_2(t) i_2 (t)) dt\\
+&= \int_{t_1}^{t_2} \left( M \frac{di_2 (t)}{dt} I_1 + L_2 \frac{di_2 (t)}{dt} i_2 (t) \right) dt\\
 &= \int_{0}^{i_2(t_2)} (M I_1 + L_2 i_2(t)) di_2(t)\\
-E &= \frac{1}{2} L_2 I_2^2 + MI_1 I_1
+E &= \frac{1}{2} L_2 I_2^2 + MI_1 I_2
 \end{align*}
-\textcolor{red}{Revoir les coefs au-dessus}
+La simplification de $v_1$ et $v_2$ se repose sur le fait que notre circuit est à \textbf{l'équilibre} pour $I_1$ donc $\frac{di_1}{dt} = 0$. Ainsi:
+\begin{align*}
+v_1 &= M \frac{di_2}{dt} & v_2 &= L_2 \frac{di_2}{dt}
+\end{align*}
 Ainsi, l'énergie magnétique totale stockée dans un tel système vaut:
 \begin{equation}
 E = \frac{1}{2} L_1 I_1^2 + \frac{1}{2} L_2 I_2^2 + MI_1 I_2
@@ -1452,7 +1456,7 @@ Ici, $0 \leqslant \sigma \leqslant 1$ et $0 \leqslant k \leqslant 1$. Au plus $\
 \includegraphics[width=6cm]{img/transfoBobinages.png}
 \end{wrapfigure}
 On couple deux bobinages à l'aide d'un entrefer pour ainsi rendre le transfert d'énergie optimale comme ci-contre.\par
-On pose que la résistance électrique des bobinages null, pas de flux de fuite et perméabilité magnétique du circuit magnétique infinie. Via Faraday:
+On pose que la résistance électrique des bobinages nulle, pas de flux de fuite et perméabilité magnétique du circuit magnétique infinie. Via Faraday:
 \begin{equation}
 \frac{v_1}{v_2} = \frac{N_1}{N_2}
 \end{equation}
@@ -1645,7 +1649,7 @@ x_Y &\approx \frac{\xi_A}{\xi_B} * \left( 1 + \frac{\epsilon_A}{\xi_A} - \frac{\
 Les comparaisons sont beaucoup plus précises que des mesures absolues. Cela est utile pour les voltmètre numérique.
 
 \subsection{Utilisation}
-Mesure absolue de résistances par rapport à un standard. Cela est exacte à moins de $100$ ppm près. On peut mesurer de faible variations de résistance. On peut même mesurer des impédances.
+Mesure absolue de résistances par rapport à un standard. Cela est exacte à moins de $100$ ppm près. On peut mesurer de faibles variations de résistance. On peut même mesurer des impédances.
 
 \subsection{Pont de Wheatstone}
 \begin{wrapfigure}{r}{.5\textwidth}
@@ -1661,7 +1665,7 @@ Ainsi, on peut réaliser 2 modes bien spécifiques, observer des faibles modific
 \begin{align*}
 R_{AX} &= (1 + \alpha) R\\
 R_{AY} &= R_{BX} = R_{BY} = R\\
-H_W &= \frac{\alpha}{2(2+\alpha)}
+H_W &= - \frac{\alpha}{2(2+\alpha)}
 \end{align*}
 Ou bien de faire des mesures absolues:
 \begin{align*}
@@ -1680,7 +1684,7 @@ Ressemble très fort au pont de Wheatstone. Il faut bien remarquer le courant \t
 H_W &= \frac{V_{AB}}{V_S} = \frac{Z_{AY}}{Z_{AY} + Z_{AX}} - \frac{R_{BY}}{R_{BX} + R_{BY}}\\
 & \begin{cases}
 \frac{1}{Z_{AX}} = \frac{1}{R_{AX}} + j \omega_0 C_{AX}\\
-Z_{AY} = R_{AY} - j \frac{1}{\omega_0 C_{AY}}
+Z_{AY} = R_{AY} + j \frac{1}{\omega_0 C_{AY}}
 \end{cases}
 \end{align*}
 Pour mesurer, on veut que \textcolor{red}{$H_W = V_{AB} = 0$}:
