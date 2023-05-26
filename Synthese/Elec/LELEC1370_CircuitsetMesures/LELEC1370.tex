@@ -69,6 +69,7 @@ Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bon
 \chapter{Cours 1}
 \section{Les bases}
 
+\subsection{Le courant et la puissance}
 Tout d'abord, il existe 2 types de courant appelé \textbf{Direct Current} ou \textit{DC} et \textbf{Alternating Current} ou \textit{AC}. Le courant direct est continu tandis que le courant \textit{AC} varie dans le temps comme montré ci-contre.\\
 \begin{figure}[H]
 	\centering
@@ -121,7 +122,7 @@ On peut simplifier un circuit et sommer des sources de tension en additionnant l
 \subsubsection{Mise en parallèle et sources multiples}
 Les sources de \textit{courant} en parallèle peuvent être sommé pour les simplifier et n'en avoir qu'une seule source de courant. Pour les sources de \textit{tension}, on les additionne quand elles sont en série.
 
-\subsubsection{Équivalent Thévenin Norton} \label{Th}
+\subsection{Équivalent Thévenin Norton} \label{Th}
 On peut simplifier une alimentation d'un circuit via les circuits de Thévenin et Norton. Thévenin est composé d'une source de tension et d'une résistance en série tandis que Norton a une source de courant et une résistance en parallèle.\\
 Les choses importantes à noter sont:
 \begin{equation}
@@ -162,13 +163,10 @@ R_1 &= \frac{R_aR_b + R_aR_c + R_bR_C}{R_b} & R_2 &= \frac{R_aR_b + R_aR_c + R_b
 R_3 &= \frac{R_aR_b + R_aR_c + R_bR_C}{R_a}
 \end{align*}
 
-
-\chapter{Cours 2}
-\section{Suite des bases}
 \subsubsection{Thévenin avec sources dépendantes}
 Pour trouver $R_{Th}$ on va rajouter au borne connectant l'autre circuit une source de tension. Puis on détermine les tensions à borne ouverte et le courant en \textit{court-circuit}.
 
-\subsubsection{Transfert maximal de puissance}
+\subsection{Transfert maximal de puissance}
 Pour trouver la puissance maximale dans une résistance, on peut faire varier le courant et donc le voltage. Ici, on a réalisé un diviseur résistif très simple pour démontrer la formule de puissance de résistance donné par \ref{eqn:pr}, on obtient donc ceci dans notre circuit: (plus d'informations en section \ref{Quadri})
 \begin{equation}
 \frac{\partial}{\partial R_2} \biggl(\frac{V^2 R_2}{(R_1 + R_2)^2}\biggl) = 0
@@ -181,7 +179,7 @@ Pour trouver la puissance maximale dans une résistance, on peut faire varier le
 \caption{Graphique montrant l'évolution de la puissance dans une résistance}
 \end{figure}
 
-\subsubsection{Le quadripole à 2 accès}
+\subsection{Le quadripole à 2 accès}
 \begin{wrapfigure}{r}{.45\textwidth}
 \centering
 \includegraphics[width=6.5cm]{img/quadri2.png}
@@ -201,7 +199,7 @@ On peut facilement représenter ces différents systèmes via des matrices déta
 
 \subsection{L'amplificateur opérationnelle}
 L'amplificateur opérationnelle ou \textit{ampli op} est un composant qu'on retrouve abondamment en électronique.\\
-On va éviter la saturation et contrôler l'ampli-op en réalisant une boucle de rétroaction négative à la borne $-$. Nous n'avons aucun courant qui rentre dans l'ampli-op dû à son impédance élevée. Il se peut qu'à la sortie de celle-ci, un faible courant puisse rentrer car l'impédance est plus faible.
+On va éviter la saturation et contrôler l'ampli-op en réalisant une boucle de rétroaction négative à la borne $-$. Nous n'avons aucun courant qui rentre dans l'ampli-op dû à son impédance élevée. Il se peut qu'à la sortie de celle-ci, un faible courant puisse rentrer car l'impédance est plus faible. Dans le cas idéal, $V_+ = V_-$ et $I_+ = I_- = 0$.
 
 \subsubsection{Buffer}
 \begin{figure}[H]
@@ -273,7 +271,7 @@ Voici les formules pou les circuits LC. (\textit{note}: on dirait que notre sour
 \begin{align}
 V_L(t) &= L \frac{dI_L(t)}{dt}\\
 V_L(t) &= GI_G(t)\\
-GL \frac{dI_L(t)}{dt} &= -(I_L(t)-I_S(t))\label{eq:LCsinus}
+\frac{L}{G} \frac{dI_L(t)}{dt} &= -(I_L(t)-I_S(t))\label{eq:LCsinus}
 \end{align}
 
 \begin{figure}[H]
@@ -1233,7 +1231,7 @@ e_3 = V_{max} cos(\omega t + \varphi_v - \frac{4 \pi}{3})
 \end{cases} & &\begin{cases}
 \overline{E_1} = V_{max}e^{j \varphi_v}\\
 \overline{E_2} = V_{max}e^{j \varphi_v - 2 \pi /3}\\
-\overline{E_3} = V_{max}e^{j \varphi_v - 2 \Pi /3}
+\overline{E_3} = V_{max}e^{j \varphi_v - 2 \pi /3}
 \end{cases}
 \end{align*}
 Ci-dessous, un système \textbf{inverse} de tension:
@@ -1245,7 +1243,7 @@ e_3 = V_{max} cos(\omega t + \varphi_v + \frac{4 \pi}{3})
 \end{cases} & &\begin{cases}
 \overline{E_1} = V_{max}e^{j \varphi_v}\\
 \overline{E_2} = V_{max}e^{j \varphi_v + 2 \pi /3}\\
-\overline{E_3} = V_{max}e^{j \varphi_v + 2 \Pi /3}
+\overline{E_3} = V_{max}e^{j \varphi_v + 2 \pi /3}
 \end{cases}
 \end{align*}
 Les signaux s'annulent entre eux.
@@ -1290,13 +1288,13 @@ Ce sont les grandeurs mesurées sur les éléments qui constituent la source et/
 Dans le cas ci-dessus, le courant de ligne et de phase est le même. La tension de ligne est tel que $V_l = \sqrt{3}V_{ph}$ et sa phase $\phi_l = \phi_{ph} + \frac{\pi}{6}$\par
 Si on a une formation en \textit{triangle}, alors les courants de ligne et de phase sont différents entre eux.
 \begin{align*}
-V_l &= \sqrt{3} V_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6} & I_l &= I_{ph} & \varphi_l &= \varphi_{ph}
+V_l &= \sqrt{3} V_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6} & &\quad & I_l &= I_{ph} & \varphi_l &= \varphi_{ph}
 \end{align*}
 
 \subsubsection{Cas particulier - triangle}
 Ressemble au cas en étoile mais cette fois-ci:
 \begin{align*}
-V_l &= V_{ph} & \varphi_l &= \varphi_{ph}& I_l &= \sqrt{3} I_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6}
+V_l &= V_{ph} & \varphi_l &= \varphi_{ph}& &\quad & I_l &= \sqrt{3} I_{ph} & \varphi_l &= \varphi_{ph} + \frac{\pi}{6}
 \end{align*}
 
 
@@ -1465,7 +1463,7 @@ On va maintenant réaliser la \textbf{loi d'Ampère} et on rajoute un parcours $
 \int_{\Gamma} \overrightarrow{H} \overrightarrow{dl} &= N i & \int_{\Gamma} \overrightarrow{H} \overrightarrow{dl} &= N_1 i_1 + N_2 i_2\\
 0 &= N_1 i_1 + N_2 i_2 & \frac{i_1}{i_2} &= - \frac{N_2}{N_1}
 \end{align*}
-On peut supposer que l'énergie est finie et donc que $N_1 i_1 + N_2 = 0$
+On peut supposer que l'énergie est finie et donc que $N_1 i_1 + N_2 i_2 = 0$
 
 \subsection{Analyse énergétique}
 Donc on a que:
@@ -1517,7 +1515,9 @@ Une propriété extrêmement utile est \textcolor{red}{$df(t)/dt \rightarrow sF(
 Il faut aussi bien réduire en fraction simple.
 
 \subsection{Résolution}
-Les calculs sont longs et méthodiques, au début, il faut ré-écrire toutes les équations différentielles. Une fois qu'on a qu'une seule variable dans cette équation, on remplace les dérivées par leur équivalent en Fourier unilatéral. Si on a un signal qui passe de 2 à 1 Volts, il faut noter \textcolor{red}{$1 u(t)$} avec $u(t)$ la fonction échellon. Cela est important puisque qu'on passe d'une équation différentielle à une analyse en continue.
+Les calculs sont longs et méthodiques, au début, il faut ré-écrire toutes les équations différentielles. Une fois qu'on a qu'une seule variable dans cette équation, on remplace les dérivées par leur équivalent en Fourier unilatéral. Si on a un signal qui passe de 2 à 1 Volts, il faut noter \textcolor{red}{$1 u(t)$} avec $u(t)$ la fonction échellon. Cela est important puisque qu'on passe d'une équation différentielle à une analyse en continue.\\
+
+N'hésitez pas à passer directement en transformée unilatérale après avoir écrit les équations de bases !
 
 \chapter{Stabilité et systèmes}
 On sait que la transformée de Laplace bilatérale est une transformée de Fourier pour $s = j \omega$ si la ROC contient $\sigma = 0$. On fait souvent référence à la transformée de Laplace unilatérale.

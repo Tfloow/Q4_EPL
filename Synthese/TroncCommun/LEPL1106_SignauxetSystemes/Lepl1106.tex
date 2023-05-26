@@ -94,16 +94,19 @@ Pour le cas discrets ou continu, nous pouvons réaliser les opérations suivante
 
 \section{Signaux élémentaires}
 \subsection{Signaux exponentiels}
+\noindent
 Pour les signaux continus nous avons:
 \begin{equation}
 x(t) = B e^{at}
 \end{equation}
+\noindent
 Et pour les signaux discrets nous avons:
 \begin{equation}
-x[n] = Br^n \rightarrow 0 < r < 1
+x[n] = Br^n \rightarrow 0 < r < 1 \qquad e^a \approx r \text{ lien entre discret et continu}
 \end{equation}
 
 \subsection{Signaux sinusoïdales}
+\noindent
 Pour les signaux continus nous avons:
 \begin{equation}
 x(t) = A cos(\omega t + \phi)
@@ -118,6 +121,7 @@ T &= \frac{2 \pi}{\omega} & N &= \frac{2 \pi}{\Omega}
 \end{align}
 
 \subsection{Signaux amortis}
+\noindent
 Pour les signaux continus et avec $\alpha > 0$:
 \begin{equation}
 x(t) = A e^{-\alpha t}cos(\omega t + \phi)
@@ -138,6 +142,7 @@ Comme son nom l'indique, ce signal se représente sous la forme d'une impulsion.
 On peut réaliser des impulsions décaler en écrivant $\delta [n-x]$ avec $x$ représentant la valeur du décalage.
 
 \subsection{L'échelon (temps discret)}
+\noindent
 Ce type de signal élémentaire est encore plus trivial puisqu'il se résume à:
 \begin{equation}\label{eq:1}
 u[n]=
@@ -178,7 +183,7 @@ On peut décomposer tout signal en impulsion comme ci-dessous:
 \end{equation}
 
 \subsection{Rampe}
-C'est le résultat d'un produit de entre un signal linéaire et un signal échelon. On le nomme généralement $r(t)$ ou $[n]$
+C'est le résultat d'un produit de entre un signal linéaire et un signal échelon. On le nomme généralement $r(t)$ ou $r[n]$
 
 
 \section{Opération sur les signaux}
@@ -1576,9 +1581,9 @@ Un filtre \textit{réel} a un $|H(j\omega)|$ qui ressemblent plus à la figure \
 \hline
 Butterworth & $|H(j\omega)|^2 = \frac{1}{1+(\omega/\omega_c)^{2n}}$ & On a un filtre avec une \textit{fluctuation de bande passante} minime. Une \textit{zone de transition} plus ou moins élevé et une \textit{bande bloquante} qui tend vers 0.\\
 \hline
-Tchebychev Direct & $|H(j\omega)|^2 = \frac{1}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} oscillante mais borné. Une \textit{zone de transition} rapide et une \textit{bande bloquante} qui tend vers 0 et plus vite que \textcolor{blue}{Butterworth}.\\
+Tchebychev Direct & $|H(j\omega)|^2 = \frac{1}{1+(\gamma T_n^2 (\omega /\omega_c))}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} oscillante mais borné. Une \textit{zone de transition} rapide et une \textit{bande bloquante} qui tend vers 0 et plus vite que \textcolor{blue}{Butterworth}.\\
 \hline
-Tchebychev Inverse & $|H(j\omega)|^2 = \frac{\sqrt{\gamma}T_n(\omega_c/\omega}{1+(\gamma T_n^2 (\omega /\omega_c)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} plate. Une \textit{zone de transition} rapide et une \textit{bande bloquante} oscille de manière bornée (l'inverse de \textcolor{blue}{Tchebychev}).\\
+Tchebychev Inverse & $|H(j\omega)|^2 = \frac{\sqrt{\gamma}T_n(\omega_c/\omega}{1+(\gamma T_n^2 (\omega /\omega_c))}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation} et $T_n^2$ est une fonction oscillante à amplitude \textit{constante}(\textit{polynôme de Tchebychev de première espèce d'ordre $n$}). On a un filtre avec une \textit{fluctuation de bande passante} plate. Une \textit{zone de transition} rapide et une \textit{bande bloquante} oscille de manière bornée (l'inverse de \textcolor{blue}{Tchebychev}).\\
 \hline
 Elliptiques/Cauer & $|H(j\omega)|^2 = \frac{1}{1+ \gamma R_n^2(\omega / \omega_n \zeta)}$ &$\gamma$ est le \textcolor{blue}{facteur d'ondulation}, $\zeta$ est le \textcolor{blue}{facteur de sélectivité} et $R_n^2$ est une fonction \textcolor{blue}{rationnelle elliptique}. On a donc un filtre où en modifiant les paramètres $\gamma$ et $\zeta$, on peut obtenir un filtre spécifique.\\
 \hline
@@ -1607,7 +1612,7 @@ Où $B$ est la largeur du filtre souhaitée et $\omega_0$ est la fréquence à l
 \subsubsection{Les filtres à encoche / notch}
 Ce sont des filtres qui ne font passer qu'une seule fréquence \textit{spécifique}.
 \begin{align}
-H(j\omega) = \frac{(j\omega + j\omega_0)(j\omega - j\omega_0)}{(j \omega + \omega_0(cos(\theta) + j\sin(\theta))(j \omega + \omega_0(cos(\theta) -j\sin(\theta))) }
+H(j\omega) = \frac{(j\omega + j\omega_0)(j\omega - j\omega_0)}{(j \omega + \omega_0(cos(\theta) + j\sin(\theta)))(j \omega + \omega_0(cos(\theta) -j\sin(\theta))) }
 \end{align}
 
 \subsubsection{Les filtres passe-tout}
@@ -1834,6 +1839,21 @@ Avec une représentation d'état continu, la fonction de transfert est: $H(s) = 
 \end{align*}
 Donc les pôles de la fonction de transfert $\mathcal{H}$ sont les valeurs propres de $A$. Via la stabilité des $vep$ de $A$ on peut savoir si les pôles sont stables.\par 
 Stabilité interne $\Longrightarrow$ stabilité BIBO. Instabilité BIBO $\Longrightarrow$ instabilité interne stricte. Le contraire n'est pas vrai.\par
+
+\subsection{Critère de Routh-Hurwitz}
+\begin{figure}[H]
+\centering
+\includegraphics[width=4cm]{img/RH.png}
+\caption{Oui j'ai la flemme de faire un tabular}
+\end{figure}
+\begin{equation}
+D(s) = a_n s^n +a_{n-1} s^{n-1} + ... + a_1 s + a_0
+\label{Poly}
+\end{equation} 
+Ainsi, si les signes sont différents entres les cases de la première colonne, notre polynôme \ref{Poly} aura des racines non-négatives. Cela est utile car avoir des pôles positifs = instabilités.
+\begin{align*}
+b_i &=\frac{a_{n-1}\times{a_{n-2i}}-a_n\times{a_{n-(2i+1)}}}{a_{n-1}} & c_i &= \frac{b_1\times{a_{n-(2i+1)}}-a_{n-1}\times{b_{i+1}}}{b_1}
+\end{align*}
 
 \section{Intermède algébrique} 
 On peut remarquer que le polynôme caractéristique d'une matrice $A$ évalué en $A$ est la matrice \textcolor{red}{nulle}.
