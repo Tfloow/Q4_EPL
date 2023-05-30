@@ -75,7 +75,7 @@ Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bon
 \chapter{Concepts}
 Dans ce chapitre, on s'intéresse aux ensembles, cardinalité et équipotences de ces derniers
 \section{Ensemble}
-Un ensemble est un \textit{collection} d'objets, \textit{sans répétition}, ces derniers sont appelés \textit{éléments} de l'ensemble.
+Un ensemble est une \textit{collection} d'objets, \textit{sans répétition}, ces derniers sont appelés \textit{éléments} de l'ensemble.
 Donc un ensemble peut être des chiffres, des lettres, il peut être vide symbolisé par $void$ %à ajouter
 On peut réaliser des opérations dessus, on peut déterminer des \textit{sous-ensembles d'ensemble} donc des ensembles issus d'ensemble.
 On a également une notion s'appelant le \textit{complément} d'un ensemble dénoté $\overline{A}$\\%trouver le bon charactère
@@ -114,7 +114,7 @@ Intéressons nous aux \textcolor{red}{extensions} qui est le fait de rajouter un
 f à la même valeur que g partout où g est défini.
 
 \subsubsection{Définition d'une fonction}
-Comme dit précédemment, une fonction est défini par sa table. On va souvent utiliser une description de la table qui permet que celle-ci soit clair et bien défini. De plus, on a pas besoin de savoir comment calculer ceci.\\
+Comme dit précédemment, une fonction est défini par sa table. On va souvent utiliser une description de la table qui permet que celle-ci soit clair et bien défini. De plus, on n'a pas besoin de savoir comment calculer ceci.\\
 On peut également définir une table via une fonction ou un algorithme.
 
 \section{Ensemble énumérable}
@@ -238,7 +238,7 @@ Les 4 grands points de la thèse:
 \item Toutes les formalisations de la calculabilité établies par la suite seront
 équivalentes aux définitions connues
 \end{enumerate}
-On établit que Java à accès à une infinité de mémoire (donc physiquement possible). Ainsi, on a $P$ qui est l'ensemble des programmes Java syntaxiquement corrects, qui reçoivent 1 données \textit{entières} et qui retournent un résultat \textit{entier}.
+On établit que Java a accès à une infinité de mémoire (donc physiquement impossible). Ainsi, on a $P$ qui est l'ensemble des programmes Java syntaxiquement corrects, qui reçoivent 1 données \textit{entières} et qui retournent un résultat \textit{entier}.
 \begin{itemize}
 \item P est un ensemble récursif (infini dénombrable)
 \item $P = P_0, P_1, ..., P_k, ...$ sans répétition donc chaque programme est unique.
@@ -287,7 +287,7 @@ $P_k$ & halt(k,0) & halt(k,1) & ... & \textcolor{red}{halt(k,k)} & ...\\
 \end{tabular}
 \end{center}
 
-On va sélectionner les valeurs sur la diagonale et stocker cela comme une variable s'appelant "\textit{diag}". On va donc modifié cette valeur et est représenté par "\textit{$diag_{mod}$}" qui inverse chaque nombre. (donc $0 \rightarrow 1$ et $1 \rightarrow 0$) Donc \textit{$diag_{mod}$} est calculable sous l'hypothèse que la fonction "halt" l'est.\\
+On va sélectionner les valeurs sur la diagonale et stocker cela comme une variable s'appelant "\textit{diag}". On va donc modifier cette valeur et est représenté par "\textit{$diag_{mod}$}" qui inverse chaque nombre. (donc $0 \rightarrow 1$ et $1 \rightarrow 0$) Donc \textit{$diag_{mod}$} est calculable sous l'hypothèse que la fonction "halt" l'est.\\
 
 Donc, il existe un programme Java qui calcule cette "$diag_{mod}$" qu'on trouvera en ligne $d$. Mais à cause de cela, $diag_{mod}(d) \neq diag(d)$ donc ne peut exister par \textit{définition}.\\
 
@@ -555,7 +555,7 @@ Pour tout transformateur (notre fonction totale calculable) de programme T, il e
 \end{itemize}
 
 \subsubsection{Démonstration pour K}
-Si on a un programme $\varphi_n (x) = \perp$ $\forall x$ (boucle tout le temps) et un autre $\varphi_m (x) = x)$ $ \forall x$. On définit une fonction:
+Si on a un programme $\varphi_n (x) = \perp$ $\forall x$ (boucle tout le temps) et un autre $\varphi_m (x) = x$ $ \forall x$. On définit une fonction:
 \begin{align*}
 f(x) &= n \text{ si } x \in K\\
 &= m \text{ si } x \notin K
@@ -777,7 +777,7 @@ Il est aussi important de remarquer que si on ne possède pas de transition à u
 
 \subsection{Extension}
 On peut étendre les automates aux \textcolor{blue}{automates finis non déterministes}. On a donc plusieurs transitions possibles pour une paire. Plusieurs exécutions pour une même donnée.\\
-Un mot m est accepté par \textit{NFDA} si il existe \textbf{une} exécution de NFDA, on finit dans un état acceptant.\\
+Un mot m est accepté par \textit{NFDA} si il existe \textbf{une} exécution de NFDA, où on finit dans un état acceptant.\\
 Pour toute exécution de NFDA, un mot \textbf{n'est pas accepté} s'il ne tombe jamais sur un état acceptant.\\
 
 On peut voir comme si on rassemblait des exécutions ensemble et des ensemble d'états.
@@ -1007,11 +1007,11 @@ Une \textit{sous-formule} peut toujours être remplacée par une \textit{sous-fo
 \hline
 $\neg (\neg p)$ & $p$ & $p \wedge q$ & $q \wedge p$ & $p \vee q$ &  $q \vee p$\\
 \hline
-$p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (q \Rightarrow p)$ & $p \Rightarrow q$ & $\neg p \vee q$ & $p \Rightarrow q$ &  $\neg p \Rightarrow \neg p$\\
+$p \Leftrightarrow q$ & $(p \Rightarrow q) \wedge (q \Rightarrow p)$ & $p \Rightarrow q$ & $\neg p \vee q$ & $p \Rightarrow q$ &  $\neg p \Rightarrow \neg q$\\
 \hline
 $\neg ( p \vee q) $ & $\neg p \wedge \neg q$ & $\neg ( p \wedge q )$ & $\neg p \vee \neg q$ & $p \vee (q \wedge r)$ &  $(p \vee q ) \wedge ( p \vee r)$\\
 \hline
- & & $p \wedge ( q \vee r)$ & $(p \wedge q) \vee ( q \wedge r)$ & & \\
+ & & $p \wedge ( q \vee r)$ & $(p \wedge q) \vee (p \wedge r)$ & & \\
 \hline
 \end{tabular}
 \end{center}
@@ -1274,6 +1274,7 @@ La borne exacte est $\Theta(g(n))$. Si $f(n) = O(g(n))$ et $f(n) = \Omega(g(n))$
 \includegraphics[width=9cm]{img/BigO.jpeg}
 \caption{Graphe de notation grand O}
 \end{figure}
+\noindent
 Algorithmes quadratiques:
 \begin{enumerate}
 \item Tri par échange
@@ -1285,7 +1286,6 @@ Algorithmes cubiques:
 \item Multiplication de matrices $n \times n$
 \item Perspective d'une image 3D
 \end{enumerate}
-
 Algorithmes exponentiels
 \begin{enumerate}
 \item Voyageur de commerce
@@ -1611,7 +1611,7 @@ Mais: $PSPACE = NPSPACE$.
 \caption{relation entre classe}
 \end{figure}
 
-On a une classe intéressante qui est $NPI = NP \ NPC \P$ qui est une sorte de \textit{no man's land}.
+On a une classe intéressante qui est $NPI = NP \setminus NPC \setminus P$ qui est une sorte de \textit{no man's land}.
 
 \chapter{Analyse et perspectives}
 \section{Thèse de Church Turing}
@@ -1681,7 +1681,7 @@ Existe-t-il un algorithme ND polynomial. Si oui, le problème est dans NP.
 
 \subsubsection{Résoudre}
 On utilise un algorithme exponentiel si la plupart des instances à résoudre sont de complexité polynomiale.\par 
-Changer le problème en un problème plus simple (polynomial) qui est porche du problème initial.\par 
+Changer le problème en un problème plus simple (polynomial) qui est proche du problème initial.\par 
 Utiliser une technique d'exploration, mais en se limitant à un nombre polynomial de cas (\textit{heuristique}). L'algorithme est incomplet. Il peut donner une réponse erronée ou approximative. Mais c'est parfois mieux que pas de réponse du tout.\par 
 Si problème d'optimisation, calculer une solution approximative.
 
@@ -1710,7 +1710,7 @@ Si une fonction est H-calculable, alors elle est T-calculable. Le comportement d
 par une machine de Turing. Tous les processus cérébraux dérivent d’un substrat calculable
 
 \subsection{Thèse CT:  version anti-réductionniste}
-Certains types d'opérations effectuées par le cerveau, mais pas la majorité d'entre elles, et certainement pas celles qui sont intéressantes, peuvent être exécutées de façon approximative par les ordinateurs Certains aspects seront cependant toujours hors de portée des ordinateurs.
+Certains types d'opérations effectuées par le cerveau, mais pas la majorité d'entre elles, et certainement pas celles qui sont intéressantes, peuvent être exécutées de façon approximative par les ordinateurs. Certains aspects seront cependant toujours hors de portée des ordinateurs.
 \begin{equation}
 H-calculable \neq T-calulable
 \end{equation}
