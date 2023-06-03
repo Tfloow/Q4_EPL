@@ -269,7 +269,7 @@ Pour calculer de manière \textbf{graphique} il faut suivre ces étapes:
 \item Il faut "\textit{renverser}" une des fonctions. C'est-à-dire faire $f(t) \rightarrow f(-t)$.
 \item On décale une des fonctions le plus à droite. (on prend le $\tau_0$ où après, tous les résultats de $f(t)g(t-\tau_0)$ valent $0$) 
 \item Puis multiplier chaque point entre eux et on les intègre. (on prend la surface sous la courbe).
-\item On met le résultat sur un \textit{graphe} au pont $\tau$.
+\item On met le résultat sur un \textit{graphe} au point $\tau$.
 \item On décale notre fonction d'une distance (pas trop loin mais pas trop proche pour ainsi avoir une nuée de points) vers la gauche et on répète le processus.
 \end{enumerate}
 En somme, nous avons une méthode très proche du temps discret si ce n'est l'utilisation d'intégrale allant de $-\infty$ à $\infty$.
@@ -700,7 +700,7 @@ Pour trouver la transformer de Fourier de notre $x_e(t)$ on réalise ceci:
 \begin{align*}
 x_e(t)&= x(t) \sum_{n \in \mathbb{Z}} \delta(t-nT_e)\\
 X_e(j\omega) &= \frac{1}{2\pi} \Bigr[ X(j\omega) \ast \frac{2\pi}{T_e} \sum_{k \in \mathbb{Z}} \delta(\omega- \frac{2\pi}{T_e}k) \Big] \qquad  \frac{2\pi}{T_e} = \omega_e\\
-&= \frac{1}{T_e} \Bigr[ X \ast \sum_{k \in \mathbb{Z}} \delta(-\omega_e) \Bigr](j\omega)\\
+&= \frac{1}{T_e} \Bigr[ X \ast \sum_{k \in \mathbb{Z}} \delta(-k \omega_e) \Bigr](j\omega)\\
 &= \frac{1}{T_e} \sum_{k \in \mathbb{Z}} X(j(\omega -k \omega_e))
 \end{align*}
 \newpage
@@ -1494,7 +1494,7 @@ On se souvient, que convoluer 2 signaux en temporel revient à multiplier leur s
 Donc en Résumé:
 \begin{align*}
 Y(t) = H(t) \ast X(t) &\longleftrightarrow Y(j\omega) = H(j \omega) X(j \omega)\\
-=|H(j \omega)||X(j \omega)|&e^{j(arg\{H(j\omega )\}+ arg\{X(j \omega) \}}
+=|H(j \omega)||X(j \omega)|&e^{j(arg\{H(j\omega )\}+ arg\{X(j \omega) \})}
 \end{align*}
 Donc, il parait clair qu'un système modifie le contenu fréquentiel de notre signal $X$.
 \begin{figure}[H]
@@ -1651,7 +1651,8 @@ et pour la version au \textit{carré} on a ceci. Il faut faire attention aux \te
 \centering
 \includegraphics[width=6cm]{img/jomegamax.png}
 \end{figure}
-Après cela, on additionne/soustrait simplement nos courbes ensembles et on obtient notre \textit{première partie} du diagramme de \textcolor{blue}{Bode}.
+Après cela, on additionne/soustrait simplement nos courbes ensembles et on obtient notre \textit{première partie} du diagramme de \textcolor{blue}{Bode}.\\
+Pour dessiner l'\textit{overshoot} d'un filtre du second ordre, on doit dessiner un point allant à l'opposée de la courbe qui se trouve à une distance $20 log(2 \xi)$.
 
 \subsection{Argument}
 Pour l'argument, le processus est le même si ce n'est qu'on ne met pas l'argument dans un logarithme mais est représenté sur une échelle logarithmique.\\
@@ -1732,6 +1733,11 @@ Notre réponse finale est une \textit{combinaison} d'exponentielles de taux:
 \item pôles de la fonction de transfert $a_i$
 \item pôles de l'entrée $\tilde{a}_i$
 \end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[width=15cm]{img/stabilite.png}
+\caption{Tableau récapitulatif de la stabilité}
+\end{figure}
 
 
 

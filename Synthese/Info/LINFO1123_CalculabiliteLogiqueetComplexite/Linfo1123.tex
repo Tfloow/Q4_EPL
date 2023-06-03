@@ -1503,7 +1503,7 @@ Si on a une longueur d'une formule $W$, on a $n$ occurrence de variables, alors 
 \subsection{Théorème SAT NP-complet}
 Donc $SAT \in NP$. Il existe un programme \textit{non déterministe} de complexité \textcolor{red}{polynomiale} capable de reconnaitre si une formule $W(A_1, ... , A_m)$ est satisfaisable.
 \begin{enumerate}
-\item On générer une séquence de $m$ valeurs logiques. $O(m)$ tel que $m \leqslant n$.
+\item On génère une séquence de $m$ valeurs logiques. $O(m)$ tel que $m \leqslant n$.
 \item On substitue les occurrences des variables $A_i$ par leur valeur. $O( n log n)$
 \item On évalue l'expression via la méthode de \textit{réduction}. Complexité \textit{polynomiale}.
 \end{enumerate}
