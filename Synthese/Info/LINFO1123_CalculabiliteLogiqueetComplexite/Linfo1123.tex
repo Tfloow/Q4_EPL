@@ -133,7 +133,7 @@ On dit d'un ensemble qu'il est dénombrable ssi il est \textcolor{red}{fini} ou 
 \subsubsection{Propriétés}
 Tout sous-ensemble d'ensemble énumérable est \textit{énumérable}. L'union et l'intersection d'ensembles énumérables est \textit{énumérable}.\\
 
-En s'intéressant à l'ensemble des programmes informatiques, on se rend compte que c'est une \textit{ensemble énumérable infini}. De plus, les programmes informatiques ne considèrent que des choses \textit{énumérables}.
+En s'intéressant à l'ensemble des programmes informatiques, on se rend compte que c'est un \textit{ensemble énumérable infini}. De plus, les programmes informatiques ne considèrent que des choses \textit{énumérables}.
 
 \section{Cantor}
 Le théorème de \textit{Cantor} nous dit que l'ensemble des nombres entre 0 et 1 compris est \textit{non énumérable}.
@@ -1303,7 +1303,8 @@ Un problème est intrinsèquement complexe \textit{ssi} il \textbf{n'existe pas}
 \subsection{Influence du modèle de calcul}
 Si un algorithme, exprimé dans un modèle de calcul particulier, est de complexité polynomiale, alors il sera également de complexité polynomiale dans un autre modèle de calcul (spatiale et temporelle).\par
 Hypothèse de modèle de calcul réaliste (pas de non déterminisme).\par 
-La classe de problème \textcolor{red}{intrinsèquement complexes} sont indépendants du modèle de calcul !
+La classe de problème \textcolor{red}{intrinsèquement complexes} sont indépendants du modèle de calcul !\\
+La seule influence qu'à un langage de programmation est qu'un problème est $O(n^2)$ en Java et $O(n^3)$ en Machine de Turing.
 
 \subsection{Influence de la représentation des données}
 Elle n'influence en aucun cas avec la propriété de \textcolor{red}{problèmes intrinsèquement complexes}. 
@@ -1397,7 +1398,7 @@ En $\leqslant_a$ on a un point de vue calculabilité et pour $\leqslant_f$ est u
 
 \section{Modèle de calcul}
 On théorie "\textit{classique}" la complexité se mesure via le modèle de machine de Turing. On regarde le nombre de \textit{transitions} nécessaires pour la complexité temporelle et le nombre de cases utilisées pour la complexité spatiale. La notion de \textit{transition} n'est pas très adapté pour les langages modernes.\par
-On va utiliser le modèle des programmes Java. Donc déterministes et non déterministes. (on peut parfois des écarts pour utiliser le modèle le plus adapté)
+On va utiliser le modèle des programmes Java. Donc déterministes et non déterministes. (on peut parfois faire des écarts pour utiliser le modèle le plus adapté)
 \subsubsection{Thèse}
 Tous les modèles de complexité ont entre eux des complexités spatiales et temporelles reliées de façon polynomiale.\par
 Si un problème est \textit{pratiquement faisable} dans un modèle alors il l'est aussi dans un autre.
@@ -1421,7 +1422,7 @@ En complexité, on \textbf{n'a pas} de programme qui boucle.\par
 \section{Relation entre les classes}
 \subsection{Rapport déterminisme et non-déterminisme}
 Si $A \in NTIME(f)$ alors $A \in DTIME(c^f)$. Il faut s'imaginer la façon dont on parcours l'arbre, de gauche à droite et de haut en bas. C'est une perte exponentielle d'efficacité.\\
-Si $A \in NSPACE(f)$ alors $A \in DSPACE(f^2)$.
+Si $A \in NSPACE(f)$ alors $A \in DSPACE(c^f)$.
 
 \subsection{Rapport temps et espace}
 \begin{align*}
@@ -1434,7 +1435,6 @@ Pour toute fonction totale calculable f, il existe un ensemble A récursif tel q
 Il existe toujours des problèmes plus complexes qu'une complexité donnée.
 
 \chapter{NP-complétude}
-Les problèmes intrinsèquement complexes ont une complexité \textit{non polynomiale}.\par 
 On veut savoir si il existe un algorithme \textcolor{red}{non déterministe polynomiale}, existe-t-il alors un algorithme \textcolor{red}{déterministe polynomial} résolvant ce même problème?\par 
 Si un ensemble A appartient à NP, A appartient-il alors à P ?
 \begin{equation}
