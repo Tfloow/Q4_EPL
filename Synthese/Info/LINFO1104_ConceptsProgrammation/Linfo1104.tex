@@ -20,6 +20,34 @@
 \usepackage{xparse}
 
 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1.0,1.0,1.0}
+\definecolor{codeblue}{rgb}{0,0,0.8}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codeblue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=shadowbox
+}
+\lstset{style=mystyle}
+\lstset{language=Oz}
+
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -164,7 +192,7 @@ Celle-ci est plus compliqué, on a 4 possibilités
 \item on supprime un sous-arbre à gauche.
 \item on supprime un sous-arbre à droite.
 \end{enumerate}
-\textcolor{red}{TODO} %ajouter le code et l'explication
+%\textcolor{red}{TODO} ajouter le code et l'explication
 
 \section{Tuples et Records}
 
@@ -774,8 +802,6 @@ Une chose importante à réaliser, il n'y a pas de notion de temps en programmat
 \section{Motivation}
 Une des solutions possibles, on définit le temps abstrait comme une suite de valeurs. On appelle cela un \textbf{état}. \\
 Formellement, un \textcolor{blue}{state} est une séquence calculé de manière \textit{progressive} et contient les résultats \textit{intermédiaire}. Le paradigme fonctionnel peut utiliser les \textcolor{blue}{états}. ci-dessous la définition de \textbf{Sum} comme un état:
-\begin{center}
-\begin{tabular}{c|c}
 \begin{lstlisting}[escapechar=\%]
 fun {Sum Xs A}
   case Xs
@@ -786,7 +812,7 @@ fun {Sum Xs A}
 end
 {Browse {Sum [1 2 3 4] 0}}
 \end{lstlisting}
-& \begin{lstlisting}[escapechar=\%]
+\begin{lstlisting}[escapechar=\%]
 Xs		A
 [1 2 3 4]	0
 [2 3 4]		1
@@ -794,8 +820,7 @@ Xs		A
 [4]		6
 nil		10    
 \end{lstlisting}
-\end{tabular}
-\end{center}
+
 Mais cela n'est pas suffisant. En effet, on voudrait que le programme remarque \textit{lui-même} ses propres changements. Il faut faire une \textbf{extensions}, on rentre dans un nouveau \textbf{paradigme}.
 
 \section{État explicite}
@@ -814,7 +839,7 @@ Une cellule à une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
 A=5; B=6
 C={NewCell A}	%// on crée une nouvelle cellule%
 {Browse @C}	%// on montre le \textit{contenu} avec @ ici 5%
-C:=B		%// on ré-attribue le pointeur qui pointe vers B maintenant%
+C:=B		%// on change la valeur pointé par C en celle de B%
 {Browse @C}	%// vaut 6%
 \end{lstlisting}
 
@@ -869,13 +894,14 @@ On remplace souvent l'attribution et l'appel du contenu par la fonction \textit{
 
 \section{Nécessité de l'état mutable}
 On dit qu'un programme est modulaire pour une partie si on peut changer cette dernière sans changer le reste du programme.
-\textcolor{red}{TODO ajouter plus d'info}
+%\textcolor{red}{TODO ajouter plus d'info}
 
 \subsection{Comparaison}
+\noindent
 Dans la \textcolor{blue}{programmation fonctionnelle}
 \begin{itemize}
 \item Un composant \textbf{ne change jamais} de comportement (c'est permanent).
-\item Mettre à jour un composant signifie que sont \textcolor{blue}{interface} change et donc on doit mettre à jour d'autres composants.
+\item Mettre à jour un composant signifie que son \textcolor{blue}{interface} change et donc on doit mettre à jour d'autres composants.
 \end{itemize}
 Dans la \textcolor{blue}{programmation impérative}
 \begin{itemize}
@@ -888,20 +914,20 @@ On peut avoir le meilleur des 2 mondes, en simplifiant les mises à jour de comp
 C'est une des bases pour construire des logiciels complexes. L'abstraction des données est supportée par \textit{les fonctions d'ordre supérieur, static scoping et l'état explicite}. La première chose à réaliser est l'\textcolor{blue}{encapsulation}.
 
 \subsection{Encapsulation}
-C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandé via une télécommande ayant un nombre limitée de fonction. Son fonctionnement est \textit{encapsulé} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
+C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandée via une télécommande ayant un nombre limité de fonction. Son fonctionnement est \textit{encapsulé} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
 
 \subsubsection{Définition}
-C'est donc une partie d'un programme qui a une partie \textit{extérieure} (au contact avec l'utilisateur) et une partie \textit{intérieur} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être donné à l'utilisateur.\\
+C'est donc une partie d'un programme qui a une partie \textit{extérieure} (au contact avec l'utilisateur) et une partie \textit{intérieure} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être donné à l'utilisateur.\\
 On limite les \textit{fonctionnalités} et l'utilisateur doit suivre des règles établis de notre interface pour s'assurer que son résultat est bien correct.\\
 L'\textcolor{blue}{encapsulation} doit être \textcolor{red}{supporté} par le langage de programmation.
 
 \subsubsection{Avantage}
 \begin{enumerate}
-\item On garantit que si on utilise la partie \textit{extérieur}, les résultats sont corrects
+\item On garantit que si on utilise la partie \textit{extérieure}, les résultats sont corrects
 \item On simplifie l'utilisation du programme:
 	\begin{itemize}
 	\item L'utilisateur \textbf{ne doit pas} savoir comment le programme fonctionne.
-	\item On peut \textcolor{blue}{partitionner} notre programme pour simplifier le développement et l'utilisation
+	\item On peut \textcolor{blue}{partitionner} notre programme pour simplifier le développement et son utilisation.
 	\end{itemize}
 \item On simplifie le développement de grands programmes. \textcolor{blue}{Un développeur} est responsable de \textcolor{blue}{son implémentation} et peut la maintenir.
 \item Un développeur ne doit pas connaitre tout le code source pour utiliser les interfaces des autres développeurs.
@@ -921,7 +947,7 @@ Dans la plupart des \textit{ADT} les valeurs et les opérations n'ont pas \textb
 Donc par exemple pour un \textcolor{blue}{stack}, on l'instantie via une fonction qui nous retourne le type de données.\\
 
 \subsection{Encapsulation}
-Le problème avec cette implémentation vu au-dessus d'un stack est que les données ne sont pas protégées donc peuvent être modifier outre les interfaces.\\
+Le problème avec cette implémentation vu au-dessus d'un stack est que les données ne sont pas protégées donc peuvent être modifiées outre les interfaces.\\
 
 On va \textcolor{red}{protéger} les données. On utilisera un \textcolor{red}{Security Wrapper}. On utilise ça comme suit:
 \begin{lstlisting}[escapechar=\%]
@@ -943,7 +969,7 @@ end
 \end{lstlisting}
 
 \subsection{Remarque}
-Le premier langage de programmation à implémenter l'\textit{ADT} est \textcolor{blue}{CLU} et précédé de \textcolor{blue}{Simula 67} en 1967.\\
+Le premier langage de programmation à implémenter l'\textit{ADT} est \textcolor{blue}{CLU} et est précédé de \textcolor{blue}{Simula 67} en 1967.\\
 Ces langages supportent également la protection, ... De nombreux langages actuels supportent implicitement l'\textit{ADT} (par exemple: \textcolor{blue}{JAVA}, les nombres sont \textit{ADT} et les objets en java ont des propriétés \textit{ADT})
 
 \section{Les objets}
@@ -952,7 +978,7 @@ Cela représente donc à la fois un ensemble de \textcolor{blue}{valeur et d'op�
 S={NewStack} 
 {S push(X)} 
 {S pop(X)}
-{S isEmpty(B)
+{S isEmpty(B)}
 \end{lstlisting}
 Donc on voit que notre $S$ est une sorte de fonction et instance, les deux à la fois. Concrètement, on implémente un objet pour un Stack comme ci-dessous:
 \begin{lstlisting}[escapechar=\%]
@@ -969,19 +995,14 @@ in
   end
 end
 \end{lstlisting}
-Chaque appel à NewStack va donc créer un nouvel \textcolor{blue}{objet}. Pour réaliser ses procédures, on passe 1 seul argument à notre objet. Pas besoin de Wrapper car on ne peut accéder à ces fonctions que via la création de l'objet stack. On le dissimule donc via le \textcolor{blue}{dynamic scoping}.
+Chaque appel à NewStack va donc créer un nouvel \textcolor{blue}{objet}. Pour réaliser ses procédures, on passe 1 seul argument à notre objet. Pas besoin de Wrapper car on ne peut pas accéder à ses fonctions que via la création de l'objet stack. On le dissimule donc via le \textcolor{blue}{dynamic scoping}.
 
 \subsection{Remarque}
-De nos jours, les objets sont \textit{omniprésents} en programmation.\\
-Ils sont apparus avec \textcolor{blue}{simula67} et a inspiré la plupart des langages actuels.\\
+De nos jours, les objets sont \textit{omniprésents} en programmation. Ils sont apparus avec \textcolor{blue}{simula67} et simula a inspiré la plupart des langages actuels.\\
 Cependant, la plupart des langages orientés objets sont en réalité des \textit{ADT} même s'ils incorporent les deux (\textit{ils ont en plus les modules et composants}).
 
 \section{Les 4 types d'abstraction de données}
-\begin{wrapfigure}{r}{.5\textwidth}
-\centering
-\includegraphics[width=7cm]{img/resAbstract.png}
-\caption{Résumé de l'abstraction des données}
-\end{wrapfigure}
+
 Les 2 à ajouter sont:
 \begin{enumerate}
 \item Les types de données abstraites \textbf{avec état} (\textit{stateful ADT})
@@ -995,6 +1016,11 @@ Les 2 à ajouter sont:
 	\item Plus en plus à la mode (\textit{oue oue Scala \#EPFL})
 	\end{enumerate}
 \end{enumerate}
+\begin{figure}[H]
+\centering
+\includegraphics[width=7cm]{img/resAbstract.png}
+\caption{Résumé de l'abstraction des données}
+\end{figure}
 
 \subsection{Functional Objects}
 \subsubsection{Constructions}
@@ -1036,13 +1062,13 @@ On utilise donc à la fois une \textcolor{blue}{cellule} et un \textcolor{blue}{
 
 \section{Remarques supplémentaires}
 \begin{itemize}
-\item Jave est designé pour supporter les abstractions de données:
+\item Java est fait pour supporter les abstractions de données:
 	\begin{enumerate}
 	\item True data abstraction (encapsulation, garbage collector)
 	\item Tout entité en Java est un \textbf{objet} ou un \textbf{ADT}
 	\item Supporte les principes de design orienté objet.
 	\end{enumerate}
-\item Scala a 2 grand principes:
+\item Scala a 2 grands principes:
 	\begin{enumerate}
 	\item Séparation entre les états mutables et immutables (programmation fonctionnelle)
 	\item Tout est un objet (même les fonctions)
@@ -1068,11 +1094,10 @@ Quasi tous les langages de programmation modernes supportent l'abstraction. Ils 
 
 \chapter{Les exceptions}
 Une exception est lorsqu'un programme ne se comporte pas comme prévu ou que les inputs ne peuvent pas être utilisé (\textit{par exemple}: division par zéro, fichier non-existant, ...)\\
-Ainsi, on peut faire fonctionner le programme même si il rencontre une erreur car celle-ci peut être "\textit{intercepté}" via une \textcolor{blue}{exception}.
+Ainsi, on peut faire fonctionner le programme même si il rencontre une erreur car celle-ci peut être "\textit{interceptée}" via une \textcolor{blue}{exception}.
 
 \section{Fonctionnement}
-On voudrait donc que le programme ne cesse pas quand il rencontre un soucis et on veut qu'une erreur impacte \textit{au minimum} le programme.\\
-On utilise le principe du \textcolor{red}{confinement}.
+On voudrait donc que le programme ne cesse pas quand il rencontre un soucis et on veut qu'une erreur impacte \textit{au minimum} le programme. On utilise le principe du \textcolor{red}{confinement}.
 
 \subsubsection{Le confinement}
 \begin{wrapfigure}{r}{.5\textwidth}
@@ -1086,8 +1111,8 @@ On protège chaque exécution par des \textit{exceptions handlers} qui sont comm
 \subsection{En Oz}
 On a les \textit{try} et \textit{raise} qui sont deux nouvelles instructions:
 \begin{lstlisting}[escapechar=\%]
-try <s1> catch <y> then <s2> end	#%On crée l'intercepteur%
-raise <x> end				#%On établit une erreur%
+try <s1> catch <y> then <s2> end	//%On crée l'intercepteur%
+raise <x> end				//%On établit une erreur%
 \end{lstlisting}
 
 \subsubsection{Try et Raise}
@@ -1099,7 +1124,7 @@ Si \textit{raise} est appelé pour signifier une erreur, le stack d'instructions
 En plus de ces deux instructions, on peut rajouter une instruction s'appelant \textit{finally} qui comporte des étapes à exécuter peu importe si une erreur arrive ou pas.
 
 \subsection{En Java}
-C'est un objet hérité de la class des \textit{Exceptions} (elle-même sous-classe des \textit{Throwable)} et il existe 2 types d'exceptions:
+C'est un objet hérité de la classe des \textit{Exceptions} (elle-même sous-classe des \textit{Throwable)} et il existe 2 types d'exceptions:
 \begin{itemize}
 \item \textcolor{blue}{Checked exceptions}: le compilateur vérifie que les méthodes ne \textit{throw} que des exceptions déclarés pour la classe
 \item \textcolor{blue}{Unchecked exceptions}: pour gérer les exceptions que le compilateur ne peut pas vérifier (\textit{les rayons cosmiques}). Elles héritent des \textit{RuntimeException} et \textit{Error}.
@@ -1107,7 +1132,7 @@ C'est un objet hérité de la class des \textit{Exceptions} (elle-même sous-cla
 Donc en tant que développeur on check les erreurs \textit{checked}.
 
 \subsection{Utilisation correcte}
-On n'utilise pas une exception pour un comportement \textbf{attendu ou prévisible}. C'est-à-dire que, par exemple, on ne lit pas un fichier jusqu'au moment d'une erreur. Non, le fait que le fichier se finisse est prévisible et ne demande pas d'exception.
+On n'utilise pas une exception pour un comportement \textbf{attendu ou prévisible}. C'est-à-dire que, par exemple, on ne lit pas un fichier jusqu'au moment où il est vide et nous produit une erreur. Non, le fait que le fichier se finisse est prévisible et ne demande pas d'exception.
 
 
 \chapter{Programmation simultanée}
@@ -1115,7 +1140,7 @@ On a besoin de la \textit{programmation simultanée} car notre monde progresse a
 \subsubsection{Simultanéité en programmation}
 \noindent
 \begin{enumerate}
-\item \textcolor{blue}{Système distribuée}: relié les pc entre eux par un réseau (data center, ...)
+\item \textcolor{blue}{Système distribué}: relier les pc entre eux par un réseau (data center, ...)
 	\begin{enumerate}
 	\item Une activité en simultanée est appelée un \textit{noeud de calcul}.
 	\item Chaque \textit{noeud de calcul} a ses propres ressources (CPU, mémoire, ...).
@@ -1165,8 +1190,8 @@ Les 3 grands paradigmes de la programmation simultanée:
 \end{enumerate}
 
 \subsubsection{Variable non-liée}
-C'est quand on crée une variable dans la mémoire sans qu'elle soit lié à une valeur.\\
-En Oz, quand on veut afficher une variable qui n'est pas encore déclaré, Oz va attendre jusqu'à ce qu'on déclare la variable. Donc ci-dessous, Oz va attendre indéfiniment juste avant l'addition de $X$:
+C'est quand on crée une variable dans la mémoire sans qu'elle soit liée à une valeur.\\
+En Oz, quand on veut afficher une variable qui n'est pas encore déclarée, Oz va attendre jusqu'à ce qu'on déclare la variable. Donc ci-dessous, Oz va attendre indéfiniment juste avant l'addition de $X$:
 \begin{lstlisting}[escapechar=\%]
 local X Y in
   Y=X+1
@@ -1183,7 +1208,7 @@ L'activité A attend à \textcolor{red}{(1)} jusqu'à ce que l'activité B arriv
 
 \section{Threads}
 C'est donc cela qui nous permet d'implémenter la programmation simultanée en Oz. C'est donc un \textit{fil} d'exécution qui s'exécute en même temps.\\
-Chaque \textit{Threads} fonctionnent de manière \textcolor{blue}{séquentielle} et sont \textcolor{blue}{indépendants} l'un de l'autre.\\
+Chacun des \textit{Threads} fonctionnent de manière \textcolor{blue}{séquentielle} et sont \textcolor{blue}{indépendants} l'un de l'autre.\\
 Cependant il faut bien comprendre quelques détails:
 \begin{itemize}
 \item Il n'y a aucun ordre spécifique pour l'exécution des Threads.
@@ -1193,7 +1218,7 @@ Cependant il faut bien comprendre quelques détails:
 Les Threads peuvent \textit{communiquer} entre eux si ils partagent une variable.\\
 
 \subsubsection{Oz}
-En Oz, créer des Threads est très peu "énergivores" donc on peut se permettre d'en créer un grand nombre.\\
+En Oz, créer des Threads est très peu "énergivore" donc on peut se permettre d'en créer un grand nombre.\\
 De plus, on écrit un Thread comme:
 \begin{lstlisting}[escapechar=\%]
 thread <s> end
@@ -1205,15 +1230,15 @@ declare X
 thread {Browse X+1} end
 thread {X=1} end
 \end{lstlisting}
-Il y a donc 2 façons que les Threads se lancent: ligne 2 $\rightarrow$ ligne 3 ou ligne 3 $\rightarrow$ ligne 2. Cependant, le même résultat est le même, 2 est affiché.
+Il y a donc 2 cas de figure possible: ligne 2 $\rightarrow$ ligne 3 ou ligne 3 $\rightarrow$ ligne 2. Cependant, le résultat est le même, 2 est affiché.
 
 \subsubsection{Le Browser}
 Le \textit{Browser} en Oz s'exécute avec son propre Thread.\\
-Pour chaque variable non-liée qui est affiché, on crée un thread dans le \textit{Browser} qui attend jusqu'à ce qu'on lui attribue une valeur.\\
-Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme  "\textit{functional dataflow}" et <il ne regarde donc pas l'intérieur de la cellule.
+Pour chaque variable non-liée qui est affichée, on crée un thread dans le \textit{Browser} qui attend jusqu'à ce qu'on lui attribue une valeur.\\
+Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme  "\textit{functional dataflow}" et il ne regarde donc pas l'intérieur de la cellule.
 
 \subsection{Streams et Agents}
-Un stream est une \textcolor{blue}{liste} qui se finit par une variable non défini. On peut étendre la liste au tant que l'on veut. \\
+Un stream est une \textcolor{blue}{liste} qui se finit par une variable non défini. On peut étendre la liste autant que l'on veuille. \\
 On peut les utiliser comme une façon de communiquer entre des Threads. (ex: \textit{producteur consommateur})
 
 \subsubsection{Producteur Consommateur}
@@ -1225,27 +1250,27 @@ On peut les utiliser comme une façon de communiquer entre des Threads. (ex: \te
 
 \subsubsection{Agent}
 C'est une activité \textit{concurrente} qui lis et écris dans un stream. C'est une raison principale de la \textbf{single assignement} car ainsi on peut faire de la récursion terminale qui fait que le \textit{dataflow deterministic} en un paradigme pratique.\\
-Toutes les listes de fonctions peuvent utiliser comme un agent. (on peut aussi faire la \textit{higher order programming})
+Toutes les listes de fonctions peuvent être utilisées comme un agent. (on peut aussi faire la \textit{higher order programming})
 
 \subsection{Sémantique des Threads}
 On étend la machine abstraite. Chaque Threads possèdent son propre stack sémantique mais partagent la même mémoire.\\
 On exécute une étape du stack sémantique à la fois et à tour de rôle.\\
-Le \textcolor{red}{Scheduler} décide sur quelle thread s'exécute via une technique d'\textit{entrelacement}.
+Le \textcolor{red}{Scheduler} décide quelle thread s'exécute via une technique d'\textit{entrelacement}.
 
 \subsubsection{Entrelacements}
-C'est une manière d'aborder des threads plus simples que de la \textit{vraie concurrence}. En entrelacement un processeur ne peut pas écrire en même sur une zone de mémoire. (on a quand même un \textcolor{blue}{cache coherence protocol} qui s'assure qu'on n'écrit pas en même temps)
+C'est une manière d'aborder des threads plus simples que de la \textit{vraie concurrence}. En entrelacement, les threads d'une processeur ne peuvent pas écrire en même temps sur une zone de mémoire. (on a quand même un \textcolor{blue}{cache coherence protocol} qui s'assure qu'on n'écrit pas en même temps)
 
 \section{Exécution de programmes concurrents}
 
 \subsubsection{Séquentiel}
-Une exécution d'un programme séquentiel est son exécution sur un \textcolor{blue}{thread}. Les exécutions séquentielles sont d'\textcolor{red}{ordres totals} donc un \textit{ordre définit entre toutes les pairs d'états}.
+Une exécution d'un programme séquentiel est son exécution sur un \textcolor{blue}{thread}. Les exécutions séquentielles sont \textcolor{red}{d'ordres totals} donc un \textit{ordre définit entre toutes les pairs d'états}.
 
 \subsubsection{Ordre partiel}
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
 \includegraphics[width=7cm]{img/ordrePartiel.png}
 \end{wrapfigure}
-Donc un programme concurrent est un programme avec plus qu'un Thread. Donc on dit qu'on a un ordre \textcolor{red}{partiel}. On n'a pas de pair d'exécution définit.\\
+Donc un programme concurrent est un programme avec plus qu'un Thread. On dit qu'on a un ordre \textcolor{red}{partiel}. On n'a pas de pair d'exécution définit.\\
 Mais on a toujours qu'une seule exécution par étape
 
 \section{Le non-déterminisme}
@@ -1254,39 +1279,39 @@ Un exemple typique est le \textcolor{red}{planificateur} (\textit{scheduler}). I
 Ce principe de non-déterminisme est toujours présent dans un système concurrent. En effet, les activités sont toutes indépendantes et le système doit générer cela de manière non-déterministe.
 \subsubsection{Exemple}
 On peut penser au fait qu'on ne sait pas qui du thread A ou B s'exécutera en premier. Ce choix varie à l'exécution et est fait par le système.\\
-Pareil pour l'écriture dans une cellule qui à un résultat qui varie.\par
+Pareil pour l'écriture dans une cellule qui a un résultat qui varie.\par
 
 \subsubsection{Piège}
 \textcolor{red}{Attention}, ce n'est pas parce que 2 threads résultent à un même résultat \textit{tout le temps} qu'ils ne sont pas non-déterministes. Le non-déterminisme est le fait qu'on ne sait pas quel thread se lance en premier.
 
 \subsection{Gestion}
-On doit toujours gérer le non-déterminisme et il ne devrait jamais influencer le fait qu'un programme est correct. C'est pour cela qu'on évite d'utiliser des threads \textbf{et} des cellules
+On doit toujours gérer le non-déterminisme et il ne devrait jamais influencer le fait qu'un programme est correct. C'est pour cela qu'on évite d'utiliser des threads \textbf{et} des cellules.
 
 \subsubsection{Deterministic dataflow}
 Avec ce paradigme, le résultat d'un programme est toujours le même. Il n'y a aucun non-déterminisme \textcolor{red}{\textit{visible}}.
 
 \subsection{Fonctionnement d'un planificateur}
-Le planificateur laisse un thread s'exécuter environ toutes les $10$ ms. On appelle ce temps un \textit{time slice}. (Sur des PC multi-cœurs on peut avoir plusieurs exécution simultanée)\par
+Le planificateur laisse un thread s'exécuter environ toutes les $10$ ms. On appelle ce temps un \textit{time slice}. (Sur des PC multi-cœurs on peut avoir plusieures exécutions simultanées)\par
 Un thread est soit en mode \textcolor{red}{runnable} si l'instruction en haut de son stack \textit{n'attend pas} de variable de \textit{dataflow}. Sinon, il est en état \textcolor{red}{suspended} donc il attend une assignation de variable.
 
 \subsubsection{Équitable}
-Il est équitable si:
+Un "\textit{scheduler}" est équitable si:
 \begin{itemize}
 \item N'importe quel thread \textit{runnable} va se lancer dans un temps \textit{fini}.
 \item On accorde une priorité à chaque threads mais cela leur accorde juste plus ou moins de pourcentage de \textit{temps} d'exécution.
 \end{itemize}
-Si un \textit{planificateur} est équitable, on peut s'assurer que notre programme est correcte. Sinon, certains programmes ne se lanceraient pas et pourraient produire des réponses érronés.
+Si un \textit{planificateur} est équitable, on peut s'assurer que notre programme est correct. Sinon, certains programmes ne se lanceraient pas et pourraient produire des réponses erronées.
 
 \section{Concurrency for dummies}
 \noindent
 \textit{sobrement intitulé par Peter van Roy}\par
 En programmation mulit-agent, la concurrence n'influence pas le résultat. La concurrence change juste l'ordre d'exécution. On peut ajouter des threads à la volée sans changer le résultat.\par
 Cela fonctionne seulement en programmation \textcolor{blue}{fonctionnelle}.\par
-Quand on veut \textit{browse} un thread, on aura une sortie sous forme de "$\_$" quand un thread se finit et attend quelque chose.
+Quand on veut \textit{browse} un thread, on aura une sortie sous forme de liste où à la fin on a "$\_$". Cela veut dire qu'on attend une autre information qui pourrait arriver.
 
 
 \section{Programmation multi-agent}
-Par exemple, on fait le crible d'Eratosthène, on va créer une méthode producer consomer un peu plus évolué qui relance un thread à chaque exécution. 
+Par exemple, on fait le crible d'Eratosthène, on va créer une méthode "\textit{producer-consomer}" un peu plus évolué qui relance un thread à chaque exécution. 
 \begin{lstlisting}[escapechar=\%]
 fun {Sieve Xs}
   case Xs
@@ -1369,15 +1394,15 @@ On se base sur 2 idées:
 \item \textcolor{blue}{Single-assignement variables} qui synchronise à la liaison
 \item \textcolor{blue}{Threads} qui définit une séquence d'instructions exécutés.
 \end{enumerate}
-Cela n'a pas de déterminisme \textcolor{red}{non observable} (pas de "\textit{race conditions}"). Le deterministic dataflow est une forme de programmation fonctionnelle.
+Cela n'a pas de déterminisme \textcolor{red}{observable} (pas de "\textit{race conditions}"). Le deterministic dataflow est une forme de programmation fonctionnelle.
 
 \section{Limitations du dataflow deterministique}
-Le plus gros soucis est qu'on ne peut pas réaliser des programmes où le \textcolor{red}{non-déterminisme } doit être \textit{visible}. Ceci est important pour les interactions \textit{clients/serveurs}.
+Le plus gros soucis est qu'on ne peut pas réaliser des programmes où le \textcolor{red}{non-déterminisme} doit être \textit{visible}. Ceci est important pour les interactions \textit{clients/serveurs}.
 
 \subsection{Client serveur}
 On a un ensemble de client communiquant à un serveur. Les clients sont donc des agents \textit{concurrents}. \par 
 On peut essayer via un simple code qui prends 2 streams (pour 2 clients) et performe des actions quand on a besoin. \textcolor{red}{Problème} pas \textit{scalable} et quand le client 1 envoie un message cela bloque pour le client 2.\par 
-Notre souci est que nous attendons sur des paternes seuls. Avec un \textcolor{blue}{case} on attend sur un seul pattern. Ici, on veut attendre sur de \textbf{multiple} pattern.
+Notre souci est que nous attendons sur des paternes seuls. Avec un \textcolor{blue}{case} on attend sur un seul paterne. Ici, on veut attendre sur de \textbf{multiple} paterne.
 \subsubsection{Comprendre le non-déterminisme} 
 Le non-déterminisme est un choix fait en dehors du controle du programme. C'est ce qu'on recherche avec le client/serveur car on ne veut pas être retardé car le serveur attend le message d'un autre.
 
@@ -1409,7 +1434,7 @@ L'opération d'ajout à la fin du stream d'un port est \textcolor{red}{atomique}
 \end{figure}
 
 \section{Message-passing concurrency}
-C'est un nouveau \textit{paradigme} pour la programmation concurrente. C'est du \textbf{deterministic dataflow } avec des \textbf{ports}. On l'appelle aussi le \textcolor{red}{multi-agent actor programming}.\par 
+C'est un nouveau \textit{paradigme} pour la programmation concurrente. C'est du \textbf{deterministic dataflow} avec des \textbf{ports}. On l'appelle aussi le \textcolor{red}{multi-agent actor programming}.\par 
 On a des objets \textit{ports} et des objets \textit{actifs}.
 
 \subsection{Stateless port objects} \label{spo}
@@ -1418,8 +1443,7 @@ Un agent est définit selon sa manière qu'il répond à un message. Chaque agen
 
 \subsubsection{Exemple}
 On peut définir une fonction simple arithmétique de la sorte:
-\begin{center}
-\begin{tabular}{c|c}
+
 \begin{lstlisting}[escapechar=\%]
 proc {Math M} 
   case M of 
@@ -1428,7 +1452,8 @@ proc {Math M}
   ... 
   end
 end
-\end{lstlisting} & \begin{lstlisting}[escapechar=\%]
+\end{lstlisting} 
+\begin{lstlisting}[escapechar=\%]
 MP={NewPort S} 
 proc {MathProcess Ms} 
   case Ms of M|Mr then 
@@ -1439,44 +1464,37 @@ end
 thread {MathProcess S} end
 \end{lstlisting}
 
-\end{tabular}
-\end{center}
-
 On peut aussi utiliser un \textcolor{blue}{forAll}
-\begin{center}
-\begin{tabular}{c|c}
+
 \begin{lstlisting}[escapechar=\%]
 proc {ForAll Xs P} 
   case Xs of nil then skip 
   [] X|Xr then {P X} {ForAll Xr P} 
   end
 end
-\end{lstlisting} & \begin{lstlisting}[escapechar=\%]
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 proc {MathProcess Ms} 
   {ForAll Ms Math} 
 end
 \end{lstlisting}
-\end{tabular}
-\end{center}
+
 
 Pour construire des objets ports stateless de manière générique. Notre deuxième implémentation utilise la syntaxe des \textit{for loops}. 
-\begin{center}
-\begin{tabular}{c|c}
 \begin{lstlisting}[escapechar=\%]
 fun {NewPortObject0 Process} Port Stream in
   Port={NewPort Stream} 
   thread {ForAll Stream Process} end 
   Port
 end
-\end{lstlisting} & \begin{lstlisting}[escapechar=\%]
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 fun {NewPortObject0 Process} Port Stream in
   Port={NewPort Stream} 
   thread for M in Stream do {Process M} end end 
   Port
 end
 \end{lstlisting}
-\end{tabular}
-\end{center}
 
 \subsection{Stateful port objects}
 \begin{wrapfigure}{r}{.4\textwidth}
@@ -1486,8 +1504,6 @@ end
 C'est donc la même chose qu'au \ref{spo} mais ici, les agents ont une \textbf{mémoire}.\par 
 On appelle sa \textit{mémoire interne} un "\textcolor{blue}{state}" qui est défini comme ci-contre.\par 
 On a des fonctions de \textit{transition} qui passe d'état en état. Cette fonction est de type $F	: State \times Msg \longrightarrow State$.
-\begin{center}
-\begin{tabular}{c|c}
 \begin{lstlisting}[escapechar=\%]
 fun {NewPortObject Init F} 
   proc {Loop S State} 
@@ -1496,17 +1512,15 @@ fun {NewPortObject Init F}
   end 
     P
 in
-  thread S in 
-    P={NewPort S} {Loop S Init} end 
+  thread S in P={NewPort S} {Loop S Init} end 
   P
 end
-\end{lstlisting} & \begin{lstlisting}[escapechar=\%]
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
 proc {Loop S State} 
   case S of M|T then {Loop T {F State M}} end
 end
 \end{lstlisting}
-\end{tabular}
-\end{center}
 La fonction $F$ dans notre \textit{loop} est une fonction binaire qui part d'un état initial et effectue différentes opérations. Ce n'est rien d'autre qu'un \textit{Fold}.
 
 \subsection{Exemples}
@@ -1557,34 +1571,60 @@ end
 C'est un object qui est une sorte de "\textit{port object}" et qui a des comportements comme une classe. Donc on a le \textit{polymorphisme} et l'\textit{héritance} de classe tout en ayant du "\textit{message passing}".
 
 \subsection{Définition Classe et Objet}
-\begin{figure}[H]
-\centering
-\includegraphics[width=9cm]{img/objet.png}
-\caption{Création et appelle d'un objet}
-\end{figure}
+\begin{lstlisting}[escapechar=\%]
+class Counter 
+  attr i 
+  meth init(X) 
+    i := X
+  end 
+  meth inc(X) 
+    i := @i + X
+  end 
+  meth get(X) 
+    X=@i
+  end
+end
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
+{Ctr inc(10)} 
+{Ctr inc(5)} 
+local X in 
+  {Ctr get(X)} 
+  {Browse X}
+end
+\end{lstlisting}
 Pour initialiser un objet, on réalise l'opération $CTR=$ \textit{\{New Counter init(0)\}}.
 
 \subsubsection{Active Object}
-\begin{figure}[H]
-\centering
-\includegraphics[width=6cm]{img/activeObj.png}
-\end{figure}
+\begin{lstlisting}[escapechar=\%]
+fun {NewActive Class Init} 
+  Obj={New Class Init} 
+  P
+in
+  thread S in 
+    {NewPort S P} 
+    for M in S do {Obj M} end
+end 
+  proc {$ M} {Send P M} end
+end
+\end{lstlisting}
 On combine donc les classes et les ports mais on utilise l'interface \textit{uniforme} de Oz pour leur donner l'apparence d'un objet standard en Oz.
 
 \subsection{Différence entre passif et actif}
-On appelle passif, les objets en Oz qui s'exécute \textbf{pas dans leur propre thread}. Les actifs eux ont leur propre thread d'exécution.
+On appelle passif, les objets en Oz qui ne s'exécute \textbf{pas dans leur propre thread}. Les actifs eux ont leur propre thread d'exécution.
 
 \subsubsection{Avantage}
 On peut sans aucun risque appeler un objet actif car ses données sont dans son propre thread à l'inverse des passifs. \par 
 Dans un objet passif, ses méthodes peuvent s'exécuter de manière \textbf{concurrente} à l'inverse des actifs qui seront toujours \textbf{séquentielle}.\par 
 Les objets passifs ne sont pas \textit{concurrency-safe}.
 
+\newpage
 \section{Message protocol}
 \begin{wrapfigure}{r}{.5\textwidth}
 \centering
 \includegraphics[width=6cm]{img/message.png}
 \end{wrapfigure}
-Ce sont des \textit{séquences} de messages entre plusieurs parties qui peuvent être compris à des niveaux d'abstractions plus élevés que les messages \textit{individuels}.\par 
+Ce sont des \textit{séquences} de messages entre plusieurs parties qui peuvent être comprises à des niveaux d'abstractions plus élevés que les messages \textit{individuels}.\par 
 On commence avec un RMI simple et puis on fait des appelles asynchrones et on y en rajoute. \par 
 Le protocole le plus compliqué est le \textbf{RMI asynchrone avec callbacks}.\par
 En gros, \textbf{RMI} c'est le fait d'envoyer des messages et recevoir des messages. \textbf{Asynchrone}, on n'attend pas le message de retour d'un serveur. \textbf{Callback}, on envoie un message à un serveur et on lui envoie un port où il peut envoyer son message.
@@ -1602,7 +1642,7 @@ Il y a \textbf{3 états} distincts: \textit{actif}, \textit{inactif} et \textit{
 Bien évidemment on voudrait qu'un mot plus utilisé et inactif redevienne libre pour qu'il puisse libérer de la place.
 
 \subsubsection{Soucis}
-Quand on veut rappeler des mots supposés \textit{inactifs}, on peut avoir du \textcolor{red}{dangling reference}. C'est quand on veut reprendre un mot mais qu'il va être utilisée par le programme (\textit{segfault}). On a aussi des \textcolor{red}{memory leak} où des mots ne sont jamais rappelés et causent des ralentissements et des utilisations de la mémoire inutile.
+Quand on veut rappeler des mots supposés \textit{inactifs}, on peut avoir du \textcolor{red}{dangling reference}. C'est quand on veut reprendre un mot mais qu'il va être utilisé par le programme (\textit{segfault}). On a aussi des \textcolor{red}{memory leak} où des mots ne sont jamais rappelés et causent des ralentissements et des utilisations de la mémoire inutile.
 
 \subsubsection{Inactif}
 Un mot est considéré comme \textbf{inactif} quand on peut plus y accéder depuis le stack.\\
@@ -1629,12 +1669,16 @@ Si on a plusieurs thread, parfois on doit revenir au principal. Donc le thread o
 \end{lstlisting}
 
 \subsubsection{Implémentation}
-\begin{wrapfigure}{r}{.5\textwidth}
-\centering
-\includegraphics[width=5cm]{img/deterministicDataflowUnit.png}
-\end{wrapfigure}
+\begin{lstlisting}[escapechar=\%]
+local X1 X2 in
+  thread %$<s>_1$% X1 = unit end
+  thread %$<s>_2$% X2 = unit end
+  {Wait X1}
+  {Wait X2}
+ end
+\end{lstlisting}
 On implémente cela en utilisant des variables \textit{dataflow}. On va utiliser la constante \textcolor{blue}{unit} quand la valeur n'importe pas.\par 
-Cela n'a pas d'importance l'ordre dans lequel on attend.
+L'ordre dans lequel on attend n'influence pas le résultat.
 
 \subsubsection{Higher-order abstraction}
 On va définir une fonction \textit{\{Barrier Ps\}} avec une liste d'instruction $Ps$.
@@ -1647,11 +1691,11 @@ in
   end
 end
 \end{lstlisting}
-Cette fonction \textit{Barrier} peut être réalisé grâce au \textit{deterministic dataflow} uniquement.\par 
-Donc on peut créer une abstraction pour cela de types $\textcolor{blue}{conc} <s>_1 \parallel <s>_2 \parallel ... \parallel <s>_n \textcolor{blue}{end}$ qui la même chose que $\{Barrier [\textcolor{blue}{proc} \{\$\} <s>_1 \textcolor{blue}{end} \quad \textcolor{blue}{proc} \{\$\} <s>_2 \textcolor{blue}{end} \quad ... \quad \textcolor{blue}{proc} \{\$\} <s>_n \textcolor{blue}{end} ]\}$
+Cette fonction \textit{Barrier} peut être réalisée grâce au \textit{deterministic dataflow} uniquement.\par 
+Donc on peut créer une abstraction pour cela de type: $\textcolor{blue}{conc} <s>_1 \parallel <s>_2 \parallel ... \parallel <s>_n \textcolor{blue}{end}$ qui la même chose que $\{Barrier [\textcolor{blue}{proc} \{\$\} <s>_1 \textcolor{blue}{end} \quad \textcolor{blue}{proc} \{\$\} <s>_2 \textcolor{blue}{end} \quad ... \quad \textcolor{blue}{proc} \{\$\} <s>_n \textcolor{blue}{end} ]\}$
 
 \subsection{Composition concurrente (nombre variable de Thread)}
-On doit arriver à créer de nouveau thread qui se synchronise avec les threads actuels. Cette abstraction \textcolor{red}{ne peut pas} être écrite en deterministic dataflow. Effectivement, l'ordre de création est inconnu donc \textbf{non-déterministique}. On va définir cela avec un port.
+On doit arriver à créer de nouveaux threads qui se synchronisent avec les threads actuels. Cette abstraction \textcolor{red}{ne peut pas} être écrite en deterministic dataflow. Effectivement, l'ordre de création est inconnu donc \textbf{non-déterministique}. On va définir cela avec un port.
 
 \subsubsection{Spécification de l'abstraction}
 Le Thread principal attend que les autres se terminent. 
@@ -1666,10 +1710,20 @@ Le Thread principal attend que les autres se terminent.
 La fonction \textit{NewThread} crée un nouveau calcul $<s>$ dans le thread \textit{principal} et ressort dans la procédure \textit{SubThread}.\par 
 Donc le \textit{NewThread} se termine qu'après que tous les \textit{SubThread} se terminent. \textit{SubThread} crée un second thread avec $<s>$. Les deux $<s>$ peuvent appeler le \textit{SubThread} et ainsi de suite récursivement. On a ainsi une profondeur d'arbre arbitraire.\par 
 On utilise un \textbf{port} pour compter le nombre de \textit{Threads} actifs. 
-\begin{figure}[H]
-\centering
-\includegraphics[width=8cm]{img/newThreadImplementation.png}
-\end{figure} 
+\begin{lstlisting}[escapechar=\%]
+proc {NewThread P SubThread} //SubThread is an output 
+  S Pt={NewPort S}
+in
+  proc {SubThread P} 
+    {Send Pt 1} 
+    thread 
+      {P} {Send Pt ~1} //Minus sign is tilde
+    end
+  end 
+  {SubThread P} //Main computation 
+  {ZeroExit 0 S} //Keep running sum on S and stop when 0
+end
+\end{lstlisting}
 Pour que cela soit correct, on doit bien incrémenter avant de créer un thread et dé-incrémenter juste avant de le finir sinon on pourrait parfois tomber à 0 threads actifs en cours d'exécution alors que ce n'est pas vraiment le cas.
 \subsubsection{Usage de l'invariant}
 On pose que la somme des éléments $S$ doit être supérieur ou égal au nombre de threads actifs. Si on tombe à $0$ on a donc tout fini.\par 
@@ -1705,21 +1759,21 @@ end
 On a des agents (processus) qui sont légers et s'envoient des \textbf{messages} entre eux. Via cela, on peut avoir de la concurrence et avoir de nombreux processus qui fonctionnent ensemble et parallèlement. On peut ainsi faire des programmes sur plusieurs pc. Il y a une vision de "\textit{Let it fail}" car le langage est robuste et sait intercepter et traiter des erreurs. Si une composante ne fonctionne pas, tout le programme ne s'arrête pas nécessairement. On a des arbres \textbf{superviseurs} qui regardent s'il y a des erreurs.
 
 \subsection{Les bases}
-Erlang est composé de processus qui sont des "\textit{active agents}" qui communiquent de manière asynchrone via du "\textcolor{red}{asynchronous FIFO message passing}". Erlang ne partage rien, toutes les données sont copiées. En erlang, chaque processus à une sorte de boite au lettre qui est accessible via \textbf{pattern matching} et ne dépend pas de l'ordre.
+Erlang est composé de processus qui sont des "\textit{active agents}" qui communiquent de manière asynchrone via du "\textcolor{red}{asynchronous FIFO message passing}". Erlang ne partage rien, toutes les données sont copiées. En erlang, chaque processus a une sorte de boite au lettre qui est accessible via \textbf{pattern matching} et ne dépend pas de l'ordre.
 
 \section{Les performances}
-Pour créer de nouveaux processus et pour envoyer des messages entre, Erlang est extrêmement rapide. Cela est très utile pour des sites web. Là où Apache crash à 4000 requêtes et une bande passante qui se dégrade, Erlang peut en avoir 40000.
+Pour créer de nouveaux processus et pour envoyer des messages entre, Erlang est extrêmement rapide. Cela est très utile pour des sites web. Là où Apache crash à 4000 requêtes simultanées et une bande passante qui se dégrade, Erlang peut en avoir 40000.
 \subsection{Switch AXD301}
 C'est un switch pour la télécommunication qui est basé sur Erlang et agrémenté via du Java et C. On a une perte linéaire quand on a une surcharge. Quand on demande $1000\%$ des capacités du switch, on a $40\%$ d'efficacité. AXD 301 version 3.2 a 1MLOC Erlang, 900KLOC C/C++, 13KLOC Java.
 
 \section{Concept de Base}
 \subsection{Pure Fonctional Core}
-Dans chaque processus, Erlang fonctionne comme un langage purement fonctionnel. Chaque variable à une assignation unique. Les fonctions sont des valeurs avec du "\textit{lexically scoped higher-order programming}. Le pattern matching est utilisable dans les \textit{case}, \textit{if} et \textit{receive}.\par 
+Dans chaque processus, Erlang fonctionne comme un langage purement fonctionnel. Chaque variable à une assignation unique. Les fonctions sont des valeurs avec du "\textit{lexically scoped higher-order programming}". Le pattern matching est utilisable dans les \textit{case}, \textit{if} et \textit{receive}.\par 
 Toutes les données sont symboliques. Les types de données sont similaires à Oz mais on a également les \textcolor{red}{binary vectors} (utilisé pour les calculs de protocoles). 
 
 \subsection{Organisation}
-Un programme en Erlang est composé de \textit{module}	 donc chaque fichier s'écrit comme suit: (ex: dans un fichier \textit{math.erl})
-\begin{lstlisting}[escapechar=\%]
+Un programme en Erlang est composé de \textit{module} dont chaque fichier s'écrit comme suit: (ex: dans un fichier \textit{math.erl})
+\begin{lstlisting}[escapechar=\%, language=erlang]
 -module(math).
 -export([areas/1]).
 -import(lists, [map/2]). 
@@ -1738,20 +1792,20 @@ On envoie un message via \textcolor{red}{Pid ! Message}. Cela s'envoie de maniè
 
 \subsection{Réception}
 On intercepte un message via un \textcolor{blue}{receive}. La boite au lettre est une liste trié de message. On les récupère via le receive puis on fait du pattern matching.\\
-Si la boite au lettre est vide, le processus attend. Sinon, il essaye de match avec un des cas possibles et l'exécute. Si rien ne match, alors le receive se bloque et attend le prochain message. Il reste dans la boite au lettre. Il faut éviter que cela reste indéfiniment dans la boite sinon \textit{memory leak}. \par
+Si la boite au lettre est vide, le processus attend. Sinon, il essaye de match avec un des cas possibles et l'exécute. Si rien ne match, alors le receive se bloque et attend le prochain message. Le message reste dans la boite au lettre dans ce cas. Il faut éviter que cela reste indéfiniment dans la boite au lettre sinon \textit{memory leak}. \par
 Patterns est une structure de donnée symbolique contenant des identificateurs de variable et des gardes qui sont de simples tests.
 
 \section{Process Linking}
-On relie \textcolor{blue}{Pid1} à \textcolor{red}{Pid2}. PID1 appelle \textbf{link(\textcolor{red}{Pid2})} pour faire une liaison. Et vice versa pour faire bidirectionnelle.
+On relie \textcolor{blue}{Pid1} à \textcolor{red}{Pid2}. Pid1 appelle \textbf{link(\textcolor{red}{Pid2})} pour faire une liaison. Et vice versa pour en faire une bidirectionnelle.
 
 \subsection{Exit}
-Un processus s'arrête et envoie un \textbf{signal d'exit}. Il envoie la raison de son arrêt aux processus qui sont reliés. Si le processus s'arrête normalement, il renvoie l'atome "\textit{normal}". Si il rencontre une erreur à l'exécution il renvoie quelque chose comme \textcolor{red}{\{Reason, Stack\}}. Le comportement classique est que tous les processus s'arrêtent à cause de l'erreur. On peut aussi le faire capturer des erreurs via "\textit{process\_flag(trap\_exit, true)}". Ainsi, cela est envoyé comme un message sous forme \textcolor{red}{\{‘EXIT’, FromPid, Reason\}}. On peut également tuer un processus via la fonction exit.
+Un processus s'arrête et envoie un \textbf{signal d'exit}. Il envoie la raison de son arrêt aux processus qui sont reliés. Si le processus s'arrête normalement, il renvoie l'atome "\textit{normal}". Si il rencontre une erreur à l'exécution il renvoie quelque chose comme \textcolor{red}{\{Reason, Stack\}}. Le comportement classique est que tous les processus s'arrêtent à cause de l'erreur. On peut aussi capturer des erreurs via "\textit{process\_flag(trap\_exit, true)}". Ainsi, cela est envoyé comme un message sous forme \textcolor{red}{\{‘EXIT’, FromPid, Reason\}}. On peut également tuer un processus via la fonction exit.
 
 \section{Changement dynamique}
 On peut, en Erlang, modifier le code qui est en cours d'exécution. On a ainsi \textcolor{red}{2} versions des modules qui sont présentes. Les processus peuvent choisir de continuer avec l'ancien processus ou le nouveau. Si on utilise \textcolor{red}{m:Fun} cela force à utiliser la nouvelle version. 
 
 \section{Abstraction pour des programmes robustes}
-Les erreurs ne peuvent être évités et donc on les manipule. Les fonctions sont \textcolor{red}{fail-fast} pour éviter les problèmes. Les erreurs sont détectables et les programmes ne partagent pas d'états entre eux.
+Les erreurs ne peuvent être évitées et donc on les manipule. Les fonctions sont \textcolor{red}{fail-fast} pour éviter les problèmes. Les erreurs sont détectables et les programmes ne partagent pas d'états entre eux.
 
 \subsection{Slogan}
 \begin{itemize}
