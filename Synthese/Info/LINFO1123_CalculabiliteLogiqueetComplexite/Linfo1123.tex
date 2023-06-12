@@ -167,7 +167,7 @@ Mais, on doit stocker notre valeur $d'$ dans la table. On la stock à $p$ ce qui
 \begin{itemize}
 \item L'ensemble des $\mathbb{R}$.
 \item L'ensemble des sous-ensemble de $\mathbb{N}$.
-\item L'ensemble des chaines infinies de caractères d'un alphabet fini.
+\item L'ensemble des chaines infinies de caractères d'un alphabet infini.
 \item L'ensemble des \textit{fonctions} de $\mathbb{N}$ dans $\mathbb{N}$.
 \end{itemize}
 Chose intéressante à noter, comme on a une infinité non énumérable de fonctions $\mathbb{N}$ dans $\mathbb{N}$ et un nombre de programme informatique \textit{infini énumérable}. On ne peut pas résoudre tous les problèmes informatiques donc.
@@ -317,7 +317,7 @@ K &= \{n | (n,n) \in \text{HALT}\}\\
 Donc K et HALT \textbf{ne sont pas} récursifs mais sont récursivement énumérable car si un élément n'appartient pas à K ou HALT, il va boucler mais fournir la bonne solution s'il appartient à ces ensembles.\\
 De plus K est la diagonale de \textit{HALT}.
 
-$\overline{HALT}$ n'est pas récursivement énumérable car on a pas de moyen de prouver qu'un élément probable n'appartient pas à cet ensemble. pareil pour $\overline{K}$
+$\overline{HALT}$ n'est pas récursivement énumérable car on n'a pas de moyen de prouver qu'un élément probable n'appartient pas à cet ensemble. pareil pour $\overline{K}$
 
 \begin{figure}[H]
 \centering
@@ -1397,7 +1397,7 @@ DIAG & \leqslant_f HALT & HALT &\leqslant_f DIAG
 En $\leqslant_a$ on a un point de vue calculabilité et pour $\leqslant_f$ est un point de vue complexité. On doit donc appliquer un schéma d'algorithme suivant pour la \textit{complexité}. On a un input a, $a' := f(a)$ et si $a' \in B$ alors l'output est $a \in A$. On utilise en dernier lieu et une seule fois le test $f(a) \in B$. On ne fait rien après ce test.
 
 \section{Modèle de calcul}
-On théorie "\textit{classique}" la complexité se mesure via le modèle de machine de Turing. On regarde le nombre de \textit{transitions} nécessaires pour la complexité temporelle et le nombre de cases utilisées pour la complexité spatiale. La notion de \textit{transition} n'est pas très adapté pour les langages modernes.\par
+En théorie "\textit{classique}" la complexité se mesure via le modèle de machine de Turing. On regarde le nombre de \textit{transitions} nécessaires pour la complexité temporelle et le nombre de cases utilisées pour la complexité spatiale. La notion de \textit{transition} n'est pas très adapté pour les langages modernes.\par
 On va utiliser le modèle des programmes Java. Donc déterministes et non déterministes. (on peut parfois faire des écarts pour utiliser le modèle le plus adapté)
 \subsubsection{Thèse}
 Tous les modèles de complexité ont entre eux des complexités spatiales et temporelles reliées de façon polynomiale.\par
