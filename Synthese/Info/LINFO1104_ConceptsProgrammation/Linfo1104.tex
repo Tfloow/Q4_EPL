@@ -119,11 +119,17 @@ Formellement, quand on déclare une variable et qu'on l'assigne à une valeur ce
 Une chose importante à noter est que cette façon de programmer peut être réalisé dans n'importe quel langage de programmation. On peut également redéclarer un identificateur. C'est-à-dire écrire "$X = 42$" et plus loin en ayant redéclarer une variable "$X = 11$" car ces deux déclarations pointent à deux éléments totalement différents dans la mémoire et ont des \textit{scopes} différents.\\
 
 Un "Scope" ou portée est une propriété centrale en programmation. En effet, c'est le scope qui nous permet d'avoir différente valeur pour des variables qui ont le même nom. Naturellement, elle ne représente pas la même chose car elle diffère de leur scope. On peut déterminer le scope d'une variable sans même exécuter le code. Il nous suffit d'analyser le code qui comprend un "\textcolor{red}{lexical scoping}" ou un "\textcolor{red}{static scoping}".
-\begin{figure}[H]
-\centering
-\includegraphics[width=3cm]{img/scope.png}
-\caption{Exemple de code avec des scope différents}
-\end{figure}
+\begin{lstlisting}[escapechar=\%]
+local
+  X
+in 
+  X = 42 {Browse X}
+  local X in
+    X = 11 {Browse X}
+  end
+  {Browse X}
+end
+\end{lstlisting}
 
 
 \chapter{Programmation symbolique}
@@ -142,12 +148,17 @@ Donc une List d'entier se définit comme: <List <Int> >. Une chose importante à
 Pour définir une liste en Oz, on utilise soit la notation \textcolor{blue}{[1 2 3]} ou \textcolor{blue}{1 | 2 | 3 | nil}.(il existe d'autre manière semblable qu'on verra plus loin) C'est 2 déclarations reviennent à la même chose en mémoire. Une utilité des listes est leur facilité à être représenté sous forme d'arbre comme montré ci-contre. La \textit{head} est accessible via \textcolor{blue}{list.1} et la \textit{tail} est obtenu via \textcolor{blue}{list.2}.
 
 \section{Pattern matching}
-\begin{wrapfigure}{l}{.18\textwidth}
-	\centering
-	\includegraphics[width=.2\textwidth]{img/patternMatching.png}
-\end{wrapfigure}
+
 Grâce à cette représentation en arbre, il est facile de voir si une liste est bien une liste.\\
 Ci-contre, on voit une fonction classique en Oz qui analyse une liste et détermine si elle est d'une structure correcte. Le \textcolor{blue}{[]} correspond au cas où l'élément \textcolor{blue}{L} est une liste avec une Head et une Tail. On appelle cela une \textit{Clause} et H|T est le pattern de la clause. Le premier cas est définit par \textcolor{blue}{of}.
+\begin{lstlisting}[escapechar=\%]
+fun {Sum L}
+  case L
+  of nil then 0
+  [] H|T then H+{Sum T}
+  end
+end
+\end{lstlisting}
 \newpage
 
 \section{Introduction au langage Kernel}
@@ -309,40 +320,75 @@ donc "<s>" contient le programme exécuté, "<v>" est une structure de donné co
 \subsubsection{2. La machine abstraite}
 Voici ci-dessous comment s'exécute un programme initialement.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm]{img/kernel.png}
-\includegraphics[width=5cm]{img/kernel1.png}
-\caption{à gauche: programme écrit en Oz $\qquad$ à droite: état initiale d'exécution}
-\end{figure}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={Programme en Oz}]
+local X in
+  local B in
+    B=true
+    if B then X=1 
+    else skip end
+  end
+end
+  
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={État initial}]
+([(local X in 
+     local B in 
+       B=true
+       if B then x=1 else skip end
+     end
+   end, {})],
+ {})
+\end{lstlisting}
+\end{minipage}
+
 Au début, l'environnement et la mémoire sont vides. L'état d'exécution est écrit typiquement comme:
 \begin{lstlisting}[escapechar=\%]
 ([(<s>,E)], %$\sigma$)
 \end{lstlisting} %trouver comment utiliser un code dans lst
 Sur la machine abstraite, on va d'instructions en instructions. C'est-à-dire on descend petit à petit.
 donc on a pour la suite:
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm]{img/kernel2.png}
-\includegraphics[width=5cm]{img/kernel3.png}
-\caption{à gauche: on descend de 1 cran $\qquad$ à droite: on descend encore de 1 cran}
-\end{figure}
+
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+([(local B in
+     B=true
+     if B then X=1 else skip end
+   end, {X %$\rightarrow$% x})]),
+ {x})
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+([((B=true
+    if B then X=1 else skip end),
+ {B %$\rightarrow$% b, X %$\rightarrow$% x})]),
+ 
+ {b, x})
+\end{lstlisting}
+\end{minipage}
+
 On voit que au fur et à mesure qu'on descend, la pile de mémoire et d'environnement s'agrandit. Ensuite on va \textit{séparer} la \textit{composition séquentielle} comme suit:
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm]{img/kernel4.png}
-\includegraphics[width=5cm]{img/kernel5.png}
-\caption{à gauche: on sépare en deux $\qquad$ à droite: on attribue à b la valeur définit à gauche}
-\end{figure}
 Une nouvelle instruction va s'ajouter à cause du "then" de notre condition:
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=5cm]{img/kernel6.png}
-\includegraphics[width=3cm]{img/kernel7.png}
-\caption{à gauche: la nouvelle instruction $\qquad$ à droite: les instructions sont vides, c'est fini}
-\end{figure}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+([(X=1, {B %$\rightarrow$% b, X %$\rightarrow$% x})],
+ {b=true, x})
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+([],
+ {b=true, x=1})
+\end{lstlisting}
+\end{minipage}
 
 \subsubsection{3. Définir la machine abstraite}
 \begin{itemize}
@@ -769,9 +815,38 @@ Eager évaluation méthode de réduction & La lazy évaluation elle, va\\
 qui commence par l'intérieur & calculer que ce qui est \\
  donc on exécute un programme comme suit: &  nécessaire et réduit si nécessaire pour \\
  & l'exécution. On va de l'extérieur à l'intérieur\\
-  & \\
-\includegraphics[width=4cm]{img/Eager.png} & \includegraphics[width=4cm]{img/Lazy.png}
+  & 
 \end{tabular}
+
+\begin{center}
+\begin{minipage}[t]{0.49\linewidth}
+\begin{lstlisting}[escapechar=\%]
+{Double {Average 5 7}} %$\rightarrow$%
+{Double ((5 + 7)/2)} %$\rightarrow$%
+{Double (12/2)} %$\rightarrow$%
+{Double 6} %$\rightarrow$%
+6 + 6 %$\rightarrow$%
+12
+12
+12
+12
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+{Double {Average 5 7}} %$\rightarrow$%
+{Average 5 7} + {Average 5 7} %$\rightarrow$%
+((5 + 7)/2) + {Average 5 7} %$\rightarrow$%
+(12/2) + {Average 5 7} %$\rightarrow$%
+6 + {Average 5 7} %$\rightarrow$%
+6 + ((5 + 7)/2) %$\rightarrow$%
+6 + ((12)/2) %$\rightarrow$%
+6 + 6 %$\rightarrow$%
+12
+\end{lstlisting}
+\end{minipage}
+\end{center}
 
 \subsubsection{If statement}
 Dans la plupart des langages de programmation, la condition \textcolor{blue}{if} est réalisé de manière applicative. La partie de l'action \textcolor{blue}{then} est réalisé de manière \textcolor{blue}{lazy}. Donc si une action produit une erreur mais quelle est dans une clause qui ne serait pas atteint, alors le programme ne crashe pas.
@@ -813,22 +888,22 @@ end
 {Browse {Sum [1 2 3 4] 0}}
 \end{lstlisting}
 \begin{lstlisting}[escapechar=\%]
-Xs		A
+Xs				A
 [1 2 3 4]	0
 [2 3 4]		1
-[3 4]		3
-[4]		6
-nil		10    
+[3 4]			3
+[4]				6
+nil				10    
 \end{lstlisting}
 
-Mais cela n'est pas suffisant. En effet, on voudrait que le programme remarque \textit{lui-même} ses propres changements. Il faut faire une \textbf{extensions}, on rentre dans un nouveau \textbf{paradigme}.
+Mais cela n'est pas suffisant. En effet, on voudrait que le programme remarque \textit{lui-même} ses propres changements. Il faut faire une \textbf{extension}, on rentre dans un nouveau \textbf{paradigme}.
 
 \section{État explicite}
 On va essayer de montrer les changements en rendant les états \textit{explicites}. On appelle l'extension une \textbf{cellule} ou \textit{cell} (c'est l'équivalent d'un \textit{pointeur} en C).\\
 Donc tout comme en C, on peut changer la référence en changeant le pointeur ou en changeant la valeur pointée.
 
 \subsubsection{Cell}
-Une cellule à une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
+Une cellule a une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
 
 \begin{itemize}
 \item \textcolor{red}{identité}: c'est constant et correspond au nom/pointeur de la cellule 
@@ -838,17 +913,19 @@ Une cellule à une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
 \begin{lstlisting}[escapechar=\%]
 A=5; B=6
 C={NewCell A}	%// on crée une nouvelle cellule%
-{Browse @C}	%// on montre le \textit{contenu} avec @ ici 5%
-C:=B		%// on change la valeur pointé par C en celle de B%
-{Browse @C}	%// vaut 6%
+{Browse @C}		%// on montre le \textit{contenu} avec @ ici 5%
+C:=B					%// on change la valeur pointé par C en celle de B%
+{Browse @C}		%// vaut 6%
 \end{lstlisting}
 
 \subsection{Exemple}
 Une chose à bien comprendre est que lorsqu'on réalise l'opération $:=$, on remplace le contenu de la \textit{box}. Si on lie 2 cell via $=$ on relie notre variable vers la même cell. Donc on peut modifier le contenu de la box via une des deux variables. (\ref{pointerEx1})
 \begin{figure}[H]
 \centering
-\includegraphics[width=6cm]{img/pointerEx1.png} \label{pointerEx1}
+\includegraphics[width=6cm]{img/pointerEx1.png}
 \includegraphics[width=6cm]{img/pointerEx2.png}
+\caption{Programme simple utilisant des cellules}
+\label{pointerEx1}
 \end{figure}
 
 \section{Sémantique de cellules}
@@ -917,9 +994,9 @@ C'est une des bases pour construire des logiciels complexes. L'abstraction des d
 C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandée via une télécommande ayant un nombre limité de fonction. Son fonctionnement est \textit{encapsulé} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
 
 \subsubsection{Définition}
-C'est donc une partie d'un programme qui a une partie \textit{extérieure} (au contact avec l'utilisateur) et une partie \textit{intérieure} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être donné à l'utilisateur.\\
-On limite les \textit{fonctionnalités} et l'utilisateur doit suivre des règles établis de notre interface pour s'assurer que son résultat est bien correct.\\
-L'\textcolor{blue}{encapsulation} doit être \textcolor{red}{supporté} par le langage de programmation.
+C'est donc une partie d'un programme qui a une partie \textit{extérieure} (au contact avec l'utilisateur) et une partie \textit{intérieure} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être données à l'utilisateur.\\
+On limite les \textit{fonctionnalités} et l'utilisateur doit suivre des règles établies de notre interface pour s'assurer que son résultat est bien correct.\\
+L'\textcolor{blue}{encapsulation} doit être \textcolor{red}{supportée} par le langage de programmation.
 
 \subsubsection{Avantage}
 \begin{enumerate}
@@ -951,9 +1028,9 @@ Le problème avec cette implémentation vu au-dessus d'un stack est que les donn
 
 On va \textcolor{red}{protéger} les données. On utilisera un \textcolor{red}{Security Wrapper}. On utilise ça comme suit:
 \begin{lstlisting}[escapechar=\%]
-{NewWrapper Wrap Unwrap} %\text{//crée une nouvelle clée d'encryption}%
-W={Wrap X} %\text{//encrypte}%
-X={Unwrap W} %\text{//décrypte}%
+{NewWrapper Wrap Unwrap}	%\text{//crée une nouvelle clée d'encryption}%
+W={Wrap X} 								%\text{//encrypte}%
+X={Unwrap W} 							%\text{//décrypte}%
 \end{lstlisting}
 C'est donc une sorte d'encryption/décryption. Ainsi, on cache et empêche l'accès aux valeurs car on va encrypter les données primaires. L'utilisateur ne peut invoquer les fonctions Wrap et Unwrap.\\
 Voici l'implémentation d'un stack:
@@ -1042,7 +1119,7 @@ end
 
 \subsubsection{En Scala}
 C'est une sorte de forme hybride entre programmation fonctionnel et orienté objet. Scala supporte les 2 \textit{paradigmes}.\\
-En Scala, on peut définir des objets immutables qui retournent, \textit{eux-mêmes}, des objets immutables.  Les objets immutables sont des objets \textit{fonctionnels}(\textit{donc pas de changement}).
+En Scala, on peut définir des objets immutables qui retournent, \textit{eux-mêmes}, des objets immutables.  Les objets immutables sont des objets \textit{fonctionnels} (\textit{donc pas de changement}).
 
 \subsection{Stateful ADT}
 Voici l'implémentation d'un stack en \textit{stateful ADT}:
@@ -1112,7 +1189,7 @@ On protège chaque exécution par des \textit{exceptions handlers} qui sont comm
 On a les \textit{try} et \textit{raise} qui sont deux nouvelles instructions:
 \begin{lstlisting}[escapechar=\%]
 try <s1> catch <y> then <s2> end	//%On crée l'intercepteur%
-raise <x> end				//%On établit une erreur%
+raise <x> end											//%On établit une erreur%
 \end{lstlisting}
 
 \subsubsection{Try et Raise}
@@ -1126,8 +1203,8 @@ En plus de ces deux instructions, on peut rajouter une instruction s'appelant \t
 \subsection{En Java}
 C'est un objet hérité de la classe des \textit{Exceptions} (elle-même sous-classe des \textit{Throwable)} et il existe 2 types d'exceptions:
 \begin{itemize}
-\item \textcolor{blue}{Checked exceptions}: le compilateur vérifie que les méthodes ne \textit{throw} que des exceptions déclarés pour la classe
-\item \textcolor{blue}{Unchecked exceptions}: pour gérer les exceptions que le compilateur ne peut pas vérifier (\textit{les rayons cosmiques}). Elles héritent des \textit{RuntimeException} et \textit{Error}.
+\item \textcolor{blue}{Checked exceptions}: le compilateur vérifie que les méthodes ne \textit{throw} que des exceptions déclarées pour la classe
+\item \textcolor{blue}{Unchecked exceptions}: pour gérer les exceptions que le compilateur ne peut pas vérifier. Elles héritent des \textit{RuntimeException} et \textit{Error}.
 \end{itemize}
 Donc en tant que développeur on check les erreurs \textit{checked}.
 
@@ -1156,7 +1233,7 @@ On a besoin de la \textit{programmation simultanée} car notre monde progresse a
 	\item Les \textit{threads} partagent le même espace mémoire.
 	\end{enumerate}
 \end{enumerate}
-Ce principe est très naturel car est présent tout autour de nous. Une activités indépendante est donc \textcolor{blue}{simultanée}. Cependant, cela doit être supporté par le langage lui-même.
+Ce principe est très naturel car est présent tout autour de nous. Une activité indépendante est donc \textcolor{blue}{simultanée}. Cependant, cela doit être supporté par le langage lui-même.
 
 \section{Les bases}
 On peut avoir des événements qui progressent en même temps mais certaines activités doivent pouvoir \textcolor{blue}{communiquer} entre elle et se \textcolor{blue}{synchroniser}.
@@ -1235,7 +1312,7 @@ Il y a donc 2 cas de figure possible: ligne 2 $\rightarrow$ ligne 3 ou ligne 3 $
 \subsubsection{Le Browser}
 Le \textit{Browser} en Oz s'exécute avec son propre Thread.\\
 Pour chaque variable non-liée qui est affichée, on crée un thread dans le \textit{Browser} qui attend jusqu'à ce qu'on lui attribue une valeur.\\
-Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme  "\textit{functional dataflow}" et il ne regarde donc pas l'intérieur de la cellule.
+Cependant, cela ne fonctionne pas avec les \textit{cellules}. Le Browser utilise le paradigme "\textit{functional dataflow}" et il ne regarde donc pas l'intérieur de la cellule.
 
 \subsection{Streams et Agents}
 Un stream est une \textcolor{blue}{liste} qui se finit par une variable non défini. On peut étendre la liste autant que l'on veuille. \\
@@ -1305,7 +1382,7 @@ Si un \textit{planificateur} est équitable, on peut s'assurer que notre program
 \section{Concurrency for dummies}
 \noindent
 \textit{sobrement intitulé par Peter van Roy}\par
-En programmation mulit-agent, la concurrence n'influence pas le résultat. La concurrence change juste l'ordre d'exécution. On peut ajouter des threads à la volée sans changer le résultat.\par
+En programmation multi-agent, la concurrence n'influence pas le résultat. La concurrence change juste l'ordre d'exécution. On peut ajouter des threads à la volée sans changer le résultat.\par
 Cela fonctionne seulement en programmation \textcolor{blue}{fonctionnelle}.\par
 Quand on veut \textit{browse} un thread, on aura une sortie sous forme de liste où à la fin on a "$\_$". Cela veut dire qu'on attend une autre information qui pourrait arriver.
 
