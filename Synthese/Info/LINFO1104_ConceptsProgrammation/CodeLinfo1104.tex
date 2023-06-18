@@ -1,0 +1,1028 @@
+%Made By Thomas Debelle
+%Ajouté des Packages si nécessaires
+\documentclass{report}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xparse}
+\usepackage{wrapfig}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1.0,1.0,1.0}
+\definecolor{codeblue}{rgb}{0,0,0.8}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codeblue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=shadowbox
+}
+\lstset{style=mystyle}
+\lstset{language=Oz}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\begin{document}
+
+%Si la mention "Juin 2023" est sur une autre page, changé le dernier VSPACE
+\begin{titlepage}
+    \begin{figure}
+        \includegraphics[height = 2cm]{UCL_Logo.png}
+        \label{fig:my_label}
+    \end{figure}
+
+    \hspace*{100cm}
+    \centering
+    \vspace*{7cm}
+
+    {\Huge \textbf{Compilation de code LINFO1104}}\\
+    \vspace*{0.25cm}
+    compilation du \today\\
+    \vspace*{0.25cm}
+    \Large{Thomas Debelle}\\
+
+    \vspace*{9.5cm} %Le dernier VSPACE
+    {\Large Juin 2023}
+\end{titlepage}
+
+%_____NE PAS MODIFIER______
+\tableofcontents
+\newpage
+
+\section*{Préface}
+
+Bonjour à toi !\\
+
+Cette synthèse recueille toutes les informations importantes données au cours, pendant les séances de tp et est améliorée grâce au note du Syllabus. Elle ne remplace pas le cours donc écoutez bien les conseils et potentielles astuces que les professeurs peuvent vous donner. Notre synthèse est plus une aide qui, on l'espère, vous sera à toutes et tous utile.\\
+
+Elle a été réalisée par toutes les personnes que tu vois mentionnées. Si jamais cette synthèse a une faute, manque de précision, typo ou n'est pas à jour par rapport à la matière actuelle ou bien que tu veux simplement contribuer en y apportant tes connaissances ? Rien de plus simple ! Améliore la en te rendant \href{http://www.github.com/Tfloow/Q4_EPL}{ici} où tu trouveras toutes les infos pour mettre ce document à jour. (\textit{en plus tu auras ton nom en gros ici et sur la page du github})\\
+
+Nous espérons que cette synthèse te sera utile d'une quelconque manière ! Bonne lecture et bonne étude.
+
+%_______Vous pouvez modifier en-dessous_____
+\chapter{Code}
+\section{Les différents paradigmes}
+\subsection{Scoping}
+\begin{lstlisting}
+local
+  X
+in 
+  X = 42 {Browse X}		% Imprime 42
+  local X in
+    X = 11 {Browse X}	% Imprime 11
+  end
+  {Browse X}					% Imprime 42
+end
+\end{lstlisting}
+    
+\section{Programmation symbolique}
+\subsection{Pattern matching}
+\begin{lstlisting}[escapechar=\%]
+fun {Sum L}
+  case L
+  of nil then 0
+  [] H|T then H+{Sum T}
+  end
+end
+\end{lstlisting}
+
+\subsection{Tuples et Records}
+\subsubsection{Tuples}
+\begin{lstlisting}
+X = state(1 b 2)
+{Browse {Label X}}
+{Browse {Width X}}
+\end{lstlisting}
+
+\subsection{Arbre avec Tuples}
+\begin{lstlisting}
+declare
+Y = left(1 2) Z = right(3 4)
+X = mid(Y Z)
+\end{lstlisting}
+
+\subsection{Similitude Tuples et listes}
+\begin{lstlisting}[escapechar=\%]
+List1 = [1 2 3]
+List2 = (1:1 2:(1:2 2:(1:3 2:nil)))
+List1 == List2 %//Vrai%
+\end{lstlisting}
+
+\subsection{Sémantique formelle}
+\begin{lstlisting}
+local P Q in
+  {Browse 'do something'}
+  proc {Q}
+    {P}
+  end
+  {Browse 'another something'}
+end
+\end{lstlisting}
+
+\subsection{Sémantique opérationnelle}
+\subsubsection{Langage Kernel complet}
+\begin{lstlisting}[escapechar=\%]
+<s> ::= skip 
+  | %$<s>_1 <s>_2$% 
+  | local <x> in <s> end 
+  | %$<x>_1=<x>_2$% 
+  | <x>=<v> 
+  | if <x> then %$<s>_1$% else %$<s>_2$% end 
+  | {<x> %$<y>_1,...,<y>_n$%} 
+  | case <x> of <p> then %$<s>_1$% else %$<s>_2$% end
+
+<v> ::= <number> | <procedure> | <record>  
+<number> ::= <int> | <float> 
+<procedure> ::= proc {$ %$<x>_1, ..., <x>_n$%} <s> end
+<record>, <p> ::= <lit> | <lit>(%$<f>_1:<x>_1, ..., <f>_n:<x>_n$%)
+\end{lstlisting}
+
+\subsubsection{La machine abstraite}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={Programme en Oz}]
+local X in
+  local B in
+    B=true
+    if B then X=1 
+    else skip end
+  end
+end
+  
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[caption={État initial}]
+([(local X in 
+     local B in 
+       B=true
+       if B then x=1 else skip end
+     end
+   end, {})],
+ {})
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+([(local B in
+     B=true
+     if B then X=1 else skip end
+   end, {X %$\rightarrow$% x})],
+ {x})
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+([((B=true
+    if B then X=1 else skip end),
+ {B %$\rightarrow$% b, X %$\rightarrow$% x})],
+ 
+ {b, x})
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+([(X=1, {B %$\rightarrow$% b, X %$\rightarrow$% x})],
+ {b=true, x})
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+([],
+ {b=true, x=1})
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Procédures}
+\subsubsection{Adjonction}
+\begin{lstlisting}[escapechar=\%]
+local X in
+  (E1) X=1 
+  local X in 
+    (E2) X=2 
+    {Browse X}
+  end 
+end
+E1 = {Browse %$\rightarrow$% b, X %$\rightarrow$% x}
+E2 = E1 + {X %$\rightarrow$% y} = {Browse %$\rightarrow$% b, X %$\rightarrow$% y}
+\end{lstlisting}
+
+\subsubsection{Restriction}
+\begin{lstlisting}[escapechar=\%]
+local A B C AddB in
+  A=1 B=2 C=3 %\textcolor{red}{(E)}%
+  fun {AddB X} %\textcolor{red}{(EC: contextual environment)}%
+    X+B
+  end
+end
+E = {A %$\rightarrow$% a, B %$\rightarrow$% b, C %$\rightarrow$% c, AddB %$\rightarrow$% a' }
+%$E_C$% = %$E_{|\{B\}}$% = {B %$\rightarrow$% b }
+\end{lstlisting}
+
+\subsection{Rappel procédure sémantique}
+\begin{lstlisting}[escapechar=\%]
+{Browse {Inc 10}}		#Langage pratique (classique)
+%\hrulefill%
+local M in		 	#Langage Kernel
+  local N in
+    M=10
+    {Inc M N}
+    {Browse N}
+  end
+end
+\end{lstlisting}
+
+\section{Programmation d'ordre supérieur}
+\subsection{FoldL}
+\begin{lstlisting}
+declare
+fun {FoldL L F U}
+  case L
+  of nil then U
+  [] H|T then {FoldL T F {F U H}}
+  end
+end
+
+{FoldL LIST Function Acc}
+\end{lstlisting}
+
+\section{Lambda calcul}
+\subsection{Fonctionnement}
+\begin{lstlisting}
+declare
+fun {FoldL L F U}
+  case L
+  of nil then U
+  [] H|T then {FoldL T F {F U H}}
+  end
+end
+
+{FoldL LIST Function Acc}
+\end{lstlisting}
+
+\subsubsection{Fonctionnement}
+\begin{lstlisting}[escapechar=\%]
+t ::= x | (%$\lambda$%x.t) | %$t_1 \quad t_2$%
+\end{lstlisting}
+
+\subsection{En Oz}
+\subsubsection{Définition fonction}
+\begin{lstlisting}[escapechar=\%]
+fun %\{\$ X\}% T end
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
+%\{$T_1 \quad T_2$\}%
+\end{lstlisting}
+
+\subsubsection{Currying}
+\begin{lstlisting}[escapechar=\%]
+F = fun %\{\$ X\}% fun %\{\$ Y\}% T end end
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
+%\{\{F X\} Y\}%
+\end{lstlisting}
+
+\subsection{Sémantique des expressions}
+\subsubsection{$\alpha$-renaming}
+\begin{lstlisting}[escapechar=\%]
+%$\lambda$% x. x %$\rightarrow_{\alpha}\lambda$%y. y
+\end{lstlisting}
+\subsubsection{$\beta$-renaming}
+\begin{lstlisting}[escapechar=\%]
+%$(\lambda x.t_1) t_2 \rightarrow t_1[::=t_2]$%
+%$(\lambda x.(x \quad x))y \rightarrow (y \quad y)$%
+\end{lstlisting}
+\subsubsection{$\eta$-renaming}
+\begin{lstlisting}[escapechar=\%]
+%$\lambda x.(t \quad x) \rightarrow t$ if $x \notin FV(t)$%
+\end{lstlisting}
+
+\subsection{Eager and Lazy evaluation}
+\begin{center}
+\begin{minipage}[t]{0.49\linewidth}
+\begin{lstlisting}[escapechar=\%]
+{Double {Average 5 7}} %$\rightarrow$%
+{Double ((5 + 7)/2)} %$\rightarrow$%
+{Double (12/2)} %$\rightarrow$%
+{Double 6} %$\rightarrow$%
+6 + 6 %$\rightarrow$%
+12
+12
+12
+12
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+{Double {Average 5 7}} %$\rightarrow$%
+{Average 5 7} + {Average 5 7} %$\rightarrow$%
+((5 + 7)/2) + {Average 5 7} %$\rightarrow$%
+(12/2) + {Average 5 7} %$\rightarrow$%
+6 + {Average 5 7} %$\rightarrow$%
+6 + ((5 + 7)/2) %$\rightarrow$%
+6 + ((12)/2) %$\rightarrow$%
+6 + 6 %$\rightarrow$%
+12
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\section{État mutable et abstraction des données}
+\subsection{State}
+\begin{center}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+fun {Sum Xs A}
+  case Xs
+  of nil then A
+  [] X|Xr then {Sum Xr A+X}
+  end
+end
+{Browse {Sum [1 2 3 4] 0}}
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+Xs				A
+______________
+[1 2 3 4]	0
+[2 3 4]		1
+[3 4]			3
+[4]				6
+nil				10    
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\subsection{Cellule}
+\begin{lstlisting}[escapechar=\%]
+A=5; B=6
+C={NewCell A}	%// on crée une nouvelle cellule%
+{Browse @C}		%// on montre le \textit{contenu} avec @. Imprime 5%
+C:=B					%// on change la valeur pointée par C en celle de B%
+{Browse @C}		%// Imprime 6%
+\end{lstlisting}
+
+\subsection{Langage Kernel extension Cellule}
+\begin{lstlisting}[escapechar=\%]
+<s> ::= skip 
+  | %$<s>_1$% %$<s>_2$% 
+  | local <x> in <s> end 
+  | %$<x>_1=<x>_2$%
+  | <x>=<v> 
+  | if <x> then %$<s>_1$% else %$<s>_2$% end 
+  | {%$<x>,<y>_1, ..., <y>_n$%} 
+  | case <x> of <p> then %$<s>_1$% else %$<s>_2$% end 
+  | {NewCell <y> <x>} 
+  | <x>:=<y> ____ {Exchange <x> <y> <z>}
+  | <y>=@<x> __|
+<v> ::= <number> | <procedure> | <record> 
+<number> ::= <int> | <float> 
+<procedure> ::= proc {$ %$<x>_1,...,<x>_n$%} <s> end
+<record>, <p> ::= <lit> | <lit>(%$<f>_1:<x>_1 ... <f>_n:<x>_n$%)
+\end{lstlisting}
+
+\subsection{Fairy tale}
+\begin{lstlisting}
+fun {MF} 
+  X = {NewCell 0}
+  fun {F ...} 
+    X:=@X+1 % Definition of F
+  end 
+  fun {G ...} 
+    % Definition of G
+  end 
+  fun {Count} @X end
+in 'export'(f:F g:G c:Count)
+end
+M = {MF}
+\end{lstlisting}
+
+\section{Type de données abstraites}
+\subsection{ADT avec encapsulation}
+\subsubsection*{Wrapper}
+\begin{lstlisting}[escapechar=\%]
+{NewWrapper Wrap Unwrap}	%\text{//crée une nouvelle clée d'encryption}%
+W={Wrap X} 								%\text{//encrypte}%
+X={Unwrap W} 							%\text{//décrypte}%
+\end{lstlisting}
+\subsubsection{ADT}
+\begin{lstlisting}[escapechar=\%]
+local Wrap Unwrap in
+  {NewWrapper Wrap Unwrap}
+
+  fun {NewStack} {Wrap nil} end 
+  fun {Push W X} {Wrap X|{Unwrap W}} end 
+  fun {Pop W X} S={Unwrap W} in X=S.1 {Wrap S.2} end
+  fun {IsEmpty W} {Unwrap W}==nil end
+end
+\end{lstlisting}
+
+\subsection{Objets stateful}
+\subsubsection{Utilisation}
+\begin{lstlisting}[escapechar=\%]
+S={NewStack} 
+{S push(X)} 
+{S pop(X)}
+{S isEmpty(B)}
+\end{lstlisting}
+
+\subsubsection{Objet}
+\begin{lstlisting}[escapechar=\%]
+fun {NewStack} 
+  C={NewCell nil} 
+  proc {Push X} C:=X|@C end 
+  proc {Pop X} S=@C in C:=S.2 X=S.1 end 
+  proc {IsEmpty B} B=(@C==nil) end
+in
+  proc {$ M}
+    case M of push(X) then {Push X} 
+    [] pop(X) then {Pop X} 
+    [] isEmpty(B) then {IsEmpty B} end
+  end
+end
+\end{lstlisting}
+
+\subsubsection{Objet avec un Record}
+\begin{lstlisting}[escapechar=\%]
+fun {NewStack} 
+  C={NewCell nil} 
+  proc {Push X} C:=X|@C end 
+  proc {Pop X} S=@C in X=S.1 C:=S.2 end 
+  fun {IsEmpty} @C==nil end
+in 
+  stack(push:Push pop:Pop isEmpty:IsEmpty)
+end
+\end{lstlisting}
+
+\subsection{Functional object (stateless)}
+\begin{lstlisting}[escapechar=\%]
+local 
+  fun {StackObject S} 
+    fun {Push E} {StackObject E|S} end 
+    fun {Pop S1} 
+      case S of X|T then S1={StackObject T} X end end 
+    fun {IsEmpty} S==nil end
+  in
+    stack(push:Push pop:Pop isEmpty:IsEmpty) 
+  end 
+  in 
+    fun {NewStack} {StackObject nil} end
+end
+\end{lstlisting}
+
+\subsection{Stateful ADT}
+\begin{lstlisting}[escapechar=\%]
+local Wrap Unwrap 
+  {NewWrapper Wrap Unwrap} 
+  fun {NewStack} {Wrap {NewCell nil}} end 
+  proc {Push S E} C={Unwrap S} in C:=E|@C end 
+  fun {Pop S} C={Unwrap S} in 
+    case @C of X|S1 then C:=S1 X end end 
+  fun {IsEmpty S} @{Unwrap S}==nil end
+in 
+  Stack=stack(new:NewStack push:Push pop:Pop isEmpty:IsEmpty)
+end
+\end{lstlisting}
+
+\section{Les exceptions}
+\subsection{En Oz}\begin{lstlisting}[escapechar=\%]
+try <s1> catch <y> then <s2> end	//%On crée l'intercepteur%
+raise <x> end											//%On établit une erreur%
+\end{lstlisting}
+
+\subsubsection{Exemple typique}
+\begin{lstlisting}[escapechar=\%]
+fun {Eval E} 
+  if {IsNumber E} then E 
+  else
+    case E of plus(X Y) then {Eval X}+{Eval Y} 
+    [] times(X Y) then {Eval X}*{Eval Y} 
+    else raise badExpression(E) end 
+    end
+  end
+end 
+
+try
+  {Browse {Eval plus(23 times(5 5))}} 
+  {Browse {Eval plus(23 minus(4 3))}}
+catch X then {Browse X} end
+\end{lstlisting}
+
+\subsubsection{Finally}
+\begin{lstlisting}
+FH={OpenFile 'foobar'} 
+try 
+  {ProcessFile FH}
+catch X then 
+  {Show '*** Exception during execution ***'}
+finally {CloseFile FH} end % Always close the file
+\end{lstlisting}
+
+\section{Programmation Simultanée}
+\subsection{Thread}
+\begin{lstlisting}[escapechar=\%]
+thread <s> end
+\end{lstlisting}
+
+\subsection{Multi-agent}
+\subsubsection{Sieve}
+\begin{lstlisting}[escapechar=\%]
+fun {Sieve Xs}
+  case Xs
+  of nil then nil
+  [] X|Xr then X|{Sieve thread {Filter Xr X} end} 
+  end
+end 
+declare Xs Ys in
+thread Xs={Prod 2} end 
+thread Ys={Sieve Xs} end
+{Browse Ys}
+\end{lstlisting}
+
+\begin{lstlisting}[escapechar=\%]
+fun {CMap Xs F} 
+  case Xs of nil then nil 
+  [] X|Xr then 
+  thread {F X} end | {CMap Xr F}
+  end
+end
+\end{lstlisting}
+
+\subsubsection{Compteur thread}
+\begin{lstlisting}[escapechar=\%]
+C={NewCell 0} 
+proc {Inc C} 
+  {Exchange C X Y} Y=X+1
+end
+
+fun {Fib X} 
+  if X==0 then 0 
+  elseif X==1 then 1 
+  else 
+    thread {Inc C} {Fib X-1} end + {Fib X-2} 
+  end
+end
+\end{lstlisting}
+
+\subsection{Porte digitale}
+\subsubsection*{And}
+\begin{lstlisting}[escapechar=\%]
+fun {And A B} if A==1 andthen B==1 then 1 else 0 end end 
+fun {Loop S1 S2} 
+  case S1#S2 of (A|T1)#(B|T2) then {And A B}|{Loop T1 T2} end
+end
+thread Sc={Loop Sa Sb} end
+\end{lstlisting}
+\subsubsection*{Gatemaker}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+fun {GateMaker F} 
+  fun {$ Xs Ys} 
+    fun {GateLoop Xs Ys} 
+      case Xs#Ys of (X|Xr)#(Y|Yr) then
+        {F X Y}|{GateLoop Xr Yr}
+      end 
+    end 
+  in 
+    thread {GateLoop Xs Ys} end 
+  end
+end
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}
+% Creation d'un interrupteur
+
+proc {Latch C Di Do} 
+  A B E F
+in
+  F={DelayG Do} 
+  A={AndG C F} 
+  E={NotG C} 
+  B={AndG E Di} 
+  Do={OrG A B}
+end
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Serveur non fonctionnel et fonctionnel}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%, caption={non fonctionnel}]
+proc {Server S1 S2} 
+  case S1|S2 of (M1|T1)|S2 
+    then (handle M1) {Server T1 S2}
+    [] S1|(M2|T2) then 
+    (handle M2) {Server S1 T2}
+  end
+end
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%, caption={fonctionnel}]
+proc {Server S} 
+  case S of M|T then 
+    (handle M) 
+    {Server T}
+    
+  end
+end
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Port}
+\subsubsection*{En Oz}
+\begin{lstlisting}[escapechar=\%]
+P = {NewPort S} 	// Cree un port P avec son stream S
+{Send P X}	 			// Envoie X a la fin du stream du port P
+\end{lstlisting}
+
+\subsubsection*{Langage Kernel}
+\begin{lstlisting}[escapechar=\%]
+P={NewPort S}, {P %$\rightarrow$%p, S %$\rightarrow$% s}	//%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
+{Send P S}, {P %$\rightarrow$%p, X %$\rightarrow$% x}			//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
+\end{lstlisting}
+
+\subsection{Message-passing concurrency}
+
+\subsubsection*{MathProcess}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+proc {Math M} 
+  case M of 
+  add(N M A) then A=N+M 
+  [] mul(N M A) then A=N*M 
+  ... 
+  end
+end
+\end{lstlisting} 
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+MP={NewPort S} 
+proc {MathProcess Ms} 
+  case Ms of M|Mr then 
+    {Math M} {MathProcess Mr}
+  end
+end
+thread {MathProcess S} end
+\end{lstlisting}
+\end{minipage}
+
+\subsubsection*{ForAll}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+proc {ForAll Xs P} 
+  case Xs of nil then skip 
+  [] X|Xr then {P X} {ForAll Xr P} 
+  end
+end
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[escapechar=\%]
+proc {MathProcess Ms} 
+
+  {ForAll Ms Math} 
+
+end
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Objets ports stateless générique}
+\begin{lstlisting}[escapechar=\%]
+fun {NewPortObject0 Process} Port Stream in
+  Port={NewPort Stream} 
+  thread {ForAll Stream Process} end 
+  Port
+end
+\end{lstlisting}
+
+\begin{lstlisting}[escapechar=\%]
+fun {NewPortObject0 Process} Port Stream in
+  Port={NewPort Stream} 
+  thread for M in Stream do {Process M} end end 
+  Port
+end
+\end{lstlisting}
+
+\subsection{Stateful port objects}
+\begin{lstlisting}[escapechar=\%]
+fun {NewPortObject Init F} 
+  proc {Loop S State} 
+    case S of M|T then 
+      {Loop T {F State M}} end
+  end 
+    P
+in
+  thread S in P={NewPort S} {Loop S Init} end 
+  P
+end
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
+proc {Loop S State} 
+  case S of M|T then {Loop T {F State M}} end
+end
+\end{lstlisting}
+
+\subsection{Autres Exemples}
+\subsubsection*{Updated NewPortObject}
+\begin{lstlisting}[escapechar=\%]
+fun {NewPortObject Init F} 
+  P Out
+in
+  thread S in P={NewPort S} Out={FoldL S F Init} end 
+  P
+end
+\end{lstlisting}
+
+\subsubsection*{Cell Agent}
+\begin{lstlisting}[escapechar=\%]
+fun {CellProcess S M} 
+  case M 
+  of assign(New) then New 
+  [] access(Old) then Old=S S 
+  end
+end
+\end{lstlisting}
+
+\subsubsection*{Uniform Interface}
+\begin{lstlisting}[escapechar=\%]
+// %On crée et utilise un \textit{cell agent}%
+declare Cell 
+Cell={NewPortObject CellProcess 0} 
+{Send Cell assign(1)}
+local X in {Send Cell access(X)} {Browse X} end
+
+// %On veut avoir les mêmes interfaces en tant qu'objet%
+{Cell assign(1)} 
+local X in {Cell access(X)} {Browse X} end
+
+// %On change la sortie pour être une procédure%
+fun {NewPortObject Init F} 
+  P Out
+in
+  thread S in P={NewPort S} Out={FoldL S F Init} end 
+  proc {$ M} {Send P M} end
+end
+\end{lstlisting}
+
+\section{Classe et Objet}
+\subsection{Définition Classe et Objet}
+\begin{lstlisting}[escapechar=\%]
+class Counter 
+  attr i 
+  meth init(X) 
+    i := X
+  end 
+  meth inc(X) 
+    i := @i + X
+  end 
+  meth get(X) 
+    X=@i
+  end
+end
+\end{lstlisting}
+\begin{lstlisting}[escapechar=\%]
+{Ctr inc(10)} 
+{Ctr inc(5)} 
+local X in 
+  {Ctr get(X)} 
+  {Browse X}
+end
+\end{lstlisting}
+
+\subsubsection{Active Object}
+\begin{lstlisting}[escapechar=\%]
+fun {NewActive Class Init} 
+  Obj={New Class Init} 
+  P
+in
+  thread S in 
+    {NewPort S P} 
+    for M in S do {Obj M} end
+end 
+  proc {$ M} {Send P M} end
+end
+\end{lstlisting}
+
+\section{Deterministic dataflow with ports}
+\subsubsection*{Définition}
+\begin{lstlisting}[escapechar=\%]
+%$(<s>_1 \parallel <s>_2)$%  	 // %Crée deux threads et attend que les deux se terminent%
+%$<s>_3$%						// %S'exécute que quand les deux se terminent%
+\end{lstlisting}
+
+\subsubsection*{Implémentation}
+\begin{lstlisting}[escapechar=\%]
+local X1 X2 in
+  thread %$<s>_1$% X1 = unit end
+  thread %$<s>_2$% X2 = unit end
+  {Wait X1}
+  {Wait X2}
+ end
+\end{lstlisting}
+
+\subsubsection*{Higher-order abstraction}
+\begin{lstlisting}[escapechar=\%]
+proc {Barrier Ps} 
+  Xs={Map Ps fun {$ P} X in thread {P} X=unit end X end}
+in 
+  for X in Xs do 
+    {Wait X} 
+  end
+end
+\end{lstlisting}
+
+\subsection{Composition concurrente}
+\begin{lstlisting}[escapechar=\%]
+proc {NewThread P SubThread} //SubThread is an output 
+  S Pt={NewPort S}
+in
+  proc {SubThread P} 
+    {Send Pt 1} 
+    thread 
+      {P} {Send Pt ~1} //Minus sign is tilde
+    end
+  end 
+  {SubThread P} //Main computation 
+  {ZeroExit 0 S} //Keep running sum on S and stop when 0
+end
+\end{lstlisting}
+
+\subsubsection*{Compteur de thread}
+\begin{lstlisting}[escapechar=\%]
+proc {ZeroExit N S}
+  case S of X|S2 then
+    if N+X==0 then skip 
+    else {ZeroExit N+X S2} end
+  end
+end
+\end{lstlisting}
+
+\section{Erlang}
+\subsection{Organisation}
+\begin{lstlisting}[escapechar=\%, language=erlang]
+-module(math).
+-export([areas/1]).
+-import(lists, [map/2]). 
+
+areas(L) -> lists:sum(map(fun(I) -> area(I) end, L)).
+
+area({square,X}) -> X*X;
+area({rectangle,X,Y}) -> X*Y.
+\end{lstlisting}
+
+\subsubsection{Fonction}
+
+\begin{lstlisting}[language=erlang]
+Pid = spawn(fun) % Pour spawn une fonction et avoir son numero de processus
+
+fun(args) -> expr end % anonyme ou nomme
+fun name/arity
+\end{lstlisting}
+
+\subsubsection{Receive}
+\begin{lstlisting}[language=erlang]
+receive 
+  pattern1 when guard1 -> expr1; 
+  pattern2 when guard2 -> expr2; 
+  ...
+  patternN when guardN -> exprN
+end
+\end{lstlisting}
+
+\subsection{Send \& Receive}
+\begin{lstlisting}[language=erlang]
+Pid ! Message,
+...
+
+receive
+  Message1 -> 
+    Actions1; 
+  Message2 -> 
+    Actions2;
+  ...
+  after Time -> 
+    TimeOutActions
+end
+\end{lstlisting}
+
+\subsection{Process Linking}
+\begin{lstlisting}[language=erlang]
+start() -> spawn(fun go/0).
+
+go() ->
+  process_flag(trap_exit, true), 
+  loop().
+  
+loop() -> 
+  receive
+    {'EXIT',Pid,Why} -> ...
+    ... -> ..., loop()
+  end.
+\end{lstlisting}
+
+\subsection{Dynamic code change}
+
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[language=erlang, caption={use new version}]
+-module(m). 
+
+loop(Data, F) -> 
+  receive
+  (From,Q} ->
+    {Reply,Data1}=F(Q,Data), 
+    m:loop(Data1, F)
+end.
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[language=erlang, caption={use old version}]
+-module(m). 
+
+loop(Data, F) -> 
+  receive
+  {From,Q} ->
+     {Reply,Data1}=F(Q,Data), 
+     loop(Data1, F)
+end.
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Client server hotswapable}
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[language=erlang]
+server(Fun, Data) -> 
+  receive
+    {new_fun,Fun1} -> 
+      server(Fun1,Data); 
+    {rpc,From,ReplyAs,Q} -> 
+      {Reply,Data1} = Fun{Q,Data},
+      From!{ReplyAs,Reply}, 
+      server(Fun, Data1)
+end.
+\end{lstlisting}
+\end{minipage}
+%
+\begin{minipage}[t]{0.45\linewidth}
+\begin{lstlisting}[language=erlang]
+% Fonction RPC
+
+
+rpc(A,B) -> 
+  Tag=new_ref(),
+  A!{rpc,self(),Tag,B}, 
+  receive 
+    {Tag,Val} -> Val
+end.
+\end{lstlisting}
+\end{minipage}
+
+
+\end{document}

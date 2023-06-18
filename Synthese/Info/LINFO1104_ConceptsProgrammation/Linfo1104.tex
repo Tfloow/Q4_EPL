@@ -109,7 +109,7 @@ Et pour découvrir ces paradigmes, nous utiliserons les langages de programmatio
 
 \chapter{Les différents Paradigmes}
 \section{Functional Programming}
-Avec ce paradigme, on impose qu'une variable peut être nommé qu'une seule fois ! Donc: $X = 10$ mais on ne peut pas plus loin dire $X = 9$. $X$ est déjà attribué. On peut penser que cela risque d'être handicapant alors qu'en réalité, cela rend notre code plus simple à débuguer. De plus, nombreux sont les langages et microservices utilisés qui implémentent la programmation fonctionnelle.
+Avec ce paradigme, on impose qu'une variable peut être nommée qu'une seule fois ! Donc: $X = 10$ mais on ne peut pas plus loin dire $X = 9$. $X$ est déjà attribué. On peut penser que cela risque d'être handicapant alors qu'en réalité, cela rend notre code plus simple à débuguer. De plus, nombreux sont les langages et microservices utilisés qui implémentent la programmation fonctionnelle.
 Formellement, quand on déclare une variable et qu'on l'assigne à une valeur ceci se passe.
 \begin{wrapfigure}{r}{.45\textwidth}
 	\centering
@@ -119,25 +119,25 @@ Formellement, quand on déclare une variable et qu'on l'assigne à une valeur ce
 Une chose importante à noter est que cette façon de programmer peut être réalisé dans n'importe quel langage de programmation. On peut également redéclarer un identificateur. C'est-à-dire écrire "$X = 42$" et plus loin en ayant redéclarer une variable "$X = 11$" car ces deux déclarations pointent à deux éléments totalement différents dans la mémoire et ont des \textit{scopes} différents.\\
 
 Un "Scope" ou portée est une propriété centrale en programmation. En effet, c'est le scope qui nous permet d'avoir différente valeur pour des variables qui ont le même nom. Naturellement, elle ne représente pas la même chose car elle diffère de leur scope. On peut déterminer le scope d'une variable sans même exécuter le code. Il nous suffit d'analyser le code qui comprend un "\textcolor{red}{lexical scoping}" ou un "\textcolor{red}{static scoping}".
-\begin{lstlisting}[escapechar=\%]
+\begin{lstlisting}
 local
   X
 in 
-  X = 42 {Browse X}
+  X = 42 {Browse X}		% Imprime 42
   local X in
-    X = 11 {Browse X}
+    X = 11 {Browse X}	% Imprime 11
   end
-  {Browse X}
+  {Browse X}					% Imprime 42
 end
 \end{lstlisting}
 
 
 \chapter{Programmation symbolique}
 \section{Listes}
-On dit d'une liste est \textbf{récursive} si elle se définit par elle-même. C'est-à-dire elle fait appel à elle-même. On utilise la récursion pour les calculs et pour stocker des données.
-Une liste est soit vide ou soit une pair \textit{d'une valeur suivi par une autre liste}.
+On dit qu'une liste est \textbf{récursive} si elle se définit par elle-même. C'est-à-dire elle fait appel à elle-même. On utilise la récursion pour les calculs et pour stocker des données.
+Une liste est soit vide ou soit une paire \textit{d'une valeur suivi par une autre liste}.
 \subsection{Définition formelle}
-En utilisant la notation \textbf{Extended Backus-Naur Form} ou \textit{EBNF} pour les intimes, on écrit une liste comme: <List T> ::= nil | T '|' <List T>. Une chose importante à noter est le deuxième "ou" qui s'écrit comme '|' signifiant qu'il n'appartient pas à la définition de List T mais plutôt à l'ensemble T '|' <List T>. Si on lit ceci, on dirait "\textit{Une list d'élément représentant T correspond à un élément vide ou un élément représentant T suivi d'une autre Liste d'élément T}.\\
+En utilisant la notation \textbf{Extended Backus-Naur Form} ou \textit{EBNF} pour les intimes, on écrit une liste comme: <List T> ::= nil | T '|' <List T>. Une chose importante à noter est le deuxième "ou" qui s'écrit comme '|' signifiant qu'il n'appartient pas à la définition de List T mais plutôt à l'ensemble T '|' <List T>. Si on lit ceci, on dirait "\textit{Une liste d'élément représentant T correspond à un élément vide ou un élément représentant T suivi d'une autre Liste d'élément T}".\\
 
 \begin{wrapfigure}{r}{.35\textwidth}
 	\centering
@@ -145,12 +145,12 @@ En utilisant la notation \textbf{Extended Backus-Naur Form} ou \textit{EBNF} pou
 \end{wrapfigure}
 Donc une List d'entier se définit comme: <List <Int> >. Une chose importante à remarquer est que j'ai utilisé le mot "représentation" en effet <Int> n'est pas un entier mais une représentation d'entier.\\
 
-Pour définir une liste en Oz, on utilise soit la notation \textcolor{blue}{[1 2 3]} ou \textcolor{blue}{1 | 2 | 3 | nil}.(il existe d'autre manière semblable qu'on verra plus loin) C'est 2 déclarations reviennent à la même chose en mémoire. Une utilité des listes est leur facilité à être représenté sous forme d'arbre comme montré ci-contre. La \textit{head} est accessible via \textcolor{blue}{list.1} et la \textit{tail} est obtenu via \textcolor{blue}{list.2}.
+Pour définir une liste en Oz, on utilise soit la notation \textcolor{blue}{[1 2 3]} ou \textcolor{blue}{1 | 2 | 3 | nil} (il existe d'autre manière semblable qu'on verra plus loin). Ces 2 déclarations reviennent à la même chose en mémoire. Une utilité des listes est leurs facilités à être représenté sous forme d'arbre comme montré ci-contre. La \textit{head} est accessible via \textcolor{blue}{list.1} et la \textit{tail} est obtenu via \textcolor{blue}{list.2}.
 
 \section{Pattern matching}
 
 Grâce à cette représentation en arbre, il est facile de voir si une liste est bien une liste.\\
-Ci-contre, on voit une fonction classique en Oz qui analyse une liste et détermine si elle est d'une structure correcte. Le \textcolor{blue}{[]} correspond au cas où l'élément \textcolor{blue}{L} est une liste avec une Head et une Tail. On appelle cela une \textit{Clause} et H|T est le pattern de la clause. Le premier cas est définit par \textcolor{blue}{of}.
+Ci-dessous, on voit une fonction classique en Oz qui analyse une liste et détermine si elle est une structure correcte. Le \textcolor{blue}{[]} correspond au cas où l'élément \textcolor{blue}{L} est une liste avec une Head et une Tail. On appelle cela une \textit{Clause} et H|T est le pattern de la clause. Le premier cas est définit par \textcolor{blue}{of}.
 \begin{lstlisting}[escapechar=\%]
 fun {Sum L}
   case L
@@ -172,7 +172,7 @@ Les grands principes du langage Kernel sont:
 Les résultats de la traduction: Les programmes Kernel sont plus longs mais on voit facilement comment un programme s'exécute et on voit si il est \textit{tail-recursive}
 
 \section{Les arbres}
-Les arbres sont des structures de données extrêmement utiles et utilisées. On peut y stocker des données spécifiques, faire des calculs, ... Les arbres illustrent bien \textit{la programmation orienté but}. Par le standard \textit{EBNF}, on définit un arbre comme suit: <tree T> ::= leaf | t(T <tree T> ... <tree T>). Donc un arbre est une feuille ou \textit{leaf} qui est suivie par un ensemble de \textit{sous-arbres} (Il faut noter que le $t(...)$ est une façon d'écrire un \textit{record} de label "\textit{t}" qui est vu au \ref{record}). Les arbres sont forts similaires au liste si ce n'est que les listes n'ont qu'une sous-listes alors qu'un arbre peut avoir plusieurs sous-arbres.
+Les arbres sont des structures de données extrêmement utiles et utilisées. On peut y stocker des données spécifiques, faire des calculs, ... Les arbres illustrent bien \textit{la programmation orientée but}. Par le standard \textit{EBNF}, on définit un arbre comme suit: <tree T> ::= leaf | t(T <tree T> ... <tree T>). Donc un arbre est une feuille ou \textit{leaf} qui est suivie par un ensemble de \textit{sous-arbres} (Il faut noter que le $t(...)$ est une façon d'écrire un \textit{record} de label "\textit{t}" qui est vu au \ref{record}). Les arbres sont forts similaires au liste si ce n'est que les listes n'ont qu'une sous-listes alors qu'un arbre peut avoir plusieurs sous-arbres.
 
 \subsection{Ordered Binary tree}
 Un arbre de ce type a 2 particularités:
@@ -215,9 +215,9 @@ X = state(1 b 2)
 {Browse {Width X}}
 \end{lstlisting}
 La première ligne définit un tuple ayant pour \textit{label} "state". La seconde ligne imprime le label du tuple. La dernière affiche sa taille. (c'est donc un entier toujours positif ou $0$)\\
-Les champs dans les tuples sont numérotés de\textbf{ $1$ à width $X$}. On appelle aussi le champ (field) une "\textit{feature}". Un tuple possède toutes ces features de manière consécutives.\\
+Les champs dans les tuples sont numérotés de\textbf{ $1$ à width $X$}. On appelle aussi le champ (field) une "\textit{feature}". Un tuple possède toutes ses features de manière consécutives.\\
 
-On peut donc ainsi construire des structures de données plus compliqués comme des arbres:
+On peut donc ainsi construire des structures de données plus compliquées comme des arbres:
 \begin{lstlisting}
 declare
 Y = left(1 2) Z = right(3 4)
@@ -240,7 +240,7 @@ List1 == List2 %//Vrai%
 \end{lstlisting}
 
 \subsection{Les Records} \label{record}
-Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différence avec les tuples est que le \textit{field} peut être n'importe quel valeur et ne doit pas être consécutif. Donc ceux-ci sont des \textit{records} corrects:
+Les "\textit{records}" sont une \textbf{généralisation} des tuples. La différence avec les tuples est que le \textit{field} peut être n'importe quelle valeur et ne doit pas être consécutif. Donc ceux-ci sont des \textit{records} corrects:
 \begin{lstlisting}
 X = state(a:1 2:a b:2)
 Y = inv(3:a 2:b 1:c)
@@ -250,7 +250,7 @@ Si on ne nomme pas un \textit{field} dans un \textit{record}, Oz va attribuer un
 \subsection{Résumé}
 \begin{itemize}
 \item Un \textit{atom} est un record de width $0$.
-\item Un tuple est un record avec des champs étant numéroté de manière consécutive de $1$ à width $X$. (consécutive, donc on skip pas. pas forcément dans l'ordre dans la déclaration)
+\item Un tuple est un record avec des champs étant numérotés de manière consécutive de $1$ à width $X$. (consécutive, donc on skip pas. pas forcément dans l'ordre dans la déclaration)
 \item Une liste est réalisée avec des \textit{tuples} et des $(X \quad Y)$. $X$ étant une donnée et $Y$ étant une sous-liste de données.
 \item $\textbf{1}$ seule \textit{structure de donné} dans le kernel pour rester simple.
 \end{itemize}
@@ -263,7 +263,7 @@ Un environnement est une fonction qui passe des \textit{identifieurs} aux \texti
 Un \textit{environnement contextuel} d'une fonction contient tous les \textit{identificateurs} qui sont utilisés dans la fonction mais déclarés \textit{en dehors}. Donc ce sont des fonctions qui lorsqu'on appelle une variable va pointer en dehors du scope de la fonction.
 
 \subsubsection{Stocker une Procédure}
-Les procédures sont stocker dans la mémoire sous le forme de procédure anonyme symboliser par le "\$".
+Les procédures sont stockées dans la mémoire sous le forme de procédure anonyme symbolisées par le symbole "\$".
 \begin{lstlisting}
 local P Q in
   {Browse 'do something'}
@@ -273,9 +273,9 @@ local P Q in
   {Browse 'another something'}
 end
 \end{lstlisting}
-Notre "proc {Q}" sera stocker comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et finit (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocké avec le code de procédure.\\
-On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand définis.\\
-Donc l'avantage d'un environnement contextuel est d'être sûr qu'on appellera la bonne valeur même si elle est déclaré en dehors de la fonction.\\
+Notre "proc {Q}" sera stockée comme: "q = (proc\{\$\}\{P\} end, \{$P\rightarrow p$\})". On lit donc, la procédure \textit{anonyme} (\$), fais un appel à P (\{P\}) et finit (end), son \textit{environnement contextuel} fait que lorsqu'on appelle "P" on va récupérer la valeur "p" en mémoire (\{$P\rightarrow p$\}). Donc on voit que l'\textit{environnement contextuel} est stocké avec le code de procédure.\\
+On appelle également la valeur d'une procédure une "\textit{closure}" ou une "\textit{lexically scoped closure}" car elle ferme les identificateurs libres quand défini.\\
+Donc l'avantage d'un environnement contextuel est d'être sûr qu'on appellera la bonne valeur même si elle est déclarée en dehors de la fonction.\\
 
 Un \textit{identificateur libre} est un identificateur utilisé dans une \textit{fonction} qui est déclaré \textit{en dehors} de la fonction.\\
 Les arguments d'une procédure \textbf{ne sont pas} des identificateurs libres car l'argument défini l'identificateur.
@@ -353,38 +353,38 @@ Sur la machine abstraite, on va d'instructions en instructions. C'est-à-dire on
 donc on a pour la suite:
 
 \begin{minipage}[t]{0.45\linewidth}
-\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+\begin{lstlisting}[escapechar=\%]
 ([(local B in
      B=true
      if B then X=1 else skip end
-   end, {X %$\rightarrow$% x})]),
+   end, {X %$\rightarrow$% x})],
  {x})
 \end{lstlisting}
 \end{minipage}
 %
 \begin{minipage}[t]{0.45\linewidth}
-\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+\begin{lstlisting}[escapechar=\%]
 ([((B=true
     if B then X=1 else skip end),
- {B %$\rightarrow$% b, X %$\rightarrow$% x})]),
+ {B %$\rightarrow$% b, X %$\rightarrow$% x})],
  
  {b, x})
 \end{lstlisting}
 \end{minipage}
 
-On voit que au fur et à mesure qu'on descend, la pile de mémoire et d'environnement s'agrandit. Ensuite on va \textit{séparer} la \textit{composition séquentielle} comme suit:
+On voit qu'au fur et à mesure qu'on descend, la pile de mémoire et d'environnement s'agrandit. Ensuite on va \textit{séparer} la \textit{composition séquentielle} comme suit:
 
 Une nouvelle instruction va s'ajouter à cause du "then" de notre condition:
 
 \begin{minipage}[t]{0.45\linewidth}
-\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+\begin{lstlisting}[escapechar=\%]
 ([(X=1, {B %$\rightarrow$% b, X %$\rightarrow$% x})],
  {b=true, x})
 \end{lstlisting}
 \end{minipage}
 %
 \begin{minipage}[t]{0.45\linewidth}
-\begin{lstlisting}[caption={On avance d'un cran}, escapechar=\%]
+\begin{lstlisting}[escapechar=\%]
 ([],
  {b=true, x=1})
 \end{lstlisting}
@@ -393,7 +393,7 @@ Une nouvelle instruction va s'ajouter à cause du "then" de notre condition:
 \subsubsection{3. Définir la machine abstraite}
 \begin{itemize}
 \item Pour chaque instructions dans le langage Kernel, on associe sa règle dans la machine abstraite
-\item Chaque instructions prends un état d'exécution en entrée et sort un état d'exécution en sortie $\rightarrow (ST, \sigma)$.
+\item Chaque instruction prend un état d'exécution en entrée et sort un état d'exécution en sortie $\rightarrow (ST, \sigma)$.
 \end{itemize}
 L'instruction la plus simple est "\textcolor{blue}{skip}" car il fonctionne comme $([(skip, E), S_2, ..., S_n], \sigma)$ et renvoie $([S_2,..., S_n], \sigma)$ 
 
@@ -433,7 +433,7 @@ Par ailleurs, voici d'autres concepts de machine abstraite:
 grâce à la sémantique, on sait prouver qu'un programme est correct. On dit qu'un programme produit une solution correcte, on l'appelle une \textit{spécification}.\\
 Donc on prouve qu'un programme satisfait la \textit{spécification} quand on utilise une certaine \textit{sémantique}. La sémantique lie le \textit{programme} à un résultat mathématique appelé \textit{spécification}.\\
 
-Donc on lie une vérité mathématique à un programme. Et on prouve cela via ces différentes étaps: (exemple avec une factorielle)
+Donc on lie une vérité mathématique à un programme. Et on prouve cela via ces différentes étapes: (exemple avec une factorielle)
 
 \begin{enumerate}
 \item On commence avec la spécification du programme.
@@ -469,7 +469,7 @@ local P in
   end
 end 
 \end{lstlisting}
-Ici, à la ligne de la création de la procédure P, son environnement contextuel est $E_c = \{Z \rightarrow z\}$.On va stocker dans la mémoire notre instruction et son environnement \textit{contextuel} c'est la \textit{semantic rule}. Au moment de l'exécution de P avec les valeurs A et B, on va donc ajouter un environnement qui est de la sorte: $E_P = \{Y \rightarrow b, X \rightarrow a, Z \rightarrow z\}$. Donc ce deuxième environnement est stocker dans le \textit{stack sémantique} \textbf{pas} dans la mémoire avec le fonction !
+Ici, à la ligne de la création de la procédure P, son environnement contextuel est $E_c = \{Z \rightarrow z\}$.On va stocker dans la mémoire notre instruction et son environnement \textit{contextuel} c'est la \textit{semantic rule}. Au moment de l'exécution de P avec les valeurs A et B, on va donc ajouter un environnement qui est de la sorte: $E_P = \{Y \rightarrow b, X \rightarrow a, Z \rightarrow z\}$. Donc ce deuxième environnement est stocké dans le \textit{stack sémantique} \textbf{pas} dans la mémoire avec le fonction !
 Donc en langage \textit{sémantique}, la définition d'une procédure ressemble à cela:
 \begin{itemize}
 \item \textbf{Instruction sémantique}: (<x>=\textcolor{blue}{proc}\{\$ $<x>_1, ..., <x>_n$\} <s> \textcolor{blue}{end}, E)
@@ -598,10 +598,10 @@ Le \textit{lambda calcul} est une manière universelle de calcul. On peut l'util
 \subsection{Fonctionnement}
 Le lambda calcul n'a que des \textit{fonctions anonymes d'un seul argument}. Donc si on veut en avoir plusieurs, il faut combiner les fonctions:
 \begin{lstlisting}[escapechar=\%]
-sum_square(x,y) = %$x^2+y^2$ //fonction classique%
-(x,y) %$\rightarrow x^2 + y^2$ //fonction anonyme%
-x %$\rightarrow$% (y %$\rightarrow x^2 + y^2$%) %//d'une seul argument%
-%$\lambda x. \lambda y. x^2+y^2$ //en lambda calcul%    
+sum_square(x,y) = %$x^2+y^2$%	 //fonction classique
+(x,y) %$\rightarrow x^2 + y^2$%						//fonction anonyme
+x %$\rightarrow$% (y %$\rightarrow x^2 + y^2$)%					//un seul argument
+%$\lambda x. \lambda y. x^2+y^2$%								//en lambda calcul    
 \end{lstlisting}
 Le fait de combiner et de "\textit{nest}" des fonctions s'appellent le \textcolor{red}{currying}.
 
@@ -913,9 +913,9 @@ Une cellule a une \textcolor{red}{identité} et un \textcolor{red}{contenu}:
 \begin{lstlisting}[escapechar=\%]
 A=5; B=6
 C={NewCell A}	%// on crée une nouvelle cellule%
-{Browse @C}		%// on montre le \textit{contenu} avec @ ici 5%
-C:=B					%// on change la valeur pointé par C en celle de B%
-{Browse @C}		%// vaut 6%
+{Browse @C}		%// on montre le \textit{contenu} avec @. Imprime 5%
+C:=B					%// on change la valeur pointée par C en celle de B%
+{Browse @C}		%// Imprime 6%
 \end{lstlisting}
 
 \subsection{Exemple}
@@ -933,8 +933,8 @@ On va maintenant étendre la machine abstraite afin d'expliquer comment les \tex
 Tout d'abord, nous avons maintenant \textbf{2 types de données}. Les données \textcolor{blue}{immutables} ou \textcolor{blue}{assignement unique} et les \textcolor{blue}{mutables} ou \textcolor{blue}{assignements multiples} (les cellules).\\
 Une cellule est une paire de 2 \textit{variables}.
 \begin{itemize}
-\item Une variable constante qui est lié au nom de la \textit{cell}
-\item Une variable qui est lié au contenu de la cellule
+\item Une variable constante qui est liée au nom de la \textit{cell}
+\item Une variable qui est liée au contenu de la cellule
 \end{itemize}
 Quand on assigne du nouveau contenu à une \textit{cell}, on change la paire (seulement la deuxième variable).\\
 
@@ -947,7 +947,7 @@ Quand on réalise l'opération $X:=Z$ on change $\sigma_2$. $x:t \rightarrow x:z
 
 \subsection{Programmation impérative}
 La \textbf{programmation impérative} est le nom du nouveau \textit{paradigme}. C'est donc le cumul du \textit{functional paradigm} et du concept de cellules.\\
-La programmation impérative est fondamentale en \textbf{programmation orienté objet}.
+La programmation impérative est fondamentale en \textbf{programmation orientée objet}.
 
 \subsubsection{Langage Kernel de la programmation impérative}
 \begin{lstlisting}[escapechar=\%]
@@ -991,11 +991,11 @@ On peut avoir le meilleur des 2 mondes, en simplifiant les mises à jour de comp
 C'est une des bases pour construire des logiciels complexes. L'abstraction des données est supportée par \textit{les fonctions d'ordre supérieur, static scoping et l'état explicite}. La première chose à réaliser est l'\textcolor{blue}{encapsulation}.
 
 \subsection{Encapsulation}
-C'est le fait de donner à l'utilisateur qu'un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandée via une télécommande ayant un nombre limité de fonction. Son fonctionnement est \textit{encapsulé} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
+C'est le fait de donner à l'utilisateur un nombre \textit{limité} de fonctions et d'instanciations. Par exemple, une TV peut être commandée via une télécommande ayant un nombre limité de fonction. Son fonctionnement est \textit{encapsulé} dans sa boite et l'utilisateur ne peut pas faire des modifications (\textit{techniquement}) à l'intérieur.
 
 \subsubsection{Définition}
 C'est donc une partie d'un programme qui a une partie \textit{extérieure} (au contact avec l'utilisateur) et une partie \textit{intérieure} (fonctionnement interne). Toutes les opérations à l'intérieur doivent passer par l'interface pour être données à l'utilisateur.\\
-On limite les \textit{fonctionnalités} et l'utilisateur doit suivre des règles établies de notre interface pour s'assurer que son résultat est bien correct.\\
+On limite les \textit{fonctionnalités} et l'utilisateur doit suivre des règles établies de notre interface pour s'assurer que son résultat soit bien correct.\\
 L'\textcolor{blue}{encapsulation} doit être \textcolor{red}{supportée} par le langage de programmation.
 
 \subsubsection{Avantage}
@@ -1016,7 +1016,7 @@ L'\textcolor{blue}{encapsulation} doit être \textcolor{red}{supportée} par le 
 On regroupe dans une même entité les \textcolor{blue}{valeurs et opérations}. Ex: la \textit{télévision}.
 
 \subsubsection{Type de données abstraites}
-On sépare les \textcolor{blue}{valeurs et opérations}. Ex: un \textit{distributeur de boisson}$\rightarrow$(\textit{on utilise un pièce (fonction) et on reçoit un objet})
+On sépare les \textcolor{blue}{valeurs et opérations}. Ex: un \textit{distributeur de boisson} $\rightarrow$ (\textit{on utilise un pièce (fonction) et on reçoit un objet})
 
 \section{Le type de données abstraites}
 Donc cela consiste a un ensemble de \textit{valeurs} et d'\textit{opérations}. Donc par exemple les nombres et les opérations arithmétiques usuelles.\\
@@ -1024,7 +1024,7 @@ Dans la plupart des \textit{ADT} les valeurs et les opérations n'ont pas \textb
 Donc par exemple pour un \textcolor{blue}{stack}, on l'instantie via une fonction qui nous retourne le type de données.\\
 
 \subsection{Encapsulation}
-Le problème avec cette implémentation vu au-dessus d'un stack est que les données ne sont pas protégées donc peuvent être modifiées outre les interfaces.\\
+Le problème avec cette implémentation d'un stack est que les données ne sont pas protégées donc peuvent être modifiées outre les interfaces.\\
 
 On va \textcolor{red}{protéger} les données. On utilisera un \textcolor{red}{Security Wrapper}. On utilise ça comme suit:
 \begin{lstlisting}[escapechar=\%]
@@ -1084,7 +1084,7 @@ Les 2 à ajouter sont:
 \begin{enumerate}
 \item Les types de données abstraites \textbf{avec état} (\textit{stateful ADT})
 	\begin{enumerate}
-	\item Très utilisé en C mais sans l'\textit{encapsulation} puisqu'impossible en C.
+	\item Très utilisé en C mais sans l'\textit{encapsulation} puisque c'est impossible en C.
 	\item On les retrouve dans les classes Java avec des attributs \textit{statiques}.
 	\end{enumerate}
 \item Les objets \textbf{sans état} (\textit{functional objects}):
@@ -1118,7 +1118,7 @@ end
 \end{lstlisting}
 
 \subsubsection{En Scala}
-C'est une sorte de forme hybride entre programmation fonctionnel et orienté objet. Scala supporte les 2 \textit{paradigmes}.\\
+C'est une sorte de forme hybride entre programmation fonctionnelle et orientée objet. Scala supporte les 2 \textit{paradigmes}.\\
 En Scala, on peut définir des objets immutables qui retournent, \textit{eux-mêmes}, des objets immutables.  Les objets immutables sont des objets \textit{fonctionnels} (\textit{donc pas de changement}).
 
 \subsection{Stateful ADT}
@@ -1210,7 +1210,11 @@ Donc en tant que développeur on check les erreurs \textit{checked}.
 
 \subsection{Utilisation correcte}
 On n'utilise pas une exception pour un comportement \textbf{attendu ou prévisible}. C'est-à-dire que, par exemple, on ne lit pas un fichier jusqu'au moment où il est vide et nous produit une erreur. Non, le fait que le fichier se finisse est prévisible et ne demande pas d'exception.
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm]{img/stackException.png}
+\caption{Fonctionnement exception sur le stack}
+\end{figure}
 
 \chapter{Programmation simultanée}
 On a besoin de la \textit{programmation simultanée} car notre monde progresse avec le \textcolor{blue}{temps} et chaque chose progresse indépendamment des autres.
@@ -1490,7 +1494,7 @@ On va étendre le \textbf{langage kernel} avec nouveau concept. On pourrait fair
 On va créer des \textcolor{blue}{Ports} qui sont des \textit{streams nommés}. On peut faire:
 \begin{lstlisting}[escapechar=\%]
 P = {NewPort S} 	// Cree un port P avec son stream S
-{Send P X}	 	// Envoie X a la fin du stream du port P
+{Send P X}	 			// Envoie X a la fin du stream du port P
 \end{lstlisting}
 Ainsi tous les clients envoient leur requête dans ce stream et le serveur se charge de les gérer. Et ainsi cela crée un ordre aléatoire grâce aux \textit{Threads} donc \textit{non-déterministique}.
 
@@ -1499,8 +1503,8 @@ On a maintenant dans notre langage \textbf{kernel} que $\sigma_1$ stocke les val
 
 \subsubsection{Langage kernel}
 \begin{lstlisting}[escapechar=\%]
-P={NewPort S}, {P %$\rightarrow$%p, S %$\rightarrow$% s} //%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
-{Send P S}, {P %$\rightarrow$%p, X %$\rightarrow$% x}	//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
+P={NewPort S}, {P %$\rightarrow$%p, S %$\rightarrow$% s}	//%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
+{Send P S}, {P %$\rightarrow$%p, X %$\rightarrow$% x}			//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
 \end{lstlisting}
 
 L'opération d'ajout à la fin du stream d'un port est \textcolor{red}{atomique} donc cela se fait en \textbf{une seule étape}.
@@ -1742,7 +1746,7 @@ Cela permet de la composition concurrente (dynamique ou statique) et élimine le
 Si on a plusieurs thread, parfois on doit revenir au principal. Donc le thread original attend que les autres s'arrêtent. C'est ce qu'on appelle la composition concurrente.
 \begin{lstlisting}[escapechar=\%]
 %$(<s>_1 \parallel <s>_2)$%  	 // %Crée deux threads et attend que les deux se terminent%
-%$<s>_3$%		// %S'exécute que quand les deux se terminent%
+%$<s>_3$%						// %S'exécute que quand les deux se terminent%
 \end{lstlisting}
 
 \subsubsection{Implémentation}
