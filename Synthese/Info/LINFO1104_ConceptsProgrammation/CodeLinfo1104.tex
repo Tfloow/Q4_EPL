@@ -31,7 +31,7 @@
     commentstyle=\color{codegray},
     keywordstyle=\color{codeblue},
     numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codeblue},
+    stringstyle=\color{codepurple},
     basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,         
     breaklines=true,                 
@@ -53,7 +53,7 @@
     linkcolor=black,
     filecolor=magenta,
     urlcolor=cyan,
-    pdftitle={Overleaf Example},
+    pdftitle={Compilation Code LINFO1104},
     pdfpagemode=FullScreen,
     }
 \begin{document}
@@ -681,8 +681,8 @@ P = {NewPort S} 	// Cree un port P avec son stream S
 
 \subsubsection*{Langage Kernel}
 \begin{lstlisting}[escapechar=\%]
-P={NewPort S}, {P %$\rightarrow$%p, S %$\rightarrow$% s}	//%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
-{Send P S}, {P %$\rightarrow$%p, X %$\rightarrow$% x}			//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
+P={NewPort S}, {P %$\rightarrow$% p, S %$\rightarrow$% s}	//%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
+{Send P S}, {P %$\rightarrow$% p, X %$\rightarrow$% x}			//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
 \end{lstlisting}
 
 \subsection{Message-passing concurrency}
@@ -864,7 +864,7 @@ local X1 X2 in
   thread %$<s>_2$% X2 = unit end
   {Wait X1}
   {Wait X2}
- end
+end
 \end{lstlisting}
 
 \subsubsection*{Higher-order abstraction}

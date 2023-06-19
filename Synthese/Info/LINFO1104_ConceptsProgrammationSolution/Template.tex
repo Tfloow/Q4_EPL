@@ -1,0 +1,88 @@
+%Made By Thomas Debelle
+%Ajouté des Packages si nécessaires
+\documentclass{exam}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsfonts}
+\usepackage{titlesec}
+\usepackage{xparse}
+\usepackage{framed}
+\usepackage{wrapfig}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1.0,1.0,1.0}
+\definecolor{codeblue}{rgb}{0,0,0.8}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codeblue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=shadowbox
+}
+\lstset{style=mystyle}
+\lstset{language=Oz}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\begin{document}
+\begin{center}
+\fbox{\fbox{\parbox{5.5in}{\centering
+Solution proposée pour l'examen Septembre 2022 de LINFO1104}}}
+\end{center}
+Solutions par @norahrmoire et ré-écris en Latex par @tfloow sur discord. Si vous trouvez une faute merci de le signaler \href{https://github.com/Tfloow/Q4_EPL/pulls}{ici}.
+
+
+\begin{questions}
+
+\question Translate the following program into kernel language. Be careful to do a complete translation that uses only kernel language instructions!: \begin{lstlisting}[escapechar=\%]
+local F C in
+  C={NewCell 1}
+  fun {F A}
+    @A
+  end
+  C:={F C}+1
+end
+\end{lstlisting}
+
+\question Basic concepts.
+\begin{parts}
+\part Define "scope" in a programming language. Give an example.
+
+\part Define "contextual environment" of a procedure. Give an example.
+\end{parts}
+\end{questions}
+
+
+
+\end{document}
