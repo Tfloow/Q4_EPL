@@ -18,6 +18,8 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{xparse}
+\usepackage{tikzit}
+\input{first.tikzstyles}
 
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -1929,12 +1931,12 @@ Ces comportements cachent la plupart de la complexité de chaque concept. Surtou
 Les arbres superviseurs prennent l'avantage que des erreurs sont souvent temporaires, donc si on échoue, on relance le processus.
 
 \subsection{Structure et principe}
-\begin{wrapfigure}{r}{.5\textwidth}
+\begin{wrapfigure}{r}{.4\textwidth}
 \centering
-\includegraphics[width=6cm]{img/hierarchies.png}
+\tikzfig{Erlang}
 \end{wrapfigure}
 On a donc un arbre où la root est le noeud qui supervise ses branches. Elle arrête et relance des nodes enfants. Les superviseurs sont eux-mêmes inspectés pour éviter qu'ils crashent. On les démarre via un processus synchrone afin que l'état initial soit correct.\\
-On a différente méthode de redémarrage comme: \textcolor{red}{one\_for\_one \textbf{1} (redémarre un seul), one\_for\_all \textbf{a} (redémarre tous les enfants), rest\_for\_one}. On est limité par le nombre de restart possible par interval. Si on excède cela, un superviseur plus élevé prend le relais. Cela est construit ainsi pour éviter les crash en continu.\\
+On a différente méthode de redémarrage comme: \textcolor{red}{one\_for\_one \textbf{1} (redémarre un seul), one\_for\_all \textbf{a} (redémarre tous les enfants), rest\_for\_one}. On est limité par le nombre de restart possible par intervalle de temps. Si on excède cela, un superviseur plus élevé prend le relais. Cela est construit ainsi pour éviter les crash en continu.\\
 Les $\square$ représente des superviseurs et les travailleurs sont représentés via $\bigcirc$.
 
 \section{Conclusions}
@@ -1942,7 +1944,7 @@ La plateforme \textcolor{red}{Erlang/OTP} est une combinaison de Erlang et de li
 \begin{itemize}
 \item Erlang: processus (agent actif) qui s'envoient des messages asynchrones et ne partagent pas d'état.
 	\begin{itemize}
-	\item Tous les processus sont définis en programmation fonctionnelle et supporte des mises à jour dynamiques.
+	\item Tous les processus sont définis en programmation fonctionnelle et supportent des mises à jour dynamiques.
 	\item On détecte les erreurs (fait partie du \textit{process linking}).
 	\end{itemize}
 \item OTP: permet d'avoir des programmes robustes en utilisant les comportements, test et arbres superviseurs.

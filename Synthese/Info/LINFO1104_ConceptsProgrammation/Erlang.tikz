@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Square] (0) at (-0.25, 3.25) {1};
+		\node [style=Square] (1) at (-2.25, 1) {1};
+		\node [style=Square] (2) at (0.75, 1.75) {a};
+		\node [style=Square] (3) at (-1, 0) {a};
+		\node [style=Square] (4) at (2, 0) {1};
+		\node [style=Out Node] (5) at (-2.25, -1) {};
+		\node [style=Out Node] (6) at (-1, -1.5) {};
+		\node [style=Out Node] (7) at (1, -1.5) {};
+		\node [style=Out Node] (8) at (3, -1.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (1) to (0);
+		\draw (0) to (2);
+		\draw (1) to (5);
+		\draw (2) to (3);
+		\draw (2) to (4);
+		\draw (3) to (6);
+		\draw (4) to (7);
+		\draw (4) to (8);
+	\end{pgfonlayer}
+\end{tikzpicture}

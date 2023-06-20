@@ -681,7 +681,7 @@ P = {NewPort S} 	// Cree un port P avec son stream S
 
 \subsubsection*{Langage Kernel}
 \begin{lstlisting}[escapechar=\%]
-P={NewPort S}, {P %$\rightarrow$% p, S %$\rightarrow$% s}	//%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
+P={NewPort S}, {P %$\rightarrow$% p, S %$\rightarrow$% s}		//%$p,s \in \sigma_1$ crée $p=\xi$ et paire $p:s$ à $\sigma_2$%
 {Send P S}, {P %$\rightarrow$% p, X %$\rightarrow$% x}			//%$p=\xi$ que $s \in \sigma_1, p:s \in \sigma_2$ crée $s=x|s'$ et update $p:s$%
 \end{lstlisting}
 
