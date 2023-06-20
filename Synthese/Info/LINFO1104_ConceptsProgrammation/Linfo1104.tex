@@ -1374,7 +1374,7 @@ Pareil pour l'écriture dans une cellule qui a un résultat qui varie.\par
 \textcolor{red}{Attention}, ce n'est pas parce que 2 threads résultent à un même résultat \textit{tout le temps} qu'ils ne sont pas non-déterministes. Le non-déterminisme est le fait qu'on ne sait pas quel thread se lance en premier.
 
 \subsection{Gestion}
-On doit toujours gérer le non-déterminisme et il ne devrait jamais influencer le fait qu'un programme est correct. C'est pour cela qu'on évite d'utiliser des threads \textbf{et} des cellules.
+On doit toujours gérer le non-déterminisme et il ne devrait jamais influencer le fait qu'un programme est correct. C'est pour cela qu'on évite d'utiliser des threads \textbf{et} des cellules en même temps.
 
 \subsubsection{Deterministic dataflow}
 Avec ce paradigme, le résultat d'un programme est toujours le même. Il n'y a aucun non-déterminisme \textcolor{red}{\textit{visible}}.
@@ -1400,7 +1400,7 @@ Quand on veut \textit{browse} un thread, on aura une sortie sous forme de liste 
 
 
 \section{Programmation multi-agent}
-Par exemple, on fait le crible d'Eratosthène, on va créer une méthode "\textit{producer-consomer}" un peu plus évolué qui relance un thread à chaque exécution. 
+Par exemple, on fait le crible d'Eratosthène, on va créer une méthode "\textit{producer-consomer}" un peu plus évoluée qui relance un thread à chaque exécution. 
 \begin{lstlisting}[escapechar=\%]
 fun {Sieve Xs}
   case Xs
